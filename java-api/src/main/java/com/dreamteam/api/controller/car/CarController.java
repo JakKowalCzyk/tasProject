@@ -2,11 +2,13 @@ package com.dreamteam.api.controller.car;
 
 import com.dreamteam.api.controller.GenericController;
 import com.dreamteam.api.model.http.car.Car;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+@Api(tags = "Car API", description = "services for cars")
 @RequestMapping(value = "/api/car")
 public interface CarController extends GenericController<Car> {
 
@@ -31,6 +33,6 @@ public interface CarController extends GenericController<Car> {
     void deleteObject(@PathVariable Long id);
 
     @Override
-    @RequestMapping(method = RequestMethod.HEAD)
+    @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);
 }
