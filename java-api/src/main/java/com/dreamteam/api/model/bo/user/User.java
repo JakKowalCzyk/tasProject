@@ -2,11 +2,13 @@ package com.dreamteam.api.model.bo.user;
 
 import com.dreamteam.api.model.bo.AbstractModel;
 import com.dreamteam.api.model.enums.RoleType;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Data
 @Entity(name = "user_bo")
 public class User extends AbstractModel {
 
@@ -20,43 +22,4 @@ public class User extends AbstractModel {
     public User() {
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
-    public String getHashPassword() {
-        return hashPassword;
-    }
-
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
-    }
 }
