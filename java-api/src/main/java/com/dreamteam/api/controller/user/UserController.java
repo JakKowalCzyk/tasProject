@@ -13,7 +13,7 @@ import java.util.Collection;
 public interface UserController extends GenericController<User> {
 
     @Override
-    @GetMapping(value = "/")
+    @GetMapping(value = "/{id}")
     User getObject(@PathVariable Long id);
 
     @Override
@@ -21,14 +21,18 @@ public interface UserController extends GenericController<User> {
     User updateObject(@RequestBody User model);
 
     @Override
+    @PostMapping
     User addObject(@RequestBody User model);
 
     @Override
+    @GetMapping(value = "/")
     Collection<User> findAll();
 
     @Override
+    @DeleteMapping
     void deleteObject(@PathVariable Long id);
 
     @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);
 }

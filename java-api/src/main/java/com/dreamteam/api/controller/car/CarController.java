@@ -33,6 +33,6 @@ public interface CarController extends GenericController<Car> {
     void deleteObject(@PathVariable Long id);
 
     @Override
-    @RequestMapping(method = RequestMethod.HEAD)
+    @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);
 }
