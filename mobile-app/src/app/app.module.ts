@@ -16,9 +16,9 @@ import {Http} from "@angular/http";
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    ListPage
+      MyApp,
+      HomePage,
+      ListPage,
       LoginPage,
       HeaderComponent,
   ],
@@ -29,15 +29,13 @@ import {Http} from "@angular/http";
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
+      MyApp,
+      HomePage,
+      ListPage,
       LoginPage,
       HeaderComponent,
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
       StatusBar,
       SplashScreen,
       AuthService,
