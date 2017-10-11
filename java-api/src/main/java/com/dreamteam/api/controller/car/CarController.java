@@ -29,7 +29,7 @@ public interface CarController extends GenericController<Car> {
     Collection<Car> findAll();
 
     @Override
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     void deleteObject(@PathVariable Long id);
 
     @Override
