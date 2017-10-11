@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.api.model.bo.car.Car> implements CarController {
@@ -49,5 +50,10 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     @Override
     public ResponseEntity<Boolean> isExist(@PathVariable Long id) {
         return super.isExist(id);
+    }
+
+    @Override
+    public Collection<Car> findByBrand(@PathVariable Long id) {
+        return ((CarService) getGenericService()).findByBrand(id).stream().map(car -> getAbstractMapper().mapToHttpObject(car)).collect(Collectors.toList());
     }
 }
