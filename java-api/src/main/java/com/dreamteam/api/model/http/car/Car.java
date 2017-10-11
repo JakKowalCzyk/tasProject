@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Car extends HttpModel {
     private String name;
-    private String brand;
+    private Long brandId;
     private String pricePerDay;
     private String date;
     private int millage;
