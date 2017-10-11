@@ -49,7 +49,7 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
     @Override
     public User updateObject(User object) {
         object.setEmail(getEmailWithSmallCases(object.getEmail()));
-        object.setHashPassword(passwordEncoder.encode(object.getHashPassword()));
+        object.setHashPassword(super.findOne(object.getId()).getHashPassword());
         return super.updateObject(object);
     }
 
