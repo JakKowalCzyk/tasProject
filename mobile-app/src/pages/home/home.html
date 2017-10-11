@@ -1,11 +1,5 @@
-<header title="Home"></header>
+<header title="Komis Szukałex"></header>
 
 <ion-content class="page_wrapper">
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+        <ad *ngFor="let ad of adService.allAds" [ad]="ad"></ad>
 </ion-content>

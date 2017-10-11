@@ -1,0 +1,33 @@
+ad {
+  .ad {
+    border-bottom: 1px #7F7B7B solid;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    &__imgCont {
+      width: 150px;
+      height: 100px;
+      //overflow: hidden;
+    }
+    &__img {
+      min-width: 100%;
+      min-height: 100%;
+    }
+    &__carInfo {
+      display: flex;
+      flex-direction: column;
+      &__title {
+        padding: 15px;
+        font-weight: 900;
+      }
+      &__desc {
+
+      }
+    }
+    &__price {
+      margin: auto 0 auto auto;
+      font-weight: 300;
+
+    }
+  }
+}

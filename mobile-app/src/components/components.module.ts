@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header';
+import { AdComponent } from './ad/ad';
 @NgModule({
 	declarations: [
-    HeaderComponent],
+    HeaderComponent,
+    AdComponent],
 	imports: [],
 	exports: [
-    HeaderComponent]
+    HeaderComponent,
+    AdComponent]
 })
 export class ComponentsModule {}
