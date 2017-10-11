@@ -59,4 +59,9 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
             SecurityContextHolder.clearContext();
         }
     }
+
+    @Override
+    public User getPrincipal(Principal principal) {
+        return super.getAbstractMapper().mapToHttpObject(((UserService) getGenericService()).findByEmail(principal.getName()));
+    }
 }

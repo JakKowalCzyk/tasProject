@@ -39,4 +39,7 @@ public interface UserController extends GenericController<User> {
 
     @GetMapping(value = "/logout")
     void logout(Principal principal);
+
+    @GetMapping(value = "/me")
+    User getPrincipal(Principal principal);
 }
