@@ -6,6 +6,7 @@ import com.dreamteam.api.model.enums.CategoryType;
 import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.service.car.CarService;
+import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,12 @@ import java.util.Collection;
 @Service
 public class CarServiceImpl extends GenericServiceImpl<Car> implements CarService {
 
+    private RentedCarService rentedCarService;
+
     @Autowired
-    public CarServiceImpl(CarDAO modelDAO) {
+    public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService) {
         super(modelDAO);
+        this.rentedCarService = rentedCarService;
     }
 
     @Override
@@ -38,6 +42,12 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     @Override
     public Collection<Car> findByCategoryType(CategoryType categoryType) {
         return getModelDAO().findByCategoryType(categoryType);
+    }
+
+    @Override
+    public void deleteObject(Long id) {
+        rentedCarService.findByCar(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
+        super.deleteObject(id);
     }
 
     @Override

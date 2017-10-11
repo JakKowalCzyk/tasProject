@@ -14,7 +14,7 @@ public class RentedCar extends HttpModel {
     private Long carId;
     private Long userId;
     private boolean isActive;
-    private Date dateFrom;
-    private Date dateTo;
-    private boolean totalPrice;
+    private Date from;
+    private Date to;
+    private String totalPrice;
 }

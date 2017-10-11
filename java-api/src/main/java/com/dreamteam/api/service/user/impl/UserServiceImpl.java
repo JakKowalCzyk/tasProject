@@ -3,6 +3,7 @@ package com.dreamteam.api.service.user.impl;
 import com.dreamteam.api.dao.user.UserDAO;
 import com.dreamteam.api.model.bo.user.User;
 import com.dreamteam.api.model.exception.UserEmailException;
+import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import com.dreamteam.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ import java.util.Arrays;
 public class UserServiceImpl extends GenericServiceImpl<User> implements UserService {
 
     private PasswordEncoder passwordEncoder;
+    private RentedCarService rentedCarService;
 
     @Autowired
-    public UserServiceImpl(UserDAO modelDAO, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDAO modelDAO, PasswordEncoder passwordEncoder, RentedCarService rentedCarService) {
         super(modelDAO);
         this.passwordEncoder = passwordEncoder;
+        this.rentedCarService = rentedCarService;
     }
 
     @Override
@@ -57,4 +60,9 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
         return email.toLowerCase();
     }
 
+    @Override
+    public void deleteObject(Long id) {
+        rentedCarService.findByUser(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
+        super.deleteObject(id);
+    }
 }
