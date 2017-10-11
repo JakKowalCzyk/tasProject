@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collection;
 
 @Api(tags = "User API", description = "services for user")
@@ -35,4 +36,10 @@ public interface UserController extends GenericController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);
+
+    @GetMapping(value = "/logout")
+    void logout(Principal principal);
+
+    @GetMapping(value = "/me")
+    User getPrincipal(Principal principal);
 }
