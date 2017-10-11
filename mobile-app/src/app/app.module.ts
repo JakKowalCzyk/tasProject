@@ -1,26 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpModule }       from '@angular/http';
+import { BrowserModule }                                from '@angular/platform-browser';
+import { ErrorHandler, NgModule }                       from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule }     from 'ionic-angular';
+import { HttpModule }                                   from '@angular/http';
+import { StatusBar }                                    from '@ionic-native/status-bar';
+import { SplashScreen }                                 from '@ionic-native/splash-screen';
+import { MyApp }                                        from './app.component';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+//pages
+import { HomePage }         from '../pages/home/home';
+import { LoginPage }        from "../pages/login/login";
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
-import {HeaderComponent} from "../components/header/header";
-import {AuthService} from "../services/auth/auth.service";
-import {Http} from "@angular/http";
+//components
+import { HeaderComponent }  from "../components/header/header";
+
+//services
+import { AuthService }      from "../services/auth/auth.service";
+import { AdService }        from "../services/ad/ad.service";
+import { RouteService }     from "../services/route/route.service";
+import {AdComponent} from "../components/ad/ad";
+
 
 @NgModule({
   declarations: [
       MyApp,
       HomePage,
-      ListPage,
       LoginPage,
       HeaderComponent,
+      AdComponent,
   ],
   imports: [
       BrowserModule,
@@ -31,14 +37,16 @@ import {Http} from "@angular/http";
   entryComponents: [
       MyApp,
       HomePage,
-      ListPage,
       LoginPage,
       HeaderComponent,
+      AdComponent,
   ],
   providers: [
       StatusBar,
       SplashScreen,
       AuthService,
+      AdService,
+      RouteService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
