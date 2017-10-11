@@ -7,10 +7,12 @@ import com.dreamteam.api.model.mapper.user.UserMapper;
 import com.dreamteam.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Collection;
 
 @RestController
@@ -49,5 +51,12 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     @Override
     public ResponseEntity<Boolean> isExist(@PathVariable Long id) {
         return super.isExist(id);
+    }
+
+    @Override
+    public void logout(Principal principal) {
+        if (principal != null) {
+            SecurityContextHolder.clearContext();
+        }
     }
 }
