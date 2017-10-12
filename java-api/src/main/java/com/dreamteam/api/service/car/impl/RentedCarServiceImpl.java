@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -26,7 +27,7 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
     @Override
     public RentedCar addObject(RentedCar object) {
         object.setTotalPrice(getTotalPriceForACar(object));
-        if (isSameDay(object)) {
+        if (isSameDay(object, new GregorianCalendar().getTime())) {
             object.setActive(true);
             object.setWillBeActive(false);
         } else {
@@ -36,16 +37,16 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
         return super.addObject(object);
     }
 
-    private boolean isSameDay(RentedCar object) {
-        return DateUtils.isSameDay(object.getFrom(), new GregorianCalendar().getTime());
+    private boolean isSameDay(RentedCar object, Date time) {
+        return DateUtils.isSameDay(object.getFrom(), time);
     }
 
     private Double getTotalPriceForACar(RentedCar object) {
-        if (isSameDay(object)) {
+        if (isSameDay(object, object.getTo())) {
             return object.getCar().getPricePerDay();
         } else {
             int days = (int) ChronoUnit.DAYS.between(object.getFrom().toInstant(), object.getTo().toInstant());
-            return object.getCar().getPricePerDay() * days;
+            return object.getCar().getPricePerDay() * (days + 1);
         }
     }
 

@@ -9,15 +9,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import java.beans.PropertyEditorSupport;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Created by JKowalczyk on 2017-10-11.
@@ -55,6 +58,21 @@ public class CentralControllerHandler {
     public ApiError validationException(ValidationException e, Locale locale) {
         logError(e);
         return new ApiError(e.getMessage(), "REQUEST_ARGUMENTS_NOT_VALID");
+    }
+
+    @ExceptionHandler({ConstraintViolationException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ApiError validationException(ConstraintViolationException e, Locale locale) {
+        logError(e);
+        return new ApiError(e.getMessage(), "REQUEST_ARGUMENTS_NOT_VALID");
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiError methodArgumentNotValidException(MethodArgumentNotValidException e, Locale locale) {
+        return new ApiError(e.getBindingResult().getAllErrors().stream().map(er -> er.getDefaultMessage()).collect(Collectors.joining("; ")), "REQUEST_ARGUMENTS_NOT_VALID");
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})

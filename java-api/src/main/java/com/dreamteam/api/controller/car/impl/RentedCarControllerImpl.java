@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     }
 
     @Override
-    public RentedCar addObject(@RequestBody RentedCar model, Principal principal) {
+    public RentedCar addObject(@Valid @RequestBody RentedCar model, Principal principal) {
         model.setUserId(userService.findByEmail(principal.getName()).getId());
         return super.addObject(model);
     }
