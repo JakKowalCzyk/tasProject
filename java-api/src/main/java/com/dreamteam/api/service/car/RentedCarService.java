@@ -21,4 +21,8 @@ public interface RentedCarService extends GenericService<RentedCar> {
 
     Collection<RentedCar> findWillBeActive();
 
+    void updateActiveRents();
+
+    void updateWillBeActiveRents();
+
 }

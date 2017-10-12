@@ -6,6 +6,7 @@ import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
@@ -73,6 +74,33 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
     @Override
     public Collection<RentedCar> findWillBeActive() {
         return getModelDAO().findByWillBeActiveTrue();
+    }
+
+    @Override
+    @Scheduled(cron = "${update.car.cron}")
+    public void updateActiveRents() {
+        findActive().forEach(rentedCar -> {
+            if (isDateBeforeNow(rentedCar.getTo())) {
+                rentedCar.setActive(false);
+                super.updateObject(rentedCar);
+            }
+        });
+    }
+
+    @Override
+    @Scheduled(cron = "${update.car.cron}")
+    public void updateWillBeActiveRents() {
+        findWillBeActive().forEach(rentedCar -> {
+            if (isDateBeforeNow(rentedCar.getFrom())) {
+                rentedCar.setActive(true);
+                rentedCar.setWillBeActive(false);
+                super.updateObject(rentedCar);
+            }
+        });
+    }
+
+    private boolean isDateBeforeNow(Date date) {
+        return date.before(new GregorianCalendar().getTime());
     }
 
     @Override
