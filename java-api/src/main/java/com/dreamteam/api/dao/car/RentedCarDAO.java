@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by JK on 2017-10-11.
@@ -20,4 +21,10 @@ public interface RentedCarDAO extends ModelDAO<RentedCar> {
     @Query("select rented from RentedCar rented where rented.car.id =:carId")
     Collection<RentedCar> findByCar(@Param("carId") Long carId);
 
+    @Query(value = "select case when " +
+            "(select case when count(1) >0 then true else false END from rented_car rent where rent.from_date >= :fromDate and rent.from_date < :toDate) " +
+            "OR " +
+            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where rent.to >= :fromDate and rent.to < :toDate) " +
+            "then true else false end", nativeQuery = true)
+    boolean existBetweenGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 }

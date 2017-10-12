@@ -1,7 +1,10 @@
 package com.dreamteam.api.validation;
 
 import com.dreamteam.api.model.http.car.RentedCar;
+import com.dreamteam.api.service.car.RentedCarService;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -10,15 +13,19 @@ import java.util.GregorianCalendar;
 /**
  * Created by JKowalczyk on 2017-10-12.
  */
+@Component
 public class RentedCarConstraintValidator implements ConstraintValidator<RentedCarValid, RentedCar> {
 
     private static final String DATE_ORDER = "Dates order is not correct";
     private static final String STARTING_DATE = "Starting date has to be at least today";
     private static final String DATE_EMPTY = "Dates have to be provided";
+    private static final String DATE_USED = "Car is rented in given dates";
+
+    @Autowired
+    private RentedCarService rentedCarService;
 
     @Override
     public void initialize(RentedCarValid rentedCarValid) {
-
     }
 
     @Override
@@ -46,6 +53,10 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
             result.setMessage(STARTING_DATE);
             return false;
         }
+        if (isDateUsed(rentedCar)) {
+            result.setMessage(DATE_USED);
+            return false;
+        }
         return true;
     }
 
@@ -60,5 +71,9 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
             return true;
         }
         return false;
+    }
+
+    private boolean isDateUsed(RentedCar rentedCar) {
+        return rentedCarService.existBetweenGivenDates(rentedCar.getFrom(), rentedCar.getTo());
     }
 }
