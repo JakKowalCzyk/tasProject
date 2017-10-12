@@ -31,13 +31,12 @@ public class RentedCarMapper extends AbstractMapper<RentedCar, com.dreamteam.api
 
     @Override
     protected com.dreamteam.api.model.bo.car.RentedCar buildModelObject(RentedCar httpObject) {
-        com.dreamteam.api.model.bo.car.RentedCar rentedCar = getModelMapper().map(httpObject, com.dreamteam.api.model.bo.car.RentedCar.class);
-
         if (httpObject.getId() != null) {
-            rentedCar.setUser(rentedCarService.findOne(httpObject.getId()).getUser());
+            return rentedCarService.findOne(httpObject.getId());
+        } else {
+            com.dreamteam.api.model.bo.car.RentedCar rentedCar = getModelMapper().map(httpObject, com.dreamteam.api.model.bo.car.RentedCar.class);
+            rentedCar.setCar(carService.findOne(httpObject.getCarId()));
+            return rentedCar;
         }
-        rentedCar.setCar(carService.findOne(httpObject.getCarId()));
-
-        return rentedCar;
     }
 }
