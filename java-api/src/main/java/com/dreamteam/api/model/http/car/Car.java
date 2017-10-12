@@ -10,7 +10,7 @@ import lombok.Data;
 public class Car extends HttpModel {
     private String name;
     private Long brandId;
-    private String pricePerDay;
+    private Double pricePerDay;
     private String date;
     private int millage;
     private String photo;

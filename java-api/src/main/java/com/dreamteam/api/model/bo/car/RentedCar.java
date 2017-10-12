@@ -21,10 +21,11 @@ public class RentedCar extends AbstractModel {
     @OneToOne
     private User user;
     private boolean isActive;
+    private boolean willBeActive;
     @Column(name = "from_date")
     private Date from;
     private Date to;
-    private String totalPrice;
+    private Double totalPrice;
 
     public RentedCar() {
         super();

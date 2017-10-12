@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Car extends AbstractModel {
 
     private String name;
-    private String pricePerDay;
+    private Double pricePerDay;
     private String date;
     private int millage;
     private String photo;
