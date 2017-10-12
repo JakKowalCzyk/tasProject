@@ -74,6 +74,6 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
     }
 
     private boolean isDateUsed(RentedCar rentedCar) {
-        return rentedCarService.existBetweenGivenDates(rentedCar.getFrom(), rentedCar.getTo());
+        return rentedCarService.existBetweenGivenDates(rentedCar.getFrom(), rentedCar.getTo(), rentedCar.getCarId());
     }
 }

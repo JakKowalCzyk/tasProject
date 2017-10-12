@@ -82,4 +82,14 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     public Collection<RentedCar> findByCar(@PathVariable Long id) {
         return getGenericService().findByCar(id).stream().map(rentedCar -> getAbstractMapper().mapToHttpObject(rentedCar)).collect(Collectors.toList());
     }
+
+    @Override
+    public Collection<RentedCar> findActive() {
+        return getGenericService().findActive().stream().map(rentedCar -> getAbstractMapper().mapToHttpObject(rentedCar)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<RentedCar> findWillBeActive() {
+        return getGenericService().findWillBeActive().stream().map(rentedCar -> getAbstractMapper().mapToHttpObject(rentedCar)).collect(Collectors.toList());
+    }
 }

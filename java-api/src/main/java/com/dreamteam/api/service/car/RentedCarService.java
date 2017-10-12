@@ -15,5 +15,10 @@ public interface RentedCarService extends GenericService<RentedCar> {
 
     Collection<RentedCar> findByCar(Long carId);
 
-    boolean existBetweenGivenDates(Date fromDate, Date toDate);
+    boolean existBetweenGivenDates(Date fromDate, Date toDate, Long carId);
+
+    Collection<RentedCar> findActive();
+
+    Collection<RentedCar> findWillBeActive();
+
 }

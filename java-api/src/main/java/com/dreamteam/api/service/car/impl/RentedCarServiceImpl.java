@@ -61,8 +61,18 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
     }
 
     @Override
-    public boolean existBetweenGivenDates(Date fromDate, Date toDate) {
-        return getModelDAO().existBetweenGivenDates(fromDate, toDate);
+    public boolean existBetweenGivenDates(Date fromDate, Date toDate, Long carId) {
+        return getModelDAO().existBetweenGivenDates(fromDate, toDate, carId);
+    }
+
+    @Override
+    public Collection<RentedCar> findActive() {
+        return getModelDAO().findByIsActiveTrue();
+    }
+
+    @Override
+    public Collection<RentedCar> findWillBeActive() {
+        return getModelDAO().findByWillBeActiveTrue();
     }
 
     @Override

@@ -54,4 +54,12 @@ public interface RentedCarController extends GenericController<RentedCar> {
     @GetMapping(value = "/api/car/{id}/rented")
     Collection<RentedCar> findByCar(@PathVariable Long id);
 
+    @ApiOperation(value = "Find active rentedCars")
+    @GetMapping(value = BASE_PATH + "/active")
+    Collection<RentedCar> findActive();
+
+    @ApiOperation(value = "Find rentedCars which will be active")
+    @GetMapping(value = BASE_PATH + "/active/will")
+    Collection<RentedCar> findWillBeActive();
+
 }
