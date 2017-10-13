@@ -22,4 +22,7 @@ public interface CarDAO extends ModelDAO<Car> {
     Collection<Car> findByDriveType(DriveType driveType);
 
     Collection<Car> findByCategoryType(CategoryType categoryType);
+
+    @Query("select o from Car o where lower(o.name) LIKE CONCAT('%',:tag,'%')")
+    Collection<Car> searchByName(@Param("tag") String tag);
 }

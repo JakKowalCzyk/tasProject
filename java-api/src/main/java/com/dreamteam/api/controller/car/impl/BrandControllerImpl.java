@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2017-10-11.
@@ -52,5 +54,10 @@ public class BrandControllerImpl extends GenericControllerImpl<Brand, com.dreamt
     @Override
     public ResponseEntity<Boolean> isExist(@PathVariable Long id) {
         return super.isExist(id);
+    }
+
+    @Override
+    public Collection<Brand> searchByName(@RequestHeader String name) {
+        return ((BrandService) getGenericService()).searchByName(name).stream().map(brand -> getAbstractMapper().mapToHttpObject(brand)).collect(Collectors.toList());
     }
 }

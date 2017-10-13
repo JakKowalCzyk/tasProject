@@ -3,6 +3,7 @@ package com.dreamteam.api.controller.car;
 import com.dreamteam.api.controller.GenericController;
 import com.dreamteam.api.model.http.car.Brand;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,4 +39,8 @@ public interface BrandController extends GenericController<Brand> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);
+
+    @ApiOperation(value = "Search brands by name")
+    @GetMapping(value = "/search")
+    Collection<Brand> searchByName(@RequestHeader String name);
 }

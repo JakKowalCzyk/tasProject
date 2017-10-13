@@ -45,6 +45,11 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     }
 
     @Override
+    public Collection<Car> searchByName(String tag) {
+        return getModelDAO().searchByName(tag);
+    }
+
+    @Override
     public void deleteObject(Long id) {
         rentedCarService.findByCar(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
         super.deleteObject(id);

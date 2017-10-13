@@ -77,6 +77,11 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     }
 
     @Override
+    public Collection<Car> searchByName(@RequestHeader String name) {
+        return getGenericService().searchByName(name).stream().map(car -> getAbstractMapper().mapToHttpObject(car)).collect(Collectors.toList());
+    }
+
+    @Override
     public CarService getGenericService() {
         return (CarService) super.getGenericService();
     }

@@ -56,5 +56,8 @@ public interface CarController extends GenericController<Car> {
     @GetMapping(value = "/category/")
     Collection<Car> findByCategory(@RequestHeader CategoryType categoryType);
 
+    @ApiOperation(value = "Search cars by name")
+    @GetMapping(value = "/search")
+    Collection<Car> searchByName(@RequestHeader String name);
 
 }

@@ -18,4 +18,7 @@ public interface CarService extends GenericService<Car> {
 
     Collection<Car> findByCategoryType(CategoryType categoryType);
 
+    Collection<Car> searchByName(String tag);
+
+
 }

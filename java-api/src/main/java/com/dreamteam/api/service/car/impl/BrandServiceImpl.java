@@ -8,6 +8,8 @@ import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 /**
  * Created by JK on 2017-10-11.
  */
@@ -27,5 +29,15 @@ public class BrandServiceImpl extends GenericServiceImpl<Brand> implements Brand
     public void deleteObject(Long id) {
         carService.findByBrand(id).forEach(car -> carService.deleteObject(car.getId()));
         super.deleteObject(id);
+    }
+
+    @Override
+    public Collection<Brand> searchByName(String tag) {
+        return getModelDAO().searchByName(tag);
+    }
+
+    @Override
+    public BrandDAO getModelDAO() {
+        return (BrandDAO) super.getModelDAO();
     }
 }
