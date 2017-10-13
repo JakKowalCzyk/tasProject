@@ -58,6 +58,11 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     }
 
     @Override
+    public void cancelRent(@PathVariable Long id) {
+        getGenericService().cancelRent(id);
+    }
+
+    @Override
     public ResponseEntity<Boolean> isExist(@PathVariable Long id) {
         return super.isExist(id);
     }

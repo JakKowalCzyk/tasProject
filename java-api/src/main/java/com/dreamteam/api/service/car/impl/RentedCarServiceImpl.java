@@ -2,6 +2,7 @@ package com.dreamteam.api.service.car.impl;
 
 import com.dreamteam.api.dao.car.RentedCarDAO;
 import com.dreamteam.api.model.bo.car.RentedCar;
+import com.dreamteam.api.model.exception.CancelException;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
@@ -97,6 +98,16 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
                 super.updateObject(rentedCar);
             }
         });
+    }
+
+    @Override
+    public void cancelRent(Long id) {
+        RentedCar rentedCar = super.findOne(id);
+        if (rentedCar.isActive()) {
+            super.deleteObject(id);
+        } else {
+            throw new CancelException(String.format("CANNOT DELETE RENT %s, IT'S BEING ACTIVE OR IT HAS BEEN FINISHED", id), "CANCEL_ERROR");
+        }
     }
 
     private boolean isDateBeforeNow(Date date) {

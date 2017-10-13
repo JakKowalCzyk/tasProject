@@ -38,6 +38,10 @@ public interface RentedCarController extends GenericController<RentedCar> {
     @DeleteMapping(value = BASE_PATH + "/{id}")
     void deleteObject(@PathVariable Long id);
 
+    @ApiOperation(value = "Cancel rent")
+    @DeleteMapping(value = BASE_PATH + "/cancel/{id}")
+    void cancelRent(@PathVariable Long id);
+
     @Override
     @RequestMapping(value = BASE_PATH + "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<Boolean> isExist(@PathVariable Long id);

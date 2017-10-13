@@ -25,4 +25,6 @@ public interface RentedCarService extends GenericService<RentedCar> {
 
     void updateWillBeActiveRents();
 
+    void cancelRent(Long id);
+
 }
