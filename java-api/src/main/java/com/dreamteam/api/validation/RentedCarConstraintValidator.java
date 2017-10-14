@@ -45,9 +45,11 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
             result.setMessage(DATE_EMPTY);
             return false;
         }
-        if (!isDateOrderCorrect(rentedCar)) {
-            result.setMessage(DATE_ORDER);
-            return false;
+        if (!DateUtils.isSameDay(rentedCar.getFrom(), rentedCar.getTo())) {
+            if (!isDateOrderCorrect(rentedCar)) {
+                result.setMessage(DATE_ORDER);
+                return false;
+            }
         }
         if (!isStartingDateAtLeastToday(rentedCar)) {
             result.setMessage(STARTING_DATE);
@@ -67,7 +69,7 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
     private boolean isStartingDateAtLeastToday(RentedCar rentedCar) {
         if (DateUtils.isSameDay(rentedCar.getFrom(), new GregorianCalendar().getTime())) {
             return true;
-        } else if (rentedCar.getTo().after(rentedCar.getFrom())) {
+        } else if (rentedCar.getTo().after(new GregorianCalendar().getTime())) {
             return true;
         }
         return false;
