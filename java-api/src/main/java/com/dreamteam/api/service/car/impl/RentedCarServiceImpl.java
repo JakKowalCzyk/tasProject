@@ -99,7 +99,7 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
     @Scheduled(cron = "${update.car.cron}")
     public void updateWillBeActiveRents() {
         findWillBeActive().forEach(rentedCar -> {
-            if (isDateBeforeNow(rentedCar.getFrom())) {
+            if (DateUtils.isSameDay(rentedCar.getFrom(), new GregorianCalendar().getTime())) {
                 rentedCar.setActive(true);
                 rentedCar.setWillBeActive(false);
                 super.updateObject(rentedCar);
