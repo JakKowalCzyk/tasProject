@@ -1,0 +1,9 @@
+<svg width="20" height="22" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <title>background</title>
+        <rect width="20" height="30" id="canvas_background" fill="none"/>
+    </g>
+    <g>
+        <polygon points="18.375,0 4.834,10.492 9.459,12.05 3.025,21.4 15.983,10.859 11.916,9.19   " fill="#FFDA44"/>
+    </g>
+</svg>

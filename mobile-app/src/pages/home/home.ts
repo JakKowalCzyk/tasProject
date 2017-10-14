@@ -1,7 +1,14 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {Ad} from "../../models/Ad";
-import {AdService} from "../../services/ad/ad.service";
+import { Component }        from '@angular/core';
+import { NavController }    from 'ionic-angular';
+
+//Pages
+import { CarPage }          from "../car/car";
+
+//Components
+import { Ad }               from "../../models/Ad";
+
+//Services
+import { AdService }        from "../../services/ad/ad.service";
 
 @Component({
   selector: 'page-home',
@@ -18,7 +25,9 @@ export class HomePage {
 
     }
 
-
+    openPage(ad : Ad) {
+        this.navCtrl.push(CarPage, {'ad' : ad})
+    }
 
 
 }

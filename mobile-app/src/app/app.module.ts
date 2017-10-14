@@ -9,15 +9,16 @@ import { MyApp }                                        from './app.component';
 //pages
 import { HomePage }         from '../pages/home/home';
 import { LoginPage }        from "../pages/login/login";
+import { CarPage }          from '../pages/car/car';
 
 //components
 import { HeaderComponent }  from "../components/header/header";
+import { AdComponent }      from "../components/ad/ad";
 
 //services
 import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
-import {AdComponent} from "../components/ad/ad";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {AdComponent} from "../components/ad/ad";
       LoginPage,
       HeaderComponent,
       AdComponent,
+      CarPage,
   ],
   imports: [
       BrowserModule,
@@ -40,6 +42,7 @@ import {AdComponent} from "../components/ad/ad";
       LoginPage,
       HeaderComponent,
       AdComponent,
+      CarPage,
   ],
   providers: [
       StatusBar,
