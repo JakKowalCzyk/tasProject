@@ -1,11 +1,16 @@
 import {Engine} from "./Engine";
+import {CarOption} from "./CarOption";
+
 export class Car {
 
     id      : number;
     brand   : number;
     model   : string;
-    category: number;
+    // category: number;
+    category: string;
     engine  : Engine;
+    options : Array<CarOption> = [];
+
 
     BRANDS = {
         1 : "Volvo",
@@ -13,6 +18,8 @@ export class Car {
         3 : "Ford",
         4 : "Mercedes",
         5 : "BMW",
+        6 : "Tesla",
+        7 : "Skoda",
     };
 
     CATEGORIES = {
@@ -26,13 +33,24 @@ export class Car {
         id          : number,
         brand       : number,
         model       : string,
-        category    : number,
+        // category    : number,
+        category    : string,
         engine      : Engine,
+        options     : Array<number>,
     ) {
         this.id        = id;
         this.brand     = brand;
         this.model     = model;
         this.category  = category;
         this.engine    = engine;
+        this.getOptions(options);
+    }
+
+    getOptions(options : Array<number>) {
+        for (let i = 1; i <= Object.keys(CarOption.NAMES).length; i++) {
+            options.indexOf(i) >= 0
+                ? this.options.push(new CarOption(i, 1))
+                : this.options.push(new CarOption(i, 0))
+        }
     }
 }

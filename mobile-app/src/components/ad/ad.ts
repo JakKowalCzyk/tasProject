@@ -15,11 +15,7 @@ export class AdComponent {
 
   @Input() ad : Ad;
 
-  text: string;
-
   constructor() {
-    console.log('Hello AdComponent Component');
-    this.text = 'Hello World';
   }
 
 }

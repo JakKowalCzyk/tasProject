@@ -3,8 +3,21 @@
         <img class="ad__img" src="assets/images/a45.jpg">
     </div>
     <div class="ad__carInfo">
-        <div class="ad__carInfo__title">{{ ad.title }}</div>
-        <div class="ad__carInfo__desc">{{ ad.car.engine.FUEL[ad.car.engine.fuel]}}</div>
+        <div class="ad__carInfo__title">{{ ad.car.BRANDS[ad.car.brand] }} {{ ad.car.model }} <span class="ad__carInfo__title--type">{{ ad.car.CATEGORIES[ad.car.category]}}</span> </div>
+        <div class="ad__carInfo__desc">
+            <img class="ad__carInfo__fuelImg" src="assets/images/{{
+                ad.car.engine.fuel == 'PB' || ad.car.engine.fuel == 'LPG'
+                    ? 'pb'
+                    : ad.car.engine.fuel == 'DIESEL'
+                        ? 'diesel'
+                        : 'electric'
+            }}.svg">
+            {{ ad.car.engine.fuel}}
+        </div>
+        <div class="ad__carInfo__descCont">
+            <div class="ad__carInfo__desc">{{ ad.car.engine.power}}KM</div>
+            <div class="ad__carInfo__desc">{{ ad.car.engine.drive}}</div>
+        </div>
     </div>
     <div class="ad__price">{{ ad.price }} zł/dzień</div>
 </div>
