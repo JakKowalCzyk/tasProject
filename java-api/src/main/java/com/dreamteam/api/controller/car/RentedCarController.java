@@ -4,11 +4,13 @@ import com.dreamteam.api.controller.GenericController;
 import com.dreamteam.api.model.http.car.RentedCar;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by JK on 2017-10-11.
@@ -65,5 +67,9 @@ public interface RentedCarController extends GenericController<RentedCar> {
     @ApiOperation(value = "Find rentedCars which will be active")
     @GetMapping(value = BASE_PATH + "/active/will")
     Collection<RentedCar> findWillBeActive();
+
+    @ApiOperation(value = "check if car is possible to rent in given dates")
+    @GetMapping(value = "/api/car/{id}/rented/free")
+    boolean isCarFreeInGivenDates(@PathVariable Long id, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date from, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date to);
 
 }

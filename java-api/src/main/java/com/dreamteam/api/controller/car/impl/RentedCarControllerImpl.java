@@ -7,14 +7,17 @@ import com.dreamteam.api.model.mapper.car.RentedCarMapper;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -97,4 +100,11 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     public Collection<RentedCar> findWillBeActive() {
         return getGenericService().findWillBeActive().stream().map(rentedCar -> getAbstractMapper().mapToHttpObject(rentedCar)).collect(Collectors.toList());
     }
+
+    @Override
+    public boolean isCarFreeInGivenDates(@PathVariable Long id, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date from, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
+        return getGenericService().isCarFreeInGivenDates(id, from, to);
+    }
+
+
 }

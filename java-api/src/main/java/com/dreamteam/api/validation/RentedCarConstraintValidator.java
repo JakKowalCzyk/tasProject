@@ -30,6 +30,8 @@ public class RentedCarConstraintValidator implements ConstraintValidator<RentedC
 
     @Override
     public boolean isValid(RentedCar rentedCar, ConstraintValidatorContext constraintValidatorContext) {
+        rentedCar.setFrom(DateUtils.setHours(rentedCar.getFrom(), 6));
+        rentedCar.setTo(DateUtils.setHours(rentedCar.getTo(), 6));
         ValidationMessage validationMessage = new ValidationMessage();
         if (isRentedCarValid(rentedCar, validationMessage)) {
             return true;

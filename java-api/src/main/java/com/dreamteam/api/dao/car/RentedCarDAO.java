@@ -22,9 +22,9 @@ public interface RentedCarDAO extends ModelDAO<RentedCar> {
     Collection<RentedCar> findByCar(@Param("carId") Long carId);
 
     @Query(value = "select case when " +
-            "(select case when count(1) >0 then true else false END from rented_car rent where rent.from_date >= :fromDate and rent.from_date <= :toDate and rent.car_id =:carId) " +
+            "(select case when count(1) >0 then true else false END from rented_car rent where rent.car_id =:carId and  :fromDate between rent.from_date and rent.to) " +
             "OR " +
-            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where rent.to >= :fromDate and rent.to <= :toDate and rent.car_id =:carId) " +
+            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where  rent.car_id =:carId and :toDate between rent.from_date and rent.to) " +
             "then true else false end", nativeQuery = true)
     boolean existBetweenGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate, @Param("carId") Long carId);
 

@@ -27,4 +27,6 @@ public interface RentedCarService extends GenericService<RentedCar> {
 
     void cancelRent(Long id);
 
+    boolean isCarFreeInGivenDates(Long carId, Date from, Date to);
+
 }
