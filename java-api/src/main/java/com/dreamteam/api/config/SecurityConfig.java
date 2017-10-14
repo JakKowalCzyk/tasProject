@@ -40,9 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and().formLogin().defaultSuccessUrl("/")
                 .and().csrf().disable()
-                .authorizeRequests().
-                antMatchers(HttpMethod.POST, "/api/user").permitAll().
-                antMatchers(HttpMethod.GET, "/api/car/").permitAll()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/user").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/car/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/brand/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/type/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and().logout().permitAll();
     }

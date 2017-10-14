@@ -30,7 +30,7 @@ public interface UserController extends GenericController<User> {
     Collection<User> findAll();
 
     @Override
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     void deleteObject(@PathVariable Long id);
 
     @Override
