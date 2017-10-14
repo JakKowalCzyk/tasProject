@@ -14,8 +14,9 @@ public class Car extends AbstractModel {
 
     private String name;
     private Double pricePerDay;
-    private String date;
+    private String productionDate;
     private int millage;
+    @Column(columnDefinition = "TEXT")
     private String photo;
     @ManyToOne
     private Brand brand;
@@ -29,6 +30,12 @@ public class Car extends AbstractModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
+    private boolean hasAirConditioning;
+    private boolean hasNavi;
+    private boolean hasElectricWindow;
+    private boolean hasRadio;
+    private boolean hasSunroof;
+    private boolean hasManualGearbox;
 
     public Car() {
         super();
