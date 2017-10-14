@@ -4,6 +4,7 @@ import com.dreamteam.api.dao.car.RentedCarDAO;
 import com.dreamteam.api.model.bo.car.RentedCar;
 import com.dreamteam.api.model.exception.CancelException;
 import com.dreamteam.api.service.car.RentedCarService;
+import com.dreamteam.api.service.email.EmailService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ import java.util.GregorianCalendar;
 public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implements RentedCarService {
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public RentedCarServiceImpl(RentedCarDAO modelDAO) {
         super(modelDAO);
     }
@@ -32,9 +36,11 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
         if (isSameDay(object, new GregorianCalendar().getTime())) {
             object.setActive(true);
             object.setWillBeActive(false);
+            emailService.sendEmailAboutStartedRent(object);
         } else {
             object.setActive(false);
             object.setWillBeActive(true);
+            emailService.sendEmailAboutScheduledRent(object);
         }
         return super.addObject(object);
     }
@@ -84,6 +90,7 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
             if (isDateBeforeNow(rentedCar.getTo())) {
                 rentedCar.setActive(false);
                 super.updateObject(rentedCar);
+                emailService.sendEmailAboutFinishedRent(rentedCar);
             }
         });
     }
@@ -96,6 +103,7 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
                 rentedCar.setActive(true);
                 rentedCar.setWillBeActive(false);
                 super.updateObject(rentedCar);
+                emailService.sendEmailAboutStartedRent(rentedCar);
             }
         });
     }
@@ -103,8 +111,9 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
     @Override
     public void cancelRent(Long id) {
         RentedCar rentedCar = super.findOne(id);
-        if (rentedCar.isActive()) {
+        if (!rentedCar.isActive() && rentedCar.isWillBeActive()) {
             super.deleteObject(id);
+            emailService.sendEmailAboutCancellation(rentedCar);
         } else {
             throw new CancelException(String.format("CANNOT DELETE RENT %s, IT'S BEING ACTIVE OR IT HAS BEEN FINISHED", id), "CANCEL_ERROR");
         }
