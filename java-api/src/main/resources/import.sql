@@ -1,6 +1,7 @@
 insert into user_bo(email, name, city, role_type, hash_password) VALUES ('email', 'kuba', 'poznan', 'ADMIN', '$2a$10$GQszpTccOl74I7uyZ7AVvuq9gZ1BSfI6oI3qkQDLbzteXXdCWm41S');
 insert into user_bo(email, name, city, role_type, hash_password) VALUES ('email1', 'kuba1', 'poznan1', 'ADMIN', '$2a$10$GQszpTccOl74I7uyZ7AVvuq9gZ1BSfI6oI3qkQDLbzteXXdCWm41S');
 insert into user_bo(email, name, city, role_type, hash_password) VALUES ('kow.jakub.kowalczyk@gmail.com', 'Jakub', 'Poznań', 'ADMIN', '$2a$10$GQszpTccOl74I7uyZ7AVvuq9gZ1BSfI6oI3qkQDLbzteXXdCWm41S');
+insert into user_bo(email, name, city, role_type, hash_password) VALUES ('krz.jozefowicz@gmail.com', 'Krzysztof', 'Poznań', 'ADMIN', '$2a$10$GQszpTccOl74I7uyZ7AVvuq9gZ1BSfI6oI3qkQDLbzteXXdCWm41S');
 insert into brand(name) VALUES ('Volvo');
 insert into brand(name) VALUES ('KIA');
 insert into brand(name) VALUES ('Opel');
