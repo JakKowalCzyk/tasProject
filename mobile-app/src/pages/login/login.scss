@@ -1,3 +1,12 @@
 page-login {
+  .login {
+    padding: 50px;
+    &__register {
 
+    }
+    &__registerLink {
+      cursor: pointer;
+      color: #007aff;
+    }
+  }
 }
