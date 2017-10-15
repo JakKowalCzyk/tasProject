@@ -37,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic()
+        http
+                .cors()
+                .and().httpBasic()
                 .and().formLogin().defaultSuccessUrl("/")
                 .and().csrf().disable()
                 .authorizeRequests()

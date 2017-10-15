@@ -124,6 +124,11 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
         return !existBetweenGivenDates(DateUtils.setHours(from, 6), DateUtils.setHours(to, 6), carId);
     }
 
+    @Override
+    public Collection<Long> findCarIdsRentedInGivenDates(Date fromDate, Date toDate) {
+        return getModelDAO().findCarIdsRentedInGivenDates(fromDate, toDate);
+    }
+
     private boolean isDateBeforeNow(Date date) {
         return date.before(new GregorianCalendar().getTime());
     }

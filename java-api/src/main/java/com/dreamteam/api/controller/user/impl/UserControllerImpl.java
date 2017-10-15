@@ -7,6 +7,7 @@ import com.dreamteam.api.model.mapper.user.UserMapper;
 import com.dreamteam.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public User updateObject(@RequestBody User model) {
         return super.updateObject(model);
     }
@@ -44,8 +46,14 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
+    }
+
+    @Override
+    public void deleteYourAccount(Principal principal) {
+        super.deleteObject(getGenericService().findByEmail(principal.getName()).getId());
     }
 
     @Override
@@ -62,6 +70,11 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
 
     @Override
     public User getPrincipal(Principal principal) {
-        return super.getAbstractMapper().mapToHttpObject(((UserService) getGenericService()).findByEmail(principal.getName()));
+        return super.getAbstractMapper().mapToHttpObject(getGenericService().findByEmail(principal.getName()));
+    }
+
+    @Override
+    public UserService getGenericService() {
+        return (UserService) super.getGenericService();
     }
 }

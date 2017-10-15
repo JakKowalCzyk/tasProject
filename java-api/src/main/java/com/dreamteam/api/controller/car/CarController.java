@@ -7,10 +7,12 @@ import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.model.http.car.Car;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Api(tags = "Car API", description = "services for cars")
 @RequestMapping(value = "/api/car")
@@ -59,5 +61,9 @@ public interface CarController extends GenericController<Car> {
     @ApiOperation(value = "Search cars by name")
     @GetMapping(value = "/search")
     Collection<Car> searchByName(@RequestHeader String name);
+
+    @ApiOperation(value = "Find cars possible to rent in given dates")
+    @GetMapping(value = "/free")
+    Collection<Car> findPossibleCarToRentInGivenDates(@RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date from, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date to);
 
 }

@@ -5,5 +5,5 @@ package com.dreamteam.api.model.enums;
  */
 public enum RoleType {
 
-    USER, ADMIN
+    ROLE_USER, ROLE_ADMIN
 }

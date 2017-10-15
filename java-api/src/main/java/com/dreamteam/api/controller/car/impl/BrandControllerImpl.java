@@ -7,6 +7,7 @@ import com.dreamteam.api.model.mapper.car.BrandMapper;
 import com.dreamteam.api.service.car.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,11 +33,13 @@ public class BrandControllerImpl extends GenericControllerImpl<Brand, com.dreamt
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Brand updateObject(@RequestBody Brand model) {
         return super.updateObject(model);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Brand addObject(@RequestBody Brand model) {
         return super.addObject(model);
     }
@@ -47,6 +50,7 @@ public class BrandControllerImpl extends GenericControllerImpl<Brand, com.dreamt
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
     }

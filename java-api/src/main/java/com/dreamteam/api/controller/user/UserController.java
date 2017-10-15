@@ -3,6 +3,7 @@ package com.dreamteam.api.controller.user;
 import com.dreamteam.api.controller.GenericController;
 import com.dreamteam.api.model.http.user.User;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,10 @@ public interface UserController extends GenericController<User> {
     @Override
     @DeleteMapping(value = "/{id}")
     void deleteObject(@PathVariable Long id);
+
+    @ApiOperation("Delete Your account")
+    @DeleteMapping(value = "/me")
+    void deleteYourAccount(Principal principal);
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
