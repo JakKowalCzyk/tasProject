@@ -9,7 +9,9 @@ export class RouteService {
         "cars"          : this.base + "car/",
 
         //user
-        "register"      : this.base + 'user',
+        'register'      : this.base + 'user',
+        'login'         : this.base + 'user/me',
+        'logout'        : this.base + 'user/logout',
     };
 
 }

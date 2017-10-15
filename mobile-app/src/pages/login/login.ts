@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {AuthService} from "../../services/auth/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegisterPage} from "../register/register";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the LoginPage page.
@@ -17,16 +18,29 @@ import {RegisterPage} from "../register/register";
 })
 export class LoginPage {
 
-  email       : string = '';
-  password    : string = '';
+  email       : string = 'krz.jozefowicz@gmail.com';
+  password    : string = '123';
   formGroup   : FormGroup;
 
+  showLoading : boolean = false;
+
   constructor(
-      private navCtrl     : NavController,
-      private navParams   : NavParams,
-      private authService : AuthService,
+      private navCtrl       : NavController,
+      private navParams     : NavParams,
+      private authService   : AuthService,
+      private events        : Events,
   ) {
     this.createFormGroup();
+    this.subscribeEvents();
+  }
+
+  subscribeEvents() {
+      this.events.subscribe('logged', () => { this.onLogged() });
+  }
+
+  onLogged() {
+      this.showLoading = false;
+      this.navCtrl.setRoot(HomePage);
   }
 
   createFormGroup() {
@@ -37,11 +51,12 @@ export class LoginPage {
   }
 
   login() {
-    if (!this.formGroup.valid) {
-      console.log("Twoja matka")
-    } else {
-      this.authService.login(this.email, this.password);
-    }
+      if (!this.formGroup.valid) {
+          console.log("FBVFD");
+      } else {
+          this.showLoading = true;
+          this.authService.login(this.email, this.password);
+      }
   }
 
   openRegister() {
