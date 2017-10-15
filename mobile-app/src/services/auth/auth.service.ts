@@ -1,6 +1,7 @@
 import { Injectable }           from "@angular/core";
 import { Http, Headers }        from "@angular/http";
 import { Events }               from "ionic-angular";
+import { Storage }              from "@ionic/storage";
 
 //models
 import { User }                 from "../../models/user/User";
@@ -20,12 +21,21 @@ export class AuthService {
     constructor(
         private http            : Http,
         private routeService    : RouteService,
-        private events          : Events
+        private events          : Events,
+        private storage         : Storage,
     ) {
     }
 
     getHeaders() {
         return this.headers;
+    }
+
+    logWithStorage() {
+        this.storage.get('user').then((val) => {
+            if (val != null)
+                this.afterLogin(val);
+        })
+
     }
 
     login(email : string, pass : string) {
@@ -36,12 +46,23 @@ export class AuthService {
             .subscribe((res) => {
                 let data = res.json();
                 if (data.id) {
-                    this.user = new User(data.id, data.email, data.name, data.city, base64);
-                    this.events.publish('logged');
+                    this.afterLogin(data, base64);
                 }
             },(err) => {
                 console.log(err.json())
             })
+    }
+
+    afterLogin(data, base64 = null) {
+        let base  = base64 || data.base64Auth;
+        this.user = new User(data.id, data.email, data.name, data.city, base);
+        //jeśli base64 nie jest null, to znaczy, że ta metoda jest wywołana ze zwykłego logowania, więc wrzucamy usera do storage
+        if (base64 != null) {
+            this.storage.set('user', this.user);
+        } else {
+            this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
+        }
+        this.events.publish('logged');
     }
 
     register(data) {

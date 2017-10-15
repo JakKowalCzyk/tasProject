@@ -10,6 +10,7 @@ import { LoginPage }  from '../pages/login/login';
 //services
 import { AdService }  from "../services/ad/ad.service";
 import {LogoutPage} from "../pages/logout/logout";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app',
@@ -28,11 +29,16 @@ export class MyApp {
       public splashScreen   : SplashScreen,
       private adService     : AdService,
       private events        : Events,
+      private authService   : AuthService,
   ) {
       this.initializeApp();
       this.subscribeEvents();
       this.makePages();
+      this.logWithStorage();
+  }
 
+  logWithStorage() {
+      this.authService.logWithStorage();
   }
 
   makePages() {
