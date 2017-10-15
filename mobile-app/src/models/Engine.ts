@@ -1,17 +1,30 @@
 export class Engine {
 
-    FUEL = {
-        1 : 'PB',
-        2 : 'ON',
-        3 : 'LPG',
-        4 : 'Electric'
-    };
+    // public static FUEL = {
+    //     1 : 'PB',
+    //     2 : 'ON',
+    //     3 : 'LPG',
+    //     4 : 'Electric'
+    // };
 
-    DRIVE = {
-        1 : 'FWD',
-        2 : 'RWD',
-        3 : 'AWD'
-    };
+    FUEL = [
+        'PB',
+        'ON',
+        'LPG',
+        'Electric'
+    ];
+
+    DRIVE = [
+        'FWD',
+        'RWD',
+        'AWD'
+    ];
+
+    // DRIVE = {
+    //     1 : 'FWD',
+    //     2 : 'RWD',
+    //     3 : 'AWD'
+    // };
 
     // fuel    : number;
     fuel    : string;

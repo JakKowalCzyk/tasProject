@@ -1,12 +1,13 @@
 export class CarOption {
-    public static NAMES = {
-        1 : "Klimatyzacja",
-        2 : "Nawigacja",
-        3 : "Elektryczne szyby",
-        4 : "Radio",
-        5 : "Szyberdach",
-        6 : "Automat"
-    };
+
+    public NAMES = [
+        "Klimatyzacja",
+        "Nawigacja",
+        "Elektryczne szyby",
+        "Radio",
+        "Szyberdach",
+        "Automat"
+    ];
 
     name                : number;
     public isEnabled    : boolean;
@@ -14,6 +15,10 @@ export class CarOption {
     constructor(name : number, isEnabled : boolean) {
         this.name       = name;
         this.isEnabled  = isEnabled;
+    }
+
+    getName() {
+        return this.NAMES[this.name];
     }
 
 }

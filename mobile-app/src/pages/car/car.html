@@ -1,41 +1,42 @@
-<header title="{{ ad.car.BRANDS[ad.car.brand] }} {{ ad.car.model }}"></header>
+<header title="{{ adService.brands[car.brand] }} {{ car.model }}"></header>
 
 <ion-content>
     <div class="ad">
         <div class="ad__imageCont">
-            <img class="ad__imageCont__img" src="assets/images/a45.jpg">
+            <img class="ad__imageCont__img" src="{{ car.imgPath }}">
+            <!--<img class="ad__imageCont__img" src="assets/images/a45.jpg">-->
         </div>
         <div class="ad__top">
             <div class="ad__top__horizontal">
-                <div class="ad__top__title">{{ ad.car.BRANDS[ad.car.brand] }} {{ ad.car.model }}</div>
-                <div class="ad__top__price">{{ ad.price }} zł / dzień</div>
+                <div class="ad__top__title">{{ adService.brands[car.brand] }} {{ car.model }}</div>
+                <div class="ad__top__price">{{ car.price }} zł / dzień</div>
             </div>
-            <div class="ad__top__carType">{{ ad.car.CATEGORIES[ad.car.category] }}</div>
+            <div class="ad__top__carType">{{ car.category }}</div>
         </div>
         <div class="ad__info">
             <div class="ad__info__item">
                 <div class="ad__info__item__name">Paliwo</div>
                 <div class="ad__info__item__value"><img class="ad__info__item__value__img" src="assets/images/{{
-                ad.car.engine.fuel == 'PB' || ad.car.engine.fuel == 'LPG'
+                car.engine.fuel == 'PB' || car.engine.fuel == 'LPG'
                     ? 'pb'
-                    : ad.car.engine.fuel == 'DIESEL'
+                    : car.engine.fuel == 'DIESEL'
                         ? 'diesel'
                         : 'electric'
-                        }}.svg"> {{ad.car.engine.fuel}}</div>
+                        }}.svg"> {{ car.engine.fuel }}</div>
             </div>
             <div class="ad__info__item">
                 <div class="ad__info__item__name">Moc</div>
-                <div class="ad__info__item__value">{{ ad.car.engine.power }}KM</div>
+                <div class="ad__info__item__value">{{ car.engine.power }}KM</div>
             </div>
             <div class="ad__info__item">
                 <div class="ad__info__item__name">Napęd</div>
-                <div class="ad__info__item__value">{{ ad.car.engine.drive}}</div>
+                <div class="ad__info__item__value">{{ car.engine.drive}}</div>
             </div>
         </div>
 
         <div class="ad__options">
-            <div class="ad__option" *ngFor="let option of ad.car.options">
-                <div class="ad__option__name">{{ option.constructor.NAMES[option.name]}}</div>
+            <div class="ad__option" *ngFor="let option of car.options">
+                <div class="ad__option__name">{{ option.getName()}}</div>
                 <div class="ad__option__value"><img class="ad__option__img" src="assets/images/{{
                 option.isEnabled
                     ? 'ok-sign'

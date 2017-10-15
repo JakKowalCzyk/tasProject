@@ -8,6 +8,8 @@ export class RouteService {
     routes = {
         'cars'          : this.base + 'car/',
         'brands'        : this.base + 'brand/',
+        'addCar'        : this.base + 'car',
+        'addBrand'      : this.base + 'brand',
 
         //user
         'register'      : this.base + 'user',

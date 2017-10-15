@@ -13,22 +13,22 @@ export class Car {
     options : Array<CarOption> = [];
 
 
-    BRANDS = {
-        1 : "Volvo",
-        2 : "Seat",
-        3 : "Ford",
-        4 : "Mercedes",
-        5 : "BMW",
-        6 : "Tesla",
-        7 : "Skoda",
-    };
+    // BRANDS = {
+    //     1 : "Volvo",
+    //     2 : "Seat",
+    //     3 : "Ford",
+    //     4 : "Mercedes",
+    //     5 : "BMW",
+    //     6 : "Tesla",
+    //     7 : "Skoda",
+    // };
 
-    CATEGORIES = {
-        1 : "Miejskie",
-        2 : "Sedan/kombi",
-        3 : "Sportowe/Coupe",
-        4 : "SUV/Terenowy"
-    };
+    // CATEGORIES = {
+    //     1 : "Miejskie",
+    //     2 : "Sedan/kombi",
+    //     3 : "Sportowe/Coupe",
+    //     4 : "SUV/Terenowy"
+    // };
 
     constructor(
         id          : number,
@@ -51,7 +51,7 @@ export class Car {
     }
 
     getOptions(options : Array<boolean>) {
-        for (let i = 1; i <= options.length; i++) {
+        for (let i = 0; i < options.length; i++) {
             this.options.push(new CarOption(i,options[i]))
         }
     }

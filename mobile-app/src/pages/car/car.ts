@@ -7,6 +7,7 @@ import { Car }                                  from "../../models/Car";
 
 //pages
 import { OrderPage }                            from "../order/order";
+import {AdService} from "../../services/ad/ad.service";
 
 @Component({
   selector: 'page-car',
@@ -16,9 +17,11 @@ export class CarPage {
 
   car      : Car;
 
+
   constructor(
       public navCtrl: NavController,
-      public navParams: NavParams
+      public navParams: NavParams,
+      private adService : AdService,
   ) {
       this.car = navParams.get('car');
   }

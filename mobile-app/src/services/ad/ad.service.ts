@@ -75,4 +75,49 @@ export class AdService {
         // ];
         // this.allAds = ads;
     }
+
+    addCarBrand(data) {
+        this.http.post(this.routeService.routes.addBrand, { name : data.brand }, { headers : this.authService.headers })
+            .subscribe((res) => {
+                let r = res.json();
+                this.brands[r.id] = r.name;
+                this.add(data);
+            })
+    }
+
+    add(data) {
+
+        //check if brand exists
+        let brandFlag = false;
+        for (let k in this.brands) {
+            if (this.brands[k] == data.brand) {
+                brandFlag = true;
+                delete data.brand;
+                data['brandId'] = k;
+            }
+        }
+        if (!brandFlag) {
+            this.addCarBrand(data);
+            return;
+        }
+
+
+
+        //check if category exists
+        // let categoryFlag = false;
+        // for (let k in this.brands) {
+        //     if (this.brands[k] == data.brand) {
+        //         brandFlag = true;
+        //     }
+        // }
+        // if (!brandFlag) {
+        //     this.addCarBrand(data);
+        //     return;
+        // }
+
+        this.http.post(this.routeService.routes.addCar, data, { headers : this.authService.headers } )
+            .subscribe((res) => {
+                console.log(res.json())
+            })
+    }
 }

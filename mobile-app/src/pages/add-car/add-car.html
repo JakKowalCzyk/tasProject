@@ -1,16 +1,64 @@
 <header title="Dodaj auto"></header>
 <ion-content class="page_wrapper">
     <div class="addCar">
-        <form class="addCar__form" [formGroup]="formGroup">
+        <form class="addCar__form"> <!--[formGroup]="formGroup"-->
             <ion-item>
                 <ion-label>Marka</ion-label>
-                <ion-input formControlName="brand" type="text" [(ngModel)]="brandId" name="brand"></ion-input>
+                <ion-input type="text" [(ngModel)]="brand" name="brand"></ion-input> <!--formControlName="brand"-->
             </ion-item>
 
             <ion-item>
                 <ion-label>Model</ion-label>
-                <ion-input formControlName="name" type="text" [(ngModel)]="name" name="name"></ion-input>
+                <ion-input type="text" [(ngModel)]="name" name="name"></ion-input> <!--formControlName="name"-->
             </ion-item>
+
+            <ion-item>
+                <ion-label>Kategoria</ion-label>
+                <ion-input type="text" [(ngModel)]="categoryType" name="categoryType"></ion-input> <!--formControlName="name"-->
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Rodzaj paliwa</ion-label>
+                <ion-select [(ngModel)]="fuelType" name="fuelType">
+                    <ion-option *ngFor="let fuel of engine.FUEL" value="{{fuel}}">{{ fuel }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Moc</ion-label>
+                <ion-input type="number" [(ngModel)]="power" name="power"></ion-input> <!--formControlName="name"-->
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Napęd</ion-label>
+                <ion-select [(ngModel)]="driveType" name="fuelType">
+                    <ion-option *ngFor="let drive of engine.DRIVE" value="{{drive}}">{{ drive }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Rok produkcji</ion-label>
+                <ion-input type="string" [(ngModel)]="productionDate" name="productionDate"></ion-input> <!--formControlName="name"-->
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Opcje dodatkowe</ion-label>
+                <ion-select [(ngModel)]="options" name="fuelType" multiple="true">
+                    <ion-option *ngFor="let option of option.NAMES" value="{{option}}">{{ option }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Link do zdjęcia (XD)</ion-label>
+                <ion-input type="string" [(ngModel)]="photo" name="photo"></ion-input> <!--formControlName="name"-->
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Cena za dzień</ion-label>
+                <ion-input type="number" [(ngModel)]="pricePerDay" name="pricePerDay"></ion-input> <!--formControlName="name"-->
+            </ion-item>
+
+
 
             <!--<ion-item>-->
                 <!--<ion-label>Hasło</ion-label>-->
@@ -22,7 +70,7 @@
                 <!--<ion-input formControlName="city" type="text" [(ngModel)]="city" name="city"></ion-input>-->
             <!--</ion-item>-->
 
-            <!--<button ion-button type="submit" block (click)="addCar()">Dodaj auto</button>-->
+            <button ion-button type="submit" block (click)="addCar()">Dodaj auto</button>
         </form>
     </div>
 </ion-content>
