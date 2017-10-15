@@ -1,4 +1,8 @@
-header {
-  .header {
+.header {
+  .toolbar-content {
+    display: flex;
+  }
+  &__hello {
+    font-weight: 300;
   }
 }
