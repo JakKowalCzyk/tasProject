@@ -8,6 +8,7 @@ import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.service.car.CarService;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
 
     @Override
     public Collection<Car> findPossibleCarToRentInGivenDates(Date fromDate, Date toDate) {
-        Collection<Long> rentedCarIds = rentedCarService.findCarIdsRentedInGivenDates(fromDate, toDate);
+        Collection<Long> rentedCarIds = rentedCarService.findCarIdsRentedInGivenDates(DateUtils.setHours(fromDate, 6), DateUtils.setHours(toDate, 6));
         return findAll().stream().filter(car -> !rentedCarIds.contains(car.getId())).collect(Collectors.toList());
     }
 
