@@ -5,16 +5,17 @@ import { Http }         from "@angular/http";
 import { RouteService }     from "../route/route.service";
 
 //models
-import { Ad }               from "../../models/Ad";
 import { Car }              from "../../models/Car";
-import {Engine} from "../../models/Engine";
-import {AuthService} from "../auth/auth.service";
+import { Engine }           from "../../models/Engine";
+import { AuthService }      from "../auth/auth.service";
 
 @Injectable()
 export class AdService {
 
-    allAds      : Array<Ad>;
-    contentHeaders  : Headers = new Headers();
+    brands          : Object = {};
+    allCars         : Array<Car>        = [];
+
+    contentHeaders  : Headers           = new Headers();
 
     constructor(
         private http            : Http,
@@ -24,18 +25,37 @@ export class AdService {
 
     }
 
+    getBrands() {
+        this.http.get(this.routeService.routes.brands)
+            .subscribe((res) => {
+                for (let brand of res.json()) {
+                    this.brands[brand.id] = brand.name;
+                }
+            })
+    }
+
     all() {
-        this.allAds = [];
+        this.getBrands();
         this.http.get(this.routeService.routes.cars)
             .subscribe((res) => {
-                console.log(res.json());
                 for (let car of res.json()) {
-                    this.allAds.push(new Ad(
+                    this.allCars.push(new Car(
                         car.id,
+                        car.brandId,
                         car.name,
+                        car.categoryType,
+                        car.photo,
                         car.pricePerDay,
-                        new Car(car.id, car.brandId,car.name,car.categoryType, new Engine(car.fuelType, 200, car.driveType),[])
-                    ))
+                        new Engine(car.fuelType, car.power, car.driveType),
+                        [
+                            car.hasAirConditioning,
+                            car.hasNavi,
+                            car.hasElectricWindow,
+                            car.hasRadio,
+                            car.hasSunroof,
+                            !car.hasManualGearbox
+                        ])
+                    )
                 }
             });
 

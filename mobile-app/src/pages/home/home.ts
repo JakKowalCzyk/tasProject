@@ -4,8 +4,8 @@ import { NavController }    from 'ionic-angular';
 //Pages
 import { CarPage }          from "../car/car";
 
-//Components
-import { Ad }               from "../../models/Ad";
+//models
+import { Car }              from "../../models/Car";
 
 //Services
 import { AdService }        from "../../services/ad/ad.service";
@@ -16,17 +16,17 @@ import { AdService }        from "../../services/ad/ad.service";
 })
 export class HomePage {
 
-    Ads : Array<Ad>;
+    cars : Array<Car>;
 
     constructor(
-        public navCtrl      : NavController,
+        private navCtrl      : NavController,
         private adService   : AdService,
     ) {
 
     }
 
-    openPage(ad : Ad) {
-        this.navCtrl.push(CarPage, {'ad' : ad})
+    openPage(car : Car) {
+        this.navCtrl.push(CarPage, {'car' : car })
     }
 
 

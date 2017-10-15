@@ -1,23 +1,24 @@
 <div class="ad">
     <div class="ad__imgCont">
-        <img class="ad__img" src="assets/images/a45.jpg">
+        <img class="ad__img" src="{{car.imgPath}}">
+        <!--<img class="ad__img" src="assets/images/a45.jpg">-->
     </div>
     <div class="ad__carInfo">
-        <div class="ad__carInfo__title">{{ ad.car.BRANDS[ad.car.brand] }} {{ ad.car.model }} <span class="ad__carInfo__title--type">{{ ad.car.CATEGORIES[ad.car.category]}}</span> </div>
+        <div class="ad__carInfo__title">{{ adService.brands[car.brand] }} {{ car.model }} <span class="ad__carInfo__title--type">{{ car.category }}</span> </div>
         <div class="ad__carInfo__desc">
             <img class="ad__carInfo__fuelImg" src="assets/images/{{
-                ad.car.engine.fuel == 'PB' || ad.car.engine.fuel == 'LPG'
+                car.engine.fuel == 'PB' || car.engine.fuel == 'LPG'
                     ? 'pb'
-                    : ad.car.engine.fuel == 'DIESEL'
+                    : car.engine.fuel == 'DIESEL'
                         ? 'diesel'
                         : 'electric'
             }}.svg">
-            {{ ad.car.engine.fuel}}
+            {{ car.engine.fuel}}
         </div>
         <div class="ad__carInfo__descCont">
-            <div class="ad__carInfo__desc">{{ ad.car.engine.power}}KM</div>
-            <div class="ad__carInfo__desc">{{ ad.car.engine.drive}}</div>
+            <div class="ad__carInfo__desc">{{ car.engine.power}}KM</div>
+            <div class="ad__carInfo__desc">{{ car.engine.drive}}</div>
         </div>
     </div>
-    <div class="ad__price">{{ ad.price }} zł/dzień</div>
+    <div class="ad__price">{{ car.price }} zł/dzień</div>
 </div>
