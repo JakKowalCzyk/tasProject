@@ -12,6 +12,8 @@ import { LoginPage }        from "../pages/login/login";
 import { CarPage }          from '../pages/car/car';
 import { RegisterPage }     from '../pages/register/register';
 import { LogoutPage }       from "../pages/logout/logout";
+import { OrderPage }        from "../pages/order/order";
+import { AddCarPage }       from "../pages/add-car/add-car";
 
 //components
 import { HeaderComponent }  from "../components/header/header";
@@ -34,7 +36,9 @@ import { RouteService }     from "../services/route/route.service";
       CarPage,
       RegisterPage,
       LogoutPage,
+      OrderPage,
       AddIconComponent,
+      AddCarPage,
   ],
   imports: [
       BrowserModule,
@@ -51,7 +55,9 @@ import { RouteService }     from "../services/route/route.service";
       CarPage,
       RegisterPage,
       LogoutPage,
+      OrderPage,
       AddIconComponent,
+      AddCarPage,
   ],
   providers: [
       StatusBar,

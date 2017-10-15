@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Ad} from "../../models/Ad";
-import { CarOption } from "../../models/CarOption";
+import { Component }                            from '@angular/core';
+import { IonicPage, NavController, NavParams }  from 'ionic-angular';
+
+//models
+import { CarOption }                            from "../../models/CarOption";
+import { Car }                                  from "../../models/Car";
+
+//pages
+import { OrderPage }                            from "../order/order";
 
 @Component({
   selector: 'page-car',
@@ -9,17 +14,20 @@ import { CarOption } from "../../models/CarOption";
 })
 export class CarPage {
 
-  ad      : Ad;
+  car      : Car;
 
   constructor(
       public navCtrl: NavController,
       public navParams: NavParams
   ) {
-    this.ad = navParams.get('ad');
+      this.car = navParams.get('car');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CarPage');
+  }
+
+  openOrderPage() {
+      this.navCtrl.push(OrderPage, { 'car' : this.car})
   }
 
 }
