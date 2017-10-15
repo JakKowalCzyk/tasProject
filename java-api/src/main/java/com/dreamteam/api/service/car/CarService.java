@@ -7,6 +7,7 @@ import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.service.GenericService;
 
 import java.util.Collection;
+import java.util.Date;
 
 public interface CarService extends GenericService<Car> {
 
@@ -20,5 +21,6 @@ public interface CarService extends GenericService<Car> {
 
     Collection<Car> searchByName(String tag);
 
+    Collection<Car> findPossibleCarToRentInGivenDates(Date fromDate, Date toDate);
 
 }

@@ -36,6 +36,12 @@ public interface RentedCarDAO extends ModelDAO<RentedCar> {
             "then true else false end", nativeQuery = true)
     boolean existBetweenGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate, @Param("carId") Long carId);
 
+    @Query("select rent.car.id from RentedCar rent where " +
+            " ((:fromDate between rent.from and rent.to) or (:toDate between rent.from and rent.to)) " +
+            "or " +
+            "((rent.from between :fromDate and :toDate) or (rent.to between :fromDate and :toDate))")
+    Collection<Long> findCarIdsRentedInGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
+
     Collection<RentedCar> findByIsActiveTrue();
 
     Collection<RentedCar> findByWillBeActiveTrue();

@@ -29,4 +29,7 @@ public interface RentedCarService extends GenericService<RentedCar> {
 
     boolean isCarFreeInGivenDates(Long carId, Date from, Date to);
 
+    Collection<Long> findCarIdsRentedInGivenDates(Date fromDate, Date toDate);
+
+
 }

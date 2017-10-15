@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl extends GenericServiceImpl<Car> implements CarService {
@@ -47,6 +49,12 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     @Override
     public Collection<Car> searchByName(String tag) {
         return getModelDAO().searchByName(tag);
+    }
+
+    @Override
+    public Collection<Car> findPossibleCarToRentInGivenDates(Date fromDate, Date toDate) {
+        Collection<Long> rentedCarIds = rentedCarService.findCarIdsRentedInGivenDates(fromDate, toDate);
+        return findAll().stream().filter(car -> !rentedCarIds.contains(car.getId())).collect(Collectors.toList());
     }
 
     @Override
