@@ -59,6 +59,67 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     }
 
     @Override
+    public Collection<Car> findByFilteredParameters(Long brandId, FuelType fuelType, DriveType driveType, CategoryType categoryType,
+                                                    Double priceSmallerThan, Double priceBiggerThan,
+                                                    Integer millageSmallerThan, Integer millageBiggerThan,
+                                                    Integer powerSmallerThan, Integer powerBiggerThan,
+                                                    Boolean hasElectricWindow, Boolean hasNavi,
+                                                    Boolean hasAirConditioning, Boolean hasManualGearbox,
+                                                    Boolean hasSunroof, Boolean hasRadio) {
+        return super.findAll().stream()
+                .filter(car -> brandId == null || car.getBrand().getId().equals(brandId))
+                .filter(car -> fuelType == null || car.getFuelType().equals(fuelType))
+                .filter(car -> driveType == null || car.getDriveType().equals(driveType))
+                .filter(car -> categoryType == null || car.getCategoryType().equals(categoryType))
+                .filter(car -> filterPrice(priceSmallerThan, priceBiggerThan, car))
+                .filter(car -> filterMillage(millageSmallerThan, millageBiggerThan, car))
+                .filter(car -> filterPower(powerSmallerThan, powerBiggerThan, car))
+                .filter(car -> hasElectricWindow == null || hasElectricWindow)
+                .filter(car -> hasNavi == null || hasNavi)
+                .filter(car -> hasAirConditioning == null || hasAirConditioning)
+                .filter(car -> hasManualGearbox == null || hasManualGearbox)
+                .filter(car -> hasSunroof == null || hasSunroof)
+                .filter(car -> hasRadio == null || hasRadio)
+                .collect(Collectors.toList());
+    }
+
+    private boolean filterPrice(Double priceSmallerThan, Double priceBiggerThan, Car car) {
+        if ((priceBiggerThan == null && priceSmallerThan == null)) {
+            return true;
+        } else if (priceBiggerThan == null) {
+            return car.getPricePerDay() < priceSmallerThan;
+        } else if (priceSmallerThan == null) {
+            return car.getPricePerDay() > priceBiggerThan;
+        } else {
+            return car.getPricePerDay() > priceBiggerThan && car.getPricePerDay() < priceSmallerThan;
+        }
+    }
+
+    private boolean filterMillage(Integer millageSmallerThan, Integer millageBiggerThan, Car car) {
+        if ((millageBiggerThan == null && millageSmallerThan == null)) {
+            return true;
+        } else if (millageBiggerThan == null) {
+            return car.getMillage() < millageSmallerThan;
+        } else if (millageSmallerThan == null) {
+            return car.getMillage() > millageBiggerThan;
+        } else {
+            return car.getMillage() > millageBiggerThan && car.getMillage() < millageSmallerThan;
+        }
+    }
+
+    private boolean filterPower(Integer powerSmallerThan, Integer powerBiggerThan, Car car) {
+        if ((powerBiggerThan == null && powerSmallerThan == null)) {
+            return true;
+        } else if (powerBiggerThan == null) {
+            return car.getPower() < powerSmallerThan;
+        } else if (powerSmallerThan == null) {
+            return car.getPower() > powerBiggerThan;
+        } else {
+            return car.getPower() > powerBiggerThan && car.getPower() < powerSmallerThan;
+        }
+    }
+
+    @Override
     public void deleteObject(Long id) {
         rentedCarService.findByCar(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
         super.deleteObject(id);
