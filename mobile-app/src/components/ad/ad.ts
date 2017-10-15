@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Ad} from "../../models/Ad";
+import {Car} from "../../models/Car";
+import {AdService} from "../../services/ad/ad.service";
 
 /**
  * Generated class for the AdComponent component.
@@ -13,13 +14,11 @@ import {Ad} from "../../models/Ad";
 })
 export class AdComponent {
 
-  @Input() ad : Ad;
+  @Input() car : Car;
 
-  text: string;
-
-  constructor() {
-    console.log('Hello AdComponent Component');
-    this.text = 'Hello World';
+  constructor(
+      private adService : AdService,
+  ) {
   }
 
 }

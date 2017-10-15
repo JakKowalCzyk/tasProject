@@ -1,16 +1,9 @@
-<!--<ion-header>-->
-  <!--<ion-navbar>-->
-    <!--<p menuToggle>Toggle Menu</p>-->
-    <!--<ion-title>{{title}}</ion-title>-->
-  <!--</ion-navbar>-->
-
-<!--</ion-header>-->
-
 <ion-header class="header">
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{title}}</ion-title>
+    <p class="header__hello">{{ authService.user ? 'Witaj, ' + authService.user.name : '' }}</p>
   </ion-navbar>
 </ion-header>

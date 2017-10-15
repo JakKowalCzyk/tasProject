@@ -1,0 +1,29 @@
+<header title="Register"></header>
+
+<ion-content class="page_wrapper">
+    <div class="register">
+        <form class="register__form" [formGroup]="formGroup">
+            <ion-item>
+                <ion-label>Imię i nazwisko</ion-label>
+                <ion-input formControlName="name" type="text" [(ngModel)]="name" name="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Adres email</ion-label>
+                <ion-input formControlName="email" type="text" [(ngModel)]="email" name="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Hasło</ion-label>
+                <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Miasto</ion-label>
+                <ion-input formControlName="city" type="text" [(ngModel)]="city" name="city"></ion-input>
+            </ion-item>
+
+            <button ion-button type="submit" block (click)="register()">Zarejestruj</button>
+        </form>
+    </div>
+</ion-content>

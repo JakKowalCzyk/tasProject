@@ -12,5 +12,9 @@
         </ion-item>
         <button ion-button type="submit" block (click)="login()">Zaloguj</button>
       </form>
+      <div class="login__register">
+          Nie masz konta? <span class="login__registerLink" (click)="openRegister()">Zarejestruj się</span>
+      </div>
   </div>
+    <div [hidden]="!showLogin" class="loader"></div>
 </ion-content>

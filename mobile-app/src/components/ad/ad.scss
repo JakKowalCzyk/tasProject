@@ -14,14 +14,28 @@ ad {
       min-height: 100%;
     }
     &__carInfo {
+      padding: 15px;
       display: flex;
       flex-direction: column;
       &__title {
-        padding: 15px;
         font-weight: 900;
+        &--type {
+          font-size: 12px;
+          font-weight: 300;
+        }
+      }
+      &__descCont {
+        margin-top: auto;
+        display: flex;
+      }
+      &__fuelImg {
+        width: 11px;
+        height: 15px;
       }
       &__desc {
-
+        font-weight: 300;
+        padding: 10px;
+        font-size: 12px;
       }
     }
     &__price {

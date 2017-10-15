@@ -9,15 +9,21 @@ import { MyApp }                                        from './app.component';
 //pages
 import { HomePage }         from '../pages/home/home';
 import { LoginPage }        from "../pages/login/login";
+import { CarPage }          from '../pages/car/car';
+import { RegisterPage }     from '../pages/register/register';
+import { LogoutPage }       from "../pages/logout/logout";
+import { OrderPage }        from "../pages/order/order";
+import { AddCarPage }       from "../pages/add-car/add-car";
 
 //components
 import { HeaderComponent }  from "../components/header/header";
+import { AdComponent }      from "../components/ad/ad";
+import { AddIconComponent } from "../components/add-icon/add-icon";
 
 //services
 import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
-import {AdComponent} from "../components/ad/ad";
 
 
 @NgModule({
@@ -27,6 +33,12 @@ import {AdComponent} from "../components/ad/ad";
       LoginPage,
       HeaderComponent,
       AdComponent,
+      CarPage,
+      RegisterPage,
+      LogoutPage,
+      OrderPage,
+      AddIconComponent,
+      AddCarPage,
   ],
   imports: [
       BrowserModule,
@@ -40,6 +52,12 @@ import {AdComponent} from "../components/ad/ad";
       LoginPage,
       HeaderComponent,
       AdComponent,
+      CarPage,
+      RegisterPage,
+      LogoutPage,
+      OrderPage,
+      AddIconComponent,
+      AddCarPage,
   ],
   providers: [
       StatusBar,

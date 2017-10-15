@@ -1,0 +1,28 @@
+<header title="Dodaj auto"></header>
+<ion-content class="page_wrapper">
+    <div class="addCar">
+        <form class="addCar__form" [formGroup]="formGroup">
+            <ion-item>
+                <ion-label>Marka</ion-label>
+                <ion-input formControlName="brand" type="text" [(ngModel)]="brandId" name="brand"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Model</ion-label>
+                <ion-input formControlName="name" type="text" [(ngModel)]="name" name="name"></ion-input>
+            </ion-item>
+
+            <!--<ion-item>-->
+                <!--<ion-label>Hasło</ion-label>-->
+                <!--<ion-input formControlName="password" type="password" [(ngModel)]="password" name="password"></ion-input>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-label>Miasto</ion-label>-->
+                <!--<ion-input formControlName="city" type="text" [(ngModel)]="city" name="city"></ion-input>-->
+            <!--</ion-item>-->
+
+            <!--<button ion-button type="submit" block (click)="addCar()">Dodaj auto</button>-->
+        </form>
+    </div>
+</ion-content>

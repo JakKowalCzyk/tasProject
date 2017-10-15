@@ -1,8 +1,8 @@
 export class Engine {
 
     FUEL = {
-        1 : 'Pb',
-        2 : 'Diesel',
+        1 : 'PB',
+        2 : 'ON',
         3 : 'LPG',
         4 : 'Electric'
     };
@@ -13,14 +13,18 @@ export class Engine {
         3 : 'AWD'
     };
 
-    fuel    : number;
+    // fuel    : number;
+    fuel    : string;
     power   : number;
-    drive   : number;
+    // drive   : number;
+    drive   : string;
 
     constructor(
-        fuel    : number,
+        // fuel    : number,
+        fuel    : string,
         power   : number,
-        drive   : number,
+        // drive   : number,
+        drive   : string,
     ) {
         this.fuel   = fuel;
         this.power  = power;
