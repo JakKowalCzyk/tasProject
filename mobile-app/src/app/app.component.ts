@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Component, ViewChild }     from '@angular/core';
+import { Events, Nav, Platform }    from 'ionic-angular';
+import { StatusBar }                from '@ionic-native/status-bar';
+import { SplashScreen }             from '@ionic-native/splash-screen';
 
 //pages
 import { HomePage }   from '../pages/home/home';
@@ -9,6 +9,7 @@ import { LoginPage }  from '../pages/login/login';
 
 //services
 import { AdService }  from "../services/ad/ad.service";
+import {LogoutPage} from "../pages/logout/logout";
 
 @Component({
   selector: 'app',
@@ -22,16 +23,32 @@ export class MyApp {
 
 
   constructor(
-      public platform     : Platform,
-      public statusBar    : StatusBar,
-      public splashScreen : SplashScreen,
-      private adService   : AdService,
+      public platform       : Platform,
+      public statusBar      : StatusBar,
+      public splashScreen   : SplashScreen,
+      private adService     : AdService,
+      private events        : Events,
   ) {
       this.initializeApp();
+      this.subscribeEvents();
+      this.makePages();
+
+  }
+
+  makePages() {
       this.pages = [
-        { title: 'HomePage', component: HomePage },
-        { title: 'Zaloguj', component: LoginPage },
+          { title: 'HomePage', component: HomePage },
+          { title: 'Zaloguj', component: LoginPage },
       ];
+  }
+
+  subscribeEvents() {
+      this.events.subscribe("logged", () => { this.onLogin(); })
+  }
+
+  onLogin() {
+      this.pages.splice(1,1);
+      this.pages.push({ title: "Wyloguj", component : LogoutPage })
   }
 
   openPage(page) {
