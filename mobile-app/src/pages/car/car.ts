@@ -1,5 +1,5 @@
-import { Component }                            from '@angular/core';
-import { IonicPage, NavController, NavParams }  from 'ionic-angular';
+import { Component }                                    from '@angular/core';
+import { AlertController, NavController, NavParams }    from 'ionic-angular';
 
 //models
 import { CarOption }                            from "../../models/CarOption";
@@ -7,7 +7,10 @@ import { Car }                                  from "../../models/Car";
 
 //pages
 import { OrderPage }                            from "../order/order";
-import {AdService} from "../../services/ad/ad.service";
+
+//services
+import { AdService  }                           from "../../services/ad/ad.service";
+import { AuthService }                          from "../../services/auth/auth.service";
 
 @Component({
   selector: 'page-car',
@@ -19,9 +22,11 @@ export class CarPage {
 
 
   constructor(
-      public navCtrl: NavController,
-      public navParams: NavParams,
-      private adService : AdService,
+      private navCtrl       : NavController,
+      private navParams     : NavParams,
+      private adService     : AdService,
+      private authService   : AuthService,
+      private alertCtrl     : AlertController,
   ) {
       this.car = navParams.get('car');
   }
@@ -31,6 +36,28 @@ export class CarPage {
 
   openOrderPage() {
       this.navCtrl.push(OrderPage, { 'car' : this.car})
+  }
+
+  showConfirm() {
+      let alert = this.alertCtrl.create({
+          title         : "Usuwanie auta",
+          subTitle      : "Czy jesteś pewien, że chcesz usunąć ten samochód ze swojej oferty?",
+          buttons       : [
+              {
+                  text      : "Anuluj",
+                  role      : "cancel",
+              },
+              {
+                  text      : "Usuń",
+                  handler   : () => { this.deleteCar() }
+              }
+          ]
+      })
+      alert.present();
+  }
+
+  deleteCar() {
+      this.adService.deleteCar(this.car.id);
   }
 
 }

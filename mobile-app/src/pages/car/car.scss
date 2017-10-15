@@ -59,5 +59,10 @@ page-car {
         height: 25px;
       }
     }
+    &__footer {
+      &--admin {
+        display: flex;
+      }
+    }
   }
 }

@@ -120,4 +120,11 @@ export class AdService {
                 console.log(res.json())
             })
     }
+
+    deleteCar(car : number) {
+        this.http.delete(this.routeService.routes.cars + car, { headers : this.authService.headers } )
+            .subscribe((res) => {
+                console.log(res.json())
+            })
+    }
 }
