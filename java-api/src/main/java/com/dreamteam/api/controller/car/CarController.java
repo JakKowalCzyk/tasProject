@@ -66,4 +66,17 @@ public interface CarController extends GenericController<Car> {
     @GetMapping(value = "/free")
     Collection<Car> findPossibleCarToRentInGivenDates(@RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date from, @RequestHeader @DateTimeFormat(pattern = "yyyy-MM-dd") Date to);
 
+    @ApiOperation(value = "Find by selected parameters")
+    @GetMapping(value = "/filter")
+    Collection<Car> findByFilteredParameters(@RequestParam(required = false) Long brandId, @RequestParam(required = false) FuelType fuelType,
+                                             @RequestParam(required = false) DriveType driveType, @RequestParam(required = false) CategoryType categoryType,
+                                             @RequestParam(required = false) Double priceSmallerThan, @RequestParam(required = false) Double priceBiggerThan,
+                                             @RequestParam(required = false) Integer millageSmallerThan, @RequestParam(required = false) Integer millageBiggerThan,
+                                             @RequestParam(required = false) Integer powerSmallerThan, @RequestParam(required = false) Integer powerBiggerThan,
+                                             @RequestParam(required = false) Boolean hasElectricWindow, @RequestParam(required = false) Boolean hasNavi,
+                                             @RequestParam(required = false) Boolean hasAirConditioning, @RequestParam(required = false) Boolean hasManualGearbox,
+                                             @RequestParam(required = false) Boolean hasSunroof, @RequestParam(required = false) Boolean hasRadio);
+
 }
+
+

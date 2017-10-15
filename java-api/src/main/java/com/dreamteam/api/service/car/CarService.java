@@ -23,4 +23,12 @@ public interface CarService extends GenericService<Car> {
 
     Collection<Car> findPossibleCarToRentInGivenDates(Date fromDate, Date toDate);
 
+    Collection<Car> findByFilteredParameters(Long brandId, FuelType fuelType, DriveType driveType, CategoryType categoryType,
+                                             Double priceSmallerThan, Double priceBiggerThan,
+                                             Integer millageSmallerThan, Integer millageBiggerThan,
+                                             Integer powerSmallerThan, Integer powerBiggerThan,
+                                             Boolean hasElectricWindow, Boolean hasNavi,
+                                             Boolean hasAirConditioning, Boolean hasManualGearbox,
+                                             Boolean hasSunroof, Boolean hasRadio);
+
 }
