@@ -15,6 +15,7 @@ import { RegisterPage }     from '../pages/register/register';
 //components
 import { HeaderComponent }  from "../components/header/header";
 import { AdComponent }      from "../components/ad/ad";
+import { AddIconComponent } from "../components/add-icon/add-icon";
 
 //services
 import { AuthService }      from "../services/auth/auth.service";
@@ -31,6 +32,7 @@ import { RouteService }     from "../services/route/route.service";
       AdComponent,
       CarPage,
       RegisterPage,
+      AddIconComponent,
   ],
   imports: [
       BrowserModule,
@@ -46,6 +48,7 @@ import { RouteService }     from "../services/route/route.service";
       AdComponent,
       CarPage,
       RegisterPage,
+      AddIconComponent,
   ],
   providers: [
       StatusBar,
