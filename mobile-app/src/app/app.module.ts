@@ -24,6 +24,7 @@ import { AddIconComponent } from "../components/add-icon/add-icon";
 import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
+import {IonicStorageModule} from "@ionic/storage";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { RouteService }     from "../services/route/route.service";
       BrowserModule,
       HttpModule,
       IonicModule.forRoot(MyApp),
+      IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
