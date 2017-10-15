@@ -11,6 +11,7 @@ import com.dreamteam.api.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -34,11 +35,13 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Car updateObject(@RequestBody Car model) {
         return super.updateObject(model);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Car addObject(@RequestBody Car model) {
         return super.addObject(model);
     }
@@ -49,6 +52,7 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
     }

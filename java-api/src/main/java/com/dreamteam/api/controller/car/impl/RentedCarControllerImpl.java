@@ -9,6 +9,7 @@ import com.dreamteam.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -40,6 +41,7 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public RentedCar updateObject(@RequestBody RentedCar model) {
         return super.updateObject(model);
     }
@@ -56,6 +58,7 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
     }
@@ -76,6 +79,7 @@ public class RentedCarControllerImpl extends GenericControllerImpl<RentedCar, co
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Collection<RentedCar> findByUser(@PathVariable Long id) {
         return getGenericService().findByUser(id).stream().map(rentedCar -> getAbstractMapper().mapToHttpObject(rentedCar)).collect(Collectors.toList());
     }
