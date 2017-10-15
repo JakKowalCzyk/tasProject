@@ -49,12 +49,18 @@ export class MyApp {
   }
 
   subscribeEvents() {
-      this.events.subscribe("logged", () => { this.onLogin(); })
+      this.events.subscribe("logged"    , () => { this.onLogin(); });
+      this.events.subscribe("loggedOut", () => { this.onLogout(); })
   }
 
   onLogin() {
       this.pages.splice(1,1);
       this.pages.push({ title: "Wyloguj", component : LogoutPage })
+  }
+
+  onLogout() {
+      this.pages.splice(1,1);
+      this.pages.push({ title: "Zaloguj", component : LoginPage })
   }
 
   openPage(page) {

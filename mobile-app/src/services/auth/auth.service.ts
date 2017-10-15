@@ -55,7 +55,7 @@ export class AuthService {
 
     afterLogin(data, base64 = null) {
         let base  = base64 || data.base64Auth;
-        this.user = new User(data.id, data.email, data.name, data.city, base);
+        this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
         //jeśli base64 nie jest null, to znaczy, że ta metoda jest wywołana ze zwykłego logowania, więc wrzucamy usera do storage
         if (base64 != null) {
             this.storage.set('user', this.user);
@@ -70,6 +70,20 @@ export class AuthService {
           .subscribe((res) => {
             console.log(res.json());
           });
+    }
+
+    logout() {
+        this.http.get(this.routeService.routes.logout, { headers : this.headers })
+            .subscribe((res) => {
+                this.afterLogout();
+            })
+    }
+
+    afterLogout() {
+        this.headers.delete('Authorization');
+        this.user = null;
+        this.storage.clear();
+        this.events.publish('loggedOut')
     }
 
 }
