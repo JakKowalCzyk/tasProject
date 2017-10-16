@@ -24,7 +24,9 @@ public class RentedCar extends AbstractModel {
     private boolean willBeActive;
     @Column(name = "from_date")
     private Date from;
+    @Column(name = "to_rent")
     private Date to;
+    @Column(columnDefinition = "float8")
     private Double totalPrice;
 
     public RentedCar() {

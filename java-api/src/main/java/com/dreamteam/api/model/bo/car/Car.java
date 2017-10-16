@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Car extends AbstractModel {
 
     private String name;
+    @Column(columnDefinition = "float8")
     private Double pricePerDay;
     private String productionDate;
     private int millage;
