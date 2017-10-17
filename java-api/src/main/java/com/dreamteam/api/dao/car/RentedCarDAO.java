@@ -23,15 +23,15 @@ public interface RentedCarDAO extends ModelDAO<RentedCar> {
 
     @Query(value = "select case when " +
             "(select case when " +
-            "(select case when count(1) >0 then true else false END from rented_car rent where rent.car_id =:carId and  :fromDate between rent.from_date and rent.to)=true " +
+            "(select case when count(1) >0 then true else false END from rented_car rent where rent.car_id =:carId and  :fromDate between rent.from_date and rent.to_rent)=true " +
             "OR " +
-            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where  rent.car_id =:carId and :toDate between rent.from_date and rent.to)=true  " +
+            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where  rent.car_id =:carId and :toDate between rent.from_date and rent.to_rent)=true  " +
             "then true else false end)=true   " +
             "OR " +
             "(select case when  " +
             "(select case when count(1) >0 then true else false END from rented_car rent where rent.car_id =:carId and  rent.from_date between :fromDate and :toDate)=true   " +
             "OR  " +
-            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where  rent.car_id =:carId and rent.to between :fromDate and :toDate)=true   " +
+            "(SELECT case when COUNT(1) > 0 then true else false end from rented_car rent where  rent.car_id =:carId and rent.to_rent between :fromDate and :toDate)=true   " +
             "then true else false end)=true   " +
             "then true else false end", nativeQuery = true)
     boolean existBetweenGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate, @Param("carId") Long carId);
