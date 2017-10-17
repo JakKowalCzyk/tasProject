@@ -3,11 +3,9 @@ FROM fabric8/java-jboss-openjdk8-jdk:1.2.3
 USER root
 
 # SSH keys
-ADD ssh /root/.ssh
 
 # Maven settings
 ADD settings.xml /root/.m2/settings.xml
-
 
 ADD repository /root/.m2/repository
 
