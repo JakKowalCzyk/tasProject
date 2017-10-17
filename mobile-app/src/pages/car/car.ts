@@ -11,6 +11,7 @@ import { OrderPage }                            from "../order/order";
 //services
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
+import {AddCarPage} from "../add-car/add-car";
 
 @Component({
   selector: 'page-car',
@@ -58,6 +59,10 @@ export class CarPage {
 
   deleteCar() {
       this.adService.deleteCar(this.car.id);
+  }
+
+  editCar() {
+      this.navCtrl.push(AddCarPage, { car : this.car })
   }
 
 }

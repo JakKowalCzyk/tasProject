@@ -8,7 +8,10 @@
         </div>
         <div class="ad__top">
             <div class="ad__top__horizontal">
-                <div class="ad__top__title">{{ adService.brands[car.brand] }} {{ car.model }}</div>
+                <div class="ad__top__title">
+                    {{ adService.brands[car.brand] }} {{ car.model }}
+                    <span class="ad__top__year">{{ car.year }} rok</span>
+                </div>
                 <div class="ad__top__price">{{ car.price }} zł / dzień</div>
             </div>
             <div class="ad__top__carType">{{ car.category }}</div>
@@ -53,6 +56,6 @@
 </ion-footer>
 
 <ion-footer *ngIf="authService.user != null && authService.user.roleType == 'ROLE_ADMIN'" class="ad__footer ad__footer--admin">
-    <button ion-button block color="primary" class="car__footer__btn" (click)="openOrderPage()">Edytuj</button>
+    <button ion-button block color="primary" class="car__footer__btn" (click)="editCar()">Edytuj</button>
     <button ion-button block color="danger" class="car__footer__btn" (click)="showConfirm()">Usuń</button>
 </ion-footer>

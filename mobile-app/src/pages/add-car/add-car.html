@@ -1,75 +1,151 @@
 <header title="Dodaj auto"></header>
 <ion-content class="page_wrapper">
     <div class="addCar">
-        <form class="addCar__form"> <!--[formGroup]="formGroup"-->
-            <ion-item>
-                <ion-label>Marka</ion-label>
-                <ion-input type="text" [(ngModel)]="brand" name="brand"></ion-input> <!--formControlName="brand"-->
+        <form class="addCar__form" [formGroup]="formGroup"> <!--[formGroup]="formGroup"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)"
+                >
+                    Marka
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)"
+                        formControlName="brand"
+                        type="text"
+                        [disabled]="car!=null"
+                        [(ngModel)]="brand"
+                        name="brand"
+                ></ion-input>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Model</ion-label>
-                <ion-input type="text" [(ngModel)]="name" name="name"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)"
+                >
+                    Model
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)"
+                        formControlName="name"
+                        type="text"
+                        [(ngModel)]="name"
+                        name="name"
+                ></ion-input> <!--formControlName="name"-->
             </ion-item>
 
-            <ion-item>
-                <ion-label>Kategoria</ion-label>
-                <ion-input type="text" [(ngModel)]="categoryType" name="categoryType"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.category.valid && (formGroup.controls.category.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.category.valid && (formGroup.controls.category.dirty || submitAttempt)"
+                >
+                    Kategoria
+                </ion-label>
+                <ion-select formControlName="category" [(ngModel)]="categoryType" name="categoryType">
+                    <ion-option *ngFor="let category of adService.categories" value="{{ category }}">{{ category }}</ion-option>
+                </ion-select>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Rodzaj paliwa</ion-label>
-                <ion-select [(ngModel)]="fuelType" name="fuelType">
+            <ion-item [class.addCar__invalid]="!formGroup.controls.fuel.valid && (formGroup.controls.fuel.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.fuel.valid && (formGroup.controls.fuel.dirty || submitAttempt)"
+                >
+                    Rodzaj paliwa
+                </ion-label>
+                <ion-select formControlName="fuel" [(ngModel)]="fuelType" name="fuelType">
                     <ion-option *ngFor="let fuel of engine.FUEL" value="{{fuel}}">{{ fuel }}</ion-option>
                 </ion-select>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Moc</ion-label>
-                <ion-input type="number" [(ngModel)]="power" name="power"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
+                >
+                    Moc
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
+                        formControlName="power"
+                        type="number"
+                        [(ngModel)]="power"
+                        name="power"
+                ></ion-input>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Napęd</ion-label>
-                <ion-select [(ngModel)]="driveType" name="fuelType">
+            <ion-item [class.addCar__invalid]="!formGroup.controls.drive.valid && (formGroup.controls.drive.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.drive.valid && (formGroup.controls.drive.dirty || submitAttempt)"
+                >
+                    Napęd
+                </ion-label>
+                <ion-select formControlName="drive" [(ngModel)]="driveType" name="driveType">
                     <ion-option *ngFor="let drive of engine.DRIVE" value="{{drive}}">{{ drive }}</ion-option>
                 </ion-select>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Rok produkcji</ion-label>
-                <ion-input type="string" [(ngModel)]="productionDate" name="productionDate"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.year.valid && (formGroup.controls.year.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.year.valid && (formGroup.controls.year.dirty || submitAttempt)"
+                >
+                    Rok produkcji
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.year.valid && (formGroup.controls.year.dirty || submitAttempt)"
+                        formControlName="year"
+                        type="string"
+                        [(ngModel)]="productionDate"
+                        name="productionDate"
+                ></ion-input>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Opcje dodatkowe</ion-label>
-                <ion-select [(ngModel)]="options" name="fuelType" multiple="true">
+            <ion-item [class.addCar__invalid]="!formGroup.controls.options.valid && (formGroup.controls.options.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.options.valid && (formGroup.controls.options.dirty || submitAttempt)"
+                >
+                    Opcje dodatkowe
+                </ion-label>
+                <ion-select formControlName="options" [(ngModel)]="options" name="options" multiple="true">
                     <ion-option *ngFor="let option of option.NAMES" value="{{option}}">{{ option }}</ion-option>
                 </ion-select>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Link do zdjęcia (XD)</ion-label>
-                <ion-input type="string" [(ngModel)]="photo" name="photo"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"
+                >
+                    Link do zdjęcia (XD)
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"
+                        formControlName="photo"
+                        type="string"
+                        [(ngModel)]="photo"
+                        name="photo"
+                ></ion-input>
             </ion-item>
 
-            <ion-item>
-                <ion-label>Cena za dzień</ion-label>
-                <ion-input type="number" [(ngModel)]="pricePerDay" name="pricePerDay"></ion-input> <!--formControlName="name"-->
+            <ion-item [class.addCar__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.addCar__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
+                >
+                    Cena za dzień
+                </ion-label>
+                <ion-input
+                        [class.addCar__invalid--input]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
+                        formControlName="price"
+                        type="number"
+                        [(ngModel)]="pricePerDay"
+                        name="pricePerDay"
+                ></ion-input>
             </ion-item>
-
-
-
-            <!--<ion-item>-->
-                <!--<ion-label>Hasło</ion-label>-->
-                <!--<ion-input formControlName="password" type="password" [(ngModel)]="password" name="password"></ion-input>-->
-            <!--</ion-item>-->
-
-            <!--<ion-item>-->
-                <!--<ion-label>Miasto</ion-label>-->
-                <!--<ion-input formControlName="city" type="text" [(ngModel)]="city" name="city"></ion-input>-->
-            <!--</ion-item>-->
-
             <button ion-button type="submit" block (click)="addCar()">Dodaj auto</button>
         </form>
     </div>

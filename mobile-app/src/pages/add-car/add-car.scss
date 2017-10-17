@@ -1,3 +1,17 @@
 page-add-car {
+  .addCar {
+    &__invalid {
+      color: #ff0000!important;
+      &--input {
+        border-bottom: solid 2px #ff0000;
+      }
+    }
+
+    &__failMsg {
+      //font-size: 14px;
+      color: #ff0000;
+
+    }
+  }
 
 }

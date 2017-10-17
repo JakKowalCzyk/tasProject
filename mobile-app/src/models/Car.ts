@@ -3,13 +3,13 @@ import {CarOption} from "./CarOption";
 
 export class Car {
     id      : number;
-    // title   : string;
     brand   : number;
     model   : string;
     category: string;
     engine  : Engine;
     imgPath : string;
     price   : number;
+    year    : string;
     options : Array<CarOption> = [];
 
 
@@ -37,6 +37,7 @@ export class Car {
         category    : string,
         imgPath     : string,
         price       : number,
+        year        : string,
         engine      : Engine,
         options     : Array<boolean>,
     ) {
@@ -46,13 +47,23 @@ export class Car {
         this.category   = category;
         this.imgPath    = imgPath;
         this.price      = price;
+        this.year       = year;
         this.engine     = engine;
-        this.getOptions(options);
+        this.addOptions(options);
     }
 
-    getOptions(options : Array<boolean>) {
+    addOptions(options : Array<boolean>) {
         for (let i = 0; i < options.length; i++) {
             this.options.push(new CarOption(i,options[i]))
         }
+    }
+
+    getOptions() {
+        let options = [];
+        for (let option of this.options) {
+            if (option.isEnabled)
+                options.push(option.getName())
+        }
+        return options;
     }
 }
