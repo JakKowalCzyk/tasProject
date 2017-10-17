@@ -8,4 +8,4 @@ RUN rm -r /deployments/java-api
 
 RUN cd /deployments
 
-ENTRYPOINT exec java  -jar $JAVA_APP_JAR.jar
+ENTRYPOINT exec java -jar /$JAVA_APP_JAR.jar
