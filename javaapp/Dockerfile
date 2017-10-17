@@ -11,4 +11,6 @@ RUN rm -r /deployments/java-api
 
 RUN cd /deployments/
 
-ENTRYPOINT exec ls | java -jar $JAVA_APP_JAR
+#ENTRYPOINT exec ls | java -jar $JAVA_APP_JAR
+CMD ["ls"]
+CMD ["java", "-jar", $JAVA_APP_JAR]
