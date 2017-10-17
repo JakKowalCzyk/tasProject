@@ -4,11 +4,6 @@ USER root
 
 RUN yum -y install maven
 
-ENV AB_OFF true
-
-EXPOSE 443
-EXPOSE 8080
-
 ENV JAVA_APP_JAR app.jar
 
 ADD /java-api  /deployments/java-api
