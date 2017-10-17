@@ -5,9 +5,6 @@ USER root
 
 ENV JAVA_APP_JAR app.jar
 
-ADD /java-api/target/*.jar  /deployments/jar
-RUN cp  /deployments/jar/*.jar  /deployments/$JAVA_APP_JAR
+ADD /java-api/target/api-0.0.1-SNAPSHOT.jar
 
-RUN cd /deployments
-
-ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar $JAVA_APP_JAR
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar api-0.0.1-SNAPSHOT.jar
