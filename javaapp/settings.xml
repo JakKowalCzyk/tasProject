@@ -108,13 +108,7 @@ under the License.
      | This is a list of authentication profiles, keyed by the server-id used within the system.
      | Authentication profiles can be used whenever maven must make a connection to a remote server.
      |-->
-    <servers>
-        <server>
-            <id>brag-maven-repo</id>
-            <username>AKIAJ4LJIZA3FU6DQRCA</username>
-            <password>8XD0H6KtW/eMsdmE5SyO01wTCyWStOqM9LQT8XG6</password>
-        </server>
-    </servers>
+
 
     <!-- mirrors
      | This is a list of mirrors to be used in downloading artifacts from remote repositories.

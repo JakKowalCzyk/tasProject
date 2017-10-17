@@ -1,7 +1,7 @@
 FROM fabric8/java-jboss-openjdk8-jdk:1.2.3
 
 USER root
-#ADD settings.xml /root/.m2/settings.xml
+ADD settings.xml /root/.m2/settings.xml
 
 RUN yum -y install maven
 
