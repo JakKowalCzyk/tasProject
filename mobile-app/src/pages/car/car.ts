@@ -1,5 +1,5 @@
 import { Component }                                    from '@angular/core';
-import { AlertController, NavController, NavParams }    from 'ionic-angular';
+import {AlertController, Events, NavController, NavParams}    from 'ionic-angular';
 
 //models
 import { CarOption }                            from "../../models/CarOption";
@@ -12,6 +12,7 @@ import { OrderPage }                            from "../order/order";
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
 import {AddCarPage} from "../add-car/add-car";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-car',
@@ -22,24 +23,26 @@ export class CarPage {
   car      : Car;
 
 
-  constructor(
-      private navCtrl       : NavController,
-      private navParams     : NavParams,
-      private adService     : AdService,
-      private authService   : AuthService,
-      private alertCtrl     : AlertController,
-  ) {
-      this.car = navParams.get('car');
-  }
+    constructor(
+        private navCtrl       : NavController,
+        private navParams     : NavParams,
+        private adService     : AdService,
+        private authService   : AuthService,
+        private alertCtrl     : AlertController,
+        private events        : Events,
+    ) {
+        this.car = navParams.get('car');
+    }
 
-  ionViewDidLoad() {
-  }
+    ionViewDidEnter() {
+        this.car = this.navParams.get('car');
+    }
 
-  openOrderPage() {
-      this.navCtrl.push(OrderPage, { 'car' : this.car})
-  }
+    openOrderPage() {
+        this.navCtrl.push(OrderPage, { 'car' : this.car})
+    }
 
-  showConfirm() {
+    showConfirm() {
       let alert = this.alertCtrl.create({
           title         : "Usuwanie auta",
           subTitle      : "Czy jesteś pewien, że chcesz usunąć ten samochód ze swojej oferty?",
@@ -57,12 +60,13 @@ export class CarPage {
       alert.present();
   }
 
-  deleteCar() {
-      this.adService.deleteCar(this.car.id);
-  }
+    deleteCar() {
+        this.adService.deleteCar(this.car.id);
+        this.navCtrl.setRoot(HomePage);
+    }
 
-  editCar() {
-      this.navCtrl.push(AddCarPage, { car : this.car })
-  }
+    editCar() {
+        this.navCtrl.push(AddCarPage, { car : this.car })
+    }
 
 }

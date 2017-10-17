@@ -50,11 +50,7 @@ export class RegisterPage {
         });
     }
 
-
-  ionViewDidLoad() {
-  }
-
-  register() {
+    register() {
 
       this.submitAttempt = true;
       if (!this.formGroup.valid) {
@@ -71,5 +67,9 @@ export class RegisterPage {
     this.authService.register(JSON.stringify(data));
 
   }
+
+    ionViewWillLeave() {
+        this.events.unsubscribe('error');
+    }
 
 }

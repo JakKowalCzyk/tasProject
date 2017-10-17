@@ -85,4 +85,9 @@ export class LoginPage {
 
     ionViewDidLoad() {}
 
+    ionViewWillLeave() {
+        this.events.unsubscribe('logged');
+        this.events.unsubscribe('error:login');
+    }
+
 }

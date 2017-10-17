@@ -1,5 +1,8 @@
 import { Component, Input }                                 from '@angular/core';
-import { NavController, NavParams }                         from 'ionic-angular';
+import {
+    AlertController, Events, NavController, NavParams,
+    ToastController
+}                         from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup, Validators }  from "@angular/forms";
 
 //models
@@ -9,6 +12,7 @@ import { Car }                      from "../../models/Car";
 
 //services
 import { AdService }                from "../../services/ad/ad.service";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-add-car',
@@ -52,12 +56,49 @@ export class AddCarPage {
         public navParams    : NavParams,
         private adService   : AdService,
         private formBuilder : FormBuilder,
+        private events      : Events,
+        private toastCtrl   : ToastController,
+        private alertCtrl   : AlertController,
     ) {
         this.car = navParams.get('car');
         if (this.car != null) {
             this.setEditForm();
         }
+        this.subscribeEvents();
         this.createFormGroup();
+    }
+
+    subscribeEvents() {
+        this.events.subscribe('car:added'           ,   ()      => { this.onCarAdded() });
+        this.events.subscribe('car:modified'        ,   ()      => { this.onCarModified() });
+        this.events.subscribe('error:car:added'     ,   (msg)   => { this.onCarAddedError(msg.msg) });
+        this.events.subscribe('error:car:modified'     ,   (msg)   => { this.onCarAddedError(msg.msg) });
+    }
+
+    onCarAdded() {
+        let toast = this.toastCtrl.create({
+            message     : 'Dodano nowy samochód!',
+            duration    : 3000,
+            cssClass    : 'toastDflt'
+        });
+        toast.present();
+    }
+
+    onCarModified() {
+        let toast = this.toastCtrl.create({
+            message     : 'Edytowano samochód',
+            duration    : 3000,
+            cssClass    : 'toastDflt'
+        });
+        toast.present();
+    }
+
+    onCarAddedError(msg : string) {
+        let alert = this.alertCtrl.create({
+            title       : 'Coś się popsuło',
+            message     : msg,
+        });
+        alert.present();
     }
 
     setEditForm() {
@@ -159,5 +200,13 @@ export class AddCarPage {
     clicked() {}
 
     ionViewDidLoad() {}
+
+    ionViewWillLeave() {
+        this.events.unsubscribe('car:added');
+        this.events.unsubscribe('car:modified');
+        this.events.unsubscribe('error:car:added');
+        this.events.unsubscribe('error:car:added');
+        this.navCtrl.setRoot(HomePage);
+    }
 
 }

@@ -9,9 +9,10 @@ import { Car }              from "../../models/Car";
 import { Engine }           from "../../models/Engine";
 import { AuthService }      from "../auth/auth.service";
 import {Events} from "ionic-angular";
+import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
 
 @Injectable()
-export class AdService {
+export class AdService extends HasResponse {
 
     brands          : Object            = {};
     categories      : Array<string>     = [];
@@ -23,16 +24,21 @@ export class AdService {
         private http            : Http,
         private routeService    : RouteService,
         private authService     : AuthService,
-        private events          : Events,
+        private eventss          : Events,
     ) {
-
+        super(eventss)
     }
 
     subscribeEvents() {
-        this.events.subscribe('logged', () => {this.all()})
+        this.eventss.subscribe('logged', () => {this.all()})
+    }
+
+    refresh() {
+        this.all();
     }
 
     getBrands() {
+        this.brands = {};
         this.http.get(this.routeService.routes.brands)
             .subscribe((res) => {
                 for (let brand of res.json()) {
@@ -42,16 +48,17 @@ export class AdService {
     }
 
     getCategories() {
+        this.categories = [];
         this.http.get(this.routeService.routes.categories)
             .subscribe((res) => {
                 for (let category of res.json()) {
                     this.categories.push(category);
                 }
-                console.log(this.categories)
             })
     }
 
     all() {
+        this.allCars = [];
         this.getBrands();
         this.getCategories();
         this.http.get(this.routeService.routes.cars)
@@ -106,7 +113,10 @@ export class AdService {
 
         this.http.post(this.routeService.routes.addCar, data, { headers : this.authService.headers } )
             .subscribe((res) => {
-                console.log(res.json())
+                this.success(res.json(), 'car:added');
+                this.refresh();
+            },(err) => {
+                this.error(err.json(), 'car:added');
             })
     }
 
@@ -119,14 +129,16 @@ export class AdService {
         }
         this.http.put(this.routeService.routes.addCar, data, { headers : this.authService.headers })
             .subscribe((res) => {
-                console.log(res.json())
+                this.success('', 'car:modified');
+                this.refresh();
             })
     }
 
     deleteCar(car : number) {
         this.http.delete(this.routeService.routes.cars + car, { headers : this.authService.headers } )
             .subscribe((res) => {
-                // console.log(res.json())
+                this.refresh();
+                this.success('', 'car:deleted');
             })
     }
 }

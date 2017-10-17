@@ -1,5 +1,5 @@
 import { Component, ViewChild }     from '@angular/core';
-import { Events, Nav, Platform }    from 'ionic-angular';
+import {Events, Nav, Platform, ToastController}    from 'ionic-angular';
 import { StatusBar }                from '@ionic-native/status-bar';
 import { SplashScreen }             from '@ionic-native/splash-screen';
 
@@ -20,6 +20,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  // rootPage: any = LoginPage;
   pages: Array<{title: string, component: any}>;
 
 
@@ -30,6 +31,7 @@ export class MyApp {
       private adService     : AdService,
       private events        : Events,
       private authService   : AuthService,
+      private toastCtrl     : ToastController,
   ) {
       this.initializeApp();
       this.subscribeEvents();
@@ -49,16 +51,34 @@ export class MyApp {
   }
 
   subscribeEvents() {
-      this.events.subscribe("logged"    , () => { this.onLogin(); });
-      this.events.subscribe("loggedOut", () => { this.onLogout(); })
+      this.events.subscribe("logged"        , () => { this.onLogin(); });
+      this.events.subscribe("loggedOut"     , () => { this.onLogout(); })
+      this.events.subscribe("car:deleted"   , () => { this.onCarDeleted(); })
+  }
+
+  onCarDeleted() {
+      let toast = this.toastCtrl.create({
+          message   : "Usunięto samochód",
+          duration  : 3000,
+          cssClass  : 'toastDflt',
+      });
+      toast.present();
   }
 
   onLogin() {
+      //TODO : for build
+      // this.adService.all();
       this.pages.splice(1,1);
       this.pages.push({ title: "Wyloguj", component : LogoutPage })
   }
 
   onLogout() {
+      let toast = this.toastCtrl.create({
+          message   : "Wylogowano poprawnie",
+          duration  : 3000,
+          cssClass  : 'toastDflt'
+      });
+      toast.present();
       this.pages.splice(1,1);
       this.pages.push({ title: "Zaloguj", component : LoginPage })
   }

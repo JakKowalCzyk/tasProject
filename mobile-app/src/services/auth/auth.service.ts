@@ -81,6 +81,7 @@ export class AuthService extends HasResponse{
     logout() {
         this.http.get(this.routeService.routes.logout, { headers : this.headers })
             .subscribe((res) => {
+                this.success('', 'loggedOut');
                 this.afterLogout();
             })
     }
@@ -89,7 +90,6 @@ export class AuthService extends HasResponse{
         this.headers.delete('Authorization');
         this.user = null;
         this.storage.clear();
-        this.eventss.publish('loggedOut')
     }
 
 }
