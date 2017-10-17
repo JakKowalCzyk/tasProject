@@ -14,6 +14,6 @@ ENV JAVA_APP_JAR app.jar
 
 ADD /java-api  /deployments/java-api
 
-RUN mvn -f  package spring-boot:repackage
+RUN mvn -f /deployments/java-api/pom.xml  package spring-boot:repackage
 RUN cp  /deployments/java-api/target/*.jar  /deployments/$JAVA_APP_JAR
 RUN rm -r /deployments/java-api
