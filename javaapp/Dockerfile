@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
+ENV JAVA_APP_JAR app.jar
 
 ADD /java-api  /deployments/java-api
 
