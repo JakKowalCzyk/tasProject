@@ -8,9 +8,10 @@ import { User }                 from "../../models/user/User";
 
 //services
 import {RouteService}           from "../route/route.service";
+import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
 
 @Injectable()
-export class AuthService {
+export class AuthService extends HasResponse{
 
     public user     : User;
 
@@ -21,9 +22,10 @@ export class AuthService {
     constructor(
         private http            : Http,
         private routeService    : RouteService,
-        private events          : Events,
+        private eventss          : Events,
         private storage         : Storage,
     ) {
+        super(eventss)
     }
 
     getHeaders() {
@@ -39,6 +41,8 @@ export class AuthService {
     }
 
     login(email : string, pass : string) {
+    // login(email : string, pass : string, ip : string) {
+    //     this.routeService.setIp(ip);
         let base64 = btoa(email + ":" + pass);
         this.headers.append("Authorization", 'Basic ' + base64);
 
@@ -49,7 +53,7 @@ export class AuthService {
                     this.afterLogin(data, base64);
                 }
             },(err) => {
-                console.log(err.json())
+                this.error(err.json(), 'login')
             })
     }
 
@@ -62,13 +66,15 @@ export class AuthService {
         } else {
             this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
         }
-        this.events.publish('logged');
+        this.eventss.publish('logged');
     }
 
     register(data) {
       this.http.post(this.routeService.routes.register, data, { headers : this.headers })
           .subscribe((res) => {
             console.log(res.json());
+          },(err) => {
+            this.error(err.json(), 'register')
           });
     }
 
@@ -83,7 +89,7 @@ export class AuthService {
         this.headers.delete('Authorization');
         this.user = null;
         this.storage.clear();
-        this.events.publish('loggedOut')
+        this.eventss.publish('loggedOut')
     }
 
 }

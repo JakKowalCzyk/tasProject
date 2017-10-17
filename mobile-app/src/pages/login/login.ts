@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {Events, NavController, NavParams} from 'ionic-angular';
+import {AlertController, Events, NavController, NavParams} from 'ionic-angular';
 import {AuthService} from "../../services/auth/auth.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegisterPage} from "../register/register";
 import {HomePage} from "../home/home";
+import {AdService} from "../../services/ad/ad.service";
 
 /**
  * Generated class for the LoginPage page.
@@ -18,53 +19,70 @@ import {HomePage} from "../home/home";
 })
 export class LoginPage {
 
-  email       : string = 'krz.jozefowicz@gmail.com';
-  password    : string = '123';
-  formGroup   : FormGroup;
+    submitAttempt   : boolean = false;
 
-  showLoading : boolean = false;
+    email       : string = 'krz.jozefowicz@gmail.com';
+    password    : string = '123';
+    formGroup   : FormGroup;
 
-  constructor(
-      private navCtrl       : NavController,
-      private navParams     : NavParams,
-      private authService   : AuthService,
-      private events        : Events,
-  ) {
-    this.createFormGroup();
-    this.subscribeEvents();
-  }
+    // ip          : string = '192.168.1.15';
 
-  subscribeEvents() {
-      this.events.subscribe('logged', () => { this.onLogged() });
-  }
+    showLoading : boolean = false;
 
-  onLogged() {
-      this.showLoading = false;
-      this.navCtrl.setRoot(HomePage);
-  }
+    constructor(
+          private navCtrl       : NavController,
+        private navParams     : NavParams,
+        private authService   : AuthService,
+        private events        : Events,
+        private alertCtrl     : AlertController,
+        private formBuilder   : FormBuilder,
+    ) {
+        this.createFormGroup();
+        this.subscribeEvents();
+    }
 
-  createFormGroup() {
-      this.formGroup = new FormGroup({
-        email   : new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])),
-        password: new FormControl('', Validators.compose([Validators.required]))
-      });
-  }
+    subscribeEvents() {
+        this.events.subscribe('logged'        , ()    => { this.onLogged() });
+        this.events.subscribe('error:login'   , (msg) => { this.onError(msg.msg) });
+    }
 
-  login() {
-      if (!this.formGroup.valid) {
-          console.log("FBVFD");
-      } else {
-          this.showLoading = true;
-          this.authService.login(this.email, this.password);
-      }
-  }
+    onError(msg : string) {
+        let alert = this.alertCtrl.create({
+            title     : "Coś się popsuło",
+            message   : msg,
+        });
+        alert.present();
+    }
 
-  openRegister() {
-    this.navCtrl.push(RegisterPage);
-  }
+    onLogged() {
+        this.showLoading = false;
+        this.navCtrl.setRoot(HomePage);
+    }
 
-  ionViewDidLoad() {
+    createFormGroup() {
+        this.formGroup = this.formBuilder.group({
+            ip        : [''],
+            email     : ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+            password  : ['', Validators.compose([Validators.required])]
+        });
+    }
 
-  }
+    login() {
+        this.submitAttempt = true;
+
+        if (!this.formGroup.valid) {
+            return;
+        } else {
+            this.showLoading = true;
+            this.authService.login(this.email, this.password);
+            // this.authService.login(this.email, this.password, this.ip);
+        }
+    }
+
+    openRegister() {
+        this.navCtrl.push(RegisterPage);
+    }
+
+    ionViewDidLoad() {}
 
 }

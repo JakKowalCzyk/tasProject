@@ -2,13 +2,40 @@
 <ion-content class="page_wrapper">
   <div class="login">
       <form class="login__form" [formGroup]="formGroup">
-        <ion-item>
-            <ion-label>Adres email</ion-label>
-            <ion-input formControlName="email" type="text" [(ngModel)]="email" name="email"></ion-input>
+          <!--<ion-item>-->
+              <!--<ion-label stacked>IP</ion-label>-->
+              <!--<ion-input formControlName="ip" type="text" [(ngModel)]="ip" name="ip"></ion-input>-->
+          <!--</ion-item>-->
+          <ion-item [class.invalid]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)">
+            <ion-label
+                    stacked
+                    [class.invalid]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)"
+            >
+                Adres email
+            </ion-label>
+            <ion-input
+                    [class.invalid--input]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)"
+                    formControlName="email"
+                    type="text"
+                    [(ngModel)]="email"
+                    name="email"
+
+            ></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-label>Hasło</ion-label>
-            <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password"></ion-input>
+          <ion-item [class.invalid]="!formGroup.controls.password.valid && (formGroup.controls.password.dirty || submitAttempt)">
+          <ion-label
+                  stacked
+                  [class.invalid]="!formGroup.controls.password.valid && (formGroup.controls.password.dirty || submitAttempt)"
+          >
+              Hasło
+          </ion-label>
+            <ion-input
+                    [class.invalid--input]="!formGroup.controls.password.valid && (formGroup.controls.password.dirty || submitAttempt)"
+                    formControlName="password"
+                    type="password"
+                    [(ngModel)]="password"
+                    name="password"
+            ></ion-input>
         </ion-item>
         <button ion-button type="submit" block (click)="login()">Zaloguj</button>
       </form>

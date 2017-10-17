@@ -4,23 +4,67 @@
     <div class="register">
         <form class="register__form" [formGroup]="formGroup">
             <ion-item>
-                <ion-label>Imię i nazwisko</ion-label>
-                <ion-input formControlName="name" type="text" [(ngModel)]="name" name="name"></ion-input>
+                <ion-label
+                        stacked
+                        [class.invalid]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)"
+                >
+                    Imię i nazwisko
+                </ion-label>
+                <ion-input
+                        [class.invalid--input]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)"
+                        formControlName="name"
+                        type="text"
+                        [(ngModel)]="name"
+                        name="name"
+                ></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Adres email</ion-label>
-                <ion-input formControlName="email" type="text" [(ngModel)]="email" name="email"></ion-input>
+                <ion-label
+                        stacked
+                        [class.invalid]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)"
+                >
+                    Adres email
+                </ion-label>
+                <ion-input
+                        [class.invalid--input]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)"
+                        formControlName="email"
+                        type="text"
+                        [(ngModel)]="email"
+                        name="email"
+                ></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Hasło</ion-label>
-                <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password"></ion-input>
+                <ion-label
+                        stacked
+                        [class.invalid]="!formGroup.controls.password.valid && (formGroup.controls.password.dirty || submitAttempt)"
+                >
+                    Hasło
+                </ion-label>
+                <ion-input
+                        [class.invalid--input]="!formGroup.controls.password.valid && (formGroup.controls.password.dirty || submitAttempt)"
+                        formControlName="password"
+                        type="password"
+                        [(ngModel)]="password"
+                        name="password"
+                ></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Miasto</ion-label>
-                <ion-input formControlName="city" type="text" [(ngModel)]="city" name="city"></ion-input>
+                <ion-label
+                        stacked
+                        [class.invalid]="!formGroup.controls.city.valid && (formGroup.controls.city.dirty || submitAttempt)"
+                >
+                    Miasto
+                </ion-label>
+                <ion-input
+                        [class.invalid--input]="!formGroup.controls.city.valid && (formGroup.controls.city.dirty || submitAttempt)"
+                        formControlName="city"
+                        type="text"
+                        [(ngModel)]="city"
+                        name="city"
+                ></ion-input>
             </ion-item>
 
             <button ion-button type="submit" block (click)="register()">Zarejestruj</button>

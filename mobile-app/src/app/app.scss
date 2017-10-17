@@ -8,6 +8,16 @@
    }
 }
 
+.invalid {
+  color: #ff0000!important;
+  &--input {
+    border-bottom: solid 2px #ff0000;
+  }
+}
+
+.failMsg {
+  color: #ff0000;
+}
 
 // App Global Sass
 // --------------------------------------------------

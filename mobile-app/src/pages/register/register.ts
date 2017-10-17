@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AlertController, Events, NavController, NavParams} from 'ionic-angular';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
@@ -9,34 +9,58 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class RegisterPage {
 
-  email       : string = 'krz.jozefowicz@gmail.com';
-  name        : string = 'Krzysztof Józefowciz';
-  password    : string = 'qwerty';
-  city        : string = 'Poznań';
-  formGroup   : FormGroup;
+    submitAttempt   : boolean = false;
 
-  constructor(
-      public navCtrl        : NavController,
-      public navParams      : NavParams,
-      private authService   : AuthService,
-  ) {
-    this.createFormGroup();
-  }
+    email       : string = 'krz.jozefowicz@gmail.com';
+    name        : string = 'Krzysztof Józefowciz';
+    password    : string = 'qwerty';
+    city        : string = 'Poznań';
+    formGroup   : FormGroup;
 
-  createFormGroup() {
-    this.formGroup = new FormGroup({
-      email     : new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])),
-      password  : new FormControl('', Validators.compose([Validators.required])),
-      city      : new FormControl('', Validators.compose([Validators.required])),
-      name      : new FormControl('', Validators.compose([Validators.required]))
-    });
-  }
+    constructor(
+        public navCtrl        : NavController,
+        public navParams      : NavParams,
+        private authService   : AuthService,
+        private events        : Events,
+        private alertCtrl     : AlertController,
+        private formBuilder   : FormBuilder,
+    ) {
+        this.subscribeEvents();
+        this.createFormGroup();
+    }
+
+    subscribeEvents() {
+        this.events.subscribe('error', (msg)  => { this.onError(msg.msg)})
+    }
+
+    onError(msg : string) {
+        let alert = this.alertCtrl.create({
+            title     : 'Coś się popsuło',
+            message   : msg,
+        })
+        alert.present();
+    }
+
+    createFormGroup() {
+        this.formGroup = this.formBuilder.group({
+            name        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-z \\-]*')])],
+            email       : ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+            password    : ['', Validators.compose([Validators.required])],
+            city        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-z \\-]*')])],
+        });
+    }
+
 
   ionViewDidLoad() {
   }
 
   register() {
-      console.log("FDBDFB");
+
+      this.submitAttempt = true;
+      if (!this.formGroup.valid) {
+          return;
+      }
+
       let data = {
         name          : this.name,
         hashPassword  : this.password,

@@ -1,7 +1,7 @@
 <header title="Dodaj auto"></header>
 <ion-content class="page_wrapper">
     <div class="addCar">
-        <form class="addCar__form" [formGroup]="formGroup"> <!--[formGroup]="formGroup"-->
+        <form class="addCar__form" [formGroup]="formGroup">
             <ion-item [class.addCar__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)">
                 <ion-label
                         stacked
