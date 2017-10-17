@@ -6,6 +6,6 @@ ADD /java-api  /deployments/java-api
 RUN cp  /deployments/java-api/target/*.jar  /deployments/$JAVA_APP_JAR
 RUN rm -r /deployments/java-api
 
-cd /deployments
+RUN cd /deployments
 
 ENTRYPOINT exec java  -jar $JAVA_APP_JAR.jar
