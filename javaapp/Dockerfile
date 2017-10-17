@@ -11,6 +11,5 @@ RUN rm -r /deployments/java-api
 
 RUN cd /deployments/
 
-#ENTRYPOINT exec ls | java -jar $JAVA_APP_JAR
-CMD ["ls"]
-CMD ["java", "-jar", $JAVA_APP_JAR]
+ENTRYPOINT ls -l
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar $JAVA_APP_JAR
