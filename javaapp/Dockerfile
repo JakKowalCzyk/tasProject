@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
+USER root
 
 ADD /java-api  /deployments/java-api
 
@@ -10,4 +11,4 @@ RUN rm -r /deployments/java-api
 
 RUN cd /deployments/
 
-ENTRYPOINT exec java  -jar $JAVA_APP_JAR
+ENTRYPOINT exec java -jar $JAVA_APP_JAR
