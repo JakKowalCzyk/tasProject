@@ -9,6 +9,7 @@ import { Car }              from "../../models/Car";
 
 //Services
 import { AdService }        from "../../services/ad/ad.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'page-home',
@@ -19,8 +20,9 @@ export class HomePage {
     cars : Array<Car>;
 
     constructor(
-        private navCtrl      : NavController,
+        private navCtrl     : NavController,
         private adService   : AdService,
+        private authService : AuthService,
     ) {
 
     }
