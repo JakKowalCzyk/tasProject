@@ -2,15 +2,6 @@ FROM fabric8/java-jboss-openjdk8-jdk:1.2.3
 
 USER root
 
-# SSH keys
-
-# Maven settings
-ADD settings.xml /root/.m2/settings.xml
-
-ADD repository /root/.m2/repository
-
-ADD data /deployments/data
-
 RUN yum -y install maven
 
 ENV AB_OFF true
