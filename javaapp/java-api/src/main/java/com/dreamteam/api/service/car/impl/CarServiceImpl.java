@@ -74,12 +74,12 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                 .filter(car -> filterPrice(priceSmallerThan, priceBiggerThan, car))
                 .filter(car -> filterMillage(millageSmallerThan, millageBiggerThan, car))
                 .filter(car -> filterPower(powerSmallerThan, powerBiggerThan, car))
-                .filter(car -> hasElectricWindow == null || hasElectricWindow)
-                .filter(car -> hasNavi == null || hasNavi)
-                .filter(car -> hasAirConditioning == null || hasAirConditioning)
-                .filter(car -> hasManualGearbox == null || hasManualGearbox)
-                .filter(car -> hasSunroof == null || hasSunroof)
-                .filter(car -> hasRadio == null || hasRadio)
+                .filter(car -> hasElectricWindow == null || car.isHasElectricWindow() == hasElectricWindow)
+                .filter(car -> hasNavi == null || car.isHasNavi() == hasNavi)
+                .filter(car -> hasAirConditioning == null || car.isHasAirConditioning() == hasAirConditioning)
+                .filter(car -> hasManualGearbox == null || car.isHasManualGearbox() == hasManualGearbox)
+                .filter(car -> hasSunroof == null || car.isHasSunroof() == hasSunroof)
+                .filter(car -> hasRadio == null || car.isHasRadio() == hasRadio)
                 .collect(Collectors.toList());
     }
 
