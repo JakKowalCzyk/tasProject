@@ -3,7 +3,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class RouteService {
 
-    base : string = "http://192.168.1.15:8080/api/";
+    base : string = "http://159.89.12.132:8080/api/";
+    // base : string = "http://192.168.1.15:8080/api/";
     // base : string = "";
 
     // routes;
@@ -14,7 +15,7 @@ export class RouteService {
         'addCar'        : this.base + 'car',
         'addBrand'      : this.base + 'brand',
         'categories'    : this.base + 'type/category/',
-
+        'filter'        : this.base + 'car/filter',
         //user
         'register'      : this.base + 'user',
         'login'         : this.base + 'user/me',
