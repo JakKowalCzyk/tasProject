@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - /bin/sh -c "cd /javaapp/java-api
+  - mvn install dockerfile:build
+  - mvn dockerfile:push
+
