@@ -30,23 +30,23 @@ export class RegisterPage {
     }
 
     subscribeEvents() {
-        this.events.subscribe('error', (msg)  => { this.onError(msg.msg)})
+        this.events.subscribe('error:register', (msg)  => { this.onError(msg.msg)})
     }
 
     onError(msg : string) {
         let alert = this.alertCtrl.create({
             title     : 'Coś się popsuło',
             message   : msg,
-        })
+        });
         alert.present();
     }
 
     createFormGroup() {
         this.formGroup = this.formBuilder.group({
-            name        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-z \\-]*')])],
+            name        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
             email       : ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
             password    : ['', Validators.compose([Validators.required])],
-            city        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-z \\-]*')])],
+            city        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
         });
     }
 
