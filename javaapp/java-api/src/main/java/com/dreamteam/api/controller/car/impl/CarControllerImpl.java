@@ -105,7 +105,15 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     }
 
     @Override
-    public Collection<Car> findByFilteredParameters(Long brandId, FuelType fuelType, DriveType driveType, CategoryType categoryType, Double priceSmallerThan, Double priceBiggerThan, Integer millageSmallerThan, Integer millageBiggerThan, Integer powerSmallerThan, Integer powerBiggerThan, Boolean hasElectricWindow, Boolean hasNavi, Boolean hasAirConditioning, Boolean hasManualGearbox, Boolean hasSunroof, Boolean hasRadio, Date from, Date to) {
+    public Collection<Car> findByFilteredParameters(@RequestParam(required = false) Long brandId, @RequestParam(required = false) FuelType fuelType,
+                                                    @RequestParam(required = false) DriveType driveType, @RequestParam(required = false) CategoryType categoryType,
+                                                    @RequestParam(required = false) Double priceSmallerThan, @RequestParam(required = false) Double priceBiggerThan,
+                                                    @RequestParam(required = false) Integer millageSmallerThan, @RequestParam(required = false) Integer millageBiggerThan,
+                                                    @RequestParam(required = false) Integer powerSmallerThan, @RequestParam(required = false) Integer powerBiggerThan,
+                                                    @RequestParam(required = false) Boolean hasElectricWindow, @RequestParam(required = false) Boolean hasNavi,
+                                                    @RequestParam(required = false) Boolean hasAirConditioning, @RequestParam(required = false) Boolean hasManualGearbox,
+                                                    @RequestParam(required = false) Boolean hasSunroof, @RequestParam(required = false) Boolean hasRadio,
+                                                    @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
         return getGenericService().findByFilteredParameters(brandId, fuelType, driveType, categoryType,
                 priceSmallerThan, priceBiggerThan, millageSmallerThan, millageBiggerThan, powerSmallerThan, powerBiggerThan,
                 hasElectricWindow, hasNavi, hasAirConditioning, hasManualGearbox, hasSunroof, hasRadio, from, to)

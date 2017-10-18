@@ -95,11 +95,11 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
         if ((priceBiggerThan == null && priceSmallerThan == null)) {
             return true;
         } else if (priceBiggerThan == null) {
-            return car.getPricePerDay() < priceSmallerThan;
+            return car.getPricePerDay() <= priceSmallerThan;
         } else if (priceSmallerThan == null) {
-            return car.getPricePerDay() > priceBiggerThan;
+            return car.getPricePerDay() >= priceBiggerThan;
         } else {
-            return car.getPricePerDay() > priceBiggerThan && car.getPricePerDay() < priceSmallerThan;
+            return car.getPricePerDay() >= priceBiggerThan && car.getPricePerDay() <= priceSmallerThan;
         }
     }
 
@@ -107,11 +107,11 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
         if ((millageBiggerThan == null && millageSmallerThan == null)) {
             return true;
         } else if (millageBiggerThan == null) {
-            return car.getMillage() < millageSmallerThan;
+            return car.getMillage() <= millageSmallerThan;
         } else if (millageSmallerThan == null) {
-            return car.getMillage() > millageBiggerThan;
+            return car.getMillage() >= millageBiggerThan;
         } else {
-            return car.getMillage() > millageBiggerThan && car.getMillage() < millageSmallerThan;
+            return car.getMillage() >= millageBiggerThan && car.getMillage() <= millageSmallerThan;
         }
     }
 
@@ -119,11 +119,11 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
         if ((powerBiggerThan == null && powerSmallerThan == null)) {
             return true;
         } else if (powerBiggerThan == null) {
-            return car.getPower() < powerSmallerThan;
+            return car.getPower() <= powerSmallerThan;
         } else if (powerSmallerThan == null) {
-            return car.getPower() > powerBiggerThan;
+            return car.getPower() >= powerBiggerThan;
         } else {
-            return car.getPower() > powerBiggerThan && car.getPower() < powerSmallerThan;
+            return car.getPower() >= powerBiggerThan && car.getPower() <= powerSmallerThan;
         }
     }
 
