@@ -8,6 +8,7 @@ komis-db:
 komis-api:
   container_name: komis-api
   image: kowkowal/komisapi
+  mem_limit: 400m
   ports:
     - 8080:8080
   environment:
