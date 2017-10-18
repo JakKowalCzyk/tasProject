@@ -1,6 +1,25 @@
+#sudo: required
+#
+#services:
+#  - docker
+#
+#script: build.sh
+
+language: java
+
+jdk:
+  - openjdk8
+
 sudo: required
 
 services:
   - docker
 
-script: build.sh
+before_install: cd /javaapp/java-api
+
+install: true # This runs the "true" command in the install phase; thus skipping install
+script:
+  - |
+    docker login -u $DOCKER_USER -p $DOCKER_PASS
+    mvn install dockerfile:build
+    mvn  dockerfile:push
