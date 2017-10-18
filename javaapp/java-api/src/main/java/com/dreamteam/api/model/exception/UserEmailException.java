@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserEmailException extends GenericException {
 
     public UserEmailException(String message) {
-        super("EMAIL_ERROR", String.format("Email: %s is already being used", message));
+        super(String.format("Email: %s is already being used", message), "EMAIL_ERROR");
     }
 }
