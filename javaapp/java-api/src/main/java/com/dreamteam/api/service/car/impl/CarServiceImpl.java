@@ -12,6 +12,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -65,7 +66,13 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                                                     Integer powerSmallerThan, Integer powerBiggerThan,
                                                     Boolean hasElectricWindow, Boolean hasNavi,
                                                     Boolean hasAirConditioning, Boolean hasManualGearbox,
-                                                    Boolean hasSunroof, Boolean hasRadio) {
+                                                    Boolean hasSunroof, Boolean hasRadio,
+                                                    Date fromDate, Date toDate) {
+        Collection<Long> rentedCarIds = new ArrayList<>();
+        if (fromDate != null && toDate != null) {
+            rentedCarIds = rentedCarService.findCarIdsRentedInGivenDates(DateUtils.setHours(fromDate, 6), DateUtils.setHours(toDate, 6));
+        }
+        Collection<Long> finalRentedCarIds = rentedCarIds;
         return super.findAll().stream()
                 .filter(car -> brandId == null || car.getBrand().getId().equals(brandId))
                 .filter(car -> fuelType == null || car.getFuelType().equals(fuelType))
@@ -80,6 +87,7 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                 .filter(car -> hasManualGearbox == null || car.isHasManualGearbox() == hasManualGearbox)
                 .filter(car -> hasSunroof == null || car.isHasSunroof() == hasSunroof)
                 .filter(car -> hasRadio == null || car.isHasRadio() == hasRadio)
+                .filter(car -> finalRentedCarIds.isEmpty() || !finalRentedCarIds.contains(car.getId()))
                 .collect(Collectors.toList());
     }
 

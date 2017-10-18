@@ -29,6 +29,7 @@ public interface CarService extends GenericService<Car> {
                                              Integer powerSmallerThan, Integer powerBiggerThan,
                                              Boolean hasElectricWindow, Boolean hasNavi,
                                              Boolean hasAirConditioning, Boolean hasManualGearbox,
-                                             Boolean hasSunroof, Boolean hasRadio);
+                                             Boolean hasSunroof, Boolean hasRadio,
+                                             Date fromDate, Date toDate);
 
 }

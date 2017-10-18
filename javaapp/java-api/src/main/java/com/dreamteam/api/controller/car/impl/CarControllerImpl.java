@@ -100,7 +100,15 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
                                                     @RequestParam(required = false) Boolean hasSunroof, @RequestParam(required = false) Boolean hasRadio) {
         return getGenericService().findByFilteredParameters(brandId, fuelType, driveType, categoryType,
                 priceSmallerThan, priceBiggerThan, millageSmallerThan, millageBiggerThan, powerSmallerThan, powerBiggerThan,
-                hasElectricWindow, hasNavi, hasAirConditioning, hasManualGearbox, hasSunroof, hasRadio)
+                hasElectricWindow, hasNavi, hasAirConditioning, hasManualGearbox, hasSunroof, hasRadio, null, null)
+                .stream().map(car -> getAbstractMapper().mapToHttpObject(car)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Car> findByFilteredParameters(Long brandId, FuelType fuelType, DriveType driveType, CategoryType categoryType, Double priceSmallerThan, Double priceBiggerThan, Integer millageSmallerThan, Integer millageBiggerThan, Integer powerSmallerThan, Integer powerBiggerThan, Boolean hasElectricWindow, Boolean hasNavi, Boolean hasAirConditioning, Boolean hasManualGearbox, Boolean hasSunroof, Boolean hasRadio, Date from, Date to) {
+        return getGenericService().findByFilteredParameters(brandId, fuelType, driveType, categoryType,
+                priceSmallerThan, priceBiggerThan, millageSmallerThan, millageBiggerThan, powerSmallerThan, powerBiggerThan,
+                hasElectricWindow, hasNavi, hasAirConditioning, hasManualGearbox, hasSunroof, hasRadio, from, to)
                 .stream().map(car -> getAbstractMapper().mapToHttpObject(car)).collect(Collectors.toList());
     }
 
