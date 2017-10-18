@@ -1,10 +1,5 @@
-FROM kowkowal/base
-
-
-ENV JAVA_APP_JAR app.jar
-
-ADD /java-api  /deployments/java-api
-
-RUN mvn -f /deployments/java-api/pom.xml clean install
-RUN cp  /deployments/java-api/target/*.jar  /deployments/$JAVA_APP_JAR
-RUN rm -r /deployments/java-api
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ADD target/api-0.1.jar app.jar
+ENV JAVA_OPTS=""
+ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
