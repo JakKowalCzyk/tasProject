@@ -15,7 +15,7 @@ sudo: required
 services:
   - docker
 
-before_install: cd /javaapp/java-api
+before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
 
 install: true # This runs the "true" command in the install phase; thus skipping install
 script:
