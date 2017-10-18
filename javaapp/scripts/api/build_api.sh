@@ -1,6 +1,8 @@
-cd ~/komis/code/tasProject/javaapp
+cd ~/komis/code/tasProject/javaapp/java-api
 
 git pull https://github.com/JakKowalCzyk/tasProject docker
 
-docker build -t kowkowal/komisapi .
-docker push kowkowal/komisapi
+mvn install dockerfile:build
+mvn  dockerfile:push
+
+docker rmi $(docker images -q)
