@@ -20,6 +20,8 @@ before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
 install: true # This runs the "true" command in the install phase; thus skipping install
 script:
   - |
-    docker login -u $DOCKER_USER -p $DOCKER_PASS
-    mvn install dockerfile:build
-    mvn  dockerfile:push
+    if git diff HEAD~ --name-only|grep javaapp; then
+      docker login -u $DOCKER_USER -p $DOCKER_PASS
+      mvn install dockerfile:build
+      mvn  dockerfile:push
+    fi;
