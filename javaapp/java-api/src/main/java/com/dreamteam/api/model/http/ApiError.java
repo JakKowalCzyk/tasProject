@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class ApiError {
 
-    private String faultString;
+    private String message;
     private String faultCode;
 
-    public ApiError(String faultString, String faultCode) {
-        this.faultString = faultString;
+    public ApiError(String message, String faultCode) {
+        this.message = message;
         this.faultCode = faultCode;
     }
 }
