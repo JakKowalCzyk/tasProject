@@ -22,8 +22,6 @@ script:
       mvn  dockerfile:push
       sleep 15
       echo "pushed"
-      sshpass -p $SERVER_PASS ssh $SERVER_USER@$SERVER_IP <<+
-        sh komis/update_api.sh
-      +
+      sshpass -p $SERVER_PASS ssh $SERVER_USER@$SERVER_IP "sh komis/update_api.sh;"
       echo "deployed"
     fi;
