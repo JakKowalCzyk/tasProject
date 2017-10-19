@@ -20,6 +20,5 @@ script:
       docker login -u $DOCKER_USER -p $DOCKER_PASS
       mvn install dockerfile:build
       mvn  dockerfile:push
-      sshpass -p $SERVER_PASS ssh $SERVER_USER@$SERVER_IP <<+
-              sh /komis/update_api.sh
+      sshpass -p $SERVER_PASS ssh $SERVER_USER@$SERVER_IP "sh komis/update_api.sh;"
     fi;
