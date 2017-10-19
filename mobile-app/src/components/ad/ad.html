@@ -1,7 +1,6 @@
 <div class="ad">
     <div class="ad__imgCont">
         <img class="ad__img" src="{{car.imgPath}}">
-        <!--<img class="ad__img" src="assets/images/a45.jpg">-->
     </div>
     <div class="ad__carInfo">
         <div class="ad__carInfo__title">{{ adService.brands[car.brand] }} {{ car.model }} <span class="ad__carInfo__title--type">{{ car.category }}</span> </div>
@@ -20,5 +19,7 @@
             <div class="ad__carInfo__desc">{{ car.engine.drive}}</div>
         </div>
     </div>
-    <div class="ad__price">{{ car.price }} zł/dzień</div>
+    <div class="ad__price">
+        <div class="ad__priceNumber">{{ car.price }}zł</div>
+        <div class="ad__priceDay">/dzień</div></div>
 </div>
