@@ -2,6 +2,7 @@ package com.dreamteam.api.service.user.impl;
 
 import com.dreamteam.api.dao.user.UserDAO;
 import com.dreamteam.api.model.bo.user.User;
+import com.dreamteam.api.model.enums.RoleType;
 import com.dreamteam.api.model.exception.UserEmailException;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
@@ -31,6 +32,13 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
     @Override
     public User findByEmail(String email) {
         return ((UserDAO) getModelDAO()).findByEmail(getEmailWithSmallCases(email));
+    }
+
+    @Override
+    public User setAdminToUser(Long id) {
+        User userToUpdate = super.findOne(id);
+        userToUpdate.setRoleType(RoleType.ROLE_ADMIN);
+        return super.updateObject(userToUpdate);
     }
 
     @Override

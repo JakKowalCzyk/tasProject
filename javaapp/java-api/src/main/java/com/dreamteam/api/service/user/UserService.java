@@ -7,4 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends GenericService<User>, UserDetailsService {
 
     User findByEmail(String email);
+
+    User setAdminToUser(Long id);
 }
