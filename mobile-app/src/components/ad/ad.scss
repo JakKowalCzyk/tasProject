@@ -5,18 +5,23 @@ ad {
     height: 100px;
     display: flex;
     &__imgCont {
-      width: 150px;
-      height: 100px;
+      //width: 150px;
+      //height: 100px;
       //overflow: hidden;
     }
     &__img {
-      min-width: 100%;
-      min-height: 100%;
+      min-width: 150px;
+      max-width: 150px;
+      min-height: 100px;
+      max-height: 100px;
+      //min-width: 100%;
+      //min-height: 100%;
     }
     &__carInfo {
-      padding: 15px;
+      padding: 15px 0 15px 15px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       &__title {
         font-weight: 900;
         &--type {
@@ -25,7 +30,7 @@ ad {
         }
       }
       &__descCont {
-        margin-top: auto;
+        //margin-top: auto;
         display: flex;
       }
       &__fuelImg {
@@ -34,14 +39,25 @@ ad {
       }
       &__desc {
         font-weight: 300;
-        padding: 10px;
+        padding: 0 10px 0 0;
         font-size: 12px;
       }
     }
     &__price {
       margin: auto 0 auto auto;
       font-weight: 300;
-
+      display: flex;
+      flex-flow: row wrap;
+      text-align: right;
+      justify-content: flex-end;
+    }
+    &__priceNumber {
+      flex: 1;
+      text-align: center;
+    }
+    &__priceDay {
+      flex: 1;
+      text-align: center;
     }
   }
 }
