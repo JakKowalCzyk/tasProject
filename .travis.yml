@@ -8,13 +8,18 @@ sudo: required
 services:
   - docker
 
-before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+before_install:
+  - apt-get install sshpass -y
 
-install: true # This runs the "true" command in the install phase; thus skipping install
+install: true
+
 script:
   - |
     if git diff HEAD~ --name-only|grep javaapp; then
+      cd $TRAVIS_BUILD_DIR/javaapp/java-api
       docker login -u $DOCKER_USER -p $DOCKER_PASS
       mvn install dockerfile:build
       mvn  dockerfile:push
+      sshpass -p $SERVER_PASS ssh $SERVER_USER@$SERVER_IP <<+
+              sh /komis/update_api.sh
     fi;
