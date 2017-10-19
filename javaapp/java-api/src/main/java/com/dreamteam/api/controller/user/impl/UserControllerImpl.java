@@ -74,6 +74,12 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
+    public User setAdminToUser(@PathVariable Long id) {
+        return getAbstractMapper().mapToHttpObject(getGenericService().setAdminToUser(id));
+    }
+
+    @Override
     public UserService getGenericService() {
         return (UserService) super.getGenericService();
     }

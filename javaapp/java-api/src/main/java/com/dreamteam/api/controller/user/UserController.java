@@ -47,4 +47,7 @@ public interface UserController extends GenericController<User> {
 
     @GetMapping(value = "/me")
     User getPrincipal(Principal principal);
+
+    @PutMapping(value = "/{id}/admin")
+    User setAdminToUser(@PathVariable Long id);
 }
