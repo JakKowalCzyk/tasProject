@@ -78,9 +78,9 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                 .filter(car -> fuelType == null || car.getFuelType().equals(fuelType))
                 .filter(car -> driveType == null || car.getDriveType().equals(driveType))
                 .filter(car -> categoryType == null || car.getCategoryType().equals(categoryType))
-                .filter(car -> filterPrice(priceSmallerThan, priceBiggerThan, car))
-                .filter(car -> filterMillage(millageSmallerThan, millageBiggerThan, car))
-                .filter(car -> filterPower(powerSmallerThan, powerBiggerThan, car))
+                .filter(car -> filterValues(priceSmallerThan, priceBiggerThan, car.getPricePerDay()))
+                .filter(car -> filterValues(millageSmallerThan, millageBiggerThan, car.getMillage()))
+                .filter(car -> filterValues(powerSmallerThan, powerBiggerThan, car.getPower()))
                 .filter(car -> hasElectricWindow == null || car.isHasElectricWindow() == hasElectricWindow)
                 .filter(car -> hasNavi == null || car.isHasNavi() == hasNavi)
                 .filter(car -> hasAirConditioning == null || car.isHasAirConditioning() == hasAirConditioning)
@@ -91,39 +91,15 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                 .collect(Collectors.toList());
     }
 
-    private boolean filterPrice(Double priceSmallerThan, Double priceBiggerThan, Car car) {
-        if ((priceBiggerThan == null && priceSmallerThan == null)) {
+    private <T extends Number> boolean filterValues(T smallerThan, T biggerThan, T valueToCompare) {
+        if ((biggerThan == null && smallerThan == null)) {
             return true;
-        } else if (priceBiggerThan == null) {
-            return car.getPricePerDay() <= priceSmallerThan;
-        } else if (priceSmallerThan == null) {
-            return car.getPricePerDay() >= priceBiggerThan;
+        } else if (biggerThan == null) {
+            return valueToCompare.doubleValue() <= smallerThan.doubleValue();
+        } else if (smallerThan == null) {
+            return valueToCompare.doubleValue() >= biggerThan.doubleValue();
         } else {
-            return car.getPricePerDay() >= priceBiggerThan && car.getPricePerDay() <= priceSmallerThan;
-        }
-    }
-
-    private boolean filterMillage(Integer millageSmallerThan, Integer millageBiggerThan, Car car) {
-        if ((millageBiggerThan == null && millageSmallerThan == null)) {
-            return true;
-        } else if (millageBiggerThan == null) {
-            return car.getMillage() <= millageSmallerThan;
-        } else if (millageSmallerThan == null) {
-            return car.getMillage() >= millageBiggerThan;
-        } else {
-            return car.getMillage() >= millageBiggerThan && car.getMillage() <= millageSmallerThan;
-        }
-    }
-
-    private boolean filterPower(Integer powerSmallerThan, Integer powerBiggerThan, Car car) {
-        if ((powerBiggerThan == null && powerSmallerThan == null)) {
-            return true;
-        } else if (powerBiggerThan == null) {
-            return car.getPower() <= powerSmallerThan;
-        } else if (powerSmallerThan == null) {
-            return car.getPower() >= powerBiggerThan;
-        } else {
-            return car.getPower() >= powerBiggerThan && car.getPower() <= powerSmallerThan;
+            return valueToCompare.doubleValue() >= biggerThan.doubleValue() && valueToCompare.doubleValue() <= smallerThan.doubleValue();
         }
     }
 
