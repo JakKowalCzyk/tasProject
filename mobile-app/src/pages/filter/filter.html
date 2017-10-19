@@ -1,0 +1,128 @@
+<ion-header class="header">
+    <ion-navbar>
+        <ion-title>Filtry</ion-title>
+        <span class="deleteFilters" (click)="deleteFilters()">Wyjeb Filtry</span>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="filter">
+        <form class="filter__form" [formGroup]="formGroup">
+            <ion-item [class.filter__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)"
+                >
+                    Marka
+                </ion-label>
+                <ion-select formControlName="brand" [(ngModel)]="brand" name="brand">
+                    <ion-option *ngFor="let brand of adService.brandsArray" value="{{ brand }}">{{ brand }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item [class.filter__invalid]="!formGroup.controls.category.valid && (formGroup.controls.category.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.category.valid && (formGroup.controls.category.dirty || submitAttempt)"
+                >
+                    Kategoria
+                </ion-label>
+                <ion-select formControlName="category" [(ngModel)]="categoryType" name="categoryType">
+                    <ion-option *ngFor="let category of adService.categories" value="{{ category }}">{{ category }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item [class.filter__invalid]="!formGroup.controls.fuel.valid && (formGroup.controls.fuel.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.fuel.valid && (formGroup.controls.fuel.dirty || submitAttempt)"
+                >
+                    Rodzaj paliwa
+                </ion-label>
+                <ion-select formControlName="fuel" [(ngModel)]="fuelType" name="fuelType">
+                    <ion-option *ngFor="let fuel of engine.FUEL" value="{{fuel}}">{{ fuel }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item [class.filter__invalid]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
+                >
+                    Minimalna moc
+                </ion-label>
+                <ion-input
+                        [class.filter__invalid--input]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
+                        formControlName="power"
+                        type="number"
+                        [(ngModel)]="minPower"
+                        name="minPower"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item [class.filter__invalid]="!formGroup.controls.drive.valid && (formGroup.controls.drive.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.drive.valid && (formGroup.controls.drive.dirty || submitAttempt)"
+                >
+                    Napęd
+                </ion-label>
+                <ion-select formControlName="drive" [(ngModel)]="driveType" name="driveType">
+                    <ion-option *ngFor="let drive of engine.DRIVE" value="{{drive}}">{{ drive }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item [class.filter__invalid]="!formGroup.controls.options.valid && (formGroup.controls.options.dirty || submitAttempt)">
+                <ion-label
+                        stacked
+                        [class.filter__invalid]="!formGroup.controls.options.valid && (formGroup.controls.options.dirty || submitAttempt)"
+                >
+                    Opcje dodatkowe
+                </ion-label>
+                <ion-select formControlName="options" [(ngModel)]="options" name="options" multiple="true">
+                    <ion-option *ngFor="let option of option.NAMES" value="{{option}}">{{ option }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item
+                    [class.filter__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)">
+                <ion-label
+                    stacked
+                    [class.filter__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
+                >
+                    Cena max
+                </ion-label>
+                <ion-input
+                        [class.filter__invalid--input]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
+                        type="number"
+                        formControlName="price"
+                        name="maxPrice"
+                        [(ngModel)]="maxPrice"
+                    >
+                </ion-input>
+                <ion-range min="1" max="3000" pin="true" [(ngModel)]="maxPrice" name="maxPrice" formControlName="price">
+                    <ion-label range-left small>1</ion-label>
+                    <ion-label range-right>3000</ion-label>
+                </ion-range>
+            </ion-item>
+
+            <div class="filter__calendars">
+                <ion-item class="filter__calendar"
+                          [class.filter__invalid]="!formGroup.controls.date.valid && (formGroup.controls.date.dirty || submitAttempt)">
+                    <div class="filter__calendarLabel">Zakres dat</div>
+                    <my-date-range-picker
+                            name="dateRange"
+                            [options]="myDatePickerOptions"
+                            [(ngModel)]="dateRange"
+                            formControlName="date"
+                    ></my-date-range-picker>
+                </ion-item>
+            </div>
+
+            <div class="filter__btns">
+                <button color="danger" ion-button  type="submit" block (click)="cancel()">Anuluj</button>
+                <button ion-button type="submit" block (click)="doFilter()">Filtruj</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

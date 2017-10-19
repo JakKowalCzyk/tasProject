@@ -1,5 +1,4 @@
-<header *ngIf="!filter" title="Dodaj auto"></header>
-<ion-header *ngIf="filter"><ion-title>Filtry</ion-title></ion-header>
+<header title="{{ car ? 'Edytuj Auto' : 'Dodaj auto' }}"></header>
 <ion-content class="page_wrapper">
     <div class="addCar">
         <form class="addCar__form" [formGroup]="formGroup">
@@ -16,11 +15,11 @@
                         type="text"
                         [(ngModel)]="brand"
                         name="brand"
+                        disabled="{{car != null}}"
                 ></ion-input>
             </ion-item>
 
             <ion-item
-                    *ngIf="!filter"
                     [class.addCar__invalid]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)">
                 <ion-label
                         stacked
@@ -34,7 +33,7 @@
                         type="text"
                         [(ngModel)]="name"
                         name="name"
-                ></ion-input> <!--formControlName="name"-->
+                ></ion-input>
             </ion-item>
 
             <ion-item [class.addCar__invalid]="!formGroup.controls.category.valid && (formGroup.controls.category.dirty || submitAttempt)">
@@ -66,7 +65,7 @@
                         stacked
                         [class.addCar__invalid]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
                 >
-                    {{ filter ? 'Minimalna moc' : 'Moc' }}
+                    Moc
                 </ion-label>
                 <ion-input
                         [class.addCar__invalid--input]="!formGroup.controls.power.valid && (formGroup.controls.power.dirty || submitAttempt)"
@@ -90,7 +89,6 @@
             </ion-item>
 
             <ion-item
-                    *ngIf="!filter"
                     [class.addCar__invalid]="!formGroup.controls.year.valid && (formGroup.controls.year.dirty || submitAttempt)">
                 <ion-label
                         stacked
@@ -120,7 +118,6 @@
             </ion-item>
 
             <ion-item
-                    *ngIf="!filter"
                     [class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)">
                 <ion-label
                         stacked
@@ -138,7 +135,6 @@
             </ion-item>
 
             <ion-item
-                    *ngIf="!filter"
                     [class.addCar__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)">
                 <ion-label
                         stacked
@@ -155,45 +151,13 @@
                 ></ion-input>
             </ion-item>
 
-
-            <div *ngIf="filter">
-                <ion-item
-                        [class.addCar__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)">
-                    >
-                    <ion-label
-                            stacked
-                            [class.addCar__invalid]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
-                    >
-                        Cena max
-                    </ion-label>
-                    <ion-input
-                            [class.addCar__invalid--input]="!formGroup.controls.price.valid && (formGroup.controls.price.dirty || submitAttempt)"
-                            type="number"
-                            formControlName="price"
-                            name="pricePerDay"
-                            [(ngModel)]="pricePerDay"
-                    >
-                    </ion-input>
-                    <ion-range min="1" max="3000" pin="true" [(ngModel)]="pricePerDay" name="pricePerDay" formControlName="price">
-                        <ion-label range-left small>1</ion-label>
-                        <ion-label range-right>3000</ion-label>
-                    </ion-range>
-                </ion-item>
-            </div>
-
-
-            <button *ngIf="!filter" ion-button type="submit" block (click)="addCar()">
+            <button ion-button type="submit" block (click)="addCar()">
                 {{
                     car == null
                         ? 'Dodaj auto'
                         : 'Edytuj'
                 }}
             </button>
-            <div *ngIf="filter" class="addCar__filterBtns">
-                <button color="danger" ion-button  type="submit" block (click)="cancel()">Anuluj</button>
-                <button ion-button type="submit" block (click)="doFilter()">Filtruj</button>
-            </div>
-
         </form>
     </div>
 </ion-content>

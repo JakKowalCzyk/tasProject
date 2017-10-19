@@ -1,6 +1,11 @@
 <header title="Komis Szukałex"></header>
 
 <ion-content class="page_wrapper">
+    <div *ngIf="filterService.activeFilters">
+        <ad *ngFor="let car of filterService.filteredCars" [car]="car" (click)="openPage(car)"></ad>
+    </div>
+    <div *ngIf="!filterService.activeFilters">
         <ad *ngFor="let car of adService.allCars" [car]="car" (click)="openPage(car)"></ad>
+    </div>
         <add-icon *ngIf="authService.user && authService.user.roleType == 'ROLE_ADMIN'"></add-icon>
 </ion-content>
