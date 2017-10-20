@@ -15,10 +15,9 @@ import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
 export class AdService extends HasResponse {
 
     brands          : Object            = {};
+    brandsArray     : Array<string>     = [];
     categories      : Array<string>     = [];
     allCars         : Array<Car>        = [];
-
-    activeFilters   : any;
 
     contentHeaders  : Headers           = new Headers();
 
@@ -46,6 +45,8 @@ export class AdService extends HasResponse {
                 for (let brand of res.json()) {
                     this.brands[brand.id] = brand.name;
                 }
+                this.brandsArray = Object.keys(this.brands).map((key) => { return this.brands[key] });
+                console.log(this.brandsArray);
             })
     }
 
@@ -133,48 +134,8 @@ export class AdService extends HasResponse {
             .subscribe((res) => {
                 this.success('', 'car:modified');
                 this.refresh();
-            })
-    }
-
-    filter(data) {
-        if (data.brand != '' && data.brand != null) {
-            for (let k in this.brands) {
-                if (this.brands[k] == data.brand) {
-                    delete data.brand;
-                    data['brandId'] = k;
-                }
-            }
-            if (!data.brandId) {
-                data['brandId'] = -1;
-            }
-        }
-
-        this.activeFilters = data;
-        console.log(this.activeFilters);
-        this.http.get(this.routeService.routes.filter, { search: data,  headers : this.authService.headers })
-            .subscribe((res) => {
-                this.success('', 'car:filtered');
-                this.allCars = [];
-                for (let car of res.json()) {
-                    this.allCars.push(new Car(
-                        car.id,
-                        car.brandId,
-                        car.name,
-                        car.categoryType,
-                        car.photo,
-                        car.pricePerDay,
-                        car.productionDate,
-                        new Engine(car.fuelType, car.power, car.driveType),
-                        [
-                            car.hasAirConditioning,
-                            car.hasNavi,
-                            car.hasElectricWindow,
-                            car.hasRadio,
-                            car.hasSunroof,
-                            !car.hasManualGearbox
-                        ])
-                    )
-                }
+            },(err) => {
+                this.error(err.json(),'car:modified');
             })
     }
 

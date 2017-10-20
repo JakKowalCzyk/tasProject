@@ -18,12 +18,7 @@ export class HeaderComponent {
     {}
 
     openFilter() {
-        console.log('openm');
         this.events.publish('filter:open');
-    }
-
-    openmenu() {
-        console.log('opening manu');
     }
 
 }

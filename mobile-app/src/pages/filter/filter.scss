@@ -1,0 +1,49 @@
+page-filter {
+  .filter {
+    &__invalid {
+      color: #ff0000 !important;
+      &--input {
+        border-bottom: solid 2px #ff0000;
+      }
+    }
+
+    &__failMsg {
+      //font-size: 14px;
+      color: #ff0000;
+
+    }
+    &__btns {
+      display: flex;
+    }
+    &__calendars {
+      display: flex;
+    }
+    &__calendar {
+      display: flex;
+      flex-direction: column;
+      .label {
+        //height: auto;
+        height: 300px;
+      }
+    }
+    &__calendarLabel {
+      color: #989898;
+      font-weight: 900;
+      font-size: 12px;
+    }
+    &__cancelFilt {
+      position: absolute;
+    }
+  }
+  .header {
+    .toolbar-content {
+      display: flex;
+    }
+    .deleteFilters {
+      cursor: pointer;
+      margin: auto;
+      color: #007aff;
+    }
+  }
+
+}

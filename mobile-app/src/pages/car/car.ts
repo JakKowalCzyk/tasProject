@@ -1,18 +1,18 @@
-import { Component }                                    from '@angular/core';
-import {AlertController, Events, NavController, NavParams}    from 'ionic-angular';
+import { Component }                                            from '@angular/core';
+import { AlertController, Events, NavController, NavParams }    from 'ionic-angular';
 
 //models
-import { CarOption }                            from "../../models/CarOption";
 import { Car }                                  from "../../models/Car";
 
 //pages
 import { OrderPage }                            from "../order/order";
+import { AddCarPage }                           from "../add-car/add-car";
+import { HomePage }                             from "../home/home";
 
 //services
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
-import {AddCarPage} from "../add-car/add-car";
-import {HomePage} from "../home/home";
+
 
 @Component({
   selector: 'page-car',

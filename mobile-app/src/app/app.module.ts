@@ -5,6 +5,8 @@ import { HttpModule }                                   from '@angular/http';
 import { StatusBar }                                    from '@ionic-native/status-bar';
 import { SplashScreen }                                 from '@ionic-native/splash-screen';
 import { MyApp }                                        from './app.component';
+import { IonicStorageModule }                           from "@ionic/storage";
+import { MyDateRangePickerModule }                      from 'mydaterangepicker';
 
 //pages
 import { HomePage }         from '../pages/home/home';
@@ -14,6 +16,7 @@ import { RegisterPage }     from '../pages/register/register';
 import { LogoutPage }       from "../pages/logout/logout";
 import { OrderPage }        from "../pages/order/order";
 import { AddCarPage }       from "../pages/add-car/add-car";
+import { FilterPage }       from "../pages/filter/filter";
 
 //components
 import { HeaderComponent }  from "../components/header/header";
@@ -24,7 +27,7 @@ import { AddIconComponent } from "../components/add-icon/add-icon";
 import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
-import {IonicStorageModule} from "@ionic/storage";
+import { FilterService }    from "../services/filter/filter.service";
 
 
 @NgModule({
@@ -40,12 +43,14 @@ import {IonicStorageModule} from "@ionic/storage";
       OrderPage,
       AddIconComponent,
       AddCarPage,
+      FilterPage,
   ],
   imports: [
       BrowserModule,
       HttpModule,
       IonicModule.forRoot(MyApp),
       IonicStorageModule.forRoot(),
+      MyDateRangePickerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,6 +65,7 @@ import {IonicStorageModule} from "@ionic/storage";
       OrderPage,
       AddIconComponent,
       AddCarPage,
+      FilterPage,
   ],
   providers: [
       StatusBar,
@@ -67,6 +73,7 @@ import {IonicStorageModule} from "@ionic/storage";
       AuthService,
       AdService,
       RouteService,
+      FilterService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

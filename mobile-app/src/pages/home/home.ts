@@ -11,6 +11,8 @@ import { Car }              from "../../models/Car";
 //Services
 import { AdService }        from "../../services/ad/ad.service";
 import { AuthService } from "../../services/auth/auth.service";
+import {FilterPage} from "../filter/filter";
+import {FilterService} from "../../services/filter/filter.service";
 
 @Component({
   selector: 'page-home',
@@ -19,14 +21,14 @@ import { AuthService } from "../../services/auth/auth.service";
 export class HomePage {
 
     cars            : Array<Car>;
-    eventsActive    : boolean;
 
     constructor(
-        private navCtrl     : NavController,
-        private adService   : AdService,
-        private authService : AuthService,
-        private events      : Events,
-        private modalCtrl   : ModalController,
+        private navCtrl         : NavController,
+        private adService       : AdService,
+        private authService     : AuthService,
+        private events          : Events,
+        private modalCtrl       : ModalController,
+        private filterService   : FilterService,
     ) {
 
     }
@@ -38,22 +40,16 @@ export class HomePage {
 
     openFilter() {
         this.unsubscribeEvents();
-        this.navCtrl.push(AddCarPage, { filter : true });
-        // let modal = this.modalCtrl.create(AddCarPage, { filter : true });
-        // modal.present();
+        this.navCtrl.push(FilterPage);
     }
 
     openPage(car : Car) {
+        this.unsubscribeEvents();
         this.navCtrl.push(CarPage, {'car' : car })
     }
 
-    ionViewDidLoad() {
-        console.log('cons', this.eventsActive);
-        if (!this.eventsActive) {
-            console.log('cons, subskrybuiję');
-            this.subscribeEvents();
-            this.eventsActive = true;
-        }
+    ionViewWillEnter() {
+        this.subscribeEvents();
     }
 
     unsubscribeEvents() {
@@ -62,11 +58,7 @@ export class HomePage {
     }
 
     ionViewDidLeave() {
-        console.log('leaving', this.eventsActive);
-        if (this.eventsActive) {
-            this.unsubscribeEvents();
-            this.eventsActive = false;
-        }
+        this.unsubscribeEvents();
     }
 
 }
