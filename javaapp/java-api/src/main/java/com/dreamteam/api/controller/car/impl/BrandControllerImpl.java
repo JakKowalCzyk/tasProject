@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -34,13 +35,13 @@ public class BrandControllerImpl extends GenericControllerImpl<Brand, com.dreamt
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public Brand updateObject(@RequestBody Brand model) {
+    public Brand updateObject(@Valid @RequestBody Brand model) {
         return super.updateObject(model);
     }
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public Brand addObject(@RequestBody Brand model) {
+    public Brand addObject(@Valid @RequestBody Brand model) {
         return super.addObject(model);
     }
 
