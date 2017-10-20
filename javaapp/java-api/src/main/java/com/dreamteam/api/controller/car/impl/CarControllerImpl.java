@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -33,13 +34,13 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public Car updateObject(@RequestBody Car model) {
+    public Car updateObject(@Valid @RequestBody Car model) {
         return super.updateObject(model);
     }
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public Car addObject(@RequestBody Car model) {
+    public Car addObject(@Valid @RequestBody Car model) {
         return super.addObject(model);
     }
 
