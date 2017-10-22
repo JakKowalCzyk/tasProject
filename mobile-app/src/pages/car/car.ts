@@ -13,6 +13,8 @@ import { HomePage }                             from "../home/home";
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
 import {LoginPage} from "../login/login";
+import {Engine} from "../../models/Engine";
+import {CarPipe} from "../../pipes/car/car.pipe";
 
 
 @Component({

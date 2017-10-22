@@ -10,6 +10,7 @@ import { Engine }           from "../../models/Engine";
 import { AuthService }      from "../auth/auth.service";
 import {Events} from "ionic-angular";
 import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
+import {CarPipe} from "../../pipes/car/car.pipe";
 
 @Injectable()
 export class AdService extends HasResponse {
@@ -26,6 +27,7 @@ export class AdService extends HasResponse {
         private routeService    : RouteService,
         private authService     : AuthService,
         private eventss         : Events,
+        private carPipe         : CarPipe,
     ) {
         super(eventss)
     }
@@ -66,24 +68,7 @@ export class AdService extends HasResponse {
         this.http.get(this.routeService.routes.cars)
             .subscribe((res) => {
                 for (let car of res.json()) {
-                    this.allCars.push(new Car(
-                        car.id,
-                        car.brandId,
-                        car.name,
-                        car.categoryType,
-                        car.photo,
-                        car.pricePerDay,
-                        car.productionDate,
-                        new Engine(car.fuelType, car.power, car.driveType),
-                        [
-                            car.hasAirConditioning,
-                            car.hasNavi,
-                            car.hasElectricWindow,
-                            car.hasRadio,
-                            car.hasSunroof,
-                            !car.hasManualGearbox
-                        ])
-                    )
+                    this.allCars.push(this.carPipe.transform(car))
                 }
             });
     }
