@@ -28,6 +28,7 @@ import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
 import { FilterService }    from "../services/filter/filter.service";
+import {BrandPipe} from "../pipes/brand/brand.pipe";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { FilterService }    from "../services/filter/filter.service";
       AddIconComponent,
       AddCarPage,
       FilterPage,
+      BrandPipe,
   ],
   imports: [
       BrowserModule,
@@ -74,6 +76,7 @@ import { FilterService }    from "../services/filter/filter.service";
       AdService,
       RouteService,
       FilterService,
+      BrandPipe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
