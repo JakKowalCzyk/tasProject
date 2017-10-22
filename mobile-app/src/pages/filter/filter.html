@@ -106,8 +106,9 @@
                 </ion-range>
             </ion-item>
 
-            <div class="filter__calendars">
+            <div class="filter__calendars" (click)="calendarToggle()">
                 <ion-item class="filter__calendar"
+                          [class.opened]="calendarOpened"
                           [class.filter__invalid]="!formGroup.controls.date.valid && (formGroup.controls.date.dirty || submitAttempt)">
                     <div class="filter__calendarLabel">Zakres dat</div>
                     <my-date-range-picker
