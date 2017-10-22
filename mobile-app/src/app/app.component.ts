@@ -66,8 +66,6 @@ export class MyApp {
   }
 
   onLogin() {
-      //TODO : for build
-      // this.adService.all();
       this.pages.splice(1,1);
       this.pages.push({ title: "Wyloguj", component : LogoutPage })
   }

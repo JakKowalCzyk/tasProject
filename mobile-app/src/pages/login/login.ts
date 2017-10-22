@@ -25,12 +25,13 @@ export class LoginPage {
     password    : string = '123';
     formGroup   : FormGroup;
 
-    // ip          : string = '192.168.1.15';
+    _loggedSub      : ()    => void;
+    _errloggedSub   : (msg) => void;
 
     showLoading : boolean = false;
 
     constructor(
-          private navCtrl       : NavController,
+        private navCtrl       : NavController,
         private navParams     : NavParams,
         private authService   : AuthService,
         private events        : Events,
@@ -42,8 +43,26 @@ export class LoginPage {
     }
 
     subscribeEvents() {
-        this.events.subscribe('logged'        , ()    => { this.onLogged() });
-        this.events.subscribe('error:login'   , (msg) => { this.onError(msg.msg) });
+        this._loggedSub = () => {
+          this.onLogged();
+        };
+        this._errloggedSub = (msg) => {
+          this.onError(msg.msg)
+        };
+        this.events.subscribe('logged'        ,  this._loggedSub);
+        this.events.subscribe('error:login'   ,  this._errloggedSub);
+    }
+
+    unsubscribeEvents() {
+        if (this._loggedSub) {
+            this.events.unsubscribe('logged', this._loggedSub);
+            this._loggedSub = undefined;
+        }
+        if (this._errloggedSub) {
+            this.events.unsubscribe('error:login', this._errloggedSub);
+            this._errloggedSub = undefined;
+        }
+        this.events.unsubscribe('error:login', this.onError);
     }
 
     onError(msg : string) {
@@ -75,7 +94,6 @@ export class LoginPage {
         } else {
             this.showLoading = true;
             this.authService.login(this.email, this.password);
-            // this.authService.login(this.email, this.password, this.ip);
         }
     }
 
@@ -83,11 +101,9 @@ export class LoginPage {
         this.navCtrl.push(RegisterPage);
     }
 
-    ionViewDidLoad() {}
-
     ionViewWillLeave() {
-        this.events.unsubscribe('logged');
-        this.events.unsubscribe('error:login');
+        this.unsubscribeEvents();
+        console.log(this.events)
     }
 
 }

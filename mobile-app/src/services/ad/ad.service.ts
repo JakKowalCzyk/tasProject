@@ -31,7 +31,7 @@ export class AdService extends HasResponse {
     }
 
     subscribeEvents() {
-        this.eventss.subscribe('logged', () => {this.all()})
+        this.eventss.subscribe('logged', () => { this.all() })
     }
 
     refresh() {
@@ -46,7 +46,6 @@ export class AdService extends HasResponse {
                     this.brands[brand.id] = brand.name;
                 }
                 this.brandsArray = Object.keys(this.brands).map((key) => { return this.brands[key] });
-                console.log(this.brandsArray);
             })
     }
 
