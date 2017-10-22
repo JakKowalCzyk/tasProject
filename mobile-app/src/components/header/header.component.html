@@ -1,0 +1,10 @@
+<ion-header class="header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{title}}</ion-title>
+      <ion-icon *ngIf="withIcons"><img class="header__icon" src="assets/images/filter.svg" (click)="openFilter()"></ion-icon>
+      <ion-icon *ngIf="withIcons"><img class="header__icon" src="assets/images/sort.svg"></ion-icon>
+  </ion-navbar>
+</ion-header>
