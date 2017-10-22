@@ -116,7 +116,7 @@ export class AdService extends HasResponse {
         }
         this.http.put(this.routeService.routes.addCar, data, { headers : this.authService.headers })
             .subscribe((res) => {
-                this.success('', 'car:modified');
+                this.success(res.json(), 'car:modified');
                 this.refresh();
             },(err) => {
                 this.error(err.json(),'car:modified');

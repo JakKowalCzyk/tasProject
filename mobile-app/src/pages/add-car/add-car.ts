@@ -79,11 +79,12 @@ export class AddCarPage {
 
     onCarModified() {
         let toast = this.toastCtrl.create({
-            message     : 'Edytowano samochód, wróć na stronę główną by odświeżyć',
+            message     : 'Edytowano samochód',
             duration    : 3000,
             cssClass    : 'toastDflt'
         });
         toast.present();
+        this.navCtrl.pop();
     }
 
     onCarAddedError(msg : string) {
