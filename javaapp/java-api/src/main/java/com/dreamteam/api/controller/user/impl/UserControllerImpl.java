@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collection;
 
@@ -31,12 +32,12 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public User updateObject(@RequestBody User model) {
+    public User updateObject(@Valid @RequestBody User model) {
         return super.updateObject(model);
     }
 
     @Override
-    public User addObject(@RequestBody User model) {
+    public User addObject(@Valid @RequestBody User model) {
         return super.addObject(model);
     }
 
