@@ -25,7 +25,7 @@ export class AdService extends HasResponse {
         private http            : Http,
         private routeService    : RouteService,
         private authService     : AuthService,
-        private eventss          : Events,
+        private eventss         : Events,
     ) {
         super(eventss)
     }

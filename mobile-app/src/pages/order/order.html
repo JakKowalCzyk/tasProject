@@ -1,18 +1,24 @@
-<!--
-  Generated template for the OrderPage page.
+<header title="Zamów {{ car.brand | brand }} {{car.model}}"></header>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<ion-content class="page_wrapper">
+    <div class="order">
+        <div class="order__date">
+            <div class="order__date__title">
+                Wybierz okres wypożyczenia
+            </div>
+            <my-date-range-picker
+                    [options]="myDatePickerOptions"
+                    [(ngModel)]="dateRange"
+            ></my-date-range-picker>
+        </div>
 
-  <ion-navbar>
-    <ion-title>order</ion-title>
-  </ion-navbar>
+        <div class="order__price">
+            {{ days }} dni, {{ price }}zł
+        </div>
 
-</ion-header>
-
-
-<ion-content padding>
-
+        <div class="order__btns">
+            <button ion-button block color="danger" (click)="cancel()">Anuluj</button>
+            <button ion-button block color="primary" (click)="order()">Zamów</button>
+        </div>
+    </div>
 </ion-content>

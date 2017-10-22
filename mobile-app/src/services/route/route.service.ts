@@ -12,9 +12,13 @@ export class RouteService {
         'addBrand'      : this.base + 'brand',
         'categories'    : this.base + 'type/category/',
         'filter'        : this.base + 'car/filter',
+
         //user
         'register'      : this.base + 'user',
         'login'         : this.base + 'user/me',
         'logout'        : this.base + 'user/logout',
+
+        //orders
+        'rent'          : this.base + 'car/rented',
     };
 }

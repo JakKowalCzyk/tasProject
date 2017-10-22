@@ -50,7 +50,12 @@
     </div>
 
 </ion-content>
-<ion-footer *ngIf="authService.user == null || authService.user.roleType != 'ROLE_ADMIN'" class="ad__footer">
+
+<ion-footer *ngIf="authService.user == null" class="ad__footer">
+    <button ion-button block class="car__footer__btn" (click)="openLoginPage()">Zaloguj by zamówić</button>
+</ion-footer>
+
+<ion-footer *ngIf="authService.user != null && authService.user.roleType != 'ROLE_ADMIN'" class="ad__footer">
     <button ion-button block class="car__footer__btn" (click)="openOrderPage()">Zamawiam</button>
 </ion-footer>
 

@@ -28,6 +28,7 @@ import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
 import { FilterService }    from "../services/filter/filter.service";
+import {OrderService} from "../services/order/order.service";
 import {BrandPipe} from "../pipes/brand/brand.pipe";
 
 
@@ -76,6 +77,7 @@ import {BrandPipe} from "../pipes/brand/brand.pipe";
       AdService,
       RouteService,
       FilterService,
+      OrderService,
       BrandPipe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

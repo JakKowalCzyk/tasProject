@@ -12,6 +12,7 @@ import { HomePage }                             from "../home/home";
 //services
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
+import {LoginPage} from "../login/login";
 
 
 @Component({
@@ -20,8 +21,7 @@ import { AuthService }                          from "../../services/auth/auth.s
 })
 export class CarPage {
 
-  car      : Car;
-
+    car      : Car;
 
     constructor(
         private navCtrl       : NavController,
@@ -40,6 +40,10 @@ export class CarPage {
 
     openOrderPage() {
         this.navCtrl.push(OrderPage, { 'car' : this.car})
+    }
+
+    openLoginPage() {
+        this.navCtrl.setRoot(LoginPage);
     }
 
     showConfirm() {
@@ -68,5 +72,4 @@ export class CarPage {
     editCar() {
         this.navCtrl.push(AddCarPage, { car : this.car })
     }
-
 }

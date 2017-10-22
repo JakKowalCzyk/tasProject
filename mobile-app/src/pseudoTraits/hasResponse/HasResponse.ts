@@ -5,7 +5,7 @@ export class HasResponse {
 
     success(response : Object, event : string) {
         console.log(event);
-        this.events.publish(event);
+        this.events.publish(event, response);
     }
 
     error(response : any, event : string) {

@@ -1,3 +1,18 @@
 page-order {
-
+  .order {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    &__date {
+      margin: 0 auto;
+      &__title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 300;
+      }
+    }
+    &__btns {
+      display: flex;
+    }
+  }
 }
