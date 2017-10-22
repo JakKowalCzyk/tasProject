@@ -30,6 +30,8 @@ import { RouteService }     from "../services/route/route.service";
 import { FilterService }    from "../services/filter/filter.service";
 import {OrderService} from "../services/order/order.service";
 import {BrandPipe} from "../pipes/brand/brand.pipe";
+import {MyOrdersPage} from "../pages/my-orders/my-orders";
+import {OrderComponent} from "../components/order/order.component";
 import {CarPipe} from "../pipes/car/car.pipe";
 
 
@@ -49,6 +51,8 @@ import {CarPipe} from "../pipes/car/car.pipe";
       FilterPage,
       BrandPipe,
       CarPipe,
+      MyOrdersPage,
+      OrderComponent,
   ],
   imports: [
       BrowserModule,
@@ -71,6 +75,8 @@ import {CarPipe} from "../pipes/car/car.pipe";
       AddIconComponent,
       AddCarPage,
       FilterPage,
+      MyOrdersPage,
+      OrderComponent,
   ],
   providers: [
       StatusBar,

@@ -1,0 +1,5 @@
+<header title="Moje zamówienia"></header>
+
+<ion-content class="page_wrapper">
+    <order *ngFor="let order of orderService.userOrders" [order]="order"></order>
+</ion-content>

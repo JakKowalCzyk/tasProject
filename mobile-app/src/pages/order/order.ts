@@ -3,6 +3,7 @@ import {AlertController, Events, IonicPage, NavController, NavParams, ToastContr
 import {Car} from "../../models/Car";
 import {IMyDateRange, IMyDateRangeModel, IMyDrpOptions} from "mydaterangepicker";
 import {OrderService} from "../../services/order/order.service";
+import {MyOrdersPage} from "../my-orders/my-orders";
 
 
 @Component({
@@ -53,7 +54,12 @@ export class OrderPage {
                 <li>Do: ${msg.to}</li>
                 <li>Łączna cena: ${msg.totalPrice}zł</li>
                </ul>`,
-          buttons   : ['Ok']
+          buttons   : [
+              {
+                  text      : 'Ok',
+                  handler   : () => { this.afterOrder() }
+              }
+          ]
       });
       alert.present();
   }
@@ -108,6 +114,11 @@ export class OrderPage {
           to        : to.year   + '-' + to.month   + '-' + to.day,
       };
       this.orderService.order(data);
+  }
+
+  afterOrder() {
+      console.log('afterorder');
+      this.navCtrl.setRoot(MyOrdersPage)
   }
 
   ionViewWillLeave() {

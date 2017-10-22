@@ -130,4 +130,8 @@ export class AdService extends HasResponse {
                 this.success('', 'car:deleted');
             })
     }
+
+    getCarById(carId : number) {
+        return this.allCars.filter((el) => { return el.id == carId })[0];
+    }
 }

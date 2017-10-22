@@ -20,5 +20,7 @@ export class RouteService {
 
         //orders
         'rent'          : this.base + 'car/rented',
+        'user_orders'   : this.base + 'car/rented/user/me',
+        'all_orders'    : this.base + 'car/rented/',
     };
 }
