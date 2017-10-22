@@ -19,9 +19,9 @@ import { AddCarPage }       from "../pages/add-car/add-car";
 import { FilterPage }       from "../pages/filter/filter";
 
 //components
-import { HeaderComponent }  from "../components/header/header";
-import { AdComponent }      from "../components/ad/ad";
-import { AddIconComponent } from "../components/add-icon/add-icon";
+import { HeaderComponent }  from "../components/header/header.component";
+import { AdComponent }      from "../components/ad/ad.component";
+import { AddIconComponent } from "../components/add-icon/add-icon.component";
 
 //services
 import { AuthService }      from "../services/auth/auth.service";
