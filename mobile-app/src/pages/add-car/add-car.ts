@@ -123,12 +123,14 @@ export class AddCarPage {
             ]
         });
         for (let brand of this.adService.brandsArray) {
-            alert.addInput({
+            let newInput = {
                 name    : 'brand',
                 type    : 'radio',
                 label   : brand,
                 value   : brand,
-            })
+            };
+            brand == this.brand ? newInput['checked'] = true : '';
+            alert.addInput(newInput);
         }
         alert.present();
     }

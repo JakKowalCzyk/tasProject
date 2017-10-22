@@ -1,15 +1,11 @@
 <header title="{{ car ? 'Edytuj Auto' : 'Dodaj auto' }}"></header>
 <ion-content class="page_wrapper">
     <div class="addCar">
+        <ion-item>
+            <p class="addCar__brand" (click)="chooseBrand()">Wybierz markę</p>
+            <p class="addCar__chooseBrand" (click)="chooseBrand()">{{ brand }}</p>
+        </ion-item>
         <form class="addCar__form" [formGroup]="formGroup">
-            <ion-item>
-                <ion-label
-                        stacked
-                >
-                    Marka
-                </ion-label>
-                <ion-input (click)="chooseBrand()" [(ngModel)]="brand" formControlName="brand" name="brand"></ion-input>
-            </ion-item>
 
             <ion-item
                     [class.addCar__invalid]="!formGroup.controls.name.valid && (formGroup.controls.name.dirty || submitAttempt)">

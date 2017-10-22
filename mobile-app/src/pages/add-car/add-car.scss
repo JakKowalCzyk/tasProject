@@ -1,5 +1,16 @@
 page-add-car {
   .addCar {
+
+    &__brand {
+      font-size: 12px;
+      color: #989898;
+    }
+
+    &__chooseBrand {
+      font-size: 16px;
+      color: #000;
+    }
+
     &__invalid {
       color: #ff0000 !important;
       &--input {
