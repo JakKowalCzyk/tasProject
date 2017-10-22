@@ -2,21 +2,13 @@
 <ion-content class="page_wrapper">
     <div class="addCar">
         <form class="addCar__form" [formGroup]="formGroup">
-            <ion-item [class.addCar__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)">
+            <ion-item>
                 <ion-label
                         stacked
-                        [class.addCar__invalid]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)"
                 >
                     Marka
                 </ion-label>
-                <ion-input
-                        [class.addCar__invalid--input]="!formGroup.controls.brand.valid && (formGroup.controls.brand.dirty || submitAttempt)"
-                        formControlName="brand"
-                        type="text"
-                        [(ngModel)]="brand"
-                        name="brand"
-                        disabled="{{car != null}}"
-                ></ion-input>
+                <ion-input (click)="chooseBrand()" [(ngModel)]="brand" formControlName="brand" name="brand"></ion-input>
             </ion-item>
 
             <ion-item
