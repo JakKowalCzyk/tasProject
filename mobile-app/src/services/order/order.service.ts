@@ -75,4 +75,13 @@ export class OrderService extends HasResponse {
             })
     }
 
+    deleteOrder(orderId : number) {
+        this.http.delete(this.routeService.routes.cancel_order + orderId, { headers : this.authService.getHeaders() })
+            .subscribe((res) => {
+                this.success(orderId, 'order:cancelled')
+            },(err) => {
+                this.error(err.json(), 'order:cancelled')
+            })
+    }
+
 }
