@@ -42,8 +42,10 @@ public interface RentedCarDAO extends ModelDAO<RentedCar> {
             "((rent.from between :fromDate and :toDate) or (rent.to between :fromDate and :toDate))")
     Collection<Long> findCarIdsRentedInGivenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
+    @Query("select rent from RentedCar  rent where rent.isActive = 'TRUE'")
     Collection<RentedCar> findByIsActiveTrue();
 
+    @Query("select rent from RentedCar  rent where rent.willBeActive = 'TRUE'")
     Collection<RentedCar> findByWillBeActiveTrue();
 
 }
