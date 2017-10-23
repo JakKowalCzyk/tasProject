@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {OrderService} from "../../services/order/order.service";
 
 @Component({
@@ -8,13 +8,28 @@ import {OrderService} from "../../services/order/order.service";
 })
 export class MyOrdersPage {
 
-  constructor(
-      public navCtrl        : NavController,
-      public navParams      : NavParams,
-      private orderService  : OrderService,
-  ) {
-      orderService.all();
-  }
+    _orderCancelled : () => void;
 
+    constructor(
+        private navCtrl       : NavController,
+        private navParams     : NavParams,
+        private orderService  : OrderService,
+        private events        : Events,
+    ) {
+        this.reload();
+        this.subscribeEvents();
+    }
+
+    subscribeEvents() {
+        this._orderCancelled = () => {
+            this.reload()
+        };
+        this.events.subscribe('order:cancelled', this._orderCancelled)
+    }
+
+    reload() {
+        console.log('reloadin');
+        this.orderService.all();
+    }
 
 }
