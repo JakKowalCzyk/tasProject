@@ -11,6 +11,7 @@ import { LoginPage }  from '../pages/login/login';
 import { AdService }  from "../services/ad/ad.service";
 import {LogoutPage} from "../pages/logout/logout";
 import {AuthService} from "../services/auth/auth.service";
+import {MyOrdersPage} from "../pages/my-orders/my-orders";
 
 @Component({
   selector: 'app',
@@ -66,10 +67,9 @@ export class MyApp {
   }
 
   onLogin() {
-      //TODO : for build
-      // this.adService.all();
       this.pages.splice(1,1);
-      this.pages.push({ title: "Wyloguj", component : LogoutPage })
+      this.pages.push({ title: "Moje Zamówienia", component : MyOrdersPage });
+      this.pages.push({ title: "Wyloguj", component : LogoutPage });
   }
 
   onLogout() {
@@ -79,7 +79,7 @@ export class MyApp {
           cssClass  : 'toastDflt'
       });
       toast.present();
-      this.pages.splice(1,1);
+      this.pages.splice(1,2);
       this.pages.push({ title: "Zaloguj", component : LoginPage })
   }
 

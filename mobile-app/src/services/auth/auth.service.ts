@@ -41,8 +41,6 @@ export class AuthService extends HasResponse{
     }
 
     login(email : string, pass : string) {
-    // login(email : string, pass : string, ip : string) {
-    //     this.routeService.setIp(ip);
         let base64 = btoa(email + ":" + pass);
         this.headers.append("Authorization", 'Basic ' + base64);
 

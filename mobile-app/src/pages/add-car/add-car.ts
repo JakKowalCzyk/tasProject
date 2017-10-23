@@ -79,11 +79,12 @@ export class AddCarPage {
 
     onCarModified() {
         let toast = this.toastCtrl.create({
-            message     : 'Edytowano samochód, wróć na stronę główną by odświeżyć',
+            message     : 'Edytowano samochód',
             duration    : 3000,
             cssClass    : 'toastDflt'
         });
         toast.present();
+        this.navCtrl.pop();
     }
 
     onCarAddedError(msg : string) {
@@ -98,7 +99,7 @@ export class AddCarPage {
         let car = this.car;
         this.brand          = this.adService.brands[car.brand];
         this.name           = car.model;
-        this.categoryType   = car.category
+        this.categoryType   = car.category;
         this.productionDate = car.year;
         this.photo          = car.imgPath;
         this.pricePerDay    = car.price;
@@ -108,9 +109,60 @@ export class AddCarPage {
         this.options        = car.getOptions();
     }
 
+    chooseBrand() {
+        let alert = this.alertCtrl.create({
+            title   : "Marka",
+            buttons : [
+                {
+                    text    : 'Nowa marka',
+                    handler : () => { this.newBrand();  },
+                },
+                {
+                    text    : 'Ok',
+                    handler : (data) => { this.brand = data; console.log(this.brand) }
+                }
+            ]
+        });
+        for (let brand of this.adService.brandsArray) {
+            let newInput = {
+                name    : 'brand',
+                type    : 'radio',
+                label   : brand,
+                value   : brand,
+            };
+            brand == this.brand ? newInput['checked'] = true : '';
+            alert.addInput(newInput);
+        }
+        alert.present();
+    }
+
+    newBrand() {
+        let alert = this.alertCtrl.create({
+            title   : 'Dodaj nową markę',
+            inputs  : [
+                {
+                    name    : 'brand',
+                    type    : 'text',
+                }
+            ],
+            buttons : [
+                {
+                    text    : 'Anuluj',
+                    role    : 'cancel'
+                },
+                {
+                    text    : 'Dodaj',
+                    handler : (data) => { this.brand = data.brand }
+                }
+            ]
+        });
+        alert.present();
+    }
+
     createFormGroup() {
         this.formGroup = this.formBuilder.group({
-            brand       : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
+            brand       : [''],
+            // brand       : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
             name        : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]+')])],
             category    : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+')])],
             fuel        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+')])],

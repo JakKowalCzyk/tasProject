@@ -3,7 +3,7 @@
         <img class="ad__img" src="{{car.imgPath}}">
     </div>
     <div class="ad__carInfo">
-        <div class="ad__carInfo__title">{{ adService.brands[car.brand] }} {{ car.model }} <span class="ad__carInfo__title--type">{{ car.category }}</span> </div>
+        <div class="ad__carInfo__title">{{ car.brand | brand }} {{ car.model }} <span class="ad__carInfo__title--type">{{ car.category }}</span> </div>
         <div class="ad__carInfo__desc">
             <img class="ad__carInfo__fuelImg" src="assets/images/{{
                 car.engine.fuel == 'PB' || car.engine.fuel == 'LPG'

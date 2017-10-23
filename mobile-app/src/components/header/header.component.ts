@@ -1,18 +1,16 @@
 import {Component, Input} from '@angular/core';
-import {AuthService} from "../../services/auth/auth.service";
 import {Events} from "ionic-angular";
 
 @Component({
   selector: 'header',
-  templateUrl: 'header.html'
+  templateUrl: 'header.component.html'
 })
 export class HeaderComponent {
 
-    @Input() title : string;
-
+    @Input() title      : string;
+    @Input() withIcons  : boolean = false;
 
     constructor(
-        private authService : AuthService,
         private events      : Events,
   )
     {}

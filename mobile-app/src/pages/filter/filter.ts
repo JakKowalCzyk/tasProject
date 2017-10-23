@@ -32,6 +32,11 @@ export class FilterPage {
     options         : Array<any>;
     maxPrice        : number;
 
+    _onLoggedOut    : ()    => void;
+    _onLogged       : ()    => void;
+
+    calendarOpened  : boolean = false;
+
     constructor(
         private navCtrl         : NavController,
         private navParams       : NavParams,
@@ -44,7 +49,32 @@ export class FilterPage {
         this.subscribeEvents();
         this.createFormGroup();
         this.setForm();
-        console.log(this.brand);
+    }
+
+    subscribeEvents() {
+        this.events.subscribe('car:filtered'        ,   ()      => { this.cancel() });
+        this.events.subscribe('error:car:filtered'  ,   (msg)   => { this.onFilterError(msg.msg) });
+        this._onLogged = () => {
+            this.deleteFilters()
+        };
+        this._onLoggedOut = () => {
+            this.deleteFilters()
+        };
+        this.events.subscribe('loggedOut' , this._onLoggedOut );
+        this.events.subscribe('logged'    , this._onLogged );
+    }
+
+    unsubscribeEvents() {
+        this.events.unsubscribe('car:filtered');
+        this.events.unsubscribe('error:car:filtered');
+        if (this._onLogged) {
+            this.events.unsubscribe('logged', this._onLogged);
+            this._onLogged = undefined;
+        }
+        if (this._onLoggedOut) {
+            this.events.unsubscribe('loggedOut', this._onLoggedOut);
+            this._onLoggedOut = undefined;
+        }
     }
 
     setForm() {
@@ -74,16 +104,6 @@ export class FilterPage {
         }
     }
 
-    subscribeEvents() {
-        this.events.subscribe('car:filtered'        ,   ()      => { this.cancel() });
-        this.events.subscribe('error:car:filtered'  ,   (msg)   => { this.onFilterError(msg.msg) });
-    }
-
-    unsubscribeEvents() {
-        this.events.unsubscribe('car:filtered');
-        this.events.unsubscribe('error:car:filtered');
-    }
-
     createFormGroup() {
         this.formGroup = this.formBuilder.group({
             brand       : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]*[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
@@ -99,12 +119,12 @@ export class FilterPage {
 
     doFilter() {
         let data = {
-            brand               : this.brand,
-            fuelType            : this.fuelType,
-            categoryType        : this.categoryType,
-            powerBiggerThan     : this.minPower,
-            driveType           : this.driveType,
-            priceSmallerThan    : this.maxPrice,
+            brand               : this.brand        || undefined,
+            fuelType            : this.fuelType     || undefined,
+            categoryType        : this.categoryType || undefined,
+            powerBiggerThan     : this.minPower     || undefined,
+            driveType           : this.driveType    || undefined,
+            priceSmallerThan    : this.maxPrice     || undefined,
         };
         if (this.options != null && this.options.length > 0)
             for (let option of this.options) {
@@ -131,7 +151,6 @@ export class FilterPage {
             }
 
         if (this.dateRange && this.dateRange.beginDate) {
-            console.log(this.dateRange);
             let begin = this.dateRange.beginDate;
             let end = this.dateRange.endDate;
             data['beginDate']   = begin;
@@ -143,7 +162,6 @@ export class FilterPage {
     }
 
     cancel() {
-        console.log('cancel');
         this.navCtrl.pop();
     }
 
@@ -151,25 +169,31 @@ export class FilterPage {
         let alert = this.alertCtrl.create({
             title   : "Coś się popsuło",
             message : msg
-        })
+        });
+        alert.present();
     }
 
     deleteFilters() {
-        this.brand              = undefined;
-        this.fuelType           = undefined;
-        this.categoryType       = undefined;
-        this.minPower           = undefined;
-        this.driveType          = undefined;
-        this.maxPrice           = undefined;
+        this.brand              = null;
+        this.fuelType           = null;
+        this.categoryType       = null;
+        this.minPower           = null;
+        this.driveType          = null;
+        this.maxPrice           = null;
         this.options            = [];
-        this.dateRange          = undefined;
-        this.filterService.activeFilters = undefined;
+        this.dateRange          = null;
+        this.filterService.activeFilters = null;
 
         console.log(this.brand);
     }
 
+    calendarToggle() {
+        this.calendarOpened = !this.calendarOpened;
+    }
+
     ionViewWillLeave() {
         this.unsubscribeEvents();
+        console.log('fiters', this.events)
     }
 
 }

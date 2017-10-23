@@ -10,6 +10,7 @@ import { Engine }           from "../../models/Engine";
 import { AuthService }      from "../auth/auth.service";
 import {Events} from "ionic-angular";
 import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
+import {CarPipe} from "../../pipes/car/car.pipe";
 
 @Injectable()
 export class AdService extends HasResponse {
@@ -25,13 +26,14 @@ export class AdService extends HasResponse {
         private http            : Http,
         private routeService    : RouteService,
         private authService     : AuthService,
-        private eventss          : Events,
+        private eventss         : Events,
+        private carPipe         : CarPipe,
     ) {
         super(eventss)
     }
 
     subscribeEvents() {
-        this.eventss.subscribe('logged', () => {this.all()})
+        this.eventss.subscribe('logged', () => { this.all() })
     }
 
     refresh() {
@@ -46,7 +48,6 @@ export class AdService extends HasResponse {
                     this.brands[brand.id] = brand.name;
                 }
                 this.brandsArray = Object.keys(this.brands).map((key) => { return this.brands[key] });
-                console.log(this.brandsArray);
             })
     }
 
@@ -67,24 +68,7 @@ export class AdService extends HasResponse {
         this.http.get(this.routeService.routes.cars)
             .subscribe((res) => {
                 for (let car of res.json()) {
-                    this.allCars.push(new Car(
-                        car.id,
-                        car.brandId,
-                        car.name,
-                        car.categoryType,
-                        car.photo,
-                        car.pricePerDay,
-                        car.productionDate,
-                        new Engine(car.fuelType, car.power, car.driveType),
-                        [
-                            car.hasAirConditioning,
-                            car.hasNavi,
-                            car.hasElectricWindow,
-                            car.hasRadio,
-                            car.hasSunroof,
-                            !car.hasManualGearbox
-                        ])
-                    )
+                    this.allCars.push(this.carPipe.transform(car))
                 }
             });
     }
@@ -132,7 +116,7 @@ export class AdService extends HasResponse {
         }
         this.http.put(this.routeService.routes.addCar, data, { headers : this.authService.headers })
             .subscribe((res) => {
-                this.success('', 'car:modified');
+                this.success(res.json(), 'car:modified');
                 this.refresh();
             },(err) => {
                 this.error(err.json(),'car:modified');
@@ -145,5 +129,9 @@ export class AdService extends HasResponse {
                 this.refresh();
                 this.success('', 'car:deleted');
             })
+    }
+
+    getCarById(carId : number) {
+        return this.allCars.filter((el) => { return el.id == carId })[0];
     }
 }

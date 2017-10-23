@@ -12,6 +12,9 @@ import { HomePage }                             from "../home/home";
 //services
 import { AdService  }                           from "../../services/ad/ad.service";
 import { AuthService }                          from "../../services/auth/auth.service";
+import {LoginPage} from "../login/login";
+import {Engine} from "../../models/Engine";
+import {CarPipe} from "../../pipes/car/car.pipe";
 
 
 @Component({
@@ -20,8 +23,8 @@ import { AuthService }                          from "../../services/auth/auth.s
 })
 export class CarPage {
 
-  car      : Car;
-
+    car         : Car;
+    _carEdited  : (car) => void;
 
     constructor(
         private navCtrl       : NavController,
@@ -30,8 +33,24 @@ export class CarPage {
         private authService   : AuthService,
         private alertCtrl     : AlertController,
         private events        : Events,
+        private carPipe       : CarPipe,
     ) {
+
         this.car = navParams.get('car');
+        this.subscribeEvents();
+    }
+
+    subscribeEvents() {
+        this._carEdited = (car) => {
+            this.onCarEdited(car)
+        };
+        this.events.subscribe('car:modified', this._carEdited);
+    }
+
+    onCarEdited(car) {
+        setTimeout(() => {
+            this.car = this.carPipe.transform(car);
+        },500);
     }
 
     ionViewDidEnter() {
@@ -40,6 +59,10 @@ export class CarPage {
 
     openOrderPage() {
         this.navCtrl.push(OrderPage, { 'car' : this.car})
+    }
+
+    openLoginPage() {
+        this.navCtrl.setRoot(LoginPage);
     }
 
     showConfirm() {
@@ -68,5 +91,4 @@ export class CarPage {
     editCar() {
         this.navCtrl.push(AddCarPage, { car : this.car })
     }
-
 }

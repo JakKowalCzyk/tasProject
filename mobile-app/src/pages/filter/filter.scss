@@ -21,9 +21,10 @@ page-filter {
     &__calendar {
       display: flex;
       flex-direction: column;
-      .label {
-        //height: auto;
-        height: 300px;
+      &.opened {
+        .label {
+          height: 300px;
+        }
       }
     }
     &__calendarLabel {

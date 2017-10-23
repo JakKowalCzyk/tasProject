@@ -1,15 +1,14 @@
-<header title="{{ adService.brands[car.brand] }} {{ car.model }}"></header>
+<header title="{{ car.brand | brand }} {{ car.model }}"></header>
 
 <ion-content class="page_wrapper">
     <div class="ad">
         <div class="ad__imageCont">
             <img class="ad__imageCont__img" src="{{ car.imgPath }}">
-            <!--<img class="ad__imageCont__img" src="assets/images/a45.jpg">-->
         </div>
         <div class="ad__top">
             <div class="ad__top__horizontal">
                 <div class="ad__top__title">
-                    {{ adService.brands[car.brand] }} {{ car.model }}
+                    {{ car.brand | brand }} {{ car.model }}
                     <span class="ad__top__year">{{ car.year }} rok</span>
                 </div>
                 <div class="ad__top__price">{{ car.price }} zł / dzień</div>
@@ -51,7 +50,12 @@
     </div>
 
 </ion-content>
-<ion-footer *ngIf="authService.user == null || authService.user.roleType != 'ROLE_ADMIN'" class="ad__footer">
+
+<ion-footer *ngIf="authService.user == null" class="ad__footer">
+    <button ion-button block class="car__footer__btn" (click)="openLoginPage()">Zaloguj by zamówić</button>
+</ion-footer>
+
+<ion-footer *ngIf="authService.user != null && authService.user.roleType != 'ROLE_ADMIN'" class="ad__footer">
     <button ion-button block class="car__footer__btn" (click)="openOrderPage()">Zamawiam</button>
 </ion-footer>
 

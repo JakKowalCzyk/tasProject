@@ -6,7 +6,7 @@ import { AddCarPage }       from "../../pages/add-car/add-car";
 
 @Component({
   selector: 'add-icon',
-  templateUrl: 'add-icon.html'
+  templateUrl: 'add-icon.component.html'
 })
 export class AddIconComponent {
 

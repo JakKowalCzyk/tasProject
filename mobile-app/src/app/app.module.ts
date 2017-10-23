@@ -19,15 +19,20 @@ import { AddCarPage }       from "../pages/add-car/add-car";
 import { FilterPage }       from "../pages/filter/filter";
 
 //components
-import { HeaderComponent }  from "../components/header/header";
-import { AdComponent }      from "../components/ad/ad";
-import { AddIconComponent } from "../components/add-icon/add-icon";
+import { HeaderComponent }  from "../components/header/header.component";
+import { AdComponent }      from "../components/ad/ad.component";
+import { AddIconComponent } from "../components/add-icon/add-icon.component";
 
 //services
 import { AuthService }      from "../services/auth/auth.service";
 import { AdService }        from "../services/ad/ad.service";
 import { RouteService }     from "../services/route/route.service";
 import { FilterService }    from "../services/filter/filter.service";
+import {OrderService} from "../services/order/order.service";
+import {BrandPipe} from "../pipes/brand/brand.pipe";
+import {MyOrdersPage} from "../pages/my-orders/my-orders";
+import {OrderComponent} from "../components/order/order.component";
+import {CarPipe} from "../pipes/car/car.pipe";
 
 
 @NgModule({
@@ -44,6 +49,10 @@ import { FilterService }    from "../services/filter/filter.service";
       AddIconComponent,
       AddCarPage,
       FilterPage,
+      BrandPipe,
+      CarPipe,
+      MyOrdersPage,
+      OrderComponent,
   ],
   imports: [
       BrowserModule,
@@ -66,6 +75,8 @@ import { FilterService }    from "../services/filter/filter.service";
       AddIconComponent,
       AddCarPage,
       FilterPage,
+      MyOrdersPage,
+      OrderComponent,
   ],
   providers: [
       StatusBar,
@@ -74,6 +85,9 @@ import { FilterService }    from "../services/filter/filter.service";
       AdService,
       RouteService,
       FilterService,
+      OrderService,
+      BrandPipe,
+      CarPipe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

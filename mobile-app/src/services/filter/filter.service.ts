@@ -28,6 +28,12 @@ export class FilterService extends HasResponse {
         private authService     : AuthService,
     ) {
         super(eventss);
+        this.subscribeEvents();
+    }
+
+    subscribeEvents() {
+        this.eventss.subscribe('loggedOut'  , () => { this.clearFilters() });
+        this.eventss.subscribe('logged'     , () => { this.clearFilters() });
     }
 
     filter(data) {
@@ -76,5 +82,9 @@ export class FilterService extends HasResponse {
             },(err) => {
                 this.error(err.json(), 'car:filtered');
             })
+    }
+
+    clearFilters() {
+        this.activeFilters = null;
     }
 }
