@@ -61,10 +61,8 @@ export class OrderService extends HasResponse {
         this.http.post(this.routeService.routes.rent, data, { headers : this.authService.getHeaders() })
             .subscribe((res) => {
                 this.success(res.json(), 'car:rented');
-                console.log(res.json())
             },(err) => {
                 this.error(err.json(), 'car:rented');
-                console.log(err.json())
             })
     }
 
@@ -83,5 +81,4 @@ export class OrderService extends HasResponse {
                 this.error(err.json(), 'order:cancelled')
             })
     }
-
 }

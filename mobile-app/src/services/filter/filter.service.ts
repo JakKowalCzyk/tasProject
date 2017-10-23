@@ -11,11 +11,13 @@ import { Engine }           from "../../models/Engine";
 import { RouteService}      from "../route/route.service";
 import { AdService}         from "../ad/ad.service";
 import { AuthService }      from "../auth/auth.service";
+import {CarPipe} from "../../pipes/car/car.pipe";
 
 @Injectable()
 export class FilterService extends HasResponse {
 
     activeFilters   : any;
+    activeSort      : any;
 
     filteredCars    : Array<Car>;
     brands          : Object;
@@ -26,6 +28,7 @@ export class FilterService extends HasResponse {
         private routeService    : RouteService,
         private adService       : AdService,
         private authService     : AuthService,
+        private carPipe         : CarPipe
     ) {
         super(eventss);
         this.subscribeEvents();
@@ -60,25 +63,9 @@ export class FilterService extends HasResponse {
                 this.success('', 'car:filtered');
                 this.filteredCars = [];
                 for (let car of res.json()) {
-                    this.filteredCars.push(new Car(
-                        car.id,
-                        car.brandId,
-                        car.name,
-                        car.categoryType,
-                        car.photo,
-                        car.pricePerDay,
-                        car.productionDate,
-                        new Engine(car.fuelType, car.power, car.driveType),
-                        [
-                            car.hasAirConditioning,
-                            car.hasNavi,
-                            car.hasElectricWindow,
-                            car.hasRadio,
-                            car.hasSunroof,
-                            !car.hasManualGearbox
-                        ])
-                    )
+                    this.filteredCars.push(this.carPipe.transform(car))
                 }
+                this.activeSort ? this.sort(this.activeSort) : '';
             },(err) => {
                 this.error(err.json(), 'car:filtered');
             })
@@ -86,5 +73,39 @@ export class FilterService extends HasResponse {
 
     clearFilters() {
         this.activeFilters = null;
+    }
+
+    sort(method : number) {
+        this.activeSort     = method;
+        let activeFilters   = this.activeFilters;
+        switch(method) {
+            case 1:
+                activeFilters ? this.filteredCars.sort(this.byPriceAsc) : this.adService.allCars.sort(this.byPriceAsc);
+                break;
+            case 2:
+                activeFilters ? this.filteredCars.sort(this.byPriceDesc) : this.adService.allCars.sort(this.byPriceDesc);
+                break;
+            case 3:
+                activeFilters ? this.filteredCars.sort(this.byPower) : this.adService.allCars.sort(this.byPower);
+                break;
+        }
+    }
+
+    byPriceAsc(a,b) {
+        if (a.price < b.price) return -1;
+        if (a.price > b.price) return 1;
+        return 0;
+    }
+
+    byPriceDesc(a,b) {
+        if (a.price < b.price) return 1;
+        if (a.price > b.price) return -1;
+        return 0;
+    }
+
+    byPower(a,b) {
+        if (a.engine.power < b.engine.power) return 1;
+        if (a.engine.power > b.engine.power) return -1;
+        return 0;
     }
 }

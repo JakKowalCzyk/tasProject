@@ -28,7 +28,6 @@ export class MyOrdersPage {
     }
 
     reload() {
-        console.log('reloadin');
         this.orderService.all();
     }
 
