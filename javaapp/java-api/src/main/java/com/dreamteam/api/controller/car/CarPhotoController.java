@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,5 +19,5 @@ public interface CarPhotoController {
 
     @PostMapping
     @ApiOperation(value = "upload photo")
-    CarPhoto uploadCarPhoto(MultipartFile multipartFile) throws IOException;
+    CarPhoto uploadCarPhoto(@RequestParam("file") MultipartFile multipartFile) throws IOException;
 }
