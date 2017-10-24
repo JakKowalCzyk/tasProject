@@ -1,5 +1,5 @@
 import { Component }                                            from '@angular/core';
-import { AlertController, Events, NavController, NavParams }    from 'ionic-angular';
+import {AlertController, Events, NavController, NavParams, ToastController}    from 'ionic-angular';
 
 //models
 import { Car }                                  from "../../models/Car";
@@ -27,15 +27,15 @@ export class CarPage {
     _carEdited  : (car) => void;
 
     constructor(
-        private navCtrl       : NavController,
-        private navParams     : NavParams,
-        private adService     : AdService,
-        private authService   : AuthService,
-        private alertCtrl     : AlertController,
-        private events        : Events,
-        private carPipe       : CarPipe,
+        private navCtrl     : NavController,
+        private navParams   : NavParams,
+        private adService   : AdService,
+        private authService : AuthService,
+        private alertCtrl   : AlertController,
+        private toastCtrl   : ToastController,
+        private events      : Events,
+        private carPipe     : CarPipe,
     ) {
-
         this.car = navParams.get('car');
         this.subscribeEvents();
     }
@@ -85,6 +85,12 @@ export class CarPage {
 
     deleteCar() {
         this.adService.deleteCar(this.car.id);
+        let toast = this.toastCtrl.create({
+            message     : 'Usunięto samochód',
+            duration    : 3000,
+            cssClass    : 'toastDflt'
+        });
+        toast.present();
         this.navCtrl.setRoot(HomePage);
     }
 
