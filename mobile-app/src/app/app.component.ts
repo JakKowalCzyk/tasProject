@@ -37,8 +37,7 @@ export class MyApp {
   ) {
       this.initializeApp();
       this.subscribeEvents();
-      this.makePages();
-      this.logWithStorage();
+
   }
 
   logWithStorage() {
@@ -92,6 +91,8 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.adService.all();
+      this.makePages();
+      this.logWithStorage();
     });
   }
 }

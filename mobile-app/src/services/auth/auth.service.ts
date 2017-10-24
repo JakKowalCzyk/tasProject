@@ -65,12 +65,9 @@ export class AuthService extends HasResponse {
         let base  = base64 || data.base64Auth;
         this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
         //jeśli base64 nie jest null, to znaczy, że ta metoda jest wywołana ze zwykłego logowania, więc wrzucamy usera do storage
-        if (base64 != null) {
-            this.storage.set('user'     , this.user);
-            this.storage.set('deepUser' , this.user);
-        } else {
-            this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
-        }
+        this.storage.set('user'     , this.user);
+        this.storage.set('deepUser' , this.user);
+        this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
         this.success('Zalogowano poprawnie', 'logged');
     }
 

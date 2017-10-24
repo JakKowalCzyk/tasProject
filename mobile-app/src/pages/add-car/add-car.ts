@@ -31,16 +31,18 @@ export class AddCarPage {
 
     formGroup       : FormGroup;
 
-    brand           : string = 'Ope;';
-    name            : string = 'złomega';
-    fuelType        : string = 'PB';
-    categoryType    : string = 'SUV';
-    power           : number = 100;
+    brand           : string = 'Opel';
+    name            : string = 'Złomega';
+    fuelType        : string = 'LPG';
+    categoryType    : string = 'SEDAN';
+    power           : number = 160;
     driveType       : string = 'RWD';
-    productionDate  : string = '2008';
+    productionDate  : string = '1999';
     options         : Array<any> = [];
-    photo           : any;
-    pricePerDay     : number = 10;
+    photo           : any = '';
+    pricePerDay     : number = 12;
+
+    showLoader      : boolean = false;
 
     imagePickerOptions : ImagePickerOptions;
 
@@ -62,10 +64,6 @@ export class AddCarPage {
         }
         this.subscribeEvents();
         this.createFormGroup();
-        this.imagePickerOptions = {
-            maximumImagesCount  : 1,
-            quality             : 20,
-        }
     }
 
     subscribeEvents() {
@@ -76,6 +74,7 @@ export class AddCarPage {
     }
 
     onCarAdded() {
+        this.showLoader = false;
         let toast = this.toastCtrl.create({
             message     : 'Dodano nowy samochód!',
             duration    : 3000,
@@ -85,6 +84,7 @@ export class AddCarPage {
     }
 
     onCarModified() {
+        this.showLoader = false;
         let toast = this.toastCtrl.create({
             message     : 'Edytowano samochód',
             duration    : 3000,
@@ -95,6 +95,7 @@ export class AddCarPage {
     }
 
     onCarAddedError(msg : string) {
+        this.showLoader = false;
         let alert = this.alertCtrl.create({
             title       : 'Coś się popsuło',
             message     : msg,
@@ -169,7 +170,6 @@ export class AddCarPage {
     createFormGroup() {
         this.formGroup = this.formBuilder.group({
             brand       : [''],
-            // brand       : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]*')])],
             name        : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ \\-]+')])],
             category    : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+')])],
             fuel        : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+')])],
@@ -183,6 +183,8 @@ export class AddCarPage {
     }
 
     addCar() {
+        this.showLoader = true;
+        console.log(this.showLoader);
         this.submitAttempt = true;
 
         if (!this.formGroup.valid) {
@@ -228,7 +230,6 @@ export class AddCarPage {
             power               : this.power,
             driveType           : this.driveType,
             productionDate      : this.productionDate,
-            photo               : '',
             pricePerDay         : this.pricePerDay,
             hasAirConditioning  : hasAirConditioning,
             hasElectricWindow   : hasElectricWindow,
@@ -238,25 +239,35 @@ export class AddCarPage {
             hasSunroof          : hasSunroof,
         };
 
+        if (typeof this.photo == 'string') {
+            data['photo'] = this.photo;
+            this.photo = null;
+        }
+
         data['millage'] = 0;
 
         if (this.car != null) {
             data['id'] = this.car.id;
-            this.adService.edit(data);
+            this.adService.edit(data, this.photo);
         } else {
             this.adService.add(data, this.photo);
         }
     }
 
     async openGallery() {
+        this.imagePickerOptions = {
+            maximumImagesCount  : 1,
+            quality             : 100
+        };
         try {
-            let result = await this.imagePicker.getPictures(this.imagePickerOptions);
-            console.log(result);
-            this.photo = result
+            this.photo = await this.imagePicker.getPictures(this.imagePickerOptions);
         } catch (e) {
-            console.log(e);
+            let alert = this.alertCtrl.create({
+                title   : "Nie udało się dodać zdjęcja",
+                message : "Spróbuj wybrać inne zdjęcie",
+            });
+            alert.present();
         }
-
     }
 
     ionViewWillLeave() {
