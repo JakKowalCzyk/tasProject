@@ -20,10 +20,11 @@ import {MyOrdersPage} from "../pages/my-orders/my-orders";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
-  // rootPage: any = LoginPage;
-  pages: Array<{title: string, component: any}>;
+    rootPage: any = HomePage;
+    pages: Array<{title: string, component: any}>;
 
+    _login      : () => void;
+    _logout     : () => void;
 
   constructor(
       public platform       : Platform,
@@ -52,9 +53,16 @@ export class MyApp {
   }
 
   subscribeEvents() {
-      this.events.subscribe("logged"        , () => { this.onLogin(); });
-      this.events.subscribe("loggedOut"     , () => { this.onLogout(); })
-      this.events.subscribe("car:deleted"   , () => { this.onCarDeleted(); })
+      this._login = () => {
+          console.log('app.component');
+          this.onLogin();
+      };
+      this._logout = () => {
+          console.log(this.events);
+          this.onLogout();
+      };
+      this.events.subscribe("logged"        , this._login);
+      this.events.subscribe("loggedOut"     , this._logout);
   }
 
   onCarDeleted() {
@@ -67,6 +75,7 @@ export class MyApp {
   }
 
   onLogin() {
+      console.log('halo halo', this.pages);
       this.pages.splice(1,1);
       this.pages.push({ title: "Moje Zamówienia", component : MyOrdersPage });
       this.pages.push({ title: "Wyloguj", component : LogoutPage });

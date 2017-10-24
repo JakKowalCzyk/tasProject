@@ -1,17 +1,10 @@
-import { Component } from '@angular/core';
-import {AlertController, Events, NavController, NavParams} from 'ionic-angular';
-import {AuthService} from "../../services/auth/auth.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {RegisterPage} from "../register/register";
-import {HomePage} from "../home/home";
-import {AdService} from "../../services/ad/ad.service";
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component }                                            from '@angular/core';
+import { AuthService }                                          from "../../services/auth/auth.service";
+import { FormBuilder, FormGroup, Validators }                   from "@angular/forms";
+import { RegisterPage }                                         from "../register/register";
+import { HomePage }                                             from "../home/home";
+import {AlertController, Events, NavController, Platform, ToastController}     from 'ionic-angular';
+import { FingerprintAIO, FingerprintOptions }                   from '@ionic-native/fingerprint-aio';
 
 @Component({
   selector: 'page-login',
@@ -19,32 +12,40 @@ import {AdService} from "../../services/ad/ad.service";
 })
 export class LoginPage {
 
+    fingerprintOptions : FingerprintOptions;
+
     submitAttempt   : boolean = false;
 
     email       : string = 'krz.jozefowicz@gmail.com';
     password    : string = '123';
     formGroup   : FormGroup;
 
-    _loggedSub      : ()    => void;
+    _loggedSub      : (msg) => void;
     _errloggedSub   : (msg) => void;
 
     showLoading : boolean = false;
 
     constructor(
-        private navCtrl       : NavController,
-        private navParams     : NavParams,
-        private authService   : AuthService,
-        private events        : Events,
-        private alertCtrl     : AlertController,
-        private formBuilder   : FormBuilder,
+        private platform    : Platform,
+        private fingerprint : FingerprintAIO,
+        private navCtrl     : NavController,
+        private authService : AuthService,
+        private events      : Events,
+        private alertCtrl   : AlertController,
+        private formBuilder : FormBuilder,
+        private toastCtrl   : ToastController,
     ) {
+        this.fingerprintOptions = {
+            clientId        : 'MyApp',
+            clientSecret    : 'password',
+            disableBackup   : true,
+        };
         this.createFormGroup();
-        this.subscribeEvents();
     }
 
     subscribeEvents() {
-        this._loggedSub = () => {
-          this.onLogged();
+        this._loggedSub = (msg) => {
+          this.onLogged(msg);
         };
         this._errloggedSub = (msg) => {
           this.onError(msg.msg)
@@ -55,25 +56,32 @@ export class LoginPage {
 
     unsubscribeEvents() {
         if (this._loggedSub) {
-            this.events.unsubscribe('logged', this._loggedSub);
             this._loggedSub = undefined;
         }
-        if (this._errloggedSub) {
-            this.events.unsubscribe('error:login', this._errloggedSub);
-            this._errloggedSub = undefined;
-        }
-        this.events.unsubscribe('error:login', this.onError);
+        // if (this._errloggedSub) {
+        //     this._errloggedSub = undefined;
+        // }
+        // this.events.unsubscribe('logged'        , this._loggedSub);
+        // this.events.unsubscribe('error:login'   , this._errloggedSub);
     }
 
     onError(msg : string) {
+        console.log(msg);
         let alert = this.alertCtrl.create({
-            title     : "Coś się popsuło",
-            message   : msg,
+            title       : "Coś się popsuło",
+            message     : msg,
         });
         alert.present();
     }
 
-    onLogged() {
+    onLogged(msg) {
+        console.log('onLogged');
+        let toast = this.toastCtrl.create({
+            message : msg,
+            duration: 3000,
+            cssClass    : 'toastDflt'
+        });
+        toast.present();
         this.showLoading = false;
         this.navCtrl.setRoot(HomePage);
     }
@@ -87,6 +95,7 @@ export class LoginPage {
     }
 
     login() {
+        console.log(this.events);
         this.submitAttempt = true;
 
         if (!this.formGroup.valid) {
@@ -101,9 +110,34 @@ export class LoginPage {
         this.navCtrl.push(RegisterPage);
     }
 
+    async fingerPrintLogin() {
+        try {
+            await this.platform.ready();
+            //if user has naver loggedin, return
+            let isDeepUserSet = this.authService.checkForDeepUser();
+            if (!isDeepUserSet) return;
+
+            let available = await this.fingerprint.isAvailable();
+            console.log(available);
+            if (available === "OK") {
+                let result = await this.fingerprint.show(this.fingerprintOptions);
+                if (result) {
+                    this.authService.logWithFingerPrint();
+                }
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    ngOnInit() {
+        this.subscribeEvents();
+        this.fingerPrintLogin();
+    }
+
     ionViewWillLeave() {
         this.unsubscribeEvents();
-        console.log(this.events)
     }
 
 }
