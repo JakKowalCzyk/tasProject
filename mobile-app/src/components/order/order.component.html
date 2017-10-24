@@ -1,3 +1,26 @@
 <div class="order">
-    {{ car.brand | brand }} {{ car.model }}
+    <div class="order__imgCont">
+        <img class="order__img" src="{{car.imgPath}}">
+    </div>
+    <div class="order__carInfo">
+        <div class="order__carInfo__title">{{ car.brand | brand }} {{ car.model }} <span class="order__carInfo__title--type">{{ car.category }}</span> </div>
+        <div class="order__carInfo__desc">
+            Od: {{ order.from }}
+        </div>
+        <div class="order__carInfo__descCont">
+            <div class="order__carInfo__desc">Do: {{ order.to }}</div>
+        </div>
+    </div>
+    <div class="order__price">
+        <div class="order__priceNumber"> {{ order.totalPrice }}zł</div>
+    </div>
+    <div *ngIf="order.willBeActive" class="order__cancel">
+        <button ion-button color="danger" class="order__btn" (click)="cancelOrder()">Anuluj</button>
+    </div>
+    <div *ngIf="order.active" class="order__cancel">
+        <button disabled ion-button color="secondary" class="order__btn">Trwa</button>
+    </div>
+    <div *ngIf="!order.active && !order.willBeActive" class="order__cancel">
+        <button disabled ion-button color="light" class="order__btn">Zakończone</button>
+    </div>
 </div>

@@ -19,4 +19,8 @@ export class HeaderComponent {
         this.events.publish('filter:open');
     }
 
+    openSort() {
+        this.events.publish('sort:open');
+    }
+
 }

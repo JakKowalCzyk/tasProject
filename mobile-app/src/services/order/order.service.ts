@@ -25,6 +25,7 @@ export class OrderService extends HasResponse {
     }
 
     all() {
+        this.userOrders = [];
         this.http.get(this.routeService.routes.user_orders, { headers : this.authService.getHeaders() })
             .subscribe((res) => {
                 for (let order of res.json()) {
@@ -33,20 +34,35 @@ export class OrderService extends HasResponse {
                         order.carId,
                         order.from,
                         order.to,
-                        order.totalPrice
+                        order.totalPrice,
+                        order.active,
+                        order.willBeActive
                     ))
                 }
+                this.sortOrders();
             })
+    }
+
+    sortOrders() {
+        this.userOrders.sort(this.sorter)
+    }
+
+    sorter(a,b) {
+        if (a.from > b.from && a.to > b.to) return -1;
+        if (a.from < b.from && a.to < b.to) return 1;
+        if (a.from == b.from) {
+            if (a.to > b.to) return -1;
+            if (a.to < b.to) return 1;
+        }
+        return 0;
     }
 
     order(data) {
         this.http.post(this.routeService.routes.rent, data, { headers : this.authService.getHeaders() })
             .subscribe((res) => {
                 this.success(res.json(), 'car:rented');
-                console.log(res.json())
             },(err) => {
                 this.error(err.json(), 'car:rented');
-                console.log(err.json())
             })
     }
 
@@ -57,4 +73,12 @@ export class OrderService extends HasResponse {
             })
     }
 
+    deleteOrder(orderId : number) {
+        this.http.delete(this.routeService.routes.cancel_order + orderId, { headers : this.authService.getHeaders() })
+            .subscribe((res) => {
+                this.success(orderId, 'order:cancelled')
+            },(err) => {
+                this.error(err.json(), 'order:cancelled')
+            })
+    }
 }

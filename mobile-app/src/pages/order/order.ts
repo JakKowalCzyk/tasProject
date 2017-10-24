@@ -105,7 +105,6 @@ export class OrderPage {
   }
 
   order() {
-      console.log(this.dateRange);
       let from  = this.dateRange.beginDate;
       let to    = this.dateRange.endDate;
       let data = {
@@ -117,7 +116,6 @@ export class OrderPage {
   }
 
   afterOrder() {
-      console.log('afterorder');
       this.navCtrl.setRoot(MyOrdersPage)
   }
 
