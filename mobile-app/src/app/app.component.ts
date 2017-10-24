@@ -54,7 +54,6 @@ export class MyApp {
 
   subscribeEvents() {
       this._login = () => {
-          console.log('app.component');
           this.onLogin();
       };
       this._logout = () => {
@@ -65,17 +64,7 @@ export class MyApp {
       this.events.subscribe("loggedOut"     , this._logout);
   }
 
-  onCarDeleted() {
-      let toast = this.toastCtrl.create({
-          message   : "Usunięto samochód",
-          duration  : 3000,
-          cssClass  : 'toastDflt',
-      });
-      toast.present();
-  }
-
   onLogin() {
-      console.log('halo halo', this.pages);
       this.pages.splice(1,1);
       this.pages.push({ title: "Moje Zamówienia", component : MyOrdersPage });
       this.pages.push({ title: "Wyloguj", component : LogoutPage });
