@@ -11,7 +11,7 @@ import {RouteService}           from "../route/route.service";
 import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
 
 @Injectable()
-export class AuthService extends HasResponse{
+export class AuthService extends HasResponse {
 
     public user     : User;
 
@@ -40,6 +40,12 @@ export class AuthService extends HasResponse{
 
     }
 
+    logWithFingerPrint() {
+        this.storage.get('deepUser').then((user) => {
+            user ? this.afterLogin(user) : this.error({message : 'Spróbuj zalogować się klasycznie'}, 'login');
+        })
+    }
+
     login(email : string, pass : string) {
         let base64 = btoa(email + ":" + pass);
         this.headers.append("Authorization", 'Basic ' + base64);
@@ -60,11 +66,12 @@ export class AuthService extends HasResponse{
         this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
         //jeśli base64 nie jest null, to znaczy, że ta metoda jest wywołana ze zwykłego logowania, więc wrzucamy usera do storage
         if (base64 != null) {
-            this.storage.set('user', this.user);
+            this.storage.set('user'     , this.user);
+            this.storage.set('deepUser' , this.user);
         } else {
             this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
         }
-        this.eventss.publish('logged');
+        this.success('Zalogowano poprawnie', 'logged');
     }
 
     register(data) {
@@ -87,7 +94,11 @@ export class AuthService extends HasResponse{
     afterLogout() {
         this.headers.delete('Authorization');
         this.user = null;
-        this.storage.clear();
+        this.storage.remove('user');
     }
 
+    async checkForDeepUser() {
+        let deepUser = await this.storage.get('deepUser');
+        return deepUser != null;
+    }
 }

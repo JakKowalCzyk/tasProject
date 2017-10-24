@@ -2,10 +2,6 @@
 <ion-content class="page_wrapper">
   <div class="login">
       <form class="login__form" [formGroup]="formGroup">
-          <!--<ion-item>-->
-              <!--<ion-label stacked>IP</ion-label>-->
-              <!--<ion-input formControlName="ip" type="text" [(ngModel)]="ip" name="ip"></ion-input>-->
-          <!--</ion-item>-->
           <ion-item [class.invalid]="!formGroup.controls.email.valid && (formGroup.controls.email.dirty || submitAttempt)">
             <ion-label
                     stacked

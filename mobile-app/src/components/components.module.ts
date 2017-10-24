@@ -4,15 +4,21 @@ import { AdComponent }      from './ad/ad.component';
 import { AddIconComponent } from './add-icon/add-icon.component';
 import { BrandPipe }        from "../pipes/brand/brand.pipe";
 import { OrderComponent }   from './order/order.component';
+import {IonicModule} from "ionic-angular";
+import {MyApp} from "../app/app.component";
+import {PipesModule} from "../pipes/pipes.module";
 @NgModule({
 	declarations: [
         HeaderComponent,
         AdComponent,
         AddIconComponent,
-        BrandPipe,
+        // BrandPipe,
     OrderComponent,
     ],
-	imports: [],
+	imports: [
+        IonicModule.forRoot(MyApp),
+        PipesModule,
+    ],
 	exports: [
         HeaderComponent,
         AdComponent,
@@ -20,7 +26,7 @@ import { OrderComponent }   from './order/order.component';
     OrderComponent,
     ],
     providers: [
-        BrandPipe
+        // BrandPipe
     ]
 })
 export class ComponentsModule {}

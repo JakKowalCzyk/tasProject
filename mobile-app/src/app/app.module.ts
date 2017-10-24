@@ -7,6 +7,7 @@ import { SplashScreen }                                 from '@ionic-native/spla
 import { MyApp }                                        from './app.component';
 import { IonicStorageModule }                           from "@ionic/storage";
 import { MyDateRangePickerModule }                      from 'mydaterangepicker';
+import { FingerprintAIO }                               from '@ionic-native/fingerprint-aio';
 
 //pages
 import { HomePage }         from '../pages/home/home';
@@ -32,7 +33,9 @@ import {OrderService} from "../services/order/order.service";
 import {BrandPipe} from "../pipes/brand/brand.pipe";
 import {MyOrdersPage} from "../pages/my-orders/my-orders";
 import {OrderComponent} from "../components/order/order.component";
-import {CarPipe} from "../pipes/car/car.pipe";
+import { CarPipe} from "../pipes/car/car.pipe";
+import { ComponentsModule } from "../components/components.module";
+import { PipesModule } from "../pipes/pipes.module";
 
 
 @NgModule({
@@ -40,21 +43,17 @@ import {CarPipe} from "../pipes/car/car.pipe";
       MyApp,
       HomePage,
       LoginPage,
-      HeaderComponent,
-      AdComponent,
       CarPage,
       RegisterPage,
       LogoutPage,
       OrderPage,
-      AddIconComponent,
       AddCarPage,
       FilterPage,
-      BrandPipe,
-      CarPipe,
       MyOrdersPage,
-      OrderComponent,
   ],
   imports: [
+      ComponentsModule,
+      PipesModule,
       BrowserModule,
       HttpModule,
       IonicModule.forRoot(MyApp),
@@ -88,6 +87,7 @@ import {CarPipe} from "../pipes/car/car.pipe";
       OrderService,
       BrandPipe,
       CarPipe,
+      FingerprintAIO,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
