@@ -14,5 +14,7 @@ komis-api:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - PASS=PASS HERRE
+    - AWS_ID=$AMAZON_ID
+    - AWS_SECRET=$AMAZON_SECR
   links:
     - komis-db:postgres
