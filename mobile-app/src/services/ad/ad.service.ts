@@ -11,6 +11,7 @@ import { AuthService }      from "../auth/auth.service";
 import {Events} from "ionic-angular";
 import {HasResponse} from "../../pseudoTraits/hasResponse/HasResponse";
 import {CarPipe} from "../../pipes/car/car.pipe";
+import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
 
 @Injectable()
 export class AdService extends HasResponse {
@@ -28,6 +29,8 @@ export class AdService extends HasResponse {
         private authService     : AuthService,
         private eventss         : Events,
         private carPipe         : CarPipe,
+        // private file            : File,
+        private transfer        : FileTransfer,
     ) {
         super(eventss)
     }
@@ -73,17 +76,16 @@ export class AdService extends HasResponse {
             });
     }
 
-    addCarBrand(data) {
+    addCarBrand(data, photo = null) {
         this.http.post(this.routeService.routes.addBrand, { name : data.brand }, { headers : this.authService.headers })
             .subscribe((res) => {
                 let r = res.json();
                 this.brands[r.id] = r.name;
-                this.add(data);
+                this.add(data, photo);
             })
     }
 
-    add(data) {
-
+    async add(data, photo) {
         //check if brand exists
         let brandFlag = false;
         for (let k in this.brands) {
@@ -94,9 +96,17 @@ export class AdService extends HasResponse {
             }
         }
         if (!brandFlag) {
-            this.addCarBrand(data);
+            this.addCarBrand(data, photo);
             return;
         }
+
+        let result = await this.sendPhoto(photo);
+        console.log(JSON.parse(result['response']));
+        // console.log(result['response'].json().photoUrl);
+
+
+        data['photo'] = JSON.parse(result['response']).photoUrl;
+        console.log(data);
 
         this.http.post(this.routeService.routes.addCar, data, { headers : this.authService.headers } )
             .subscribe((res) => {
@@ -105,6 +115,27 @@ export class AdService extends HasResponse {
             },(err) => {
                 this.error(err.json(), 'car:added');
             })
+    }
+
+    async sendPhoto(photo) {
+        try {
+            let fileTransfer: FileTransferObject = this.transfer.create();
+            let options: FileUploadOptions = {
+                fileKey: 'file',
+                fileName: 'photo.jpg',
+                headers     : {
+                    'Authorization' : this.authService.headers.toJSON().Authorization
+                }
+            };
+            return fileTransfer.upload(photo[0], 'http://159.89.12.132:8080/api/car/photo', options)
+                .then((res) => {
+                    return res;
+                },(err) => {
+                    console.log(err);
+                });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     edit(data) {

@@ -36,6 +36,8 @@ import {OrderComponent} from "../components/order/order.component";
 import { CarPipe} from "../pipes/car/car.pipe";
 import { ComponentsModule } from "../components/components.module";
 import { PipesModule } from "../pipes/pipes.module";
+import {ImagePicker} from "@ionic-native/image-picker";
+import {FileTransfer} from "@ionic-native/file-transfer";
 
 
 @NgModule({
@@ -88,6 +90,8 @@ import { PipesModule } from "../pipes/pipes.module";
       BrandPipe,
       CarPipe,
       FingerprintAIO,
+      ImagePicker,
+      FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

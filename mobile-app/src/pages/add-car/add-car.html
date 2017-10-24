@@ -105,21 +105,22 @@
                 </ion-select>
             </ion-item>
 
-            <ion-item
-                    [class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)">
-                <ion-label
-                        stacked
-                        [class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"
-                >
-                    Link do zdjęcia (XD)
-                </ion-label>
-                <ion-input
-                        [class.addCar__invalid--input]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"
-                        formControlName="photo"
-                        type="string"
-                        [(ngModel)]="photo"
-                        name="photo"
-                ></ion-input>
+            <ion-item>
+                    <!--[class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)">-->
+                <!--<ion-label-->
+                        <!--stacked-->
+                        <!--[class.addCar__invalid]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"-->
+                <!--&gt;-->
+                    <!--Link do zdjęcia (XD)-->
+                <!--</ion-label>-->
+                <button ion-button (click)="openGallery()">Wybierz zdjęcie</button>
+                <!--<ion-input-->
+                        <!--[class.addCar__invalid&#45;&#45;input]="!formGroup.controls.photo.valid && (formGroup.controls.photo.dirty || submitAttempt)"-->
+                        <!--formControlName="photo"-->
+                        <!--type="string"-->
+                        <!--[(ngModel)]="photo"-->
+                        <!--name="photo"-->
+                <!--&gt;</ion-input>-->
             </ion-item>
 
             <ion-item

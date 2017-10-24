@@ -12,6 +12,7 @@ export class RouteService {
         'addBrand'      : this.base + 'brand',
         'categories'    : this.base + 'type/category/',
         'filter'        : this.base + 'car/filter',
+        'addPhoto'      : this.base + 'car/photo',
 
         //user
         'register'      : this.base + 'user',

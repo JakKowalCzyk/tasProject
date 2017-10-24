@@ -3,7 +3,8 @@ import {
     AlertController, Events, NavController, NavParams,
     ToastController, ViewController
 }                                                           from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators }  from "@angular/forms";
+import { FormBuilder, FormGroup, Validators }   from "@angular/forms";
+import { ImagePicker, ImagePickerOptions }      from "@ionic-native/image-picker";
 
 //models
 import { Engine }                   from '../../models/Engine';
@@ -14,7 +15,6 @@ import { Car }                      from "../../models/Car";
 import { AdService }                from "../../services/ad/ad.service";
 
 //pages & components
-import { HomePage }                 from "../home/home";
 
 @Component({
   selector: 'page-add-car',
@@ -31,16 +31,18 @@ export class AddCarPage {
 
     formGroup       : FormGroup;
 
-    brand           : string;
-    name            : string;
-    fuelType        : string;
-    categoryType    : string;
-    power           : number;
-    driveType       : string;
-    productionDate  : string;
-    options         : Array<any>;
-    photo           : string;
-    pricePerDay     : number;
+    brand           : string = 'Ope;';
+    name            : string = 'złomega';
+    fuelType        : string = 'PB';
+    categoryType    : string = 'SUV';
+    power           : number = 100;
+    driveType       : string = 'RWD';
+    productionDate  : string = '2008';
+    options         : Array<any> = [];
+    photo           : any;
+    pricePerDay     : number = 10;
+
+    imagePickerOptions : ImagePickerOptions;
 
     constructor(
         public navCtrl      : NavController,
@@ -51,6 +53,7 @@ export class AddCarPage {
         private toastCtrl   : ToastController,
         private alertCtrl   : AlertController,
         private viewCtrl    : ViewController,
+        private imagePicker : ImagePicker,
     ) {
         this.car = navParams.get('car');
 
@@ -59,6 +62,10 @@ export class AddCarPage {
         }
         this.subscribeEvents();
         this.createFormGroup();
+        this.imagePickerOptions = {
+            maximumImagesCount  : 1,
+            quality             : 20,
+        }
     }
 
     subscribeEvents() {
@@ -170,7 +177,7 @@ export class AddCarPage {
             drive       : ['', Validators.compose([Validators.required, Validators.pattern('[A-Z]+')])],
             year        : ['', Validators.compose([Validators.required, Validators.pattern('19[0-9]{2}|20[0-2][0-9]')])],
             options     : [''],
-            photo       : ['', Validators.compose([Validators.required])],
+            photo       : [''],
             price       : ['', Validators.compose([Validators.required, Validators.pattern('[1-9]+[0-9]*')])],
         });
     }
@@ -221,7 +228,7 @@ export class AddCarPage {
             power               : this.power,
             driveType           : this.driveType,
             productionDate      : this.productionDate,
-            photo               : this.photo,
+            photo               : '',
             pricePerDay         : this.pricePerDay,
             hasAirConditioning  : hasAirConditioning,
             hasElectricWindow   : hasElectricWindow,
@@ -237,8 +244,19 @@ export class AddCarPage {
             data['id'] = this.car.id;
             this.adService.edit(data);
         } else {
-            this.adService.add(data);
+            this.adService.add(data, this.photo);
         }
+    }
+
+    async openGallery() {
+        try {
+            let result = await this.imagePicker.getPictures(this.imagePickerOptions);
+            console.log(result);
+            this.photo = result
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 
     ionViewWillLeave() {
@@ -246,6 +264,5 @@ export class AddCarPage {
         this.events.unsubscribe('car:modified');
         this.events.unsubscribe('error:car:added');
         this.events.unsubscribe('error:car:added');
-        // this.navCtrl.setRoot(HomePage);
     }
 }
