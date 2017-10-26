@@ -5,6 +5,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NnnComponent } from './nnn/nnn.component';
 import {RouterModule, Routes} from "@angular/router";
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
@@ -15,6 +17,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NnnComponent,
+    HeaderComponent,
+    FooterComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
