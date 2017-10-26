@@ -29,6 +29,11 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     }
 
     @Override
+    public void deleteObject(Car object) {
+        super.deleteObject(object);
+    }
+
+    @Override
     public Collection<Car> findByBrand(Long brandId) {
         return getModelDAO().findByBrand(brandId);
     }

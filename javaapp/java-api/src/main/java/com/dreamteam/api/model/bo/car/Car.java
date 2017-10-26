@@ -37,6 +37,8 @@ public class Car extends AbstractModel {
     private boolean hasRadio;
     private boolean hasSunroof;
     private boolean hasManualGearbox;
+    @OneToOne
+    private CarPhoto defaultCarPhoto;
 
     public Car() {
         super();

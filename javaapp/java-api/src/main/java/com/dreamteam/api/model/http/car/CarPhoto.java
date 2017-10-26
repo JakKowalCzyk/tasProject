@@ -11,6 +11,8 @@ public class CarPhoto extends HttpModel {
 
     private String photoUrl;
     private String photoS3Id;
+    private String resizedPhotoUrl;
+    private String resizedPhotoS3Id;
 
     public CarPhoto() {
     }
