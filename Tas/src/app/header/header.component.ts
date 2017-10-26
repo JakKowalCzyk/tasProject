@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Car} from "../models/car";
+import {Engine} from "../models/engine";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  constructor(private http: HttpClient){
+  }
+
+
+
+  ngOnInit(): void {
+    let hamburger = document.querySelector('.hamburger');
+    hamburger.addEventListener('click', function () {
+      document.querySelector('.page-header').classList.toggle('nav-opened');
+    }, false);
+
+
+
+
   }
 
 }

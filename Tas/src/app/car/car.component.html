@@ -1,0 +1,13 @@
+<article class="gallery">
+  <li *ngFor="let car of cars; let i=index" class="mainImg">
+
+    <p class="zamow">
+      {{car.brand}} {{car.model}}<br>
+      {{car.price}} zł/dzień</p>
+    <div><img class="img"  src="{{car.imgPath}}">
+      <article class="imgMenu">
+        <p>{{car.brand}} {{car.model}}<br>
+          {{car.price}} zł/dzień</p>
+      </article></div>
+  </li>
+</article>

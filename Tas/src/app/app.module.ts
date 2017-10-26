@@ -7,11 +7,15 @@ import { NnnComponent } from './nnn/nnn.component';
 import {RouterModule, Routes} from "@angular/router";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { MainComponent } from './main/main.component';
+import { CarComponent } from './car/car.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
 const appRoutes: Routes = [
-  { path: 'crisis-center', component: NnnComponent } ]
+  { path: 'dzejkob', component: NnnComponent },
+  { path: 'main', component: MainComponent}
+]
 
 @NgModule({
   declarations: [
@@ -19,6 +23,8 @@ const appRoutes: Routes = [
     NnnComponent,
     HeaderComponent,
     FooterComponent,
+    MainComponent,
+    CarComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
@@ -30,6 +36,6 @@ const appRoutes: Routes = [
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, MainComponent]
 })
 export class AppModule { }
