@@ -5,11 +5,15 @@ import com.dreamteam.api.model.enums.CategoryType;
 import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.service.GenericService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 
 public interface CarService extends GenericService<Car> {
+
+    Car addObject(Car model, MultipartFile multipartFile) throws IOException;
 
     Collection<Car> findByBrand(Long brandId);
 

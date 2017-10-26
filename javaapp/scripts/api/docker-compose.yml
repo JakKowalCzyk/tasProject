@@ -16,5 +16,7 @@ komis-api:
     - PASS=PASS HERRE
     - AWS_ID=$AMAZON_ID
     - AWS_SECRET=$AMAZON_SECR
+    - BUCKET_IMAGE $BUCKET_IMAGE_NAME
+    - BUCKET_RESIZED_IMAGE $BUCKET_RESIZED_IMAGE_NAME
   links:
     - komis-db:postgres

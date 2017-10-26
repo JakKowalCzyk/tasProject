@@ -36,6 +36,7 @@ public class Car extends HttpModel {
     private boolean hasRadio;
     private boolean hasSunroof;
     private boolean hasManualGearbox;
+    private CarPhoto defaultCarPhoto;
 
     public Car() {
         super();

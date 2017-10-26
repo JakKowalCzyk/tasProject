@@ -14,6 +14,8 @@ public class CarPhoto extends AbstractModel {
 
     private String photoUrl;
     private String photoS3Id;
+    private String resizedPhotoUrl;
+    private String resizedPhotoS3Id;
 
     public CarPhoto() {
     }

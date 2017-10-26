@@ -13,8 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -42,6 +44,12 @@ public class CarControllerImpl extends GenericControllerImpl<Car, com.dreamteam.
     @PreAuthorize("hasRole('ADMIN')")
     public Car addObject(@Valid @RequestBody Car model) {
         return super.addObject(model);
+    }
+
+    @Override
+    @PreAuthorize("hasRole('ADMIN')")
+    public Car addObject(Car model, MultipartFile multipartFile) throws IOException {
+        return getAbstractMapper().mapToHttpObject(getGenericService().addObject(getAbstractMapper().mapToModel(model), multipartFile));
     }
 
     @Override

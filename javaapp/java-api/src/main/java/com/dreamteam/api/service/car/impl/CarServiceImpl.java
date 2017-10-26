@@ -5,13 +5,16 @@ import com.dreamteam.api.model.bo.car.Car;
 import com.dreamteam.api.model.enums.CategoryType;
 import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
+import com.dreamteam.api.service.car.CarPhotoService;
 import com.dreamteam.api.service.car.CarService;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,11 +24,25 @@ import java.util.stream.Collectors;
 public class CarServiceImpl extends GenericServiceImpl<Car> implements CarService {
 
     private RentedCarService rentedCarService;
+    private CarPhotoService carPhotoService;
 
     @Autowired
-    public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService) {
+    public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService, CarPhotoService carPhotoService) {
         super(modelDAO);
         this.rentedCarService = rentedCarService;
+        this.carPhotoService = carPhotoService;
+    }
+
+    @Override
+    public Car addObject(Car model, MultipartFile multipartFile) throws IOException {
+        model.setDefaultCarPhoto(carPhotoService.loadCarPhoto(multipartFile));
+        model.setPhoto(model.getDefaultCarPhoto().getResizedPhotoUrl());
+        return super.addObject(model);
+    }
+
+    @Override
+    public void deleteObject(Car object) {
+        super.deleteObject(object);
     }
 
     @Override

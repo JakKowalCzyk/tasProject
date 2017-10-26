@@ -1,19 +1,19 @@
 package com.dreamteam.api.service.car.impl;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dreamteam.api.dao.car.CarPhotoDAO;
 import com.dreamteam.api.model.bo.car.CarPhoto;
 import com.dreamteam.api.service.car.CarPhotoService;
+import com.dreamteam.api.service.file.FileService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -23,52 +23,80 @@ import java.util.UUID;
 @Service
 public class CarPhotoServiceImpl extends GenericServiceImpl<CarPhoto> implements CarPhotoService {
 
-    private AmazonS3 amazonS3Client;
+    private static final String RESIZED_PREFIX = "RESIZED";
+    private static final int RESIZED_IMAGES_WIDTH = 120;
+
+    private FileService fileService;
 
     @Value("${s3-repo-bucket-komis-images}")
     private String s3KomisImagesBucketName;
+    @Value("${s3-repo-bucket-komis-images-resized}")
+    private String s3KomisResizedImagesBucketName;
 
     @Autowired
-    public CarPhotoServiceImpl(CarPhotoDAO modelDAO, AmazonS3 amazonS3Client) {
+    public CarPhotoServiceImpl(CarPhotoDAO modelDAO, FileService fileService) {
         super(modelDAO);
-        this.amazonS3Client = amazonS3Client;
+        this.fileService = fileService;
     }
 
     @Override
     public CarPhoto loadCarPhoto(MultipartFile multipartFile) throws IOException {
-        File file = multipartFileToFile(multipartFile);
-        return super.addObject(loadImages(UUID.randomUUID().toString(), s3KomisImagesBucketName, file));
-    }
-
-    public File multipartFileToFile(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(convFile);
-        fileOutputStream.write(file.getBytes());
-        fileOutputStream.close();
-        return convFile;
-    }
-
-    private CarPhoto loadImages(String fileName, String bucketName, File file) throws IOException {
-        uploadFileToS3(fileName, bucketName, file);
         CarPhoto carPhoto = new CarPhoto();
-        carPhoto.setPhotoS3Id(fileName);
-        carPhoto.setPhotoUrl(getS3FileDownloadURL(fileName, bucketName));
-        return carPhoto;
+        File file = fileService.multipartFileToFile(multipartFile);
+        loadCarImage(carPhoto, file);
+        loadResizedImage(carPhoto, file);
+        return super.addObject(carPhoto);
     }
 
-    private PutObjectRequest createPutObjectRequest(String objectKey, String bucketName, File objectFile) {
-        PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectKey, objectFile);
-        putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-
-        return putObjectRequest;
+    @Override
+    public void deleteObject(CarPhoto object) {
+        fileService.deleteS3File(object.getPhotoS3Id(), s3KomisImagesBucketName);
+        fileService.deleteS3File(object.getResizedPhotoS3Id(), s3KomisResizedImagesBucketName);
+        super.deleteObject(object);
     }
 
-    public void uploadFileToS3(String filePath, String bucketName, File file) {
-        amazonS3Client.putObject(createPutObjectRequest(filePath, bucketName, file));
+    private void loadResizedImage(CarPhoto carPhoto, File file) throws IOException {
+        File resizedfile = File.createTempFile(RESIZED_PREFIX, null);
+        resizeImage(file, RESIZED_IMAGES_WIDTH, resizedfile);
+        String imageS3Id = getImageS3Id();
+        fileService.loadImages(imageS3Id, s3KomisResizedImagesBucketName, resizedfile);
+        carPhoto.setResizedPhotoS3Id(imageS3Id);
+        carPhoto.setResizedPhotoUrl(fileService.getS3FileDownloadURL(imageS3Id, s3KomisResizedImagesBucketName));
+        resizedfile.delete();
     }
 
-    public String getS3FileDownloadURL(String objectKey, String bucketName) {
-        return amazonS3Client.getUrl(bucketName, objectKey).toString();
+    private void loadCarImage(CarPhoto carPhoto, File file) {
+        String imageS3Id = getImageS3Id();
+        fileService.loadImages(imageS3Id, s3KomisImagesBucketName, file);
+        carPhoto.setPhotoUrl(fileService.getS3FileDownloadURL(imageS3Id, s3KomisImagesBucketName));
+        carPhoto.setPhotoS3Id(imageS3Id);
     }
+
+    private String getImageS3Id() {
+        return UUID.randomUUID().toString();
+    }
+
+    private void resizeImage(File inputfile, int newWidth, File outputFile) throws IOException {
+        BufferedImage originalImage = ImageIO.read(inputfile);
+        float scaleRatio = (float) originalImage.getWidth() / (float) newWidth;
+
+        BufferedImage scaledImage = new BufferedImage(newWidth, Math.round(originalImage.getHeight() / scaleRatio),
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics2D graphics2d = createGraphics2D(scaledImage);
+
+        graphics2d.drawImage(originalImage, 0, 0, scaledImage.getWidth(), scaledImage.getHeight(), null);
+        graphics2d.dispose();
+
+        ImageIO.write(scaledImage, "jpg", outputFile);
+    }
+
+    private Graphics2D createGraphics2D(BufferedImage bufferedImage) {
+        Graphics2D graphics2d = bufferedImage.createGraphics();
+        graphics2d.setBackground(Color.WHITE);
+        graphics2d.clearRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+
+        return graphics2d;
+    }
+
 }
