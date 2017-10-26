@@ -74,11 +74,7 @@ body {
   .gallery li:hover .zamow{
     display: block;
   }
-  /*.article.imgMenu p{*/
-  /*display: block;*/
-  /*position: absolute;*/
-  /*top: 10px*/
-  /*}*/
+
   .gallery .zamow{
     width: 390px;
     height: 50px;
@@ -106,11 +102,7 @@ body {
     margin: auto;
     max-width: 800px;
   }
-  .page-nav .navigation-menu li{
-    /*display: inline-block;*/
-    margin-right: 20px;
-    border: 0;
-  }
+
   .gallery li:nth-child(-2n + 10){
     display: inline-block;
   }

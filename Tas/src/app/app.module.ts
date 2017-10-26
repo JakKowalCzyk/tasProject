@@ -9,12 +9,18 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { CarComponent } from './car/car.component';
+import { AboutFirmComponent } from './about-firm/about-firm.component';
+import { TermsComponent } from './terms/terms.component';
+import { ContactComponent } from './contact/contact.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
 const appRoutes: Routes = [
   { path: 'dzejkob', component: NnnComponent },
-  { path: 'main', component: MainComponent}
+  { path: 'main', component: MainComponent},
+  { path: 'about-firm', component: AboutFirmComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'terms', component: TermsComponent},
 ]
 
 @NgModule({
@@ -25,6 +31,9 @@ const appRoutes: Routes = [
     FooterComponent,
     MainComponent,
     CarComponent,
+    AboutFirmComponent,
+    TermsComponent,
+    ContactComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(

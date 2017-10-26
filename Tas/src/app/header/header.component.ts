@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Car} from "../models/car";
-import {Engine} from "../models/engine";
 
 @Component({
   selector: 'app-header',
