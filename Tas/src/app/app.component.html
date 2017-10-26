@@ -9,61 +9,6 @@
 </head>
 <body>
 <app-header></app-header>
-<!--<header class="page-header">-->
-  <!--<a routerLink="/crisis-center" routerLinkActive="active">-->
-
-    <!--<img src="https://uam-my.sharepoint.com/personal/barszu3_st_amu_edu_pl/_layouts/15/guestaccess.aspx?docid=1809f9c4f88b64feda7f9dbbaad4c4a63&authkey=ASHeRcpbFoPGfuMxhrfc1Sc">-->
-  <!--</a>-->
-  <!--<router-outlet></router-outlet>-->
-  <!--<nav class="page-nav">-->
-    <!--<ul class="navigation-menu">-->
-      <!--<li><a href="x" title="O firmie">O firmie</a></li>-->
-      <!--<li><a href="x" title="Przegląd samochodów">Oferta</a></li>-->
-      <!--<li><a href="x" title="Warunki wynajmu samochodu">Warunki wynajmu</a></li>-->
-      <!--<li><a href="x" title="Kontakt do firmy">Kontakt</a></li>-->
-      <!--<li class="sign-up"><a href="x" title="Zaloguj się">Zaloguj</a></li>-->
-    <!--</ul>-->
-    <!--<button class="hamburger" title="Open menu" aria-label="navigation menu">-->
-      <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="35" height="12" viewBox="0 0 35 12" class="hamburger-icon">-->
-        <!--<path d="M-0.000,12.000 L-0.000,8.000 L35.000,8.000 L35.000,12.000 L-0.000,12.000 ZM-0.000,0.000 L35.000,0.000 L35.000,4.000 L-0.000,4.000 L-0.000,0.000 Z"/>-->
-      <!--</svg>-->
-      <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="28.312" height="27.594" viewBox="0 0 28.312 27.594" class="close-icon">-->
-        <!--<path d="M28.298,2.831 L16.984,14.145 L27.591,24.751 L24.763,27.580 L14.156,16.973 L3.549,27.580 L0.721,24.751 L11.328,14.145 L0.014,2.831 L2.842,0.003 L14.156,11.316 L25.470,0.003 L28.298,2.831 Z"/>-->
-      <!--</svg>-->
-    <!--</button>-->
-  <!--</nav>-->
-<!--</header>-->
-<main>
-
-  <div><img class="image"  src="http://www.foxrent.pl/images/topslider.png"></div>
-  <article class="article">
-    <header class="article-header">
-      <h2>Kompleksowa wypożyczalnia samochodów</h2>
-      <p>Oferta naszej profesjonalnej wypożyczalni samochodów skierowana jest m.in. do klientów z miasta Przeźmierowo. Obejmuje ona nie tylko wynajem aut osobowych, lecz także możliwość wypożyczenia świetnie wyposażonych i bardzo pojemnych samochodów dostawczych. Z uwagi na niezwykle szeroki zakres oferowanych przez nas modeli aut, nasze usługi docenią zarówno klienci indywidualni, jak i przedstawiciele większych firm, zajmujących się przewozem różnego rodzaju ładunków.</p>
-      <h3>Komfort i bezpieczeństwo – wynajem samochodów Szukałex</h3>
-      <p>Jako sprawdzona wypożyczalnia samochodów w Przeźmierowie, jesteśmy znani z ogromnej dbałości o komfort i bezpieczeństwo naszych klientów. Dokładamy wszelkich starań, by regularnie poddawać nasze pojazdy przeglądom technicznym, dzięki czemu mogą mieć Państwo pewność, że oferujemy wynajem doskonale wyposażonych, a przede wszystkim bezpiecznych samochodów. Ponieważ doskonale zdajemy sobie sprawę z tego, jak różne potrzeby mają nasi klienci, w naszej ofercie znajdą Państwo możliwość krótko- bądź długoterminowego wynajmu pojazdów. Jeśli więc zależy Państwu na skorzystaniu z usług sprawdzonej i niedrogiej firmy na terenie miasta Przeźmierowo, zapraszamy do zapoznania się z ofertą, którą przygotowała nasza wypożyczalnia samochodów.</p>
-    </header>
-  </article>
-
-  <article class="gallery">
-    <li *ngFor="let car of cars; let i=index" class="mainImg">
-
-     <p class="zamow">
-      {{car.brand}} {{car.model}}<br>
-        {{car.price}} zł/dzień</p>
-      <div><img class="img"  src="{{car.imgPath}}">
-      <article class="imgMenu">
-        <p>{{car.brand}} {{car.model}}<br>
-        {{car.price}} zł/dzień</p>
-      </article></div>
-    </li>
-  </article>
-
-  <!--<img src="{{dane.imgPath}}">-->
-
-
-
-
-</main>
+<!--<app-main></app-main>-->
 <app-footer></app-footer>
 </body>
