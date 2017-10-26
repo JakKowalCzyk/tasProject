@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -31,10 +29,6 @@ public interface CarController extends GenericController<Car> {
     @Override
     @PostMapping
     Car addObject(@RequestBody Car model);
-
-    @ApiOperation("Add car with photo")
-    @PostMapping(value = "/photo")
-    Car addObject(@RequestBody Car model, @RequestParam("file") MultipartFile multipartFile) throws IOException;
 
     @Override
     @GetMapping(value = "/")

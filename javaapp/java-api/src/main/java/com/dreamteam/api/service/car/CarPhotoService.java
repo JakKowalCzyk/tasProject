@@ -11,5 +11,5 @@ import java.io.IOException;
  */
 public interface CarPhotoService extends GenericService<CarPhoto> {
 
-    CarPhoto loadCarPhoto(MultipartFile multipartFile) throws IOException;
+    CarPhoto loadCarPhoto(MultipartFile multipartFile, Long carId) throws IOException;
 }

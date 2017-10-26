@@ -27,7 +27,9 @@ public class CarMapper extends AbstractMapper<Car, com.dreamteam.api.model.bo.ca
     protected Car buildHttpObject(com.dreamteam.api.model.bo.car.Car modelObject) {
         Car car = getModelMapper().map(modelObject, Car.class);
 
-        car.setDefaultCarPhoto(carPhotoMapper.buildHttpObject(modelObject.getDefaultCarPhoto()));
+        if (modelObject.getDefaultCarPhoto() != null) {
+            car.setDefaultCarPhoto(carPhotoMapper.buildHttpObject(modelObject.getDefaultCarPhoto()));
+        }
 
         return car;
     }

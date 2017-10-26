@@ -1,8 +1,10 @@
 package com.dreamteam.api.service.car.impl;
 
 import com.dreamteam.api.dao.car.CarPhotoDAO;
+import com.dreamteam.api.model.bo.car.Car;
 import com.dreamteam.api.model.bo.car.CarPhoto;
 import com.dreamteam.api.service.car.CarPhotoService;
+import com.dreamteam.api.service.car.CarService;
 import com.dreamteam.api.service.file.FileService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,28 +26,44 @@ import java.util.UUID;
 public class CarPhotoServiceImpl extends GenericServiceImpl<CarPhoto> implements CarPhotoService {
 
     private static final String RESIZED_PREFIX = "RESIZED";
-    private static final int RESIZED_IMAGES_WIDTH = 120;
 
     private FileService fileService;
+    private CarService carService;
 
     @Value("${s3-repo-bucket-komis-images}")
     private String s3KomisImagesBucketName;
     @Value("${s3-repo-bucket-komis-images-resized}")
     private String s3KomisResizedImagesBucketName;
+    @Value("${resized-image-width}")
+    private String resizeImageWidth;
 
     @Autowired
-    public CarPhotoServiceImpl(CarPhotoDAO modelDAO, FileService fileService) {
+    public CarPhotoServiceImpl(CarPhotoDAO modelDAO, FileService fileService, CarService carService) {
         super(modelDAO);
         this.fileService = fileService;
+        this.carService = carService;
     }
 
     @Override
-    public CarPhoto loadCarPhoto(MultipartFile multipartFile) throws IOException {
+    public CarPhoto loadCarPhoto(MultipartFile multipartFile, Long carId) throws IOException {
         CarPhoto carPhoto = new CarPhoto();
         File file = fileService.multipartFileToFile(multipartFile);
         loadCarImage(carPhoto, file);
         loadResizedImage(carPhoto, file);
-        return super.addObject(carPhoto);
+        carPhoto = super.addObject(carPhoto);
+        updateCarWithPhoto(carId, carPhoto);
+        return carPhoto;
+    }
+
+    private void updateCarWithPhoto(Long carId, CarPhoto carPhoto) {
+        Car car = carService.findOne(carId);
+        CarPhoto carPhotoToDelete = (car.getDefaultCarPhoto());
+        car.setDefaultCarPhoto(carPhoto);
+        car.setPhoto(carPhoto.getResizedPhotoUrl());
+        carService.updateObject(car);
+        if (carPhotoToDelete != null) {
+            deleteObject(carPhotoToDelete);
+        }
     }
 
     @Override
@@ -56,8 +74,8 @@ public class CarPhotoServiceImpl extends GenericServiceImpl<CarPhoto> implements
     }
 
     private void loadResizedImage(CarPhoto carPhoto, File file) throws IOException {
-        File resizedfile = File.createTempFile(RESIZED_PREFIX, null);
-        resizeImage(file, RESIZED_IMAGES_WIDTH, resizedfile);
+        File resizedfile = File.createTempFile(RESIZED_PREFIX, ".jpg");
+        resizeImage(file, Integer.parseInt(resizeImageWidth), resizedfile);
         String imageS3Id = getImageS3Id();
         fileService.loadImages(imageS3Id, s3KomisResizedImagesBucketName, resizedfile);
         carPhoto.setResizedPhotoS3Id(imageS3Id);

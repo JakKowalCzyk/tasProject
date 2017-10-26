@@ -18,5 +18,6 @@ komis-api:
     - AWS_SECRET=$AMAZON_SECR
     - BUCKET_IMAGE $BUCKET_IMAGE_NAME
     - BUCKET_RESIZED_IMAGE $BUCKET_RESIZED_IMAGE_NAME
+    - IMAGE_WIDTH=250
   links:
     - komis-db:postgres
