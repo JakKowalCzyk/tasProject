@@ -103,20 +103,6 @@ export class AddCarPage {
         alert.present();
     }
 
-    setEditForm() {
-        let car = this.car;
-        this.brand          = this.adService.brands[car.brand];
-        this.name           = car.model;
-        this.categoryType   = car.category;
-        this.productionDate = car.year;
-        this.photo          = car.imgPath;
-        this.pricePerDay    = car.price;
-        this.fuelType       = car.engine.fuel;
-        this.driveType      = car.engine.drive;
-        this.power          = car.engine.power;
-        this.options        = car.getOptions();
-    }
-
     chooseBrand() {
         let alert = this.alertCtrl.create({
             title   : "Marka",
@@ -142,6 +128,20 @@ export class AddCarPage {
             alert.addInput(newInput);
         }
         alert.present();
+    }
+
+    setEditForm() {
+        let car = this.car;
+        this.brand          = this.adService.brands[car.brand];
+        this.name           = car.model;
+        this.categoryType   = car.category;
+        this.productionDate = car.year;
+        // this.photo          = car.imgPath;
+        this.pricePerDay    = car.price;
+        this.fuelType       = car.engine.fuel;
+        this.driveType      = car.engine.drive;
+        this.power          = car.engine.power;
+        this.options        = car.getOptions();
     }
 
     newBrand() {
@@ -184,7 +184,6 @@ export class AddCarPage {
 
     addCar() {
         this.showLoader = true;
-        console.log(this.showLoader);
         this.submitAttempt = true;
 
         if (!this.formGroup.valid) {
@@ -237,14 +236,13 @@ export class AddCarPage {
             hasNavi             : hasNavi,
             hasRadio            : hasRadio,
             hasSunroof          : hasSunroof,
+            millage             : 0
         };
 
-        if (typeof this.photo == 'string') {
-            data['photo'] = this.photo;
-            this.photo = null;
-        }
-
-        data['millage'] = 0;
+        // if (typeof this.photo == 'string') {
+        //     data['photo'] = this.photo;
+        //     this.photo = null;
+        // }
 
         if (this.car != null) {
             data['id'] = this.car.id;
