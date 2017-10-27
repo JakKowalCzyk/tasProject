@@ -1,3 +1,7 @@
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 matrix:
   include:
     - language: java
@@ -5,7 +9,7 @@ matrix:
       sudo: required
 
       jdk:
-        - openjdk8
+        - oraclejdk8
 
 
       services:
