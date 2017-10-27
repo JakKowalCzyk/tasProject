@@ -2,15 +2,16 @@ import {Engine} from "./Engine";
 import {CarOption} from "./CarOption";
 
 export class Car {
-    id      : number;
-    brand   : number;
-    model   : string;
-    category: string;
-    engine  : Engine;
-    imgPath : string;
-    price   : number;
-    year    : string;
-    options : Array<CarOption> = [];
+    id          : number;
+    brand       : number;
+    model       : string;
+    category    : string;
+    engine      : Engine;
+    dfltImg     : string;
+    resizedImg  : string;
+    price       : number;
+    year        : string;
+    options     : Array<CarOption> = [];
 
 
     // BRANDS = {
@@ -35,7 +36,8 @@ export class Car {
         brand       : number,
         model       : string,
         category    : string,
-        imgPath     : string,
+        dfltImg     : string,
+        resizedImg  : string,
         price       : number,
         year        : string,
         engine      : Engine,
@@ -45,7 +47,8 @@ export class Car {
         this.brand      = brand;
         this.model      = model;
         this.category   = category;
-        this.imgPath    = imgPath;
+        this.dfltImg    = dfltImg;
+        this.resizedImg = resizedImg;
         this.price      = price;
         this.year       = year;
         this.engine     = engine;

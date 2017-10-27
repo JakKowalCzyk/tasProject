@@ -70,6 +70,7 @@ export class AdService extends HasResponse {
         this.getCategories();
         this.http.get(this.routeService.routes.cars)
             .subscribe((res) => {
+                console.log(res.json().defaultCarPhoto);
                 for (let car of res.json()) {
                     this.allCars.push(this.carPipe.transform(car))
                 }
@@ -85,41 +86,54 @@ export class AdService extends HasResponse {
             })
     }
 
-    async add(data, photo) {
-        //check if brand exists
-        let brandFlag = false;
-        for (let k in this.brands) {
-            if (this.brands[k] == data.brand) {
-                brandFlag = true;
-                delete data.brand;
-                data['brandId'] = k;
+    getBrandId(brandName : string) {
+        let brandId;
+        for (let id in this.brands) {
+            if (this.brands[id] == brandName) {
+                brandId = id;
             }
         }
-        if (!brandFlag) {
+        return brandId;
+    }
+
+    async add(data, photo) {
+        //check if brand exists
+        let brandId = this.getBrandId(data.brand);
+        if (brandId == null) {
             this.addCarBrand(data, photo);
             return;
         }
-
+        data['brandId'] = brandId;
         try {
-            let result = await this.sendPhoto(photo);
-            console.log(JSON.parse(result['response']));
-            data['photo'] = JSON.parse(result['response']).photoUrl;
-            console.log(data);
-
             this.http.post(this.routeService.routes.addCar, data, { headers : this.authService.headers } )
                 .subscribe((res) => {
-                    this.success(res.json(), 'car:added');
-                    this.refresh();
+                    this.sendPhoto(photo, res.json().id);
                 },(err) => {
                     this.error(err.json(), 'car:added');
                 })
         } catch (e) {
             this.error(e, 'car:added');
+        }
+    }
+
+    async edit(data, photo) {
+        data['brandId'] = this.getBrandId(data.brand);
+
+        try {
+            this.http.put(this.routeService.routes.addCar, data, {headers: this.authService.headers})
+                .subscribe((res) => {
+                    photo ? this.sendPhoto(photo, data.id) : '';
+                    this.success(res.json(), 'car:modified');
+                    this.refresh();
+                }, (err) => {
+                    this.error(err.json(), 'car:modified');
+                })
+        } catch(e) {
             console.log(e);
         }
     }
 
-    async sendPhoto(photo) {
+    async sendPhoto(photo, carId) {
         try {
             let fileTransfer: FileTransferObject = this.transfer.create();
             let options: FileUploadOptions = {
@@ -127,42 +141,18 @@ export class AdService extends HasResponse {
                 fileName: 'photo.jpg',
                 headers     : {
                     'Authorization' : this.authService.headers.toJSON().Authorization
-                }
+                },
+                params      : { id : carId }
             };
-            return fileTransfer.upload(photo[0], 'http://159.89.12.132:8080/api/car/photo', options)
+            return fileTransfer.upload(photo[0], this.routeService.routes.addPhoto + carId + "/photo", options)
                 .then((res) => {
-                    return res;
+                    console.log(res);
+                    this.success('Dodano samochód!', 'car:added');
+                    this.refresh();
                 },(err) => {
                     console.log(err);
                 });
         } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async edit(data, photo) {
-        for (let k in this.brands) {
-            if (this.brands[k] == data.brand) {
-                delete data.brand;
-                data['brandId'] = k;
-            }
-        }
-
-        try {
-            if (photo != null) {
-                let result = await this.sendPhoto(photo);
-                console.log(JSON.parse(result['response']));
-                data['photo'] = JSON.parse(result['response']).photoUrl;
-                console.log(data);
-            }
-            this.http.put(this.routeService.routes.addCar, data, {headers: this.authService.headers})
-                .subscribe((res) => {
-                    this.success(res.json(), 'car:modified');
-                    this.refresh();
-                }, (err) => {
-                    this.error(err.json(), 'car:modified');
-                })
-        } catch(e) {
             console.log(e);
         }
     }
