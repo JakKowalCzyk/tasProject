@@ -21,6 +21,13 @@ matrix:
     node_js:
       - "6.9"
 
+    sudo: required
+
+    services:
+      - docker
+
+    before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+
     before_script:
       - npm install -g firebase-tools
       - npm install -g @angular/cli
@@ -29,3 +36,5 @@ matrix:
       - |
           ng build --prod
           docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker build -t kowkowal/angularapp .
+          docker push kowkowal/angularapp
