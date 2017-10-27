@@ -1,0 +1,10 @@
+ul li {
+  display: inline-block;
+}
+ul .number{
+  position: absolute;
+  right: 350px;
+}
+
+
+
