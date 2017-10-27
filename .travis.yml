@@ -27,7 +27,7 @@ matrix:
       services:
         - docker
 
-      before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+      before_install: cd $TRAVIS_BUILD_DIR/Tas
 
       before_script:
         - npm install -g firebase-tools
