@@ -8,3 +8,4 @@ REST API:
 
 MOBILE:
   - działająca apka: https://drive.google.com/drive/folders/0B1fIPdn6TDWsbkNZcERLMy1UQlk?usp=sharing
+  - dokumentacja: https://docs.google.com/document/d/1zXTXeTzO_Duw1GmIGOuPNS-AnmE_e9cUh1zI1EFo2rQ/edit?usp=sharing
