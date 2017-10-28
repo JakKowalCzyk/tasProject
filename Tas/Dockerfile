@@ -1,13 +1,15 @@
-FROM mhart/alpine-node
+FROM node:7
 
-RUN mkdir -p /usr/app
-RUN chmod -R 777 /usr/app
-WORKDIR /usr/app
+RUN mkdir -p /usr/src/app
 
-COPY package.json /usr/app
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app
+
 RUN npm install
 
-COPY . /usr/app
-EXPOSE 3000
+COPY . /usr/src/app
 
-CMD [ "npm", "start" ]
+EXPOSE 4200
+
+CMD ["npm", "start"]
