@@ -5,7 +5,9 @@ RUN chmod -R 777 /usr/app
 WORKDIR /usr/app
 
 COPY package.json /usr/app
-RUN npm install
+RUN npm install -g npm@latest
+
+
 
 COPY . /usr/app
 EXPOSE 3000
