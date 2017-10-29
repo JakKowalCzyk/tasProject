@@ -10,6 +10,6 @@ RUN npm install
 
 COPY . /usr/src/app
 
-EXPOSE 4200
+RUN ng build
 
-CMD ["npm", "start"]
+CMD ["\bin\bash"]
