@@ -5,26 +5,34 @@
   <article class="article">
     <header class="article-header">
       <h2>Kompleksowa wypożyczalnia samochodów</h2>
+      <br>
       <p>Oferta naszej profesjonalnej wypożyczalni samochodów skierowana jest m.in. do klientów z miasta Przeźmierowo. Obejmuje ona nie tylko wynajem aut osobowych, lecz także możliwość wypożyczenia świetnie wyposażonych i bardzo pojemnych samochodów dostawczych. Z uwagi na niezwykle szeroki zakres oferowanych przez nas modeli aut, nasze usługi docenią zarówno klienci indywidualni, jak i przedstawiciele większych firm, zajmujących się przewozem różnego rodzaju ładunków.</p>
-      <h3>Komfort i bezpieczeństwo – wynajem samochodów Szukałex</h3>
+      <br>
+      <h2>Komfort i bezpieczeństwo – wynajem samochodów Szukałex</h2>
+      <br>
       <p>Jako sprawdzona wypożyczalnia samochodów w Przeźmierowie, jesteśmy znani z ogromnej dbałości o komfort i bezpieczeństwo naszych klientów. Dokładamy wszelkich starań, by regularnie poddawać nasze pojazdy przeglądom technicznym, dzięki czemu mogą mieć Państwo pewność, że oferujemy wynajem doskonale wyposażonych, a przede wszystkim bezpiecznych samochodów. Ponieważ doskonale zdajemy sobie sprawę z tego, jak różne potrzeby mają nasi klienci, w naszej ofercie znajdą Państwo możliwość krótko- bądź długoterminowego wynajmu pojazdów. Jeśli więc zależy Państwu na skorzystaniu z usług sprawdzonej i niedrogiej firmy na terenie miasta Przeźmierowo, zapraszamy do zapoznania się z ofertą, którą przygotowała nasza wypożyczalnia samochodów.</p>
+      <br>
     </header>
   </article>
 
   <article class="gallery">
     <li *ngFor="let car of cars; let i=index" class="mainImg">
-
       <p class="zamow">
-        {{car.brand}} {{car.model}}<br>
-        {{car.price}} zł/dzień</p>
+        {{car.brand}} {{car.model}}
+        <br>
+        {{car.price}} zł/dzień
+      </p>
       <div><img class="img"  src="{{car.imgPath}}">
         <article class="imgMenu">
-          <p>{{car.brand}} {{car.model}}<br>
-            {{car.price}} zł/dzień</p>
-        </article></div>
+          <p>
+            {{car.brand}} {{car.model}}
+            <br>
+            {{car.price}} zł/dzień
+          </p>
+        </article>
+      </div>
     </li>
   </article>
-
   <!--<img src="{{dane.imgPath}}">-->
-
+  <br>
 </main>

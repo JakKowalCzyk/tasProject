@@ -1,16 +1,26 @@
-.image{
+.image {
   width: 100%;
+}
+
+.logo
+{
+  padding: 3px;
 }
 
 .mainImg{
   /*border:4px solid blue;*/
   list-style: none;
-  padding: 0;
+  padding: 3px;
   margin: 0;
   margin-top: 10px;
-
 }
 
+li
+{
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 .page-nav .hamburger {
   border: 0;
@@ -33,7 +43,8 @@
 
 .page-header{
   width: 100%;
-  background: url("https://wallpaperlayer.com/img/2015/7/awesome-navy-blue-wallpaper-7036-7317-hd-wallpapers.jpg");
+  height: 70px;
+  background: url("http://cdn.pcwallart.com/images/solid-blue-wallpaper-3.jpg");
   padding: 0;
   margin: 0;
   box-sizing: border-box;
