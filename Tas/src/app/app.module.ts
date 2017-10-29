@@ -13,6 +13,7 @@ import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { OfferComponent } from './offer/offer.component';
+import { RegisterComponent } from './register/register.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'terms', component: TermsComponent},
   { path: 'login', component: LoginComponent},
   { path: 'offer', component: OfferComponent},
+  { path: 'register', component: RegisterComponent},
 ]
 
 @NgModule({
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     TermsComponent,
     ContactComponent,
     OfferComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
