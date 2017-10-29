@@ -1,15 +1,17 @@
-FROM mhart/alpine-node
+FROM node:8-alpine as builder
 
-RUN mkdir -p /usr/app
-RUN chmod -R 777 /usr/app
-WORKDIR /usr/app
+COPY package.json package-lock.json ./
 
-COPY package.json /usr/app
-RUN npm install -g npm@latest
+RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
+## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
+RUN npm i && mkdir /ng-app && cp -R ./node_modules ./ng-app
 
+WORKDIR /ng-app
 
-COPY . /usr/app
-EXPOSE 3000
+COPY . .
 
-CMD [ "npm", "start" ]
+## Build the angular app in production mode and store the artifacts in dist folder
+RUN $(npm bin)/ng build --build-optimizer
+
+CMD ["\bin\bash"]
