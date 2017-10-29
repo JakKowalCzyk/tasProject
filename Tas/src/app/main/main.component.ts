@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Engine} from "../models/engine";
 import {Car} from "../models/car";
 import {HttpClient} from "@angular/common/http";
+import {DefaultCarPhoto} from "../models/default-car-photo";
 
 @Component({
   selector: 'app-main',
@@ -52,6 +53,8 @@ export class MainComponent implements OnInit {
               car.pricePerDay,
               car.productionDate,
               new Engine(car.fuelType, car.power, car.driveType),
+              new DefaultCarPhoto(car.defaultCarPhoto.id, car.defaultCarPhoto.photoUrl, car.defaultCarPhoto.photoS3Id,
+                car.defaultCarPhoto.resizedPhotoUrl, car.defaultCarPhoto.resizedPhotoS3Id),
               []))
           }
         }
