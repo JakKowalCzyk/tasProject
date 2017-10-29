@@ -1,17 +1,13 @@
-FROM node:7
+FROM mhart/alpine-node
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/app
+RUN chmod -R 777 /usr/app
+WORKDIR /usr/app
 
-WORKDIR /usr/src/app
+COPY package.json /usr/app
+RUN npm install
 
-COPY package.json /usr/src/app
+COPY . /usr/app
+EXPOSE 3000
 
-RUN npm install -g npm@latest
-
-RUN npm install -g @angular/cli
-
-COPY . /usr/src/app
-
-RUN ng build
-
-#CMD ["npm", "start"]
+CMD [ "npm", "start" ]
