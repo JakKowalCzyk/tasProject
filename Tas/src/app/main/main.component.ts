@@ -3,6 +3,7 @@ import {Engine} from "../models/engine";
 import {Car} from "../models/car";
 import {HttpClient} from "@angular/common/http";
 import {DefaultCarPhoto} from "../models/default-car-photo";
+import {Brand} from "../models/brand";
 
 @Component({
   selector: 'app-main',
@@ -11,9 +12,10 @@ import {DefaultCarPhoto} from "../models/default-car-photo";
 })
 export class MainComponent implements OnInit {
   cars: Array<Car> = [];
+  brands: Array<Brand> = [];
   title = 'Dzejkob';
 
-  private apiUrl = 'http://159.89.12.132:8080/api/car';
+  private apiUrl = 'http://159.89.12.132:8080/api/';
 
   constructor(private http: HttpClient){
     //this.getData();
@@ -35,7 +37,7 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.http.get('http://159.89.12.132:8080/api/car/')
+    this.http.get(this.apiUrl + 'car/')
       .subscribe((cars) =>
       {
         console.log(cars);
@@ -59,5 +61,24 @@ export class MainComponent implements OnInit {
           }
         }
       });
+
+    this.http.get(this.apiUrl + 'brand/')
+      .subscribe((brands) =>
+      {
+        // console.log(brands);
+        for (let i in brands) {
+          if (brands.hasOwnProperty(i)) {
+            // console.log(brands[i]);
+
+            let brand = brands[i];
+            this.brands.push(new Brand(
+              brand.id,
+              brand.name
+            ))
+
+          }
+        }
+      });
+
   }
 }

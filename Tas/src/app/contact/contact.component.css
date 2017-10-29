@@ -1,10 +1,23 @@
-ul li {
-  display: inline-block;
+/*ul li {*/
+  /*display: inline-block;*/
+/*}*/
+/*ul .number{*/
+  /*position: absolute;*/
+  /*right: 350px;*/
+/*}*/
+.map {
+  width: 100%;
 }
-ul .number{
-  position: absolute;
-  right: 350px;
+.mainContact {
+  list-style: none;
 }
+.mainContact .contact h1{
+  color: coral ;
+}
+.mainContact .contact h2{
+  color: black;
+}
+
 
 
 

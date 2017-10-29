@@ -103,7 +103,7 @@
 }
 
 
-@media (min-width: 51.875em) {
+@media (min-width: 950px) {
   .page-nav {
     position: absolute;
     top: 8px;
