@@ -1,3 +1,7 @@
+addons:
+  apt:
+    packages:
+      - docker-ce
 matrix:
   include:
     - language: node_js
