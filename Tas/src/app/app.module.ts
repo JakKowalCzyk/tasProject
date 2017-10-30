@@ -20,6 +20,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 
 
 const appRoutes: Routes = [
+  { path: '', component: MainComponent },
   { path: 'main', component: MainComponent},
   { path: 'about-firm', component: AboutFirmComponent},
   { path: 'contact', component: ContactComponent},
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'offer', component: OfferComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'car/:id', component: Car},
-]
+];
 
 @NgModule({
   declarations: [
