@@ -22,6 +22,7 @@ import { CategoryViewComponent } from './category-view/category-view.component';
 
 
 const appRoutes: Routes = [
+  { path: '', component: MainComponent },
   { path: 'main', component: MainComponent},
   { path: 'about-firm', component: AboutFirmComponent},
   { path: 'contact', component: ContactComponent},
@@ -29,9 +30,14 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'offer', component: OfferComponent},
   { path: 'register', component: RegisterComponent},
+<<<<<<< HEAD
   { path: 'car/:id', component: CarComponent},
   { path: 'category/:typeCategory', component: CategoryViewComponent}
 ]
+=======
+  { path: 'car/:id', component: Car},
+];
+>>>>>>> 655d71183b9866fa63f0450a6aee5e77e60c39ba
 
 @NgModule({
   declarations: [
