@@ -6,7 +6,8 @@ matrix:
   include:
     - language: node_js
       node_js:
-        - "node:8"
+        - "node"
+        - "8"
 
       sudo: required
 
