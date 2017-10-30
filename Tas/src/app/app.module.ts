@@ -22,7 +22,6 @@ import { CategoryViewComponent } from './category-view/category-view.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: MainComponent },
   { path: 'main', component: MainComponent},
   { path: 'about-firm', component: AboutFirmComponent},
   { path: 'contact', component: ContactComponent},
@@ -33,8 +32,6 @@ const appRoutes: Routes = [
   { path: 'car/:id', component: CarComponent},
   { path: 'category/:typeCategory', component: CategoryViewComponent}
 ]
-
-
 
 
 @NgModule({

@@ -14,7 +14,7 @@ import {HttpClient} from "@angular/common/http";
 export class GalleryComponent implements OnInit {
 
   constructor(private http: HttpClient,
-              public carService: CarService,
+              private carService: CarService,
               private brandService: BrandService){
     // this.carService.getCars();
   }
