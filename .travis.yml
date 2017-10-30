@@ -22,7 +22,7 @@ matrix:
       script:
         - |
             ls -l
-            ng build
+            ng build --prod
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t kowkowal/angularapp .
             docker push kowkowal/angularapp
