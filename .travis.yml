@@ -1,18 +1,43 @@
-language: java
+addons:
+  apt:
+    packages:
+      - docker-ce
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - "6.9"
 
-jdk:
-  - openjdk8
+      sudo: required
 
-sudo: required
+      services:
+        - docker
 
-services:
-  - docker
+      before_install: cd $TRAVIS_BUILD_DIR/Tas
 
-before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+      before_script:
+        - npm install -g @angular/cli
 
-install: true # This runs the "true" command in the install phase; thus skipping install
-script:
-  - |
-      docker login -u $DOCKER_USER -p $DOCKER_PASS
-      mvn install dockerfile:build
-      mvn  dockerfile:push
+      script:
+        - |
+            npm install
+            ng build --prod
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t kowkowal/angularapp .
+            docker push kowkowal/angularapp
+
+    - language: java
+      sudo: required
+      jdk: oraclejdk8
+
+      services:
+        - docker
+
+      before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+
+      install: true # This runs the "true" command in the install phase; thus skipping install
+      script:
+        - |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            mvn install dockerfile:build
+            mvn  dockerfile:push
