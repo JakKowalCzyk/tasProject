@@ -1,5 +1,10 @@
+<!--<button type="button" class="btn red darken-1" (click)="getCarsByCategory('SEDAN')">Sedan</button>-->
+<!--<button type="button" class="btn red darken-1" (click)="getCarsByCategory('CITY')">City</button>-->
+<!--<button type="button" class="btn red darken-1" (click)="getCarsByCategory('SPORT')">Sport</button>-->
+<!--<button type="button" class="btn red darken-1" (click)="getCarsByCategory('SUV')">Suv</button>-->
 <article class="gallery">
-  <li *ngFor="let car of carService.cars; let i=index" class="mainImg" >
+
+  <li *ngFor="let car of carService.cars  " class="mainImg" >
     <div>
       <p class="zamow">
         {{brandService.brands[car.brand-1].name}} {{car.model}}<br>
@@ -16,3 +21,5 @@
       </article></div>
   </li>
 </article>
+<!--<button ng-click="getCarByCategory()">Say "category"!</button>-->
+

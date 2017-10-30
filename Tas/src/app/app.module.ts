@@ -16,6 +16,8 @@ import { OfferComponent } from './offer/offer.component';
 import { RegisterComponent } from './register/register.component';
 import {Car} from "./models/car";
 import { GalleryComponent } from './gallery/gallery.component';
+import { CategoryMenuComponent } from './category-menu/category-menu.component';
+import { CategoryViewComponent } from './category-view/category-view.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'offer', component: OfferComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'car/:id', component: Car},
+  { path: 'car/:id', component: CarComponent},
+  { path: 'category/:typeCategory', component: CategoryViewComponent}
 ]
 
 @NgModule({
@@ -44,6 +47,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     GalleryComponent,
+    CategoryMenuComponent,
+    CategoryViewComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(

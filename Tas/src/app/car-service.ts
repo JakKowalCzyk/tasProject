@@ -1,5 +1,5 @@
 
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Car} from "./models/car";
 import {Engine} from "./models/engine";
 import {DefaultCarPhoto} from "./models/default-car-photo";
@@ -14,10 +14,19 @@ export class CarService {
   }
   private apiUrl = 'http://159.89.12.132:8080/api/';
   cars: Array<Car> = [];
-  param: string = 'SEDAN'
-  getCarsByCategory(): any{
 
-    this.http.get(this.apiUrl + 'car/category/'  )
+
+  getCarById(id: number): any{
+    this.http.get(this.apiUrl + 'car/' + id)
+      .subscribe(data => {console.log(data);
+      });
+  }
+
+  getCarsByCategory(categoryType: string): any{
+
+    this.http.get(this.apiUrl + 'car/category/' , {
+      headers: new HttpHeaders().set('categoryType', categoryType),
+    })
       .subscribe((cars) =>
       {
         console.log(cars);
