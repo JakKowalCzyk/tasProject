@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <body>
+     <div class="register">
+       <br>
+       <h3>Rejestracja nowego użytkownika</h3>
+
+       <form ng-submit="formSubmit()" class="form">
+         <div class="register-inside">
+           <div class="form-group">
+             <input type="text" class="form-control" ng-model="username" placeholder="username" required=""/>
+           </div>
+
+           <div class="form-group">
+             <input type="password1" class="form-control" ng-model="password" placeholder="password" required=""/>
+           </div>
+
+           <div class="form-group">
+             <input type="password2" class="form-control" ng-model="password" placeholder="password" required=""/>
+           </div>
+
+           <div class="form-group">
+               <button type="submit" class="btn btn-success">Zarejestruj się</button>
+           </div>
+
+           <div class="login"><a routerLink="/login" routerLinkActive="active" title="Zaloguj się">Powrót do logowania</a></div>
+
+         </div>
+       </form>
+       <br>
+     </div>
+  </body>
+</html>
