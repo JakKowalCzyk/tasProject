@@ -30,14 +30,12 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'offer', component: OfferComponent},
   { path: 'register', component: RegisterComponent},
-<<<<<<< HEAD
   { path: 'car/:id', component: CarComponent},
   { path: 'category/:typeCategory', component: CategoryViewComponent}
 ]
-=======
-  { path: 'car/:id', component: Car},
-];
->>>>>>> 655d71183b9866fa63f0450a6aee5e77e60c39ba
+
+
+
 
 @NgModule({
   declarations: [
