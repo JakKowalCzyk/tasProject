@@ -27,9 +27,9 @@ matrix:
             docker build -t kowkowal/angularapp .
             docker push kowkowal/angularapp
             touch file
-            sshpass -e scp -o stricthostkeychecking=no file SERVER_USER@SERVER_IP:
-            sshpass -e ssh SERVER_USER@SERVER_IP cd komis-app && sh build-app.sh
-            sshpass -e ssh SERVER_USER@SERVER_IP rm file
+            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
+            sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis-app && sh build-app.sh
+            sshpass -e ssh $SERVER_USER@$SERVER_IP rm file
     - language: java
       sudo: required
       jdk: oraclejdk8
@@ -46,6 +46,6 @@ matrix:
             mvn install dockerfile:build
             mvn  dockerfile:push
             touch file
-            sshpass -e scp -o stricthostkeychecking=no file SERVER_USER@SERVER_IP:
-            sshpass -e ssh SERVER_USER@SERVER_IP cd komis && sh update_api.sh
-            sshpass -e ssh SERVER_USER@SERVER_IP rm file
+            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
+            sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis && sh update_api.sh
+            sshpass -e ssh $SERVER_USER@$SERVER_IP rm file
