@@ -2,6 +2,7 @@ addons:
   apt:
     packages:
       - docker-ce
+      - sshpass
 matrix:
   include:
     - language: node_js
@@ -25,7 +26,10 @@ matrix:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t kowkowal/angularapp .
             docker push kowkowal/angularapp
-
+            touch file
+            sshpass -e -v scp -o stricthostkeychecking=no file SERVER_USER@SERVER_IP:
+            sshpass -e -v ssh SERVER_USER@SERVER_IP cd komis-app && sh build-app.sh
+            sshpass -e -v ssh SERVER_USER@SERVER_IP rm file
     - language: java
       sudo: required
       jdk: oraclejdk8
@@ -35,9 +39,13 @@ matrix:
 
       before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
 
-      install: true # This runs the "true" command in the install phase; thus skipping install
+      install: true
       script:
         - |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             mvn install dockerfile:build
             mvn  dockerfile:push
+            touch file
+            sshpass -e -v scp -o stricthostkeychecking=no file SERVER_USER@SERVER_IP:
+            sshpass -e -v ssh SERVER_USER@SERVER_IP cd komis && sh update_api.sh
+            sshpass -e -v ssh SERVER_USER@SERVER_IP rm file
