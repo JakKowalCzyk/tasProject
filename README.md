@@ -15,3 +15,6 @@ MOBILE:
 UI:
   - UI: http://159.89.12.132:8999/
   - Docker image: https://hub.docker.com/r/kowkowal/angularapp/
+  
+Documentation:
+  - https://drive.google.com/open?id=1lpzDvAj95DFE5QCiVFSfQKbRQHUYvvO_xgjomJSUtJA
