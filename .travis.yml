@@ -29,6 +29,7 @@ matrix:
             touch file
             sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
             sshpass -e ssh $SERVER_USER@$SERVER_IP ls
+            sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis-app && ls
             sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis-app && sh build-app.sh
             sshpass -e ssh $SERVER_USER@$SERVER_IP rm file
     - language: java
@@ -49,5 +50,6 @@ matrix:
             touch file
             sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
             sshpass -e ssh $SERVER_USER@$SERVER_IP ls
+            sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis && ls
             sshpass -e ssh $SERVER_USER@$SERVER_IP cd komis && sh update_api.sh
             sshpass -e ssh $SERVER_USER@$SERVER_IP rm file
