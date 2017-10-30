@@ -17,13 +17,11 @@ matrix:
       before_install: cd $TRAVIS_BUILD_DIR/Tas
 
       before_script:
-        - npm install -g firebase-tools
         - npm install -g @angular/cli
 
       script:
         - |
             npm install
-            ls -l
             ng build --prod
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t kowkowal/angularapp .
