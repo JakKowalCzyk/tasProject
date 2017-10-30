@@ -14,6 +14,8 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { OfferComponent } from './offer/offer.component';
 import { RegisterComponent } from './register/register.component';
+import {Car} from "./models/car";
+import { GalleryComponent } from './gallery/gallery.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'offer', component: OfferComponent},
   { path: 'register', component: RegisterComponent},
+  { path: 'car/:id', component: Car},
 ]
 
 @NgModule({
@@ -40,6 +43,7 @@ const appRoutes: Routes = [
     OfferComponent,
     LoginComponent,
     RegisterComponent,
+    GalleryComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(

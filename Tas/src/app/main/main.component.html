@@ -10,20 +10,25 @@
     </header>
   </article>
 
-  <article class="gallery">
-    <li *ngFor="let car of cars; let i=index" class="mainImg">
 
-      <p class="zamow">
-        {{brands[car.brand-1].name}} {{car.model}}<br>
-        {{car.price}} zł/dzień</p>
-      <div><img class="img"  src="{{car.defaultCarPhoto.photoUrl}}">
-        <article class="imgMenu">
-          <p>{{car.brand}} {{car.model}}<br>
-            {{car.price}} zł/dzień</p>
-        </article></div>
-    </li>
-  </article>
+  <!--<article class="gallery">-->
+    <!--<li *ngFor="let car of carService.cars; let i=index" class="mainImg" >-->
+      <!--<div>-->
+      <!--<p class="zamow">-->
+        <!--{{brandService.brands[car.brand-1].name}} {{car.model}}<br>-->
+        <!--{{car.price}} zł/dzień</p>-->
 
-  <!--<img src="{{dane.imgPath}}">-->
+      <!--<a  [routerLink]="['/car', car.id]" routerLinkActive="active" title="Przejdź do strony głównej">-->
+
+        <!--<img class="img" src="{{car.defaultCarPhoto.photoUrl}}">-->
+      <!--</a></div>-->
+      <!--<div>-->
+        <!--<article class="imgMenu">-->
+          <!--<p>{{car.brand}} {{car.model}}<br>-->
+            <!--{{car.price}} zł/dzień</p>-->
+        <!--</article></div>-->
+    <!--</li>-->
+  <!--</article>-->
+<app-gallery></app-gallery>
 
 </main>
