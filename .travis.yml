@@ -8,7 +8,6 @@ matrix:
       node_js:
         - "6.9"
 
-
       sudo: required
 
       services:
@@ -28,9 +27,7 @@ matrix:
             docker push kowkowal/angularapp
 
     - language: java
-
       sudo: required
-
       jdk: oraclejdk8
 
       services:
