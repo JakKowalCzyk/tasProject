@@ -1,33 +1,21 @@
-### STAGE 1: Build ###
+# Last.Backend angular example image
+FROM node:5-slim
 
-# We label our stage as ‘builder’
-FROM node:8.8.1-alpine as builder
+WORKDIR /usr/src/app
+ADD . /usr/src/app
 
-COPY package.json package-lock.json ./
-
-RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
-## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm i && mkdir /ng-app && cp -R ./node_modules ./ng-app
-
-WORKDIR /ng-app
-
-COPY . .
-
-## Build the angular app in production mode and store the artifacts in dist folder
-RUN $(npm bin)/ng build --prod
-
-
-### STAGE 2: Setup ###
-
-FROM nginx:1.13.3-alpine
-
-## Copy our default nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/
-
-## Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
-
-## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /ng-app/dist /usr/share/nginx/html
+RUN apt-get update && \
+    apt-get install -y git nginx && \
+    service nginx stop && \
+    rm -rf node_modules && \
+    npm install && \
+    npm install -g bower && \
+    npm install -g grunt-cli && \
+    bower install --allow-root && \
+    grunt build:development && \
+    cp -r ./dist/* /usr/share/nginx/html && \
+    cp ./nginx/default.conf /etc/nginx && \
+    rm /etc/nginx/sites-enabled/default && \
+    cp ./nginx/app /etc/nginx/sites-enabled
 
 CMD ["nginx", "-g", "daemon off;"]
