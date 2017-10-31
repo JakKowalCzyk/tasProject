@@ -55,7 +55,7 @@ export class CarService {
 
   }
   getCars(): any{
-
+      this.cars = [];
       this.http.get(this.apiUrl + 'car/')
       .subscribe((cars) =>
       {
