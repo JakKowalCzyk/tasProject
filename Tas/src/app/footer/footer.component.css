@@ -2,9 +2,9 @@
 .page-footer{
   text-align: center;
   padding-top: 25px;
-  background: url("https://uam-my.sharepoint.com/personal/barszu3_st_amu_edu_pl/_layouts/15/guestaccess.aspx?docid=1e3ff9bb317d3464ea161699c5eb3fa61&authkey=ARzss_EJhMncwYZiUcUNjv0&e=b325aeeb535e417fb7789fa9d7e3f324");
+  /*background: url("https://uam-my.sharepoint.com/personal/barszu3_st_amu_edu_pl/_layouts/15/guestaccess.aspx?docid=1e3ff9bb317d3464ea161699c5eb3fa61&authkey=ARzss_EJhMncwYZiUcUNjv0&e=b325aeeb535e417fb7789fa9d7e3f324");*/
   padding-bottom: 25px;
-
+  background-color: #313233;
 }
 
 
