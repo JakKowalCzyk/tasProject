@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 export class CategoryViewComponent implements OnInit {
   id: string;
   private sub: any;
-  constructor(private carService: CarService,
+  constructor(public carService: CarService,
               private brandService: BrandService,
               private route: ActivatedRoute) { }
   getCarsByCategory(category: string) {
