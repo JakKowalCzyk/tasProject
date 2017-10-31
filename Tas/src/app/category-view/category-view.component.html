@@ -3,7 +3,7 @@
 </p>
 <!--<app-category-menu></app-category-menu>-->
 <article class="gallery">
-  <li *ngFor="let car of carService.cars; let i=index" class="mainImg" >
+  <li *ngFor="let car of carService.carsCategory; let i=index" class="mainImg" >
     <div>
       <p class="zamow">
         {{brandService.brands[car.brand-1].name}} {{car.model}}<br>

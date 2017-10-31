@@ -11,12 +11,13 @@ import {Subscription} from "rxjs/Subscription";
 export class CarService {
   constructor(private http: HttpClient){
       if (this.cars.length <= 0) {
-          this.getCars();
+        this.getCars();
       }
   }
 
   private apiUrl = 'http://159.89.12.132:8080/api/';
   cars: Array<Car> = [];
+  carsCategory: Array<Car> = [];
 
   getCarById(id: number): any {
       let car = this.cars.filter((el) => { return el.id == id })[0];
@@ -24,7 +25,8 @@ export class CarService {
   }
 
   getCarsByCategory(categoryType: string): any{
-
+    this.cars = [];
+    this.carsCategory = [];
     this.http.get(this.apiUrl + 'car/category/' , {
       headers: new HttpHeaders().set('categoryType', categoryType),
     })

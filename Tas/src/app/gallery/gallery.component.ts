@@ -32,7 +32,7 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.getBrands();
     //this.getCarsByCategory();
-     this.getCars();
+    // this.getCars();
   }
 
 }
