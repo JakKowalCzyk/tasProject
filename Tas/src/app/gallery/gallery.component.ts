@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BrandService} from "../brand-service";
 import {CarService} from "../car-service";
 import {HttpClient} from "@angular/common/http";
@@ -12,6 +12,7 @@ import {HttpClient} from "@angular/common/http";
 
 })
 export class GalleryComponent implements OnInit {
+ // @Input() name: string;
 
   constructor(private http: HttpClient,
               public carService: CarService,
@@ -22,12 +23,16 @@ export class GalleryComponent implements OnInit {
   getCars() {
     return this.carService.getCars();
   }
+  getCarsByCategory() {
+    return this.carService.getCarsByCategory(name);
+  }
   getBrands(){
     return this.brandService.getBrands();
   }
   ngOnInit(): void {
     this.getBrands();
-    this.getCars();
+    //this.getCarsByCategory();
+     this.getCars();
   }
 
 }

@@ -15,11 +15,9 @@ export class CarService {
   private apiUrl = 'http://159.89.12.132:8080/api/';
   cars: Array<Car> = [];
 
-
   getCarById(id: number): any{
-    this.http.get(this.apiUrl + 'car/' + id)
-      .subscribe(data => {console.log(data);
-      });
+    let car = this.cars.filter((el) => { return el.id == id })[0];
+
   }
 
   getCarsByCategory(categoryType: string): any{
