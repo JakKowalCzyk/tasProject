@@ -1,4 +1,6 @@
 <p>
   car works!
 </p>
-{{car.name}}
+<div *ngIf="car != null" class="car">
+    {{car.model}}
+</div>

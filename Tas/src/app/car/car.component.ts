@@ -12,28 +12,30 @@ import {DefaultCarPhoto} from "../models/default-car-photo";
   providers: [CarService]
 })
 export class CarComponent implements OnInit {
-  car: Car;
-  id: number;
-  private sub: any;
-  constructor(private route: ActivatedRoute,
-              private carService: CarService) {
-    this.car = new Car(2,2,'',"","",2,"", new Engine("",2,""), new DefaultCarPhoto(2,'','','',''),[])
-    this.route.params.subscribe( params => console.log(params) ); }
 
-  getCarById(id: number) {
-    return console.log(this.car = this.carService.getCarById(this.id));
+  car   : Car;
+  id    : number;
+  sub   : any;
+
+
+  constructor(
+      private route         : ActivatedRoute,
+      private carService    : CarService
+  ) { }
+
+  getCarById() {
+      if (this.carService.cars.length <= 0) { //jeżeli cars jest puste, to czekamy aż się ściągną
+          setTimeout(() => {
+              this.getCarById();
+          },500);
+      }
+      this.car = this.carService.getCarById(this.id);
   }
 
   ngOnInit() {
-      this.sub = this.route.params.subscribe(params => {
-        this.id = +params['id']; // (+) converts string 'id' to a number
-        this.getCarById(this.id);
-
+      this.route.params.subscribe(params => {
+          this.id = +params['id']; // (+) converts string 'id' to a number
+          this.getCarById();
       });
-
-    //this.getCarById(this.id);
-
-
   }
-
 }

@@ -10,14 +10,17 @@ import {Subscription} from "rxjs/Subscription";
 @Injectable()
 export class CarService {
   constructor(private http: HttpClient){
-
+      if (this.cars.length <= 0) {
+          this.getCars();
+      }
   }
+
   private apiUrl = 'http://159.89.12.132:8080/api/';
   cars: Array<Car> = [];
 
-  getCarById(id: number): any{
-    let car = this.cars.filter((el) => { return el.id == id })[0];
-
+  getCarById(id: number): any {
+      let car = this.cars.filter((el) => { return el.id == id })[0];
+      return car;
   }
 
   getCarsByCategory(categoryType: string): any{
