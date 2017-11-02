@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CarService} from "../car-service";
-import {BrandService} from "../brand-service";
+import {CarService} from "../../services/car-service";
+import {BrandService} from "../../services/brand-service";
 
 @Component({
   selector: 'app-offer',

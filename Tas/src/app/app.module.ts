@@ -1,38 +1,78 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
-import {RouterModule, Routes} from "@angular/router";
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
-import { CarComponent } from './car/car.component';
-import { AboutFirmComponent } from './about-firm/about-firm.component';
-import { TermsComponent } from './terms/terms.component';
-import { ContactComponent } from './contact/contact.component';
-import { LoginComponent } from './login/login.component';
-import { OfferComponent } from './offer/offer.component';
-import { RegisterComponent } from './register/register.component';
-import {Car} from "./models/car";
-import { GalleryComponent } from './gallery/gallery.component';
-import { CategoryMenuComponent } from './category-menu/category-menu.component';
-import { CategoryViewComponent } from './category-view/category-view.component';
+import { RouterModule, Routes} from "@angular/router";
+
+//pages
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+//components
+import { MainPage} from './pages/main/main';
+
+//services
+
+
+import { CarPage } from './pages/car/car';
+import { AboutFirmComponent } from './pages/about-firm/about-firm.component';
+import { TermsComponent } from './pages/terms/terms.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { LoginComponent } from './pages/login/login.component';
+import { OfferComponent } from './pages/offer/offer.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { CategoryMenuComponent } from './components/category-menu/category-menu.component';
+import { CategoryViewComponent } from './pages/category-view/category-view.component';
+import {CarService} from "./services/car-service";
+import {BrandService} from "./services/brand-service";
+import { CarComponent } from './components/car/car.component';
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
 
 
 const appRoutes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'main', component: MainComponent},
-  { path: 'about-firm', component: AboutFirmComponent},
-  { path: 'contact', component: ContactComponent},
-  { path: 'terms', component: TermsComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'offer', component: OfferComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'car/:id', component: CarComponent},
-  { path: 'category/:typeCategory', component: CategoryViewComponent}
-]
+  {
+      path      : '',
+      component : MainPage
+  },
+  {
+      path      : 'main',
+      component : MainPage
+  },
+  {
+      path      : 'about-firm',
+      component : AboutFirmComponent
+  },
+  {
+      path      : 'contact',
+      component : ContactComponent
+  },
+  {
+      path      : 'terms',
+      component : TermsComponent
+  },
+  {
+      path      : 'login',
+      component : LoginComponent
+  },
+  {
+      path      : 'offer',
+      component : OfferComponent
+  },
+  {
+      path      : 'register',
+      component : RegisterComponent
+  },
+  {
+      path      : 'car/:id',
+      component : CarPage
+  },
+  {
+      path      : 'category/:typeCategory',
+      component : CategoryViewComponent
+  }
+];
 
 
 @NgModule({
@@ -40,8 +80,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent,
-    CarComponent,
+    MainPage,
+    CarPage,
     AboutFirmComponent,
     TermsComponent,
     ContactComponent,
@@ -51,6 +91,7 @@ const appRoutes: Routes = [
     GalleryComponent,
     CategoryMenuComponent,
     CategoryViewComponent,
+    CarComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
@@ -61,7 +102,10 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent, MainComponent]
+  providers: [
+      CarService,
+      BrandService,
+  ],
+  bootstrap: [AppComponent, MainPage]
 })
 export class AppModule { }

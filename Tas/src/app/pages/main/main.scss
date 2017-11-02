@@ -1,36 +1,63 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Open Sans";
-  color: gray;
-  font-size: 16px;
+@import "../../../variables";
+.main {
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  &__text {
+    margin: auto;
+    padding: 20px;
+    font-size: 24px;
+  }
+  &__cars {
+    display: flex;
+
+    &__filters {
+      flex: 1;
+      background-color: $light;
+    }
+    &__list {
+      flex: 4;
+      display: flex;
+      flex-flow: wrap;
+    }
+  }
 }
 
 
-.image{
-  width: 100%;
-}
+/*body {*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+  /*font-family: "Open Sans";*/
+  /*color: gray;*/
+  /*font-size: 16px;*/
+/*}*/
 
-.img{
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.mainImg{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-top: 10px;
 
-}
+/*.image{*/
+  /*width: 100%;*/
+/*}*/
 
-.imgMenu{
-  text-align: center;
-  color: white;
-  font-family: fantasy;
-  background: url("https://t3.ftcdn.net/jpg/00/65/10/10/240_F_65101091_Yy664ewvjWIvRvYpVXOeZUZ9muKBh3P6.jpg");
-}
+/*.img{*/
+  /*width: 100%;*/
+  /*list-style: none;*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+/*}*/
+/*.mainImg{*/
+  /*list-style: none;*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+  /*margin-top: 10px;*/
+
+/*}*/
+
+/*.imgMenu{*/
+  /*text-align: center;*/
+  /*color: white;*/
+  /*font-family: fantasy;*/
+  /*background: url("https://t3.ftcdn.net/jpg/00/65/10/10/240_F_65101091_Yy664ewvjWIvRvYpVXOeZUZ9muKBh3P6.jpg");*/
+/*}*/
 
 .gallery .zamow {
   display: none;

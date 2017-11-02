@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Brand} from "./models/brand";
+import {Brand} from "../models/brand";
 
 @Injectable()
 export class BrandService {

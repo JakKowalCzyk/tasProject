@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
@@ -15,10 +15,10 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    let hamburger = document.querySelector('.hamburger');
-    hamburger.addEventListener('click', function () {
-      document.querySelector('.page-header').classList.toggle('nav-opened');
-    }, false);
+    // let hamburger = document.querySelector('.hamburger');
+    // hamburger.addEventListener('click', function () {
+    //   document.querySelector('.page-header').classList.toggle('nav-opened');
+    // }, false);
 
 
 

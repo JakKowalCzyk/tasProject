@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CarService} from "../car-service";
-import {BrandService} from "../brand-service";
+import {CarService} from "../../services/car-service";
+import {BrandService} from "../../services/brand-service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

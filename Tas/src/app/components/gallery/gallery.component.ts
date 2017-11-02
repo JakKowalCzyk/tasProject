@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BrandService} from "../brand-service";
-import {CarService} from "../car-service";
+import {BrandService} from "../../services/brand-service";
+import {CarService} from "../../services/car-service";
 import {HttpClient} from "@angular/common/http";
 
 

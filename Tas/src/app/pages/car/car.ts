@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CarService} from "../car-service";
-import {Car} from "../models/car";
-import {Engine} from "../models/engine";
-import {DefaultCarPhoto} from "../models/default-car-photo";
+import {CarService} from "../../services/car-service";
+import {Car} from "../../models/car";
+import {Engine} from "../../models/engine";
+import {DefaultCarPhoto} from "../../models/default-car-photo";
 
 @Component({
   selector: 'app-car',
-  templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css'],
+  templateUrl: './car.html',
+  styleUrls: ['./car.scss'],
   providers: [CarService]
 })
-export class CarComponent implements OnInit {
+export class CarPage implements OnInit {
 
   car   : Car;
   id    : number;

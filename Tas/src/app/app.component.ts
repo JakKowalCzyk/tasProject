@@ -12,7 +12,6 @@ import {Engine} from "./models/engine";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  // template: `<h1>{{title}}</h1><h2>{{title}} details!</h2>`
 })
 
 export class AppComponent implements OnInit {

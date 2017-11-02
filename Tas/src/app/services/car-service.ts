@@ -1,8 +1,8 @@
 
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Car} from "./models/car";
-import {Engine} from "./models/engine";
-import {DefaultCarPhoto} from "./models/default-car-photo";
+import {Car} from "../models/car";
+import {Engine} from "../models/engine";
+import {DefaultCarPhoto} from "../models/default-car-photo";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {Subscription} from "rxjs/Subscription";
@@ -82,6 +82,7 @@ export class CarService {
 
           }
         }
+        console.log(this.cars)
       });
 
   }
