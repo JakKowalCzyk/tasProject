@@ -32,7 +32,7 @@ matrix:
 
       before_script:
         - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
-        - tar -xvf android-sdk_r24.4-linux.tgz
+        - tar -xzvf android-sdk_r24.4-linux.tgz
         - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter platform-tools
         - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
         - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter android-23
@@ -44,51 +44,51 @@ matrix:
 
       script:
         - cordova prepare
-    - language: node_js
-      node_js:
-        - "6.9"
-
-      sudo: required
-
-      services:
-        - docker
-
-      before_install: cd $TRAVIS_BUILD_DIR/Tas
-
-      before_script:
-        - npm install -g @angular/cli
-
-      script:
-        - |
-            npm install
-            ng build --prod
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker build -t kowkowal/angularapp .
-            docker push kowkowal/angularapp
-            touch file
-            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
-            sshpass -e ssh $SERVER_USER@$SERVER_IP << !
-              cd komis-app && sh build-app.sh
-              cd && rm file && ls
-            !
-    - language: java
-      sudo: required
-      jdk: oraclejdk8
-
-      services:
-        - docker
-
-      before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
-
-      install: true
-      script:
-        - |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            mvn install dockerfile:build
-            mvn  dockerfile:push
-            touch file
-            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
-            sshpass -e ssh $SERVER_USER@$SERVER_IP << !
-              cd komis && sh update_api.sh
-              cd && rm file && ls
-            !
+#    - language: node_js
+#      node_js:
+#        - "6.9"
+#
+#      sudo: required
+#
+#      services:
+#        - docker
+#
+#      before_install: cd $TRAVIS_BUILD_DIR/Tas
+#
+#      before_script:
+#        - npm install -g @angular/cli
+#
+#      script:
+#        - |
+#            npm install
+#            ng build --prod
+#            docker login -u $DOCKER_USER -p $DOCKER_PASS
+#            docker build -t kowkowal/angularapp .
+#            docker push kowkowal/angularapp
+#            touch file
+#            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
+#            sshpass -e ssh $SERVER_USER@$SERVER_IP << !
+#              cd komis-app && sh build-app.sh
+#              cd && rm file && ls
+#            !
+#    - language: java
+#      sudo: required
+#      jdk: oraclejdk8
+#
+#      services:
+#        - docker
+#
+#      before_install: cd $TRAVIS_BUILD_DIR/javaapp/java-api
+#
+#      install: true
+#      script:
+#        - |
+#            docker login -u $DOCKER_USER -p $DOCKER_PASS
+#            mvn install dockerfile:build
+#            mvn  dockerfile:push
+#            touch file
+#            sshpass -e scp -o stricthostkeychecking=no file $SERVER_USER@$SERVER_IP:
+#            sshpass -e ssh $SERVER_USER@$SERVER_IP << !
+#              cd komis && sh update_api.sh
+#              cd && rm file && ls
+#            !
