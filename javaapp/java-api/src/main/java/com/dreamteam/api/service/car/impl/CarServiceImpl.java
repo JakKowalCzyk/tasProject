@@ -96,7 +96,7 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
                 .collect(Collectors.toList());
     }
 
-    private <T extends Number> boolean filterValues(T smallerThan, T biggerThan, T valueToCompare) {
+    public <T extends Number> boolean filterValues(T smallerThan, T biggerThan, T valueToCompare) {
         if ((biggerThan == null && smallerThan == null)) {
             return true;
         } else if (biggerThan == null) {
