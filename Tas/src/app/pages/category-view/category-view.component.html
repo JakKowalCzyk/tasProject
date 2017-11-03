@@ -1,0 +1,22 @@
+<p>
+  category-view works!
+</p>
+<!--<app-category-menu></app-category-menu>-->
+<article class="gallery">
+  <li *ngFor="let car of carService.carsCategory; let i=index" class="mainImg" >
+    <div>
+      <p class="zamow">
+        {{brandService.brands[car.brand-1].name}} {{car.model}}<br>
+        {{car.price}} zł/dzień</p>
+
+      <a  [routerLink]="['/car', car.id]" routerLinkActive="active" title="Specyfikacja auta">
+
+        <img class="img" src="{{car.defaultCarPhoto.photoUrl}}">
+      </a></div>
+    <div>
+      <article class="imgMenu">
+        <p>{{car.brand}} {{car.model}}<br>
+          {{car.price}} zł/dzień</p>
+      </article></div>
+  </li>
+</article>

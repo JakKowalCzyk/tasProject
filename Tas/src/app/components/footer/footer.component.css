@@ -1,0 +1,51 @@
+
+.page-footer{
+  text-align: center;
+  padding-top: 25px;
+  /*background: url("https://uam-my.sharepoint.com/personal/barszu3_st_amu_edu_pl/_layouts/15/guestaccess.aspx?docid=1e3ff9bb317d3464ea161699c5eb3fa61&authkey=ARzss_EJhMncwYZiUcUNjv0&e=b325aeeb535e417fb7789fa9d7e3f324");*/
+  padding-bottom: 25px;
+  background-color: #313233;
+}
+
+
+.page-footer .navigation-menu {
+  margin-top: -25px;
+  list-style: none;
+//margin: 0;
+  padding: 0;
+  /*background: url("https://wallpaperlayer.com/img/2015/7/awesome-navy-blue-wallpaper-7036-7317-hd-wallpapers.jpg");*/
+}
+
+.page-footer .navigation-menu li  {
+  margin-top: 25px;
+
+}
+
+.page-footer .navigation-menu li a {
+  color: crimson;
+
+}
+
+@media (min-width: 51.875em) {
+
+  .page-footer .navigation-menu li {
+    display: inline-block;
+    margin-right: 60px;
+    border: 0;
+    font-size: 25px;
+
+  }
+
+  .page-footer .navigation-menu li a {
+    color: white;
+  }
+
+  @media (max-width: 1217px) {
+    .page-nav .navigation-menu li {
+      /*display: inline-block;*/
+      margin-right: 20px;
+      border: 0;
+    }
+
+  }
+}
