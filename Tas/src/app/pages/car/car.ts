@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
-import {Engine} from "../../models/engine";
-import {DefaultCarPhoto} from "../../models/default-car-photo";
 
 @Component({
   selector: 'app-car',
@@ -24,11 +22,6 @@ export class CarPage implements OnInit {
   ) { }
 
   getCarById() {
-      if (this.carService.cars.length <= 0) { //jeżeli cars jest puste, to czekamy aż się ściągną
-          setTimeout(() => {
-              this.getCarById();
-          },500);
-      }
       this.car = this.carService.getCarById(this.id);
   }
 
