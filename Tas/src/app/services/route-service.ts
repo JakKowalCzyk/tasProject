@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 
-@Injectable
+@Injectable()
 export class RouteService {
 
   baseApi: string = "http://159.89.12.132:8080/api/";

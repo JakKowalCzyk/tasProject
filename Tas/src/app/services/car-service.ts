@@ -1,4 +1,3 @@
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Car} from "../models/car";
 import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
@@ -8,7 +7,6 @@ import {RouteService} from "./route-service";
 @Injectable()
 export class CarService {
   constructor(private http: Http,
-              private httpClient: HttpClient,
               private routeService: RouteService,
               private carPipe: CarPipe) {
     if (this.cars.length <= 0) {
@@ -20,30 +18,22 @@ export class CarService {
   carsCategory: Array<Car> = [];
 
   getCarById(id: number): any {
-    this.http.get(this.routeService.routes.car + id)
-      .subscribe(data => {
-        return this.carPipe.transform(data.json());
-      });
+    return this.cars.filter((el) => {
+      return el.id == id
+    })[0];
   }
+
+  getCategoryHeaders(categoryType: string): any {
+    return new Headers({"categoryType": categoryType});
+  }
+
 
   getCarsByCategory(categoryType: string): any {
     this.cars = [];
     this.carsCategory = [];
-    this.httpClient.get(this.routeService.routes.categories, {
-      headers: new HttpHeaders().set('categoryType', categoryType),
-    })
+    this.http.get(this.routeService.routes.categories, {headers: this.getCategoryHeaders(categoryType)})
       .subscribe((cars) => {
-        console.log(cars);
-        for (let carl in cars) {
-          if (cars.hasOwnProperty(carl)) {
-            console.log(cars[carl]);
-
-            let car = cars[carl];
-            this.cars.push(
-              this.carPipe.transform(car)
-            )
-          }
-        }
+        this.populateCarList(cars);
       });
 
   }
@@ -52,18 +42,15 @@ export class CarService {
     this.cars = [];
     this.http.get(this.routeService.routes.cars)
       .subscribe((cars) => {
-        console.log(cars);
-        for (let carl in cars) {
-          if (cars.hasOwnProperty(carl)) {
-            console.log(cars[carl]);
-
-            let car = cars[carl];
-            this.cars.push(
-              this.carPipe.transform(car));
-          }
-        }
-        console.log(this.cars)
+        this.populateCarList(cars);
       });
 
+  }
+
+  private populateCarList(cars) {
+    for (let carl of cars.json()) {
+      this.cars.push(
+        this.carPipe.transform(carl));
+    }
   }
 }

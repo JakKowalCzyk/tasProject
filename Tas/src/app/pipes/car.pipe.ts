@@ -9,11 +9,12 @@ import {Car} from "../models/car";
 export class CarPipe implements PipeTransform {
 
   transform(car, ...args): any {
+    console.log(car);
     return new Car(car.id,
       car.brandId,
       car.name,
       car.categoryType,
-      car.defaultCarPhoto.photoUrl,
+      car.photo,
       car.pricePerDay,
       car.productionDate,
       new Engine(car.fuelType, car.power, car.driveType),

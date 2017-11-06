@@ -26,6 +26,7 @@ import {UserService} from "./services/user-service";
 import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
+import {PipesModule} from "./pipes/pipes.module";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -102,6 +103,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     HttpModule,
+    PipesModule
   ],
   providers: [
       CarService,
