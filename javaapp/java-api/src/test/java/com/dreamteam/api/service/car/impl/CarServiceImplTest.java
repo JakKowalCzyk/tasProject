@@ -133,30 +133,4 @@ public class CarServiceImplTest extends AbstractServiceTest {
         assertFalse(carService.filterValues(1000, 4000, 300));
     }
 
-    public Car getCarTest(Long id, Brand brand, String name, Double price, CategoryType categoryType, FuelType fuelType, DriveType driveType, boolean hasRestGoods) {
-        Car car = new Car();
-        car.setId(id);
-        car.setBrand(brand);
-        car.setName(name);
-        car.setPricePerDay(price);
-        car.setCategoryType(categoryType);
-        car.setFuelType(fuelType);
-        car.setDriveType(driveType);
-        car.setHasManualGearbox(hasRestGoods);
-        car.setHasAirConditioning(hasRestGoods);
-        car.setHasElectricWindow(hasRestGoods);
-        car.setHasManualGearbox(hasRestGoods);
-        car.setHasNavi(hasRestGoods);
-        car.setHasRadio(hasRestGoods);
-        car.setHasSunroof(hasRestGoods);
-        return car;
-    }
-
-    public Brand getBrandTest(String name, Long id) {
-        Brand brand = new Brand();
-        brand.setName(name);
-        brand.setId(id);
-        return brand;
-    }
-
 }
