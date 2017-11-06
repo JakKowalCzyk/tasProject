@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {UserService} from "../../services/user-service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,8 @@ import {HttpClient} from "@angular/common/http";
 export class HeaderComponent implements OnInit {
 
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient,
+              public userService: UserService) {
   }
 
 

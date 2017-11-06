@@ -4,11 +4,14 @@
             <p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p>
         </a>
     </div>
-    <div class="header__login">
+  <div class="header__login" *ngIf="!userService.isUserLogged()">
         <a class="header__loginLink" routerLink="login" routerLinkActive="active" title="Zaloguj">
             Zaloguj
         </a>
     </div>
+  <div class="login_name" *ngIf="userService.isUserLogged()">
+    <p>Hello {{userService.user.name}}</p>
+  </div>
 
   <!--<nav class="page-nav">-->
     <!--<ul class="navigation-menu">-->
