@@ -17,8 +17,6 @@ import {LoginComponent} from './pages/login/login.component';
 import {OfferComponent} from './pages/offer/offer.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {GalleryComponent} from './components/gallery/gallery.component';
-import {CategoryMenuComponent} from './components/category-menu/category-menu.component';
-import {CategoryViewComponent} from './pages/category-view/category-view.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
@@ -69,10 +67,6 @@ const appRoutes: Routes = [
       path      : 'car/:id',
       component : CarPage
   },
-  {
-      path      : 'category/:typeCategory',
-      component : CategoryViewComponent
-  }
 ];
 
 
@@ -90,8 +84,6 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     GalleryComponent,
-    CategoryMenuComponent,
-    CategoryViewComponent,
     CarComponent,
     // routableComponents
   ],
