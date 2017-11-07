@@ -12,12 +12,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   logged: boolean = false;
-  router: Router;
 
-  constructor(public userService: UserService,
-              private formBuilder: FormBuilder,
-              rout: Router) {
-    this.router = rout;
+  constructor(
+      public userService    : UserService,
+      private formBuilder   : FormBuilder,
+      private router        : Router,
+  ) {
     this.createFormGroup();
   }
 
@@ -34,10 +34,9 @@ export class LoginComponent implements OnInit {
     } else {
       let success = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
       if (success) {
-        console.log(this.userService.user);
-        this.router.navigate(['/me']);
+        this.router.navigateByUrl('/me');
       } else {
-        this.router.navigate(['/login']);
+        this.router.navigateByUrl('/login');
       }
     }
   }

@@ -7,18 +7,19 @@ import {User} from "../../models/user";
   selector: 'app-profile',
   templateUrl: './user.profile.component.html',
   styleUrls: ['./user.profile.component.scss'],
-  providers: [UserService]
+  // providers: [UserService]
 })
 export class UserProfileComponent implements OnInit {
 
   loggedUser: User;
 
-  constructor(public userService: UserService) {
+  constructor(
+      public userService: UserService
+  ) {
   }
 
-  ngOnInit(): void {
-    this.loggedUser = this.userService.user;
-    console.log(this.loggedUser);
+  ngOnInit() {
+      this.loggedUser = this.userService.user
   }
 
 }

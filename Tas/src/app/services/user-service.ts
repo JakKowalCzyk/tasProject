@@ -6,7 +6,7 @@ import {Headers, Http} from "@angular/http";
 @Injectable()
 export class UserService {
 
-  public user: User;
+  user: User;
 
   headers: Headers = new Headers({
     "Content-Type": 'application/json'
@@ -29,10 +29,11 @@ export class UserService {
   }
 
   async afterLogin(data, base64 = null) {
+      console.log(data);
       let base = base64 || data.base64Auth;
       this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
       this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
-      return true;
+      return this.user;
   }
 
   isUserLogged(): any {
