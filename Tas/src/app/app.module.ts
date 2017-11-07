@@ -27,6 +27,7 @@ import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
+import { FilterComponent } from './components/filter/filter.component';
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -93,6 +94,7 @@ const appRoutes: Routes = [
     CategoryMenuComponent,
     CategoryViewComponent,
     CarComponent,
+    FilterComponent,
     // routableComponents
   ],
   imports: [RouterModule.forRoot(

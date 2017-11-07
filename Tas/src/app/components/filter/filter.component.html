@@ -1,0 +1,60 @@
+<div class="filter">
+  <form class="filter__form">
+    <label>Brand</label>
+    <select  [(ngModel)]="brand" name="brand">
+      <option  *ngFor="let brand of brandService.brands" value="{{brand.id}}">{{ brand.name }}</option>
+    </select>
+    <br>
+    <label>Fuel</label>
+    <select  [(ngModel)]="fuelType" name="fuelType">
+      <option  *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}</option>
+    </select>
+    <br>
+    <label>DriveType</label>
+    <select  [(ngModel)]="driveType" name="driveType">
+      <option  *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}</option>
+    </select>
+    <br>
+    <label>CategoryType</label>
+    <select  [(ngModel)]="categoryType" name="categoryType">
+      <option  *ngFor="let category of categories" value="{{category}}">{{ category }}</option>
+    </select>
+    <!--<br>-->
+
+    <!--<form #form="ngForm" class="datePickerFrom">-->
+      <!--<label>FromDate</label>-->
+      <!--<date-picker [(ngModel)]="dateFrom" name="dateFrom"></date-picker>-->
+    <!--</form>-->
+    <div class="form-group">
+      <input [(ngModel)]="priceSmallerThan" type="text" class="form-control"
+             formControlName="priceSmallerThan" placeholder="priceSmallerThan" required=""/>
+      <input [(ngModel)]="priceBiggerThan" type="text" class="form-control"
+             formControlName="priceBiggerThan" placeholder="priceBiggerThan" required=""/>
+    </div>
+
+    <label>HasElectricWindow</label>
+    <input [(ngModel)]="hasElectricWindow"  type="checkbox" name="windowCheckbox"
+           class="windowCheckbox-checkbox" id="mywindowCheckbox" checked>
+    <br>
+    <label>HasNavi</label>
+    <input [(ngModel)]="hasNavi"  type="checkbox" name="naviCheckbox"
+           class="naviCheckbox-checkbox" id="mynaviCheckbox" checked>
+    <br>
+    <label>HasAirConditioning</label>
+    <input [(ngModel)]="hasAirConditioning"  type="checkbox" name="airCheckbox"
+           class="airCheckbox-checkbox" id="myairCheckbox" checked>
+    <br>
+    <label>HasManualGearBox</label>
+    <input [(ngModel)]="hasManualGearbox"  type="checkbox" name="gearboxCheckbox"
+           class="gearboxCheckbox-checkbox" id="mygearboxCheckbox" checked>
+    <br>
+    <label>HasSunroof</label>
+    <input [(ngModel)]="hasSunroof"  type="checkbox" name="sunRoofCheckbox"
+           class="sunRoofCheckbox-checkbox" id="mysunRoofCheckbox" checked>
+    <br>
+    <label>HasRadio</label>
+    <input [(ngModel)]="hasRadio"  type="checkbox" name="radioCheckbox"
+           class="radioCheckbox-checkbox" id="myradioCheckbox" checked>
+  </form>
+</div>
+<button type="button" class="buttonFilter" (click)="getFilterCars(priceBiggerThan)">Filtruj</button>
