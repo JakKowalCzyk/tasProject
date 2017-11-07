@@ -1,0 +1,20 @@
+app-profile {
+  .profile {
+    padding: 5px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    &_title {
+      font-size: 260px;
+      font-weight: 900;
+    }
+
+    &_data {
+
+    }
+
+    &_edit {
+
+    }
+  }
+}

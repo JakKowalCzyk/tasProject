@@ -27,6 +27,7 @@ import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
+import {UserProfileComponent} from "./pages/user/user.profile.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -72,6 +73,10 @@ const appRoutes: Routes = [
   {
       path      : 'category/:typeCategory',
       component : CategoryViewComponent
+  },
+  {
+    path: 'me',
+    component: UserProfileComponent
   }
 ];
 
@@ -93,6 +98,7 @@ const appRoutes: Routes = [
     CategoryMenuComponent,
     CategoryViewComponent,
     CarComponent,
+    UserProfileComponent
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
