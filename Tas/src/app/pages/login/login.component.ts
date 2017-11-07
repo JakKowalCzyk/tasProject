@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     } else {
-      console.log(this.loginForm.get('email').value);
-      console.log(this.loginForm.get('password').value);
       this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
     }
   }

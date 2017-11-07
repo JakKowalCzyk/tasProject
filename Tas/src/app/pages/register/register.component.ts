@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
 import {User} from "../../models/user";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {matchOtherValidator} from "../match-other-validator";
 
 @Component({
   selector: 'app-register',
@@ -10,17 +12,25 @@ import {User} from "../../models/user";
 })
 export class RegisterComponent implements OnInit {
 
+  registerForm: FormGroup;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private formBuilder: FormBuilder) {
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      password: ['', Validators.compose([Validators.required])],
+      repeatPass: ['', Validators.compose([Validators.required, matchOtherValidator('password')])]
+    });
   }
 
-  registerUser(email: string, pass: string, repeat: string) {
-    if (pass == repeat) {
-      let user = new User(null, email, pass, "poznan", null, pass);
+  registerUser() {
+    if (!this.registerForm.valid) {
+      return;
+    } else {
+      let user = new User(null, this.registerForm.get('email').value, this.registerForm.get('name').value, "poznan", null, this.registerForm.get('password').value);
       this.userService.registerUser(user);
     }
-    else
-      console.log("wrong password")
   }
 
   ngOnInit() {
