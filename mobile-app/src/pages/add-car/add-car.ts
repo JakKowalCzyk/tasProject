@@ -31,16 +31,16 @@ export class AddCarPage {
 
     formGroup       : FormGroup;
 
-    brand           : string = 'Opel';
-    name            : string = 'Złomega';
-    fuelType        : string = 'LPG';
-    categoryType    : string = 'SEDAN';
-    power           : number = 160;
-    driveType       : string = 'RWD';
-    productionDate  : string = '1999';
+    brand           : string;
+    name            : string;
+    fuelType        : string;
+    categoryType    : string;
+    power           : number;
+    driveType       : string;
+    productionDate  : string;
     options         : Array<any> = [];
     photo           : any = '';
-    pricePerDay     : number = 12;
+    pricePerDay     : number;
 
     showLoader      : boolean = false;
 

@@ -29,7 +29,6 @@ export class AdService extends HasResponse {
         private authService     : AuthService,
         private eventss         : Events,
         private carPipe         : CarPipe,
-        // private file            : File,
         private transfer        : FileTransfer,
     ) {
         super(eventss)
@@ -51,6 +50,7 @@ export class AdService extends HasResponse {
                     this.brands[brand.id] = brand.name;
                 }
                 this.brandsArray = Object.keys(this.brands).map((key) => { return this.brands[key] });
+                this.brandsArray.sort((a,b) => { return a < b ? -1 : 1 })
             })
     }
 
