@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  email: string;
-  password: string;
   loginForm: FormGroup;
 
   constructor(public userService: UserService,
@@ -18,18 +16,21 @@ export class LoginComponent implements OnInit {
     this.createFormGroup();
   }
 
-  //https://toddmotto.com/angular-2-forms-reactive
-
   createFormGroup() {
     this.loginForm = this.formBuilder.group({
-      email: [''],
-      password: ['']
+      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      password: ['', Validators.compose([Validators.required])]
     });
   }
 
   login() {
-    console.log(this.email);
-    this.userService.loginUser(this.email, this.password);
+    if (!this.loginForm.valid) {
+      return;
+    } else {
+      console.log(this.loginForm.get('email').value);
+      console.log(this.loginForm.get('password').value);
+      this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+    }
   }
 
   ngOnInit() {

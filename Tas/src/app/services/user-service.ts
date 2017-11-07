@@ -17,9 +17,12 @@ export class UserService {
   }
 
   loginUser(email: string, pass: string) {
+    console.log(email);
+    console.log(pass);
     let base64 = btoa(email + ":" + pass);
+    console.log(base64);
     this.headers.append("Authorization", 'Basic ' + base64);
-
+    console.log(this.headers);
     this.http.get(this.routeService.routes.login, {headers: this.headers})
       .subscribe((res) => {
         let data = res.json();
@@ -50,4 +53,17 @@ export class UserService {
         console.log(err, 'register')
       });
   }
+
+  logout() {
+    this.http.get(this.routeService.routes.logout, {headers: this.headers})
+      .subscribe((res) => {
+        this.afterLogout();
+      })
+  }
+
+  afterLogout() {
+    this.headers.delete('Authorization');
+    this.user = null;
+  }
+
 }

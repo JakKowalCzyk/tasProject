@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  logout() {
+    this.userService.logout();
+  }
 
   ngOnInit(): void {
     // let hamburger = document.querySelector('.hamburger');
