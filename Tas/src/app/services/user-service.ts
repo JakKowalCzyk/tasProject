@@ -19,18 +19,13 @@ export class UserService {
   async loginUser(email: string, pass: string) : Promise<any> {
     let base64 = btoa(email + ":" + pass);
     this.headers.append("Authorization", 'Basic ' + base64);
-    const response = await this.http.get(this.routeService.routes.login, {headers: this.headers}).toPromise();
-    return this.afterLogin(response.json(), base64);
-      // .subscribe((res) => {
-      //   console.log("Co to cm,ds");
-      //   let data = res.json();
-      //   if (data.id) {
-      //     this.afterLogin(data, base64);
-      //   }
-      // }, (err) => {
-      //   console.error("error login");
-      //   this.headers.delete('Authorization');
-      // });
+    try {
+      const response = await this.http.get(this.routeService.routes.login, {headers: this.headers}).toPromise();
+      return this.afterLogin(response.json(), base64);
+    } catch (e) {
+      this.headers.delete('Authorization');
+      return false;
+    }
   }
 
   async afterLogin(data, base64 = null) {

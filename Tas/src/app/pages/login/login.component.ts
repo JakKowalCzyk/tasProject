@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   logged: boolean = false;
+  router: Router;
 
   constructor(public userService: UserService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              rout: Router) {
+    this.router = rout;
     this.createFormGroup();
   }
 
@@ -28,8 +32,13 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     } else {
-      let aa = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
-      //ta zmienna zwróci true po zalogowaniu
+      let success = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+      if (success) {
+        console.log(this.userService.user);
+        this.router.navigate(['/me']);
+      } else {
+        this.router.navigate(['/login']);
+      }
     }
   }
 
