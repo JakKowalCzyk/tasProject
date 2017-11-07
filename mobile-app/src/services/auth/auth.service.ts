@@ -22,7 +22,7 @@ export class AuthService extends HasResponse {
     constructor(
         private http            : Http,
         private routeService    : RouteService,
-        private eventss          : Events,
+        private eventss         : Events,
         private storage         : Storage,
     ) {
         super(eventss)

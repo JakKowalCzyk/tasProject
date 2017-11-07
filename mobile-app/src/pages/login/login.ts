@@ -56,13 +56,9 @@ export class LoginPage {
 
     unsubscribeEvents() {
         if (this._loggedSub) {
+            this.events.unsubscribe('logged'        , this._loggedSub);
             this._loggedSub = undefined;
         }
-        // if (this._errloggedSub) {
-        //     this._errloggedSub = undefined;
-        // }
-        // this.events.unsubscribe('logged'        , this._loggedSub);
-        // this.events.unsubscribe('error:login'   , this._errloggedSub);
     }
 
     onError(msg : string) {
