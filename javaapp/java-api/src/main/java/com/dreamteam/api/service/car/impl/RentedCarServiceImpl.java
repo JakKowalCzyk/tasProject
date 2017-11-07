@@ -22,12 +22,12 @@ import java.util.GregorianCalendar;
 @Service
 public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implements RentedCarService {
 
-    @Autowired
     private EmailService emailService;
 
     @Autowired
-    public RentedCarServiceImpl(RentedCarDAO modelDAO) {
+    public RentedCarServiceImpl(RentedCarDAO modelDAO, EmailService emailService) {
         super(modelDAO);
+        this.emailService = emailService;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RentedCarServiceImpl extends GenericServiceImpl<RentedCar> implemen
         return DateUtils.isSameDay(object.getFrom(), time);
     }
 
-    private Double getTotalPriceForACar(RentedCar object) {
+    public Double getTotalPriceForACar(RentedCar object) {
         if (isSameDay(object, object.getTo())) {
             return object.getCar().getPricePerDay();
         } else {
