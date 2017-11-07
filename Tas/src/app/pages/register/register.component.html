@@ -3,27 +3,30 @@
        <br>
        <h3>Rejestracja nowego użytkownika</h3>
 
-       <form ng-submit="formSubmit()" class="form">
+  <form [formGroup]="registerForm" class="form">
          <div class="register-inside">
            <div class="form-group">
-             <input id="email1" type="text" class="form-control" #emailBox placeholder="email" required=""/>
+             Name: <input id="name" type="text" class="form-control" formControlName="name" required=""/>
            </div>
 
            <div class="form-group">
-             <input type="password" class="form-control" #passBox placeholder="password" required=""/>
+             Email: <input id="email" type="text" class="form-control" formControlName="email" required=""/>
            </div>
 
            <div class="form-group">
-             <input type="password" class="form-control" #repeatBox placeholder="password" required/>
-             <div *ngIf="passBox.value!=repeatBox.value">Password doesn't match</div>
+             Pass: <input type="password" class="form-control" formControlName="password" required=""/>
            </div>
 
            <div class="form-group">
-             <button type="submit" class="btn btn-success"
-                     routerLink="/login" routerLinkActive="active"
-                     (click)="registerUser(emailBox.value, passBox.value, repeatBox.value)">Zarejestruj się
+             Repeat Password: <input type="password" class="form-control" formControlName="repeatPass" required/>
+           </div>
+
+           <div class="form-group">
+             <button type="submit" class="btn btn-success" [disabled]="!this.registerForm.valid" routerLink="/login"
+                     routerLinkActive="active" (click)="registerUser()">Zarejestruj się
              </button>
            </div>
+
            <div class="login"><a routerLink="/login" routerLinkActive="active" title="Zaloguj się">Powrót do
              logowania</a></div>
          </div>
