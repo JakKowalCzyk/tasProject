@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<div class="main">
+    <div class="main__text">Poznaj naszą ofertę</div>
+    <div class="main__cars">
+        <div class="main__cars__filters">Filtry</div>
+        <div class="main__cars__list">
+            <app-carc *ngFor="let car of carService.cars" [car]="car"></app-carc>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>

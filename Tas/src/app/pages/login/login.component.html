@@ -1,0 +1,27 @@
+<app-header></app-header>
+     <div class="login">
+       <br>
+       <h3>Zaloguj się</h3>
+
+       <form [formGroup]="loginForm" novalidate class="form">
+         <div class="login-inside">
+           <div class="form-group">
+             <input type="text" class="form-control" formControlName="email" placeholder="username" required=""/>
+           </div>
+
+           <div class="form-group">
+             <input type="password" class="form-control" formControlName="password" placeholder="password" required=""/>
+           </div>
+
+           <div class="form-group">
+             <button type="submit" [disabled]="!loginForm.valid" routerLink="/" (click)="login()"
+                     class="btn btn-success">Login
+             </button>
+           </div>
+
+           <div class="register"><a routerLink="/register" routerLinkActive="active" title="Zarejestruj się">Nie masz konta? Zarejestruj się!</a></div>
+
+         </div>
+       </form>
+       <br>
+     </div>

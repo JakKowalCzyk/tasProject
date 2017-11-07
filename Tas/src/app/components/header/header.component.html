@@ -1,0 +1,23 @@
+<header class="header">
+    <div class="header__text">
+        <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
+            <p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p>
+        </a>
+    </div>
+  <div class="header__login" *ngIf="!userService.isUserLogged()">
+        <a class="header__loginLink" routerLink="login" routerLinkActive="active" title="Zaloguj">
+            Zaloguj
+        </a>
+    </div>
+  <div class="login_name" *ngIf="userService.isUserLogged()">
+    <a class="user_name">Hello {{userService.user.name}}</a>
+  </div>
+
+  <div class="header__logout" *ngIf="userService.isUserLogged()">
+    <button (click)="logout()" class="header__logoutLink" routerLink="/" routerLinkActive="active" title="Logout">
+      Logout
+    </button>
+  </div>
+
+</header>
+<router-outlet></router-outlet>
