@@ -16,26 +16,28 @@ export class UserService {
               private routeService: RouteService) {
   }
 
-  loginUser(email: string, pass: string) {
+  async loginUser(email: string, pass: string) : Promise<any> {
     let base64 = btoa(email + ":" + pass);
     this.headers.append("Authorization", 'Basic ' + base64);
-    this.http.get(this.routeService.routes.login, {headers: this.headers})
-      .subscribe((res) => {
-        let data = res.json();
-        if (data.id) {
-          this.afterLogin(data, base64);
-        }
-      }, (err) => {
-        console.error("error login");
-        this.headers.delete('Authorization');
-      })
-
+    const response = await this.http.get(this.routeService.routes.login, {headers: this.headers}).toPromise();
+    return this.afterLogin(response.json(), base64);
+      // .subscribe((res) => {
+      //   console.log("Co to cm,ds");
+      //   let data = res.json();
+      //   if (data.id) {
+      //     this.afterLogin(data, base64);
+      //   }
+      // }, (err) => {
+      //   console.error("error login");
+      //   this.headers.delete('Authorization');
+      // });
   }
 
-  afterLogin(data, base64 = null) {
-    let base = base64 || data.base64Auth;
-    this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
-    this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
+  async afterLogin(data, base64 = null) {
+      let base = base64 || data.base64Auth;
+      this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
+      this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
+      return true;
   }
 
   isUserLogged(): any {

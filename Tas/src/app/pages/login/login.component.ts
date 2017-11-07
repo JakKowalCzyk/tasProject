@@ -24,18 +24,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  async login() {
     if (!this.loginForm.valid) {
       return;
     } else {
-      this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
-      if (this.userService.user) {
-        console.log(true)
-        // this.logged = true;
-      } else {
-        console.log(false)
-        // this.logged = false;
-      }
+      let aa = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+      //ta zmienna zwróci true po zalogowaniu
     }
   }
 
