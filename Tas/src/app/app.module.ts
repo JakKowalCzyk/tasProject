@@ -1,4 +1,4 @@
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
@@ -26,6 +26,7 @@ import {UserService} from "./services/user-service";
 import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
+import {PipesModule} from "./pipes/pipes.module";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -102,6 +103,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     HttpModule,
+    PipesModule,
+    ReactiveFormsModule
   ],
   providers: [
       CarService,

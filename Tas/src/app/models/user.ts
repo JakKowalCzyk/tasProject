@@ -5,6 +5,7 @@ export class User {
   city: string;
   roleType: string;
   hashPassword: string;
+  base64Auth: string;
 
 
   constructor(id: number, email: string, name: string, city: string, roleType: string, hashPassword: string) {

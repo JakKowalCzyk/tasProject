@@ -11,24 +11,28 @@ import {Car} from "../../models/car";
 })
 export class CarPage implements OnInit {
 
-  car   : Car;
-  id    : number;
-  sub   : any;
+  car: Car;
+  id: number;
+  sub: any;
 
 
-  constructor(
-      private route         : ActivatedRoute,
-      private carService    : CarService
-  ) { }
+  constructor(private route: ActivatedRoute,
+              private carService: CarService) {
+  }
 
   getCarById() {
-      this.car = this.carService.getCarById(this.id);
+    if (this.carService.cars.length <= 0) {
+      setTimeout(() => {
+        this.getCarById();
+      }, 500);
+    }
+    this.car = this.carService.getCarById(this.id);
   }
 
   ngOnInit() {
-      this.route.params.subscribe(params => {
-          this.id = +params['id']; // (+) converts string 'id' to a number
-          this.getCarById();
-      });
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.getCarById();
+    });
   }
 }
