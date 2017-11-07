@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
+
 })
 export class FilterComponent implements OnInit {
   engine          : Engine = new Engine('prom', 1, '1');
@@ -32,9 +34,16 @@ export class FilterComponent implements OnInit {
   constructor(private carService: CarService,
               private brandService: BrandService) { }
 
+  getFilterCars()
+
+  {
+    let params = new HttpParams().set('categoryType', this.categoryType);
+    console.log('getFilterCars');
+    // params.set('categoryType', this.categoryType).set('fuelType', this.fuelType);
+    this.carService.getFilterCars(params);
+  }
 
 
-              
   ngOnInit() {
   }
 
