@@ -30,7 +30,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {ServiceTestConfig.class, PasswordConfig.class})
 public abstract class AbstractServiceTest {
-    //test
+    //
     @MockBean
     protected RentedCarService rentedCarService;
     @MockBean
