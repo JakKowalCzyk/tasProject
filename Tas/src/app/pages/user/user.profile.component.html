@@ -2,9 +2,9 @@
 <div class="profile" *ngIf="userService.isUserLogged()">
   <div class="profile_title">Your data:</div>
   <div class="user_data">
-    {{userService.user.name}}
-    {{userService.user.email}}
-    {{userService.user.city}}
+    {{loggedUser.name}}
+    {{loggedUser.email}}
+    {{loggedUser.city}}
   </div>
   <div class="user_edit">
     <button type="submit" class="btn btn-success">Edit account</button>

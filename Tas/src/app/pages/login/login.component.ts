@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  logged: boolean = false;
 
   constructor(public userService: UserService,
               private formBuilder: FormBuilder) {
@@ -28,6 +29,13 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+      if (this.userService.user) {
+        console.log(true)
+        // this.logged = true;
+      } else {
+        console.log(false)
+        // this.logged = false;
+      }
     }
   }
 
