@@ -9,7 +9,6 @@ import {Car} from "../models/car";
 export class CarPipe implements PipeTransform {
 
   transform(car, ...args): any {
-    console.log(car);
     return new Car(car.id,
       car.brandId,
       car.name,
