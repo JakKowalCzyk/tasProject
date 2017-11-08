@@ -40,8 +40,12 @@ export class UserService {
     return this.user != null;
   }
 
+  isAdmin(): any {
+    return this.user.roleType == this.user.role.ROLE_ADMIN;
+  }
+
   registerUser(userData): any {
-    this.http.post(this.routeService.routes.register, userData, this.headers)
+    this.http.post(this.routeService.routes.register, userData, {headers: this.headers})
       .subscribe((res) => {
         console.log(res);
       }, (err) => {
