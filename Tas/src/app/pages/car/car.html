@@ -3,14 +3,15 @@
   car works!
 </p>
 <div *ngIf="car != null" class="car">
-    {{car.model}}<br>
-  {{car.id}}<br>
-  {{car.brand}}<br>
-  {{car.model}}<br>
-  {{car.category}}<br>
+  Marka: {{ brandService.getBrandByCarId(this.car.brand).name }}<br>
+  Model: {{ car.model}}<br>
+  Rok Produkcji: {{ car.year }}<br>
+  Napęd: {{ car.engine.drive }}<br>
+  Paliwo: {{ car.engine.fuel }}<br>
+  Moc: {{ car.engine.power }}<br>
+  Cena: {{ car.price  }} zł/dzień<br>
+  <img class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
 
-  {{car.price  }}<br>
- {{ car.year }}
 
 </div>
 <!--<img class="img" src="{{car.defaultCarPhoto.photoUrl}}">-->

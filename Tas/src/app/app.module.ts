@@ -17,8 +17,6 @@ import {LoginComponent} from './pages/login/login.component';
 import {OfferComponent} from './pages/offer/offer.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {GalleryComponent} from './components/gallery/gallery.component';
-import {CategoryMenuComponent} from './components/category-menu/category-menu.component';
-import {CategoryViewComponent} from './pages/category-view/category-view.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
@@ -27,6 +25,7 @@ import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
+import { FilterComponent } from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
 
 //services
@@ -71,10 +70,6 @@ const appRoutes: Routes = [
       component : CarPage
   },
   {
-      path      : 'category/:typeCategory',
-      component : CategoryViewComponent
-  },
-  {
     path: 'me',
     component: UserProfileComponent
   }
@@ -95,9 +90,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     GalleryComponent,
-    CategoryMenuComponent,
-    CategoryViewComponent,
     CarComponent,
+    FilterComponent,
     UserProfileComponent
     // routableComponents
   ],

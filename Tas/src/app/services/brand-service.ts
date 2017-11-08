@@ -7,6 +7,9 @@ import {RouteService} from "./route-service";
 export class BrandService {
   constructor(private http: HttpClient,
               private routeService: RouteService) {
+    if (this.brands.length <= 0) {
+    this.getBrands();
+  }
   }
 
   brands: Array<Brand> = [];
@@ -29,6 +32,12 @@ export class BrandService {
         }
       });
 
+  }
+
+  getBrandByCarId(id: number): any {
+    return this.brands.filter((el) => {
+      return el.id == id
+    })[0];
   }
 
 }

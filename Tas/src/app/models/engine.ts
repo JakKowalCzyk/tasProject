@@ -1,4 +1,16 @@
 export class Engine {
+  fuelType = [
+    'PB',
+    'DIESEL',
+    'LPG',
+    'ELECTRIC'
+  ];
+
+  driveType = [
+    'FWD',
+    'RWD',
+    'AWD'
+  ];
   fuel : string;
   power: number;
   drive: string;

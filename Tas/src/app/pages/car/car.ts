@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
+import {BrandService} from "../../services/brand-service";
 
 @Component({
   selector: 'app-car',
@@ -17,7 +18,8 @@ export class CarPage implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-              private carService: CarService) {
+              private carService: CarService,
+              private brandService: BrandService) {
   }
 
   getCarById() {

@@ -13,13 +13,13 @@
 <button type="button" class="btn red darken-1" (click)="getCarsByCategory('CITY')">City</button>
 <button type="button" class="btn red darken-1" (click)="getCarsByCategory('SPORT')">Sport</button>
 <button type="button" class="btn red darken-1" (click)="getCarsByCategory('SUV')">Suv</button>
-<app-category-menu></app-category-menu>
+
 <!--<app-gallery></app-gallery>-->
 <article class="gallery">
   <li *ngFor="let car of carService.cars; let i=index" class="mainImg" >
     <div>
       <p class="zamow">
-        {{brandService.brands[car.brand-1].name}} {{car.model}}<br>
+        {{car.model}}<br>
         {{car.price}} zł/dzień</p>
 
       <a  [routerLink]="['/car', car.id]" routerLinkActive="active" title="Specyfikacja auta">
@@ -28,7 +28,7 @@
       </a></div>
     <div>
       <article class="imgMenu">
-        <p>{{car.brand}} {{car.model}}<br>
+        <p>{{car.model}}<br>
           {{car.price}} zł/dzień</p>
       </article></div>
   </li>
