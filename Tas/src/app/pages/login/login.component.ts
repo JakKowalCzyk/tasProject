@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  logged: boolean = false;
+  logged: boolean = true;
 
   constructor(
       public userService    : UserService,
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/me');
       } else {
         this.router.navigateByUrl('/login');
+        this.logged = false;
       }
     }
   }

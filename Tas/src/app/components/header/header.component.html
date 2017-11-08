@@ -9,8 +9,11 @@
             Zaloguj
         </a>
     </div>
-  <div class="login_name" *ngIf="userService.isUserLogged()">
-    <a class="user_name">Hello {{userService.user.name}}</a>
+  <div class="header_profile" *ngIf="userService.isUserLogged()">
+    Your profile:
+    <button class="header_profileLink" routerLink="/me" routerLinkActive="active" title="profile">
+      {{userService.user.name}}
+    </button>
   </div>
 
   <div class="header__logout" *ngIf="userService.isUserLogged()">

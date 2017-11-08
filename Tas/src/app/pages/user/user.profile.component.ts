@@ -7,7 +7,6 @@ import {User} from "../../models/user";
   selector: 'app-profile',
   templateUrl: './user.profile.component.html',
   styleUrls: ['./user.profile.component.scss'],
-  // providers: [UserService]
 })
 export class UserProfileComponent implements OnInit {
 
