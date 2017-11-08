@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
@@ -32,7 +32,8 @@ export class FilterComponent implements OnInit {
   hasSunroof: boolean;
   hasRadio: boolean;
   constructor(private carService: CarService,
-              private brandService: BrandService) { }
+              public brandService: BrandService) {
+  }
 
   getFilterCars()
 
