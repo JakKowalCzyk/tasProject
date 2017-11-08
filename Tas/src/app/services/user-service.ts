@@ -6,7 +6,7 @@ import {Headers, Http} from "@angular/http";
 @Injectable()
 export class UserService {
 
-  public user: User;
+  user: User;
 
   headers: Headers = new Headers({
     "Content-Type": 'application/json'
@@ -16,29 +16,24 @@ export class UserService {
               private routeService: RouteService) {
   }
 
-  loginUser(email: string, pass: string) {
-    console.log(email);
-    console.log(pass);
+  async loginUser(email: string, pass: string) : Promise<any> {
     let base64 = btoa(email + ":" + pass);
-    console.log(base64);
     this.headers.append("Authorization", 'Basic ' + base64);
-    console.log(this.headers);
-    this.http.get(this.routeService.routes.login, {headers: this.headers})
-      .subscribe((res) => {
-        let data = res.json();
-        if (data.id) {
-          this.afterLogin(data, base64);
-        }
-      }, (err) => {
-        console.error("error login")
-      })
-
+    try {
+      const response = await this.http.get(this.routeService.routes.login, {headers: this.headers}).toPromise();
+      return this.afterLogin(response.json(), base64);
+    } catch (e) {
+      this.headers.delete('Authorization');
+      return false;
+    }
   }
 
-  afterLogin(data, base64 = null) {
-    let base = base64 || data.base64Auth;
-    this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
-    this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
+  async afterLogin(data, base64 = null) {
+      console.log(data);
+      let base = base64 || data.base64Auth;
+      this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
+      this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
+      return this.user;
   }
 
   isUserLogged(): any {

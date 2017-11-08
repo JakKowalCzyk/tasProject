@@ -26,6 +26,7 @@ import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import { FilterComponent } from './components/filter/filter.component';
+import {UserProfileComponent} from "./pages/user/user.profile.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -68,6 +69,10 @@ const appRoutes: Routes = [
       path      : 'car/:id',
       component : CarPage
   },
+  {
+    path: 'me',
+    component: UserProfileComponent
+  }
 ];
 
 
@@ -87,6 +92,7 @@ const appRoutes: Routes = [
     GalleryComponent,
     CarComponent,
     FilterComponent,
+    UserProfileComponent
     // routableComponents
   ],
   imports: [RouterModule.forRoot(

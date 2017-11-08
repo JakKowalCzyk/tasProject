@@ -3,6 +3,11 @@
        <br>
        <h3>Zaloguj się</h3>
 
+       <div class="login_failed" *ngIf="!logged">
+         <br>
+         <h3>Invalid email or password! Try again!</h3>
+       </div>
+
        <form [formGroup]="loginForm" novalidate class="form">
          <div class="login-inside">
            <div class="form-group">
@@ -14,8 +19,7 @@
            </div>
 
            <div class="form-group">
-             <button type="submit" [disabled]="!loginForm.valid" routerLink="/" (click)="login()"
-                     class="btn btn-success">Login
+             <button type="submit" [disabled]="!loginForm.valid" (click)="login()" class="btn btn-success">Login
              </button>
            </div>
 

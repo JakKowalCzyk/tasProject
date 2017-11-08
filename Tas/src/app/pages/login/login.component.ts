@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  logged: boolean = true;
 
-  constructor(public userService: UserService,
-              private formBuilder: FormBuilder) {
+  constructor(
+      public userService    : UserService,
+      private formBuilder   : FormBuilder,
+      private router        : Router,
+  ) {
     this.createFormGroup();
   }
 
@@ -23,11 +28,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  async login() {
     if (!this.loginForm.valid) {
       return;
     } else {
-      this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+      let success = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
+      if (success) {
+        this.router.navigateByUrl('/me');
+      } else {
+        this.router.navigateByUrl('/login');
+        this.logged = false;
+      }
     }
   }
 
