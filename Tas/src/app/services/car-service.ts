@@ -3,6 +3,8 @@ import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
 import {Http} from "@angular/http";
 import {RouteService} from "./route-service";
+import {DefaultCarPhoto} from "../models/default-car-photo";
+import {Engine} from "../models/engine";
 
 @Injectable()
 export class CarService {
@@ -27,6 +29,18 @@ export class CarService {
     return new Headers({"categoryType": categoryType});
   }
 
+  getFilterCars(params): any{
+    this.cars = [];
+    this.carsCategory = [];
+    console.log(params)
+    this.http.get(this.routeService.routes.filter , { params: params
+
+    })
+      .subscribe((cars) => {
+        this.populateCarList(cars);
+      });
+
+  }
 
   getCarsByCategory(categoryType: string): any {
     this.cars = [];
