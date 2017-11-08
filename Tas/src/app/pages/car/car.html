@@ -3,7 +3,7 @@
   car works!
 </p>
 <div *ngIf="car != null" class="car">
-  Marka: {{ brandService.brands[car.brand-1]._name}}<br>
+  Marka: {{ brandService.getBrandByCarId(this.car.brand).name }}<br>
   Model: {{ car.model}}<br>
   Rok Produkcji: {{ car.year }}<br>
   Napęd: {{ car.engine.drive }}<br>

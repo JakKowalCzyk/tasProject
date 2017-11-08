@@ -34,4 +34,10 @@ export class BrandService {
 
   }
 
+  getBrandByCarId(id: number): any {
+    return this.brands.filter((el) => {
+      return el.id == id
+    })[0];
+  }
+
 }
