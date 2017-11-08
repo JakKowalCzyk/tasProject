@@ -32,7 +32,7 @@ export class CarService {
   getFilterCars(params): any{
     this.cars = [];
     this.carsCategory = [];
-
+    console.log(params)
     this.http.get(this.routeService.routes.filter , { params: params
 
     })
