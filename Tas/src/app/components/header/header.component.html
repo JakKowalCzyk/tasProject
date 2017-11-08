@@ -9,6 +9,23 @@
             Zaloguj
         </a>
     </div>
+
+
+  <!--<div class="user_profile" *ngIf="userService.isUserLogged()">-->
+  <!--<button mat-button [matMenuTriggerFor]="menu">Profile</button>-->
+  <!--</div>-->
+
+  <!--<mat-menu #menu="matMenu">-->
+  <!--<button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>-->
+  <!--<button mat-menu-item routerLink="/me/rents" routerLinkActive="true">My rents</button>-->
+  <!--<button mat-menu-item routerLink="/" (click)="logout()" routerLinkActive="true">Logout</button>-->
+  <!--</mat-menu>-->
+
+  <!--<mat-menu #menu="userMenu">-->
+  <!--<button mat-menu-item routerLink="/me" routerLinkActive="active" title="profile">{{userService.user.name}}</button>-->
+  <!--<button (click)="logout()" mat-menu-item routerLink="/" routerLinkActive="active" title="Logout">Logout</button>-->
+  <!--</mat-menu>-->
+
   <div class="header_profile" *ngIf="userService.isUserLogged()">
     Your profile:
     <button class="header_profileLink" routerLink="/me" routerLinkActive="active" title="profile">

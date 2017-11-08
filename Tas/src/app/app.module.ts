@@ -25,8 +25,10 @@ import {RouteService} from "./services/route-service";
 import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
-import { FilterComponent } from './components/filter/filter.component';
+import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
+import {MaterialModule} from "./material.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -34,12 +36,13 @@ import {UserProfileComponent} from "./pages/user/user.profile.component";
 
 const appRoutes: Routes = [
   {
-      path      : '',
+      path      : 'main',
       component : MainPage
   },
   {
-      path      : 'main',
-      component : MainPage
+    path: '',
+    redirectTo: 'main',
+    pathMatch: 'full'
   },
   {
       path      : 'about-firm',
@@ -104,7 +107,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     HttpModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [
       CarService,
