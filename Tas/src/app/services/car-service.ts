@@ -21,7 +21,7 @@ export class CarService {
   activeFilters : any;
 
 
-  async getCarById(id: number): Promise<Car> {
+  getCarById(id: number) {
     return this.cars.filter((el) => {
       return el.id == id
     })[0];
