@@ -1,44 +1,29 @@
 <header class="header">
+  <mat-toolbar class="mat_header">
     <div class="header__text">
-        <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
-            <p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p>
-        </a>
+      <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
+        <p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p>
+      </a>
     </div>
-  <div class="header__login" *ngIf="!userService.isUserLogged()">
-        <a class="header__loginLink" routerLink="/login" routerLinkActive="active" title="Zaloguj">
-            Zaloguj
-        </a>
+    <div class="header__login" *ngIf="!userService.isUserLogged()">
+      <button class="header__loginLink" routerLink="/login" routerLinkActive="active" title="Zaloguj">
+        Zaloguj
+      </button>
     </div>
 
 
-  <div class="user_profile" *ngIf="userService.isUserLogged()">
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
-      <mat-icon>more_vert</mat-icon>
-      Profile
-    </button>
-    <mat-menu #appMenu="matMenu">
-      <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
-      <button mat-menu-item routerLink="/me/rents" routerLinkActive="true">My rents</button>
-      <button mat-menu-item routerLink="/" (click)="logout()" routerLinkActive="true">Logout</button>
-    </mat-menu>
-  </div>
+    <div class="user_profile" *ngIf="userService.isUserLogged()">
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+        Profile
+      </button>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
+        <button mat-menu-item routerLink="/me/rents" routerLinkActive="true">My rents</button>
+        <button mat-menu-item routerLink="/" (click)="logout()" routerLinkActive="true">Logout</button>
+      </mat-menu>
+    </div>
 
-  <!--<mat-menu #menu="userMenu">-->
-  <!--<button mat-menu-item>Shut down</button>-->
-  <!--</mat-menu>-->
-
-
-  <!--<div class="header_profile" *ngIf="userService.isUserLogged()">-->
-  <!--Your profile:-->
-  <!--<button class="header_profileLink" routerLink="/me" routerLinkActive="active" title="profile">-->
-  <!--{{userService.user.name}}-->
-  <!--</button>-->
-  <!--</div>-->
-
-  <!--<div class="header__logout" *ngIf="userService.isUserLogged()">-->
-  <!--<button (click)="logout()" class="header__logoutLink" routerLink="/" routerLinkActive="active" title="Logout">-->
-  <!--Logout-->
-  <!--</button>-->
-  <!--</div>-->
+  </mat-toolbar>
 
 </header>

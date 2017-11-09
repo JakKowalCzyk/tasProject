@@ -28,14 +28,19 @@ export class CarPage implements OnInit {
     this.brand = this.brandService.getBrandByCarId(id);
   }
 
-  getCarById() {
+  isCarLoaded(): any {
+    console.log(this.car);
+    return this.car != null;
+  }
+
+  async getCarById() {
     if (this.carService.cars.length <= 0) {
       setTimeout(() => {
         this.getCarById();
       }, 500);
     }
-    this.car = this.carService.getCarById(this.id);
-
+    this.car = await this.carService.getCarById(this.id);
+    console.log(this.car)
   }
 
   ngOnInit() {

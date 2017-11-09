@@ -17,7 +17,7 @@ export class CarService {
   cars: Array<Car> = [];
   carsCategory: Array<Car> = [];
 
-  getCarById(id: number): any {
+  async getCarById(id: number): Promise<Car> {
     console.log(this.cars);
     return this.cars.filter((el) => {
       return el.id == id
