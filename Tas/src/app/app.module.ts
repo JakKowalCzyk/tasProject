@@ -28,7 +28,6 @@ import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
 import {MaterialModule} from "./material.module";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -36,13 +35,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const appRoutes: Routes = [
   {
-      path      : 'main',
-      component : MainPage
+    path: '',
+    component: MainPage
   },
   {
-    path: '',
-    redirectTo: 'main',
-    pathMatch: 'full'
+    path      : 'main',
+    component : MainPage
   },
   {
       path      : 'about-firm',
@@ -102,14 +100,13 @@ const appRoutes: Routes = [
     appRoutes,
     { enableTracing: true } // <-- debugging purposes only
   ),
+    MaterialModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     HttpModule,
     PipesModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    BrowserAnimationsModule
+    ReactiveFormsModule
   ],
   providers: [
       CarService,
