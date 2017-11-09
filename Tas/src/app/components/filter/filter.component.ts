@@ -59,12 +59,7 @@ export class FilterComponent implements OnInit {
           hasSunroof : this.hasSunroof  || undefined,
           hasRadio : this.hasRadio  || undefined,
       };
-    let begin = this.dateFrom;
-    let end = this.dateTo;
-    data['beginDate']   = begin;
-    data['endDate']     = end;
-    data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
-    data['to']          = end.year   + '-' + end.month   + '-' + end.day;
+
       this.carService.getFilterCars(data);
       // if (this.options != null && this.options.length > 0)
       //     for (let option of this.options) {

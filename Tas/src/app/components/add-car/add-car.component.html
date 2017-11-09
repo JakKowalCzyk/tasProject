@@ -1,22 +1,46 @@
-<p>
-  add-car works!
-</p>
-<label>Brand</label>
-<select  [(ngModel)]="brand" name="brand">
-  <option  *ngFor="let brand of brandService.brands" value="{{brand.id}}">{{ brand.name }}</option>
-</select>
-<br>
-<label>Fuel</label>
-<select  [(ngModel)]="fuelType" name="fuelType">
-  <option  *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}</option>
-</select>
-<br>
-<label>DriveType</label>
-<select  [(ngModel)]="driveType" name="driveType">
-  <option  *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}</option>
-</select>
-<br>
-<label>CategoryType</label>
-<select  [(ngModel)]="categoryType" name="categoryType">
-  <option  *ngFor="let category of categories" value="{{category}}">{{ category }}</option>
-</select>
+<mat-form-field>
+  <mat-select  [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria">
+    <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select [(ngModel)]="brand" name="brand" placeholder="Marka">
+    <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
+      {{ brand.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+defaultCarPhoto
+
+<mat-form-field>
+  <mat-select [(ngModel)]="fuelType" name="fuelType" placeholder="Paliwo">
+    <mat-option *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field >
+  <mat-select [(ngModel)]="driveType" name="driveType" placeholder="Napęd">
+    <mat-option *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!--<div [formGroup]="formGroup">-->
+  <!--<mat-checkbox [(ngModel)]="hasElectricWindow"  formControlName="hasElectricWindow">Elektryczne szyby</mat-checkbox>-->
+  <!--<br>-->
+  <!--<mat-checkbox [(ngModel)]="hasNavi"  formControlName="hasNavi">Navi</mat-checkbox>-->
+  <!--<br>-->
+  <!--<mat-checkbox [(ngModel)]="hasAirConditioning"  formControlName="hasAirConditioning">Klima</mat-checkbox>-->
+  <!--<br>-->
+  <!--<mat-checkbox [(ngModel)]="hasManualGearbox"  formControlName="hasManualGearbox">Manualna skrzynia</mat-checkbox>-->
+  <!--<br>-->
+  <!--<mat-checkbox [(ngModel)]="hasSunroof"  formControlName="hasSunroof">Szyberdach</mat-checkbox>-->
+  <!--<br>-->
+  <!--<mat-checkbox [(ngModel)]="hasRadio"  formControlName="hasRadio">Radio</mat-checkbox>-->
+<!--</div>-->
+
+
