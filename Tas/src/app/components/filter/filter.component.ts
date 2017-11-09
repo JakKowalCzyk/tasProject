@@ -3,6 +3,8 @@ import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
 import {HttpParams} from "@angular/common/http";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'app-filter',
@@ -11,6 +13,8 @@ import {HttpParams} from "@angular/common/http";
 
 })
 export class FilterComponent implements OnInit {
+  myFilter: any;
+  formGroup       : FormGroup;
   engine          : Engine = new Engine('prom', 1, '1');
   categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
   dateFrom       : any;
@@ -31,23 +35,36 @@ export class FilterComponent implements OnInit {
   hasManualGearbox: boolean;
   hasSunroof: boolean;
   hasRadio: boolean;
+
   constructor(private carService: CarService,
               public brandService: BrandService) {
   }
 
   getFilterCars() {
-      console.log(this.hasAirConditioning);
-      console.log(this.hasManualGearbox);
+      console.log(this.dateFrom);
+      console.log(this.dateTo);
       let data = {
           brand             : this.brand                || undefined,
           fuelType          : this.fuelType             || undefined,
           categoryType      : this.categoryType         || undefined,
-          powerBiggerThan   : this.powerSmallerThan     || undefined,
+          powerBiggerThan   : this.powerBiggerThan      || undefined,
+          powerSmallerThan  : this.powerBiggerThan      || undefined,
           driveType         : this.driveType            || undefined,
           priceSmallerThan  : this.priceSmallerThan     || undefined,
+          priceBiggerThan   : this.priceBiggerThan      || undefined,
           hasElectricWindow : this.hasElectricWindow    || undefined,
+          hasNavi           : this.hasNavi              || undefined,
+          hasAirConditioning : this.hasAirConditioning  || undefined,
+          hasManualGearbox : this.hasManualGearbox  || undefined,
+          hasSunroof : this.hasSunroof  || undefined,
+          hasRadio : this.hasRadio  || undefined,
       };
-
+    let begin = this.dateFrom;
+    let end = this.dateTo;
+    data['beginDate']   = begin;
+    data['endDate']     = end;
+    data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
+    data['to']          = end.year   + '-' + end.month   + '-' + end.day;
       this.carService.getFilterCars(data);
       // if (this.options != null && this.options.length > 0)
       //     for (let option of this.options) {
@@ -73,19 +90,38 @@ export class FilterComponent implements OnInit {
       //         }
       //     }
 
-      // if (this.dateRange && this.dateRange.beginDate) {
-      //     let begin = this.dateRange.beginDate;
-      //     let end = this.dateRange.endDate;
-      //     data['beginDate']   = begin;
-      //     data['endDate']     = end;
-      //     data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
-      //     data['to']          = end.year   + '-' + end.month   + '-' + end.day;
-      // }
+
+          // let begin = this.dateFrom;
+          // let end = this.dateTo;
+          // data['beginDate']   = begin;
+          // data['endDate']     = end;
+          // data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
+          // data['to']          = end.year   + '-' + end.month   + '-' + end.day;
+
       // this.filterService.filter(data);
   }
 
 
   ngOnInit() {
+    this.myFilter = (d: Date): boolean => {
+      const day = d.getDay();
+      // Prevent Saturday and Sunday from being selected.
+      return day !== 0 && day !== 6;
+    }
+    this.formGroup = new FormGroup({
+      priceSmallerThan: new FormControl(),
+      priceBiggerThan: new FormControl(),
+      powerBiggerThan: new FormControl(),
+      powerSmallerThan: new FormControl(),
+      hasElectricWindow: new FormControl(),
+      hasNavi: new FormControl(),
+      hasAirConditioning: new FormControl(),
+      hasManualGearbox: new FormControl(),
+      hasSunroof: new FormControl(),
+      hasRadio: new FormControl(),
+      brand: new FormControl(),
+      category: new FormControl(),
+    });
   }
 
 }
