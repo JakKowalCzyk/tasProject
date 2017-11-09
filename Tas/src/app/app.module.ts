@@ -35,6 +35,7 @@ import {
   MatInputModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatSidenavModule,
   MatToolbarModule
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
@@ -117,7 +118,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSidenavModule
   ],
   providers: [
     CarService,

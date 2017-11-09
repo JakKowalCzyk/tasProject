@@ -1,5 +1,51 @@
 <header class="header">
+  <div class="side_nav">
+
+    <mat-sidenav-container class="example-container">
+
+      <mat-sidenav #sidenav mode="side" class="example-sidenav">
+        <div>
+          <button class="bt" (click)="sidenav.close()" routerLink="/about-firm" routerLinkActive="active"
+                  title="O firmie">O firmie
+          </button>
+        </div>
+        <div>
+          <button routerLink="/login" (click)="sidenav.close()" routerLinkActive="active" title="Logowanie">Logowanie
+          </button>
+        </div>
+        <div>
+          <button routerLink="/about-firm" (click)="sidenav.close()" routerLinkActive="active" title="O firmie">O
+            firmie
+          </button>
+        </div>
+        <div>
+          <button routerLink="/offer" (click)="sidenav.close()" routerLinkActive="active" title="Przegląd samochodów">
+            Oferta
+          </button>
+        </div>
+        <div>
+          <button routerLink="/terms" (click)="sidenav.close()" routerLinkActive="active"
+                  title="Warunki wynajmu samochodu">Warunki wynajmu
+          </button>
+        </div>
+        <div>
+          <button routerLink="/contact" (click)="sidenav.close()" routerLinkActive="active" title="Kontakt do firmy">
+            Kontakt
+          </button>
+        </div>
+      </mat-sidenav>
+      <button type="button" mat-button (click)="sidenav.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+    </mat-sidenav-container>
+
+
+  </div>
+
   <mat-toolbar class="mat_header">
+
+
     <div class="header__text">
       <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
         <span><p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p></span>
@@ -11,11 +57,9 @@
       </button>
     </div>
 
-
     <div class="user_profile" *ngIf="userService.isUserLogged()">
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
-        <mat-icon>more_vert</mat-icon>
-        Profile
+        <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
@@ -27,3 +71,4 @@
   </mat-toolbar>
 
 </header>
+

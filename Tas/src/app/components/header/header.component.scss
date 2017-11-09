@@ -7,6 +7,23 @@
     background-color: $main;
     display: flex;
     padding: 0 15px;
+    .example-sidenav {
+      padding: 20px;
+    }
+    .example-container {
+      width: 500px;
+      height: 300px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+    .example-container mat-sidenav {
+      max-width: 200px;
+    }
+
+    .example-container .mat-sidenav-content,
+    .example-container mat-sidenav {
+      display: flex;
+      overflow: visible;
+    }
     &__logo {
       margin: 0;
     }
