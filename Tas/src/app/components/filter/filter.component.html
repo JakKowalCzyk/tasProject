@@ -1,61 +1,95 @@
 <div class="filter">
   <form class="filter__form">
-    <label>Brand</label>
-    <select  [(ngModel)]="brand" name="brand">
-      <option  *ngFor="let brand of brandService.brands" value="{{brand.id}}">{{ brand.name }}</option>
-    </select>
-    <br>
-    <label>Fuel</label>
-    <select  [(ngModel)]="fuelType" name="fuelType">
-      <option  *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}</option>
-    </select>
-    <br>
-    <label>DriveType</label>
-    <select  [(ngModel)]="driveType" name="driveType">
-      <option  *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}</option>
-    </select>
-    <br>
-    <label>CategoryType</label>
-    <select  [(ngModel)]="categoryType" name="categoryType">
-      <option  *ngFor="let category of categories" value="{{category}}">{{ category }}</option>
-    </select>
-    <!--<br>-->
+    <mat-form-field>
+      <mat-select  [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria">
+        <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <!--<form #form="ngForm" class="datePickerFrom">-->
-      <!--<label>FromDate</label>-->
-      <!--<date-picker [(ngModel)]="dateFrom" name="dateFrom"></date-picker>-->
-    <!--</form>-->
+    <mat-form-field>
+      <mat-select [(ngModel)]="brand" name="brand" placeholder="Marka">
+        <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
+          {{ brand.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="fuelType" name="fuelType" placeholder="Paliwo">
+        <mat-option *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-select [(ngModel)]="driveType" name="driveType" placeholder="Napęd">
+        <mat-option *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
+    <mat-form-field [formGroup]="formGroup">
+      <div>
+      <input matInput type="number" formControlName="priceBiggerThan" [(ngModel)]="priceBiggerThan"
+             placeholder="Cena od">
+      </div>
+    </mat-form-field>
+    <mat-form-field [formGroup]="formGroup">
+      <div>
+      <input matInput type="number" formControlName="priceSmallerThan" [(ngModel)]="priceSmallerThan"
+             placeholder="Cena do">
+      </div>
+    </mat-form-field>
+    <mat-form-field [formGroup]="formGroup">
+      <div>
+        <input matInput type="number" formControlName="powerBiggerThan" [(ngModel)]="powerBiggerThan"
+               placeholder="KM od">
+      </div>
+
+    </mat-form-field>
+    <mat-form-field [formGroup]="formGroup">
+      <div>
+        <input matInput type="number" formControlName="powerSmallerThan" [(ngModel)]="powerSmallerThan"
+               placeholder="KM do">
+      </div>
+
+    </mat-form-field>
 
 
-    <label>HasElectricWindow</label>
-    <input [(ngModel)]="hasElectricWindow"  type="checkbox" name="windowCheckbox"
-           class="windowCheckbox-checkbox" id="mywindowCheckbox" checked>
+    <div [formGroup]="formGroup">
+      <mat-checkbox [(ngModel)]="hasElectricWindow"  formControlName="hasElectricWindow">Elektryczne szyby</mat-checkbox>
     <br>
-    <label>HasNavi</label>
-    <input [(ngModel)]="hasNavi"  type="checkbox" name="naviCheckbox"
-           class="naviCheckbox-checkbox" id="mynaviCheckbox" checked>
+      <mat-checkbox [(ngModel)]="hasNavi"  formControlName="hasNavi">Navi</mat-checkbox>
     <br>
-    <label>HasAirConditioning</label>
-    <input [(ngModel)]="hasAirConditioning"  type="checkbox" name="airCheckbox"
-           class="airCheckbox-checkbox" id="myairCheckbox" checked>
+      <mat-checkbox [(ngModel)]="hasAirConditioning"  formControlName="hasAirConditioning">Klima</mat-checkbox>
     <br>
-    <label>HasManualGearBox</label>
-    <input [(ngModel)]="hasManualGearbox"  type="checkbox" name="gearboxCheckbox"
-           class="gearboxCheckbox-checkbox" id="mygearboxCheckbox" checked>
+      <mat-checkbox [(ngModel)]="hasManualGearbox"  formControlName="hasManualGearbox">Manualna skrzynia</mat-checkbox>
     <br>
-    <label>HasSunroof</label>
-    <input [(ngModel)]="hasSunroof"  type="checkbox" name="sunRoofCheckbox"
-           class="sunRoofCheckbox-checkbox" id="mysunRoofCheckbox" checked>
+      <mat-checkbox [(ngModel)]="hasSunroof"  formControlName="hasSunroof">Szyberdach</mat-checkbox>
     <br>
-    <label>HasRadio</label>
-    <input [(ngModel)]="hasRadio"  type="checkbox" name="radioCheckbox"
-           class="radioCheckbox-checkbox" id="myradioCheckbox" checked>
+      <mat-checkbox [(ngModel)]="hasRadio"  formControlName="hasRadio">Radio</mat-checkbox>
+    </div>
+
+    <mat-form-field class="example-full-width">
+      <input matInput [min]="minDate"  [matDatepicker]="dateFromPicker" [(ngModel)]="dateFrom" name="dateFrom" placeholder="Od" >
+      <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #dateFromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="!dateFrom; else elseBlock"></div>
+    <ng-template #elseBlock>
+      <mat-form-field class="example-full-width">
+        <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do" required>
+        <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateToPicker></mat-datepicker>
+      </mat-form-field>
+    </ng-template>
+
+
+    <button mat-raised-button color="primary" class="buttonFilter"  (click)="getFilterCars()">Filtruj</button>
   </form>
-  <input type="text" [(ngModel)]="priceSmallerThan" placeholder="Cena mniejsza niż"/>
-  <input type="text" [(ngModel)]="priceBiggerThan" placeholder="Cena wyższa niz"/>
-  <input type="text" [(ngModel)]="powerSmallerThan" placeholder="KM mniejsze niż"/>
-  <input type="text" [(ngModel)]="powerBiggerThan" placeholder="KM wyższe niż"/>
+
 </div>
-<button type="button" class="buttonFilter" (click)="getFilterCars()">Filtruj</button>
+
