@@ -20,7 +20,6 @@ import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
 import {UserService} from "./services/user-service";
 import {RouteService} from "./services/route-service";
-import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
@@ -120,7 +119,6 @@ const appRoutes: Routes = [
     BrandService,
     UserService,
     RouteService,
-    CarPipe
   ],
   bootstrap: [AppComponent]
 })
