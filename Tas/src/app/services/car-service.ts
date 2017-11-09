@@ -14,11 +14,14 @@ export class CarService {
     }
   }
 
-  cars: Array<Car> = [];
-  carsCategory: Array<Car> = [];
+  cars          : Array<Car> = [];
+  carsCategory  : Array<Car> = [];
+  filteredCars  : Array<Car> = [];
+
+  activeFilters : any;
+
 
   async getCarById(id: number): Promise<Car> {
-    console.log(this.cars);
     return this.cars.filter((el) => {
       return el.id == id
     })[0];
@@ -28,16 +31,31 @@ export class CarService {
     return new Headers({"categoryType": categoryType});
   }
 
-  getFilterCars(params): any{
-    this.cars = [];
-    this.carsCategory = [];
-    console.log(params);
-    this.http.get(this.routeService.routes.filter , { params: params
+  getFilterCars(params): any {
 
-    })
-      .subscribe((cars) => {
-        this.populateCarList(cars);
-      });
+      this.activeFilters = params;
+
+      let route = params.from ? this.routeService.routes.filter + '/dates' : this.routeService.routes.filter;
+
+      this.http.get(route, { search: params })
+          .subscribe((res) => {
+              this.filteredCars = [];
+              for (let car of res.json()) {
+                  this.filteredCars.push(this.carPipe.transform(car))
+              }
+              //tu jeszcze posortować
+          },(err) => {
+            console.log(err)
+          })
+      // this.cars = [];
+    // this.carsCategory = [];
+    // console.log(this.cars);
+    // this.http.get(this.routeService.routes.filter , { params: params
+
+    // })
+    //   .subscribe((cars) => {
+    //     this.populateCarList(cars);
+    //   });
 
   }
 

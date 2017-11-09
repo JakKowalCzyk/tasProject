@@ -37,6 +37,7 @@ import {
   MatNativeDateModule,
   MatToolbarModule
 } from "@angular/material";
+import { AddCarComponent } from './components/add-car/add-car.component';
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -91,11 +92,13 @@ const appRoutes: Routes = [
     RegisterComponent,
     CarComponent,
     FilterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddCarComponent
+    // routableComponents
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
-    // {enableTracing: true} // <-- debugging purposes only
+    { enableTracing: true } // <-- debugging purposes only
   ),
     // MaterialModule,
     BrowserModule,

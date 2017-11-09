@@ -1,0 +1,22 @@
+<p>
+  add-car works!
+</p>
+<label>Brand</label>
+<select  [(ngModel)]="brand" name="brand">
+  <option  *ngFor="let brand of brandService.brands" value="{{brand.id}}">{{ brand.name }}</option>
+</select>
+<br>
+<label>Fuel</label>
+<select  [(ngModel)]="fuelType" name="fuelType">
+  <option  *ngFor="let fuel of engine.fuelType" value="{{fuel}}">{{ fuel }}</option>
+</select>
+<br>
+<label>DriveType</label>
+<select  [(ngModel)]="driveType" name="driveType">
+  <option  *ngFor="let drive of engine.driveType" value="{{drive}}">{{ drive }}</option>
+</select>
+<br>
+<label>CategoryType</label>
+<select  [(ngModel)]="categoryType" name="categoryType">
+  <option  *ngFor="let category of categories" value="{{category}}">{{ category }}</option>
+</select>

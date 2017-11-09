@@ -4,7 +4,12 @@
     <div class="main__cars">
         <div class="main__cars__filters"><app-filter></app-filter>Filtry</div>
         <div class="main__cars__list">
-            <app-carc *ngFor="let car of carService.cars" [car]="car"></app-carc>
+            <div *ngIf="carService.activeFilters">
+                <app-carc *ngFor="let car of carService.filteredCars" [car]="car"></app-carc>
+            </div>
+            <div *ngIf="!carService.activeFilters">
+                <app-carc *ngFor="let car of carService.cars" [car]="car"></app-carc>
+            </div>
         </div>
     </div>
 </div>
