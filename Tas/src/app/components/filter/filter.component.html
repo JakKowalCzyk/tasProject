@@ -25,12 +25,9 @@
       <!--<label>FromDate</label>-->
       <!--<date-picker [(ngModel)]="dateFrom" name="dateFrom"></date-picker>-->
     <!--</form>-->
-    <div class="form-group">
-      <input [(ngModel)]="priceSmallerThan" type="text" class="form-control"
-             formControlName="priceSmallerThan" placeholder="priceSmallerThan" required=""/>
-      <input [(ngModel)]="priceBiggerThan" type="text" class="form-control"
-             formControlName="priceBiggerThan" placeholder="priceBiggerThan" required=""/>
-    </div>
+
+
+
 
     <label>HasElectricWindow</label>
     <input [(ngModel)]="hasElectricWindow"  type="checkbox" name="windowCheckbox"
@@ -56,5 +53,9 @@
     <input [(ngModel)]="hasRadio"  type="checkbox" name="radioCheckbox"
            class="radioCheckbox-checkbox" id="myradioCheckbox" checked>
   </form>
+  <input type="text" [(ngModel)]="priceSmallerThan" placeholder="Cena mniejsza niż"/>
+  <input type="text" [(ngModel)]="priceBiggerThan" placeholder="Cena wyższa niz"/>
+  <input type="text" [(ngModel)]="powerSmallerThan" placeholder="KM mniejsze niż"/>
+  <input type="text" [(ngModel)]="powerBiggerThan" placeholder="KM wyższe niż"/>
 </div>
 <button type="button" class="buttonFilter" (click)="getFilterCars()">Filtruj</button>

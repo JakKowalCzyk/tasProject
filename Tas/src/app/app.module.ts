@@ -27,6 +27,7 @@ import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import { FilterComponent } from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
+import { AddCarComponent } from './components/add-car/add-car.component';
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     GalleryComponent,
     CarComponent,
     FilterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddCarComponent
     // routableComponents
   ],
   imports: [RouterModule.forRoot(
