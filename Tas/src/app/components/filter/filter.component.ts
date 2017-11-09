@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
-import {HttpParams} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
@@ -67,29 +66,7 @@ export class FilterComponent implements OnInit {
       };
 
       this.carService.getFilterCars(data);
-      // if (this.options != null && this.options.length > 0)
-      //     for (let option of this.options) {
-      //         switch (option) {
-      //             case 'Klimatyzacja':
-      //                 data['hasAirConditioning'] = 1;
-      //                 break;
-      //             case 'Nawigacja':
-      //                 data['hasNavi'] = 1;
-      //                 break;
-      //             case 'Elektryczne szyby':
-      //                 data['hasElectricWindow'] = 1;
-      //                 break;
-      //             case 'Radio':
-      //                 data['hasRadio'] = 1;
-      //                 break;
-      //             case 'Szyberdach':
-      //                 data['hasSunroof'] = 1;
-      //                 break;
-      //             case 'Automat':
-      //                 data['hasManualGearbox'] = 0;
-      //                 break;
-      //         }
-      //     }
+
   }
 
 
