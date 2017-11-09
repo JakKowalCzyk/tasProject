@@ -37,7 +37,9 @@ import {
   MatNativeDateModule,
   MatToolbarModule
 } from "@angular/material";
-import { AddCarComponent } from './components/add-car/add-car.component';
+import {AddCarComponent} from './components/add-car/add-car.component';
+import {RentedCarPipe} from "./pipes/rented-car.pipe";
+import {CarPipe} from "./pipes/car.pipe";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -122,6 +124,8 @@ const appRoutes: Routes = [
     BrandService,
     UserService,
     RouteService,
+    CarPipe,
+    RentedCarPipe
   ],
   bootstrap: [AppComponent]
 })
