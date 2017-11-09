@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {CarService} from "../../services/car-service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -8,11 +9,13 @@ import {CarService} from "../../services/car-service";
 })
 export class MainPage {
 
-  constructor(public carService: CarService) {
+  constructor(public carService: CarService,
+              private  route: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
+
 
   }
 }
