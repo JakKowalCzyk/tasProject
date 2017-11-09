@@ -1,7 +1,6 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 //pages
@@ -16,18 +15,31 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {LoginComponent} from './pages/login/login.component';
 import {OfferComponent} from './pages/offer/offer.component';
 import {RegisterComponent} from './pages/register/register.component';
-import {GalleryComponent} from './components/gallery/gallery.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
 import {UserService} from "./services/user-service";
 import {RouteService} from "./services/route-service";
-import {CarPipe} from "./pipes/car.pipe";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
-import { FilterComponent } from './components/filter/filter.component';
+import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
-import { AddCarComponent } from './components/add-car/add-car.component';
+// import {MaterialModule} from "./material.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatToolbarModule
+} from "@angular/material";
+import {AddCarComponent} from './components/add-car/add-car.component';
+import {RentedCarPipe} from "./pipes/rented-car.pipe";
+import {CarPipe} from "./pipes/car.pipe";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -35,44 +47,34 @@ import { AddCarComponent } from './components/add-car/add-car.component';
 
 const appRoutes: Routes = [
   {
-      path      : '',
-      component : MainPage
+    path: 'main', component: MainPage
   },
   {
-      path      : 'main',
-      component : MainPage
+    path: '', redirectTo: 'main', pathMatch: 'full'
   },
   {
-      path      : 'about-firm',
-      component : AboutFirmComponent
+    path: 'about-firm', component: AboutFirmComponent
   },
   {
-      path      : 'contact',
-      component : ContactComponent
+    path: 'contact', component: ContactComponent
   },
   {
-      path      : 'terms',
-      component : TermsComponent
+    path: 'terms', component: TermsComponent
   },
   {
-      path      : 'login',
-      component : LoginComponent
+    path: 'login', component: LoginComponent
   },
   {
-      path      : 'offer',
-      component : OfferComponent
+    path: 'offer', component: OfferComponent
   },
   {
-      path      : 'register',
-      component : RegisterComponent
+    path: 'register', component: RegisterComponent
   },
   {
-      path      : 'car/:id',
-      component : CarPage
+    path: 'car/:id', component: CarPage
   },
   {
-    path: 'me',
-    component: UserProfileComponent
+    path: 'me', component: UserProfileComponent
   }
 ];
 
@@ -90,7 +92,6 @@ const appRoutes: Routes = [
     OfferComponent,
     LoginComponent,
     RegisterComponent,
-    GalleryComponent,
     CarComponent,
     FilterComponent,
     UserProfileComponent,
@@ -101,20 +102,32 @@ const appRoutes: Routes = [
     appRoutes,
     { enableTracing: true } // <-- debugging purposes only
   ),
+    // MaterialModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     HttpModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
-      CarService,
-      BrandService,
+    CarService,
+    BrandService,
     UserService,
     RouteService,
-    CarPipe
+    CarPipe,
+    RentedCarPipe
   ],
-  bootstrap: [AppComponent, MainPage]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

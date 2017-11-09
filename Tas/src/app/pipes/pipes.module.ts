@@ -1,12 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CarPipe} from "./car.pipe";
+import {RentedCarPipe} from "./rented-car.pipe";
 
 @NgModule({
   declarations: [
-    CarPipe],
+    CarPipe,
+    RentedCarPipe],
   imports: [],
   exports: [
-    CarPipe]
+    CarPipe,
+    RentedCarPipe]
 })
 export class PipesModule {
 }

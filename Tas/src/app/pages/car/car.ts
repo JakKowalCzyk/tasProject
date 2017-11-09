@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
 import {BrandService} from "../../services/brand-service";
+import {Brand} from "../../models/brand";
 
 @Component({
   selector: 'app-car',
@@ -13,6 +14,7 @@ import {BrandService} from "../../services/brand-service";
 export class CarPage implements OnInit {
 
   car: Car;
+  brand: Brand;
   id: number;
   sub: any;
 
@@ -22,19 +24,31 @@ export class CarPage implements OnInit {
               private brandService: BrandService) {
   }
 
-  getCarById() {
+  getBrand(id: number) {
+    this.brand = this.brandService.getBrandByCarId(id);
+  }
+
+  isCarLoaded(): any {
+    console.log(this.car);
+    return this.car != null;
+  }
+
+  async getCarById() {
     if (this.carService.cars.length <= 0) {
       setTimeout(() => {
         this.getCarById();
       }, 500);
     }
-    this.car = this.carService.getCarById(this.id);
+    this.car = await this.carService.getCarById(this.id);
+    console.log(this.car)
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getCarById();
+      this.getBrand(this.id);
+      console.log('id: ', this.id);
     });
   }
 }

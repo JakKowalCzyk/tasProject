@@ -1,9 +1,8 @@
-<app-header></app-header>
 <p>
   car works!
 </p>
-<div *ngIf="car != null" class="car">
-  Marka: {{ brandService.getBrandByCarId(this.car.brand).name }}<br>
+<div *ngIf="isCarLoaded()" class="car">
+  <!--Marka: {{ brand.name }}<br>-->
   Model: {{ car.model}}<br>
   Rok Produkcji: {{ car.year }}<br>
   Napęd: {{ car.engine.drive }}<br>
@@ -15,4 +14,3 @@
 
 </div>
 <!--<img class="img" src="{{car.defaultCarPhoto.photoUrl}}">-->
-<app-footer></app-footer>

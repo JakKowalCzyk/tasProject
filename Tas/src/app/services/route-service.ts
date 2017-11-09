@@ -21,10 +21,10 @@ export class RouteService {
     'logout'        : this.baseApi + 'user/logout',
 
     //orders
-    'rent'          : this.baseApi + 'car/rented',
-    'user_orders'   : this.baseApi + 'car/rented/user/me',
-    'all_orders'    : this.baseApi + 'car/rented/',
-    'cancel_order'  : this.baseApi + 'car/rented/cancel/',
+    "add_rent": this.baseApi + 'car/rented',
+    "user_rents": this.baseApi + 'car/rented/user/me',
+    "all_rents": this.baseApi + 'car/rented/',
+    "cancel_rent": this.baseApi + 'car/rented/cancel/',
   };
 
 }

@@ -1,12 +1,5 @@
-import { Component, OnInit }    from '@angular/core';
-import { Engine }               from "../../models/engine";
-import { Car }                  from "../../models/car";
-import { HttpClient }           from "@angular/common/http";
-import { DefaultCarPhoto }      from "../../models/default-car-photo";
-import { Brand }                from "../../models/brand";
-import { CarService }           from "../../services/car-service";
-import { Subscription }         from "rxjs/Subscription";
-import { BrandService }         from "../../services/brand-service";
+import {Component} from '@angular/core';
+import {CarService} from "../../services/car-service";
 
 @Component({
   selector: 'app-main',
@@ -15,29 +8,11 @@ import { BrandService }         from "../../services/brand-service";
 })
 export class MainPage {
 
-  cars      : Array<Car> = [];
-  brands    : Array<Brand> = [];
-  title     = 'Dzejkob';
-
-  private apiUrl = 'http://159.89.12.132:8080/api/';
-
-  constructor(
-      private http          : HttpClient,
-      public carService     : CarService,
-      private brandService  : BrandService){
- // this.carService.getCars();
+  constructor(public carService: CarService) {
   }
 
-  getCars() {
-    return this.carService.getCars();
-  }
-  getBrands(){
-    return this.brandService.getBrands();
-  }
 
   ngOnInit(): void {
-    // this.getBrands();
-    // this.getCars();
 
   }
 }

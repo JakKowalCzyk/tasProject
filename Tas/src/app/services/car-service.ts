@@ -3,8 +3,6 @@ import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
 import {Http} from "@angular/http";
 import {RouteService} from "./route-service";
-import {DefaultCarPhoto} from "../models/default-car-photo";
-import {Engine} from "../models/engine";
 
 @Injectable()
 export class CarService {
@@ -23,7 +21,7 @@ export class CarService {
   activeFilters : any;
 
 
-  getCarById(id: number): any {
+  async getCarById(id: number): Promise<Car> {
     return this.cars.filter((el) => {
       return el.id == id
     })[0];
