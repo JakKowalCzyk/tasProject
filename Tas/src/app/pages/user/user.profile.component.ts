@@ -11,10 +11,24 @@ import {User} from "../../models/user";
 export class UserProfileComponent implements OnInit {
 
   loggedUser: User;
+  step = -1;
 
   constructor(
       public userService: UserService
   ) {
+  }
+
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 
   ngOnInit() {
