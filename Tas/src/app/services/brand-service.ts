@@ -17,10 +17,8 @@ export class BrandService {
   getBrands(): any {
     this.http.get(this.routeService.routes.brands)
       .subscribe((brands) => {
-        console.log(brands);
         for (let i in brands) {
           if (brands.hasOwnProperty(i)) {
-            console.log(brands[i]);
 
             let brand = brands[i];
             this.brands.push(new Brand(
