@@ -90,16 +90,6 @@ export class FilterComponent implements OnInit {
       //                 break;
       //         }
       //     }
-
-
-          // let begin = this.dateFrom;
-          // let end = this.dateTo;
-          // data['beginDate']   = begin;
-          // data['endDate']     = end;
-          // data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
-          // data['to']          = end.year   + '-' + end.month   + '-' + end.day;
-
-      // this.filterService.filter(data);
   }
 
 
