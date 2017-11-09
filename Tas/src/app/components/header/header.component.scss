@@ -1,43 +1,35 @@
 @import "../../../variables";
 
-.mat_header {
-  color: #fff;
-  height: 60px;
-  background-color: $main;
-  display: flex;
-  padding: 0 15px;
-  &__logo {
-    margin:  0;
-  }
-  &__link {
+.header {
+  .mat_header {
     color: #fff;
-    font-size: 24px;
-    text-decoration: none;
-  }
-  &__loginLink {
-    color: #fff;
-    font-size: 18px;
-    text-decoration: none;
-  }
-  &__logoBold {
-    font-size: 28px;
-    font-weight: 900;
-  }
-  &__text {
+    height: 60px;
+    background-color: $main;
+    display: flex;
+    padding: 0 15px;
+    &__logo {
+      margin: 0;
+    }
+    &__link {
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+    }
 
-    margin: auto 0;
-    color: #fff!important;
-  }
-  &__login {
-    margin: auto 0 auto auto;
-  }
-
-  &_profile {
-    margin: auto 0 auto auto;
-  }
+    &__text {
+      margin: auto 0;
+      color: #fff !important;
+    }
 
 
-  &__logout {
-    margin: auto 0 auto auto;
+
   }
+}
+
+.header__login {
+  padding: 0 14px;
+}
+
+.user_profile {
+  padding: auto 0;
 }

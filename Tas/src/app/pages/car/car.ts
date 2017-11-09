@@ -16,39 +16,40 @@ export class CarPage implements OnInit {
   car: Car;
   brand: Brand;
   id: number;
-  sub: any;
-
 
   constructor(private route: ActivatedRoute,
               private carService: CarService,
               private brandService: BrandService) {
   }
 
-  getBrand(id: number) {
-    this.brand = this.brandService.getBrandByCarId(id);
+  getBrand() {
+    if (this.car == null) {
+      setTimeout(() => {
+        this.getBrand();
+      }, 500)
+    } else {
+      this.brand = this.brandService.getBrandByCarId(this.car.brand);
+    }
   }
 
   isCarLoaded(): any {
-    console.log(this.car);
-    return this.car != null;
+    return this.car != null && this.brand != null;
   }
 
-  async getCarById() {
+  getCarById() {
     if (this.carService.cars.length <= 0) {
       setTimeout(() => {
         this.getCarById();
       }, 500);
     }
-    this.car = await this.carService.getCarById(this.id);
-    console.log(this.car)
+    this.car = this.carService.getCarById(this.id);
+    this.getBrand();
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getCarById();
-      this.getBrand(this.id);
-      console.log('id: ', this.id);
     });
   }
 }
