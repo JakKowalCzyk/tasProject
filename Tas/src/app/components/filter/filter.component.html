@@ -77,11 +77,15 @@
       <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
       <mat-datepicker #dateFromPicker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do">
-      <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
-      <mat-datepicker #dateToPicker></mat-datepicker>
-    </mat-form-field>
+
+    <div *ngIf="!dateFrom; else elseBlock"></div>
+    <ng-template #elseBlock>
+      <mat-form-field class="example-full-width">
+        <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do" required>
+        <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateToPicker></mat-datepicker>
+      </mat-form-field>
+    </ng-template>
 
 
     <button mat-raised-button color="primary" class="buttonFilter"  (click)="getFilterCars()">Filtruj</button>
