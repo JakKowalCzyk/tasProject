@@ -1,7 +1,6 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 //pages
@@ -16,7 +15,6 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {LoginComponent} from './pages/login/login.component';
 import {OfferComponent} from './pages/offer/offer.component';
 import {RegisterComponent} from './pages/register/register.component';
-import {GalleryComponent} from './components/gallery/gallery.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
@@ -27,7 +25,9 @@ import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
-import {MaterialModule} from "./material.module";
+// import {MaterialModule} from "./material.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -35,44 +35,34 @@ import {MaterialModule} from "./material.module";
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: MainPage
+    path: 'main', component: MainPage
   },
   {
-    path      : 'main',
-    component : MainPage
+    path: '', redirectTo: 'main', pathMatch: 'full'
   },
   {
-      path      : 'about-firm',
-      component : AboutFirmComponent
+    path: 'about-firm', component: AboutFirmComponent
   },
   {
-      path      : 'contact',
-      component : ContactComponent
+    path: 'contact', component: ContactComponent
   },
   {
-      path      : 'terms',
-      component : TermsComponent
+    path: 'terms', component: TermsComponent
   },
   {
-      path      : 'login',
-      component : LoginComponent
+    path: 'login', component: LoginComponent
   },
   {
-      path      : 'offer',
-      component : OfferComponent
+    path: 'offer', component: OfferComponent
   },
   {
-      path      : 'register',
-      component : RegisterComponent
+    path: 'register', component: RegisterComponent
   },
   {
-      path      : 'car/:id',
-      component : CarPage
+    path: 'car/:id', component: CarPage
   },
   {
-    path: 'me',
-    component: UserProfileComponent
+    path: 'me', component: UserProfileComponent
   }
 ];
 
@@ -90,31 +80,35 @@ const appRoutes: Routes = [
     OfferComponent,
     LoginComponent,
     RegisterComponent,
-    GalleryComponent,
     CarComponent,
     FilterComponent,
     UserProfileComponent
-    // routableComponents
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
-    { enableTracing: true } // <-- debugging purposes only
+    // {enableTracing: true} // <-- debugging purposes only
   ),
-    MaterialModule,
+    // MaterialModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     HttpModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
-      CarService,
-      BrandService,
+    CarService,
+    BrandService,
     UserService,
     RouteService,
     CarPipe
   ],
-  bootstrap: [AppComponent, MainPage]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
