@@ -19,6 +19,8 @@ export class FilterComponent implements OnInit {
   categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
   dateFrom       : any;
   dateTo          : any;
+  begin       : any;
+  end          : any;
   brand           : string;
   fuelType        : string;
   categoryType    : string;
@@ -41,8 +43,8 @@ export class FilterComponent implements OnInit {
   }
 
   getFilterCars() {
-      console.log(this.dateFrom);
-      console.log(this.dateTo);
+      this.begin = (this.dateFrom.getYear()+1900) + '-' + (this.dateFrom.getMonth()+1) + '-' + this.dateFrom.getDate();
+      this.end = (this.dateTo.getYear()+1900) + '-' + (this.dateTo.getMonth()+1) + '-' + this.dateTo.getDate();
       let data = {
           brand             : this.brand                || undefined,
           fuelType          : this.fuelType             || undefined,
@@ -54,10 +56,12 @@ export class FilterComponent implements OnInit {
           priceBiggerThan   : this.priceBiggerThan      || undefined,
           hasElectricWindow : this.hasElectricWindow    || undefined,
           hasNavi           : this.hasNavi              || undefined,
-          hasAirConditioning : this.hasAirConditioning  || undefined,
-          hasManualGearbox : this.hasManualGearbox  || undefined,
-          hasSunroof : this.hasSunroof  || undefined,
-          hasRadio : this.hasRadio  || undefined,
+          hasAirConditioning: this.hasAirConditioning   || undefined,
+          hasManualGearbox  : this.hasManualGearbox     || undefined,
+          hasSunroof        : this.hasSunroof           || undefined,
+          hasRadio          : this.hasRadio             || undefined,
+          from              : this.begin                || undefined,
+          to                : this.end                  || undefined,
       };
 
       this.carService.getFilterCars(data);
@@ -98,11 +102,11 @@ export class FilterComponent implements OnInit {
 
 
   ngOnInit() {
-    this.myFilter = (d: Date): boolean => {
-      const day = d.getDay();
-      // Prevent Saturday and Sunday from being selected.
-      return day !== 0 && day !== 6;
-    }
+    // this.myFilter = (d: Date): boolean => {
+    //   const day = d.getDay();
+    //   // Prevent Saturday and Sunday from being selected.
+    //   return day !== 0 && day !== 6;
+    // }
     this.formGroup = new FormGroup({
       priceSmallerThan: new FormControl(),
       priceBiggerThan: new FormControl(),
