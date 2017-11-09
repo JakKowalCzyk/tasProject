@@ -73,12 +73,12 @@
     </div>
 
     <mat-form-field class="example-full-width">
-      <input matInput  [matDatepicker]="dateFromPicker" [(ngModel)]="dateFrom" name="dateFrom" placeholder="Od" >
+      <input matInput [min]="minDate"  [matDatepicker]="dateFromPicker" [(ngModel)]="dateFrom" name="dateFrom" placeholder="Od" >
       <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
       <mat-datepicker #dateFromPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput  [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do">
+      <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do">
       <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
       <mat-datepicker #dateToPicker></mat-datepicker>
     </mat-form-field>

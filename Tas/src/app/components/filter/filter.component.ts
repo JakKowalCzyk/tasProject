@@ -36,6 +36,7 @@ export class FilterComponent implements OnInit {
   hasManualGearbox: boolean;
   hasSunroof: boolean;
   hasRadio: boolean;
+  minDate: any;
 
   constructor(private carService: CarService,
               public brandService: BrandService) {
@@ -43,8 +44,8 @@ export class FilterComponent implements OnInit {
 
   getFilterCars() {
       if (this.dateFrom && this.dateTo) {
-        this.begin = (this.dateFrom.getYear() + 1900) + '-' + (this.dateFrom.getMonth() + 1) + '-' + this.dateFrom.getDate();
-        this.end = (this.dateTo.getYear() + 1900) + '-' + (this.dateTo.getMonth() + 1) + '-' + this.dateTo.getDate();
+        this.begin = (this.dateFrom.getFullYear()) + '-' + (this.dateFrom.getMonth() + 1) + '-' + this.dateFrom.getDate();
+        this.end = (this.dateTo.getFullYear()) + '-' + (this.dateTo.getMonth() + 1) + '-' + this.dateTo.getDate();
       }
       let data = {
           brand             : this.brand                || undefined,
@@ -71,11 +72,15 @@ export class FilterComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.myFilter = (d: Date): boolean => {
-    //   const day = d.getDay();
-    //   // Prevent Saturday and Sunday from being selected.
-    //   return day !== 0 && day !== 6;
-    // }
+
+    this.minDate = new Date();
+    this.myFilter = (d: Date): any => {
+      const day = d.getDate();
+      const month = d.getMonth();
+      const year = d.getFullYear();
+      // Prevent Saturday and Sunday from being selected.
+      this.minDate = new Date(year, month, day);
+    }
     this.formGroup = new FormGroup({
       priceSmallerThan: new FormControl(),
       priceBiggerThan: new FormControl(),
