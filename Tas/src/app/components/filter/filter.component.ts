@@ -43,8 +43,10 @@ export class FilterComponent implements OnInit {
   }
 
   getFilterCars() {
-      this.begin = (this.dateFrom.getYear()+1900) + '-' + (this.dateFrom.getMonth()+1) + '-' + this.dateFrom.getDate();
-      this.end = (this.dateTo.getYear()+1900) + '-' + (this.dateTo.getMonth()+1) + '-' + this.dateTo.getDate();
+      if (this.dateFrom && this.dateTo) {
+        this.begin = (this.dateFrom.getYear() + 1900) + '-' + (this.dateFrom.getMonth() + 1) + '-' + this.dateFrom.getDate();
+        this.end = (this.dateTo.getYear() + 1900) + '-' + (this.dateTo.getMonth() + 1) + '-' + this.dateTo.getDate();
+      }
       let data = {
           brand             : this.brand                || undefined,
           fuelType          : this.fuelType             || undefined,

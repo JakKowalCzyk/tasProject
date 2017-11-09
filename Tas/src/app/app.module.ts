@@ -78,6 +78,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'me', component: UserProfileComponent
+  },
+  {
+    path: 'filter/:id', component: MainPage
   }
 ];
 
