@@ -35,13 +35,53 @@ export class FilterComponent implements OnInit {
               public brandService: BrandService) {
   }
 
-  getFilterCars()
+  getFilterCars() {
+      console.log(this.hasAirConditioning);
+      console.log(this.hasManualGearbox);
+      let data = {
+          brand             : this.brand                || undefined,
+          fuelType          : this.fuelType             || undefined,
+          categoryType      : this.categoryType         || undefined,
+          powerBiggerThan   : this.powerSmallerThan     || undefined,
+          driveType         : this.driveType            || undefined,
+          priceSmallerThan  : this.priceSmallerThan     || undefined,
+          hasElectricWindow : this.hasElectricWindow    || undefined,
+      };
 
-  {
-    let params = new HttpParams().set('categoryType', this.categoryType);
-    console.log('getFilterCars');
-    // params.set('categoryType', this.categoryType).set('fuelType', this.fuelType);
-    this.carService.getFilterCars(params);
+      this.carService.getFilterCars(data);
+      // if (this.options != null && this.options.length > 0)
+      //     for (let option of this.options) {
+      //         switch (option) {
+      //             case 'Klimatyzacja':
+      //                 data['hasAirConditioning'] = 1;
+      //                 break;
+      //             case 'Nawigacja':
+      //                 data['hasNavi'] = 1;
+      //                 break;
+      //             case 'Elektryczne szyby':
+      //                 data['hasElectricWindow'] = 1;
+      //                 break;
+      //             case 'Radio':
+      //                 data['hasRadio'] = 1;
+      //                 break;
+      //             case 'Szyberdach':
+      //                 data['hasSunroof'] = 1;
+      //                 break;
+      //             case 'Automat':
+      //                 data['hasManualGearbox'] = 0;
+      //                 break;
+      //         }
+      //     }
+
+      // if (this.dateRange && this.dateRange.beginDate) {
+      //     let begin = this.dateRange.beginDate;
+      //     let end = this.dateRange.endDate;
+      //     data['beginDate']   = begin;
+      //     data['endDate']     = end;
+      //     data['from']        = begin.year + '-' + begin.month + '-' + begin.day;
+      //     data['to']          = end.year   + '-' + end.month   + '-' + end.day;
+      // }
+      // this.filterService.filter(data);
   }
 
 
