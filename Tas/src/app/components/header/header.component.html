@@ -2,11 +2,11 @@
   <mat-toolbar class="mat_header">
     <div class="header__text">
       <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
-        <p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p>
+        <span><p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p></span>
       </a>
     </div>
     <div class="header__login" *ngIf="!userService.isUserLogged()">
-      <button class="header__loginLink" routerLink="/login" routerLinkActive="active" title="Zaloguj">
+      <button class="btn btn-success" routerLink="/login" routerLinkActive="active" title="Zaloguj">
         Zaloguj
       </button>
     </div>
