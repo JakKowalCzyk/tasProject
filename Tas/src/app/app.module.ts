@@ -35,7 +35,10 @@ import {
   MatInputModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatListModule,
+  MatCheckboxModule,
+  MatSelectModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
@@ -75,6 +78,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'me', component: UserProfileComponent
+  },
+  {
+    path: 'filter/:id', component: MainPage
   }
 ];
 
@@ -117,7 +123,10 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule,
+    MatCheckboxModule,
+    MatSelectModule,
   ],
   providers: [
     CarService,
