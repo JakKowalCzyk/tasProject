@@ -1,30 +1,51 @@
-     <div class="login">
-       <br>
-       <h3>Zaloguj się</h3>
+<div class="login" *ngIf="!isUserPresent()">
 
-       <div class="login_failed" *ngIf="!logged">
-         <br>
-         <h3>Invalid email or password! Try again!</h3>
-       </div>
+  <mat-card class="user-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
 
-       <form [formGroup]="loginForm" novalidate class="form">
-         <div class="login-inside">
-           <div class="form-group">
-             <input type="text" class="form-control" formControlName="email" placeholder="username" required=""/>
-           </div>
+    <br>
+    <h3>Zaloguj się</h3>
+    <br>
 
-           <div class="form-group">
-             <input type="password" class="form-control" formControlName="password" placeholder="password" required=""/>
-           </div>
+    <div class="login_failed" *ngIf="!logged">
+      <br>
+      <h3>Invalid email or password! Try again!</h3>
+    </div>
 
-           <div class="form-group">
-             <button type="submit" [disabled]="!loginForm.valid" (click)="login()" class="btn btn-success">Login
-             </button>
-           </div>
+    <form [formGroup]="loginForm" novalidate class="form">
+      <div class="login-inside">
+        <div class="email">
+          <mat-form-field>
+            <input type="text" class="form-control" matInput formControlName="email" placeholder="username"
+                   required=""/>
+          </mat-form-field>
+        </div>
 
-           <div class="register"><a routerLink="/register" routerLinkActive="active" title="Zarejestruj się">Nie masz konta? Zarejestruj się!</a></div>
+        <div class="pass">
+          <mat-form-field>
+            <input type="password" class="form-control" matInput formControlName="password" placeholder="password"
+                   required=""/>
+          </mat-form-field>
+        </div>
 
-         </div>
-       </form>
-       <br>
-     </div>
+
+        <div class="buttons">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
+            Login!
+          </button>
+          <button mat-raised-button color="accent" type="submit" routerLink="/register" routerLinkActive="active">Click
+            to register!
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <br>
+
+  </mat-card>
+</div>

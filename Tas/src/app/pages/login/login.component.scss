@@ -1,34 +1,31 @@
 .login
 {
-  width: auto;
-  height: 600px; /*wysokość na całą stonę - footer do ustawienie */
-  position: relative;
+  width: 1000px;
+  margin: auto;
+  padding: 30px;
+}
+
+.mat-header {
+  margin: auto;
+  padding: 30px;
 }
 
 .login-inside
 {
+  align-content: center;
   width: 50%;
   height: 50%;
-  margin: 0 auto;
+  margin: auto;
 }
 
-.form-group
-{
-  padding: 5px;
-  width: 50%;
-  margin: 0 auto;
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+h3 {
   text-align: center;
 }
-
-.register
-{
-  text-align: center;
-}
-
-h3
-{
-  text-align: center;
-}
-
 
 /*CSS do poprawy?*/

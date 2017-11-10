@@ -42,6 +42,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  isUserPresent(): any {
+    return this.userService.user != null;
+  }
+
   ngOnInit() {
   }
 
