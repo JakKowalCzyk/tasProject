@@ -1,59 +1,71 @@
 <div class="user_profile" *ngIf="loggedUser">
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Email: {{loggedUser.email}}
-        </mat-panel-title>
-        <mat-panel-description>
-          Click to edit
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput placeholder="New email">
-      </mat-form-field>
+  <mat-card class="user-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-card-title>{{loggedUser.email}}</mat-card-title>
+      <mat-card-subtitle>Edit Your account</mat-card-subtitle>
+    </mat-card-header>
 
-      <mat-action-row>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.email}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      </mat-action-row>
-    </mat-expansion-panel>
+        <mat-form-field>
+          <input matInput placeholder="New email">
+        </mat-form-field>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Username: {{loggedUser.name}}
-        </mat-panel-title>
-        <mat-panel-description>
-          Click to edit
-          <mat-icon>map</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+        <mat-action-row>
 
-      <mat-form-field>
-        <input matInput placeholder="New name">
-      </mat-form-field>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="New name">
+        </mat-form-field>
 
 
-    </mat-expansion-panel>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          City: {{loggedUser.city}}
-        </mat-panel-title>
-        <mat-panel-description>
-          Click to edit
-          <mat-icon>date_range</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.city}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput placeholder="New city">
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="New city">
+        </mat-form-field>
 
-    </mat-expansion-panel>
+      </mat-expansion-panel>
 
-  </mat-accordion>
+    </mat-accordion>
+
+  </mat-card>
 </div>

@@ -1,22 +1,11 @@
-app-profile {
-  .profile {
-    padding: 5px;
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    &_title {
-      font-size: 260px;
-      font-weight: 900;
-    }
+.user_profile {
+  width: 1000px;
+  margin: auto;
+  padding: 30px;
+}
 
-    &_data {
-
-    }
-
-    &_edit {
-
-    }
-  }
+.avatar {
+  background-size: cover;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
