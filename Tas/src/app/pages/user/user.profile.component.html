@@ -1,11 +1,88 @@
-<div class="profile" *ngIf="userService.isUserLogged()">
-  <div class="profile_title">Your data:</div>
-  <div class="user_data">
-    <div class="user_name"> {{loggedUser.name}}</div>
-    <div class="user_email"> {{loggedUser.email}}</div>
-    <div class="user_city"> {{loggedUser.city}}</div>
-  </div>
-  <div class="user_edit">
-    <button type="submit" class="btn btn-success">Edit account</button>
-  </div>
+<div class="user_profile" *ngIf="loggedUser">
+
+  <mat-card class="user-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-card-title>{{loggedUser.email}}</mat-card-title>
+      <mat-card-subtitle>Edit Your account</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.email}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form [formGroup]="emailForm" novalidate class="form">
+          <mat-form-field>
+            <input formControlName="email" matInput placeholder="New email">
+            <mat-error *ngIf="!emailForm.valid">Wrong email</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="password" matInput placeholder="Current password" type="password">
+            <mat-error *ngIf="!isPasswordValid()">Password doesn't match!</mat-error>
+          </mat-form-field>
+        </form>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="updateEmail()" [disabled]="!isEmailFormValid()">Save</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <form [formGroup]="nameForm" novalidate class="form">
+            <input matInput placeholder="New name" formControlName="name">
+          </form>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="updateName()" [disabled]="!nameForm.valid">Save</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{loggedUser.city}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to edit
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <form [formGroup]="cityForm" novalidate class="form">
+            <input matInput placeholder="New city" formControlName="city">
+          </form>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="updateCity()" [disabled]="!cityForm.valid">Save</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </mat-card>
 </div>
