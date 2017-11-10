@@ -1,17 +1,36 @@
-<p>
-  car works!
-</p>
 <div *ngIf="isCarLoaded()" class="car">
-  Marka: {{ brand.name }}<br>
-  Model: {{ car.model}}<br>
-  Rok Produkcji: {{ car.year }}<br>
-  Napęd: {{ car.engine.drive }}<br>
-  Paliwo: {{ car.engine.fuel }}<br>
-  Moc: {{ car.engine.power }}<br>
-  Cena: {{ car.price  }} zł/dzień<br>
-  <img class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
+  <mat-card class="car-card">
+    <mat-card-header>
+
+      <div mat-card-avatar class="avatar">
+        <mat-icon>directions_car</mat-icon>
+      </div>
+
+      <mat-card-title>{{brand.name}}</mat-card-title>
+      <mat-card-subtitle>{{car.model}} - {{car.year}}</mat-card-subtitle>
+    </mat-card-header>
 
 
+    <mat-card-content class="car-content">
+      <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
+
+      <div class="car_desc">
+        <mat-chip-list>
+          <mat-chip color="primary" selected="true" matTooltip="Brand">{{brand.name}}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Model">{{ car.model}}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Production year">{{ car.year }}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Drive type">{{ car.engine.drive }}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Fuel">{{ car.engine.fuel }}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Power KM">{{ car.engine.power }}</mat-chip>
+          <mat-chip color="primary" selected="true" matTooltip="Price per day">{{ car.price }}zł</mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button>Rent!</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -22,6 +41,5 @@
 =======
 
 
-<!--<img class="img" src="{{car.defaultCarPhoto.photoUrl}}">-->
 
 >>>>>>> mat
