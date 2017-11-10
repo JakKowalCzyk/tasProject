@@ -44,12 +44,7 @@
 
     <mat-card-actions>
       <button mat-button>Rent!</button>
-      <button mat-button *ngIf="isUserLoggedAndAdmin()">Usuń auto!</button>
+      <button mat-button *ngIf="isUserLoggedAndAdmin()" (click)="deleteCarById()">Usuń auto!</button>
     </mat-card-actions>
-    <div class="user_profile" *ngIf="userService.isUserLogged()">
-      <mat-card-actions>
-        <button mat-button *ngIf="userService.isAdmin()" (click)="deleteCarById()">Usuń auto!</button>
-      </mat-card-actions>
-    </div>
   </mat-card>
 </div>
