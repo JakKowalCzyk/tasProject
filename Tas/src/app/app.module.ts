@@ -39,11 +39,14 @@ import {
   MatMenuModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatTabsModule,
   MatToolbarModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
 import {CarPipe} from "./pipes/car.pipe";
+import {RentsComponent} from "./pages/rents/rents.component";
+import {RentedCarService} from "./services/rented-car-service";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -80,6 +83,10 @@ const appRoutes: Routes = [
   {
     path: 'me', component: UserProfileComponent
   },
+
+  {
+    path: 'me/rents', component: RentsComponent
+  },
   {
     path: 'filter/:id', component: MainPage
   }
@@ -102,8 +109,8 @@ const appRoutes: Routes = [
     CarComponent,
     FilterComponent,
     UserProfileComponent,
-    AddCarComponent
-    // routableComponents
+    AddCarComponent,
+    RentsComponent
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
@@ -129,11 +136,14 @@ const appRoutes: Routes = [
     MatListModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     CarService,
     BrandService,
     UserService,
+    RentedCarService,
     RouteService,
     CarPipe,
     RentedCarPipe

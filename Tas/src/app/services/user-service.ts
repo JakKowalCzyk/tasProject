@@ -7,6 +7,8 @@ import {Headers, Http} from "@angular/http";
 export class UserService {
 
   user: User;
+  ADMIN: string = 'ROLE_ADMIN';
+  USER: string = 'ROLE_USER';
 
   headers: Headers = new Headers({
     "Content-Type": 'application/json'
@@ -40,7 +42,7 @@ export class UserService {
   }
 
   isAdmin(): any {
-    return this.user.roleType == this.user.role.ROLE_ADMIN;
+    return this.user.roleType == this.ADMIN;
   }
 
   registerUser(userData): any {
