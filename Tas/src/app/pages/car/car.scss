@@ -1,8 +1,26 @@
 .photo {
   height: 260px;
   width: 390px;
-  position: absolute;
-  margin-left: 500px;
-  margin-top: -150px;
+  margin: 0 auto;
+  align-self: center;
+}
 
+.car {
+  width: 1000px;
+  margin: auto;
+  padding: 15px;
+  align-content: center;
+  align-items: center;
+}
+
+.car-content {
+  padding: 5px;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mat-header {
+  margin: auto;
+  padding: 30px;
 }
