@@ -4,6 +4,7 @@ import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
 import {BrandService} from "../../services/brand-service";
 import {Brand} from "../../models/brand";
+import {UserService} from "../../services/user-service";
 
 @Component({
   selector: 'app-car',
@@ -19,7 +20,8 @@ export class CarPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private carService: CarService,
-              private brandService: BrandService) {
+              private brandService: BrandService,
+              private userService: UserService) {
   }
 
   getBrand() {

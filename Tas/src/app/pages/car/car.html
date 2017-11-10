@@ -30,8 +30,10 @@
     <mat-card-actions>
       <button mat-button>Rent!</button>
     </mat-card-actions>
+    <div class="user_profile" *ngIf="userService.isUserLogged()">
+      <mat-card-actions>
+        <button mat-button *ngIf="userService.isAdmin()">Usuń auto!</button>
+      </mat-card-actions>
+    </div>
   </mat-card>
 </div>
-
-
-
