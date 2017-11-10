@@ -43,6 +43,7 @@ export class FilterComponent implements OnInit {
   constructor(private carService: CarService,
               public brandService: BrandService,
               public snackBar: MatSnackBar) {
+    this.carService.activeFilters = '';
   }
 
   resetFilterCars(){
@@ -90,7 +91,6 @@ export class FilterComponent implements OnInit {
       };
 
       this.carService.getFilterCars(data);
-
   }
 
   openSnackBar() {
@@ -107,12 +107,12 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.minDate = new Date();
     this.myFilter = (d: Date): any => {
       const day = d.getDate();
       const month = d.getMonth();
       const year = d.getFullYear();
-      // Prevent Saturday and Sunday from being selected.
       this.minDate = new Date(year, month, day);
     }
     this.formGroup = new FormGroup({

@@ -90,9 +90,7 @@ const appRoutes: Routes = [
   {
     path: 'me/rents', component: RentsComponent
   },
-  {
-    path: 'filter/:id', component: MainPage
-  }
+
 ];
 
 
