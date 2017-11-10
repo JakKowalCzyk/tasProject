@@ -11,7 +11,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class UserProfileComponent implements OnInit {
 
+  emailForm: FormGroup;
   nameForm: FormGroup;
+  cityForm: FormGroup;
   loggedUser: User;
   step = -1;
 
@@ -22,19 +24,62 @@ export class UserProfileComponent implements OnInit {
   }
 
   createFormGroup() {
+    this.emailForm = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      password: ['', Validators.compose([Validators.required])]
+    });
     this.nameForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])]
     });
+    this.cityForm = this.formBuilder.group({
+      city: ['', Validators.compose([Validators.required])]
+    });
   }
 
-  updateName() {
+  async updateEmail() {
+    if (this.isPasswordValid()) {
+      this.loggedUser.email = this.emailForm.get('email').value;
+      await this.updateUserEmail(this.emailForm.get('password').value);
+    }
+  }
+
+  isPasswordValid(): any {
+    console.log(btoa(this.userService.user.email + ":" + this.emailForm.get('password').value) == this.loggedUser.base64Auth);
+    return btoa(this.userService.user.email + ":" + this.emailForm.get('password').value) == this.loggedUser.base64Auth;
+  }
+
+  isEmailFormValid(): any {
+    return this.emailForm.valid && this.isPasswordValid();
+  }
+
+  async updateName() {
     this.loggedUser.name = this.nameForm.get('name').value;
-    this.updateUser()
+    await this.updateUser()
   }
 
+  async updateCity() {
+    this.loggedUser.city = this.cityForm.get('city').value;
+    await this.updateUser();
+  }
 
-  updateUser() {
-    this.userService.updateUser(this.loggedUser).then(value => this.loggedUser = value);
+  async updateUser() {
+    let success = await this.userService.updateUser(this.loggedUser);
+    if (success) {
+      this.loggedUser = this.userService.user;
+    }
+    this.resetStep();
+  }
+
+  async updateUserEmail(password: string) {
+    let success = await this.userService.updateUserWithPassword(this.loggedUser, password);
+    if (success) {
+      this.loggedUser = this.userService.user;
+    }
+    this.resetStep();
+  }
+
+  resetStep() {
+    this.setStep(-1);
   }
 
   setStep(index: number) {

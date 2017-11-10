@@ -29,11 +29,11 @@ export class UserService {
   }
 
   async afterLogin(data, base64 = null) {
-      console.log(data);
       let base = base64 || data.base64Auth;
       this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
+    this.user.base64Auth = base;
       this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
-      return this.user;
+    return this.user;
   }
 
   isUserLogged(): any {
@@ -55,19 +55,33 @@ export class UserService {
 
   async updateUser(userData): Promise<any> {
     try {
-      const respnse = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
-      return this.afterLogin(respnse, this.user.base64Auth);
+      const response = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
+      return this.afterUpdate(response.json());
     }
     catch (e) {
       return false;
     }
   }
 
+  async afterUpdate(data) {
+    this.user.name = data.name;
+    this.user.city = data.city;
+    return this.user;
+  }
+
+  async afterUpdateWithPassword(data, password: string) {
+    this.user.email = data.email;
+    let base64 = btoa(this.user.email + ":" + password);
+    this.user.base64Auth = base64;
+    this.headers.delete('Authorization');
+    this.headers.append("Authorization", 'Basic ' + base64);
+    return this.user;
+  }
+
   async updateUserWithPassword(userData, password: string): Promise<any> {
     try {
-      const respnse = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
-      this.headers.delete('Authorization');
-      return this.afterLogin(respnse, btoa(userData.email + ":" + password));
+      const response = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
+      return this.afterUpdateWithPassword(response.json(), password);
     }
     catch (e) {
       return false;
