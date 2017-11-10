@@ -31,7 +31,7 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     }
 
     @Override
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("@securityServiceImpl.isAllowedToUpdateUser(#model.getId(), authentication)")
     public User updateObject(@Valid @RequestBody User model) {
         return super.updateObject(model);
     }
