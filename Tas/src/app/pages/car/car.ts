@@ -5,6 +5,7 @@ import {Car} from "../../models/car";
 import {BrandService} from "../../services/brand-service";
 import {Brand} from "../../models/brand";
 import {UserService} from "../../services/user-service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-car',
@@ -21,7 +22,8 @@ export class CarPage implements OnInit {
   constructor(private route: ActivatedRoute,
               private carService: CarService,
               private brandService: BrandService,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   getBrand() {
@@ -46,6 +48,12 @@ export class CarPage implements OnInit {
     }
     this.car = this.carService.getCarById(this.id);
     this.getBrand();
+  }
+
+  deleteCarById()
+  {
+    this.carService.deleteCar(this.id);
+    this.router.navigateByUrl('/main');
   }
 
   ngOnInit() {
