@@ -49,15 +49,6 @@ export class CarService {
           },(err) => {
             console.log(err)
           })
-      // this.cars = [];
-    // this.carsCategory = [];
-    // console.log(this.cars);
-    // this.http.get(this.routeService.routes.filter , { params: params
-
-    // })
-    //   .subscribe((cars) => {
-    //     this.populateCarList(cars);
-    //   });
 
   }
 

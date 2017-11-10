@@ -3,6 +3,8 @@ import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material";
+
 
 
 @Component({
@@ -15,7 +17,7 @@ export class FilterComponent implements OnInit {
   myFilter: any;
   formGroup       : FormGroup;
   engine          : Engine = new Engine('prom', 1, '1');
-  categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
+  categories = ['','SEDAN', 'SUV', 'CITY', 'SPORT'];
   dateFrom       : any;
   dateTo          : any;
   begin       : any;
@@ -37,9 +39,33 @@ export class FilterComponent implements OnInit {
   hasSunroof: boolean;
   hasRadio: boolean;
   minDate: any;
+  step: any;
 
   constructor(private carService: CarService,
-              public brandService: BrandService) {
+              public brandService: BrandService,
+              public snackBar: MatSnackBar) {
+    this.carService.activeFilters = '';
+
+  }
+
+  resetFilterCars(){
+    this.brand              = undefined;
+    this.fuelType           = undefined;
+    this.categoryType       = undefined;
+    this.powerBiggerThan    = undefined;
+    this.powerSmallerThan   = undefined;
+    this.driveType          = undefined;
+    this.priceSmallerThan   = undefined;
+    this.priceBiggerThan    = undefined;
+    this.hasElectricWindow  = undefined;
+    this.hasNavi            = undefined;
+    this.hasAirConditioning = undefined;
+    this.hasManualGearbox   = undefined;
+    this.hasSunroof         = undefined;
+    this.hasRadio           = undefined;
+    this.dateFrom           = undefined;
+    this.dateTo             = undefined;
+
   }
 
   getFilterCars() {
@@ -48,11 +74,11 @@ export class FilterComponent implements OnInit {
         this.end = (this.dateTo.getFullYear()) + '-' + (this.dateTo.getMonth() + 1) + '-' + this.dateTo.getDate();
       }
       let data = {
-          brand             : this.brand                || undefined,
+          brandId             : this.brand              || undefined,
           fuelType          : this.fuelType             || undefined,
           categoryType      : this.categoryType         || undefined,
           powerBiggerThan   : this.powerBiggerThan      || undefined,
-          powerSmallerThan  : this.powerBiggerThan      || undefined,
+          powerSmallerThan  : this.powerSmallerThan     || undefined,
           driveType         : this.driveType            || undefined,
           priceSmallerThan  : this.priceSmallerThan     || undefined,
           priceBiggerThan   : this.priceBiggerThan      || undefined,
@@ -67,9 +93,19 @@ export class FilterComponent implements OnInit {
       };
 
       this.carService.getFilterCars(data);
-
   }
 
+  openSnackBar() {
+    let message = 'Filtry zostały wyczyszczone';
+    let action = '';
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
 
   ngOnInit() {
 
@@ -78,7 +114,6 @@ export class FilterComponent implements OnInit {
       const day = d.getDate();
       const month = d.getMonth();
       const year = d.getFullYear();
-      // Prevent Saturday and Sunday from being selected.
       this.minDate = new Date(year, month, day);
     }
     this.formGroup = new FormGroup({

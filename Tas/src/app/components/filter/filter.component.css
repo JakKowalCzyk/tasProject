@@ -1,3 +1,14 @@
 .buttonFilter {
   margin-left: 50px;
 }
+
+.filter__form .mat .mat-expansion-panel-header-title,
+.filter__form .mat .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.filter__form .mat .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+}

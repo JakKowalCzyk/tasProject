@@ -43,6 +43,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatSnackBarModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
@@ -89,9 +90,7 @@ const appRoutes: Routes = [
   {
     path: 'me/rents', component: RentsComponent
   },
-  {
-    path: 'filter/:id', component: MainPage
-  }
+
 ];
 
 
@@ -141,7 +140,8 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatListModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule,
   ],
   providers: [
     CarService,
