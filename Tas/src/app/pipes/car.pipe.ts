@@ -9,6 +9,7 @@ import {Car} from "../models/car";
 export class CarPipe implements PipeTransform {
 
   transform(car, ...args): any {
+    console.log(car);
     return new Car(car.id,
       car.brandId,
       car.name,
@@ -19,14 +20,13 @@ export class CarPipe implements PipeTransform {
       new Engine(car.fuelType, car.power, car.driveType),
       new DefaultCarPhoto(car.defaultCarPhoto.id, car.defaultCarPhoto.photoUrl, car.defaultCarPhoto.photoS3Id,
         car.defaultCarPhoto.resizedPhotoUrl, car.defaultCarPhoto.resizedPhotoS3Id),
-      [
         car.hasAirConditioning,
         car.hasNavi,
         car.hasElectricWindow,
         car.hasRadio,
         car.hasSunroof,
         !car.hasManualGearbox
-      ]);
+    );
   }
 
 }
