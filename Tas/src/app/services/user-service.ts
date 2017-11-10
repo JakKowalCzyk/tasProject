@@ -32,7 +32,6 @@ export class UserService {
       let base = base64 || data.base64Auth;
       this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
     this.user.base64Auth = base;
-      this.headers.append("Authorization", 'Basic ' + this.user.base64Auth);
     return this.user;
   }
 

@@ -44,7 +44,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   isPasswordValid(): any {
-    console.log(btoa(this.userService.user.email + ":" + this.emailForm.get('password').value) == this.loggedUser.base64Auth);
     return btoa(this.userService.user.email + ":" + this.emailForm.get('password').value) == this.loggedUser.base64Auth;
   }
 
