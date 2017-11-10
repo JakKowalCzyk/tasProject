@@ -24,6 +24,34 @@ export class AddCarComponent implements OnInit {
   constructor(public carService: CarService,
               public brandService: BrandService) {
   }
+
+// {
+//   "brandId": 0,
+//   "categoryType": "CITY",
+//   "defaultCarPhoto": {
+//     "id": 0,
+//     "photoS3Id": "string",
+//     "photoUrl": "string",
+//     "resizedPhotoS3Id": "string",
+//     "resizedPhotoUrl": "string"
+//   },
+//   "driveType": "AWD",
+//   "fuelType": "PB",
+//   "hasAirConditioning": true,
+//   "hasElectricWindow": true,
+//   "hasManualGearbox": true,
+//   "hasNavi": true,
+//   "hasRadio": true,
+//   "hasSunroof": true,
+//   "id": 0,
+//   "millage": 0,
+//   "name": "string",
+//   "photo": "string",
+//   "power": 0,
+//   "pricePerDay": 0,
+//   "productionDate": "string"
+// }
+
   ngOnInit() {
   }
 
