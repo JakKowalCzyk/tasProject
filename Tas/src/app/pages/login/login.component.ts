@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {RentedCarService} from "../../services/rented-car-service";
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,10 @@ export class LoginComponent implements OnInit {
   logged: boolean = true;
 
   constructor(
-      public userService    : UserService,
-      private formBuilder   : FormBuilder,
-      private router        : Router,
+    public userService    : UserService,
+    private formBuilder   : FormBuilder,
+    private router        : Router,
+    private rentedCarService: RentedCarService
   ) {
     this.createFormGroup();
   }
@@ -34,12 +36,17 @@ export class LoginComponent implements OnInit {
     } else {
       let success = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
       if (success) {
+        this.rentedCarService.loadMyRents();
         this.router.navigateByUrl('/me');
       } else {
         this.router.navigateByUrl('/login');
         this.logged = false;
       }
     }
+  }
+
+  isUserPresent(): any {
+    return this.userService.user != null;
   }
 
   ngOnInit() {

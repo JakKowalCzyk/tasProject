@@ -1,8 +1,4 @@
 export class User {
-  role: {
-    'ROLE_USER'
-    'ROLE_ADMIN'
-  };
 
   id: number;
   email: string;

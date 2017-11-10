@@ -28,7 +28,7 @@ export class CarPage implements OnInit {
         this.getBrand();
       }, 500)
     } else {
-      this.brand = this.brandService.getBrandByCarId(this.car.brand);
+      this.brand = this.brandService.getBrandById(this.car.brand);
     }
   }
 

@@ -17,6 +17,7 @@ export class RouteService {
 
     //user
     'register'      : this.baseApi + 'user',
+    'update': this.baseApi + 'user',
     'login'         : this.baseApi + 'user/me',
     'logout'        : this.baseApi + 'user/logout',
 
