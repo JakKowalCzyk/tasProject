@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../services/user-service";
 import {User} from "../../models/user";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -10,25 +11,34 @@ import {User} from "../../models/user";
 })
 export class UserProfileComponent implements OnInit {
 
+  nameForm: FormGroup;
   loggedUser: User;
   step = -1;
 
-  constructor(
-      public userService: UserService
+  constructor(public userService: UserService,
+              private formBuilder: FormBuilder
   ) {
+    this.createFormGroup();
   }
 
+  createFormGroup() {
+    this.nameForm = this.formBuilder.group({
+      name: ['', Validators.compose([Validators.required])]
+    });
+  }
+
+  updateName() {
+    this.loggedUser.name = this.nameForm.get('name').value;
+    this.updateUser()
+  }
+
+
+  updateUser() {
+    this.userService.updateUser(this.loggedUser).then(value => this.loggedUser = value);
+  }
 
   setStep(index: number) {
     this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
   }
 
   ngOnInit() {

@@ -22,11 +22,11 @@
         </mat-expansion-panel-header>
 
         <mat-form-field>
-          <input matInput placeholder="New email">
+          <input ([ngModel])="loggedUser.email" matInput placeholder="New email">
         </mat-form-field>
 
         <mat-action-row>
-
+          <button mat-button color="primary" (click)="updateUser()">Save</button>
         </mat-action-row>
       </mat-expansion-panel>
 
@@ -42,9 +42,14 @@
         </mat-expansion-panel-header>
 
         <mat-form-field>
-          <input matInput placeholder="New name">
+          <form [formGroup]="nameForm" novalidate class="form">
+            <input matInput placeholder="New name" formControlName="name">
+          </form>
         </mat-form-field>
 
+        <mat-action-row>
+          <button mat-button color="primary" (click)="updateName()">Save</button>
+        </mat-action-row>
 
       </mat-expansion-panel>
 

@@ -53,6 +53,27 @@ export class UserService {
       });
   }
 
+  async updateUser(userData): Promise<any> {
+    try {
+      const respnse = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
+      return this.afterLogin(respnse, this.user.base64Auth);
+    }
+    catch (e) {
+      return false;
+    }
+  }
+
+  async updateUserWithPassword(userData, password: string): Promise<any> {
+    try {
+      const respnse = await this.http.put(this.routeService.routes.update, userData, {headers: this.headers}).toPromise();
+      this.headers.delete('Authorization');
+      return this.afterLogin(respnse, btoa(userData.email + ":" + password));
+    }
+    catch (e) {
+      return false;
+    }
+  }
+
   logout() {
     this.http.get(this.routeService.routes.logout, {headers: this.headers})
       .subscribe((res) => {
