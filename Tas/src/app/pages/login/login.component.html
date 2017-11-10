@@ -19,14 +19,14 @@
 
     <form [formGroup]="loginForm" novalidate class="form">
       <div class="login-inside">
-        <div class="email">
+        <div class="form-group">
           <mat-form-field>
             <input type="text" class="form-control" matInput formControlName="email" placeholder="username"
                    required=""/>
           </mat-form-field>
         </div>
 
-        <div class="pass">
+        <div class="form-group">
           <mat-form-field>
             <input type="password" class="form-control" matInput formControlName="password" placeholder="password"
                    required=""/>
@@ -38,6 +38,7 @@
           <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
             Login!
           </button>
+          <div></div>
           <button mat-raised-button color="accent" type="submit" routerLink="/register" routerLinkActive="active">Click
             to register!
           </button>

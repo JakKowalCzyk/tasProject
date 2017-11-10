@@ -2,7 +2,7 @@
 {
   width: 1000px;
   margin: auto;
-  padding: 30px;
+  padding: 15px;
 }
 
 .mat-header {
@@ -10,12 +10,17 @@
   padding: 30px;
 }
 
+.form-group {
+  padding: 5px;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
 .login-inside
 {
-  align-content: center;
   width: 50%;
   height: 50%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .buttons {
