@@ -1,11 +1,20 @@
-<div class="filter">
+
   <form class="filter__form">
-    <mat-form-field>
-      <mat-select  [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria">
-        <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-accordion class="expansionFilter">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filtry
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+          <mat-form-field>
+            <mat-select  [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria">
+              <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
     <mat-form-field>
       <mat-select [(ngModel)]="brand" name="brand" placeholder="Marka">
@@ -58,38 +67,54 @@
     </mat-form-field>
 
 
-    <div [formGroup]="formGroup">
-      <mat-checkbox [(ngModel)]="hasElectricWindow"  formControlName="hasElectricWindow">Elektryczne szyby</mat-checkbox>
-    <br>
-      <mat-checkbox [(ngModel)]="hasNavi"  formControlName="hasNavi">Navi</mat-checkbox>
-    <br>
-      <mat-checkbox [(ngModel)]="hasAirConditioning"  formControlName="hasAirConditioning">Klima</mat-checkbox>
-    <br>
-      <mat-checkbox [(ngModel)]="hasManualGearbox"  formControlName="hasManualGearbox">Manualna skrzynia</mat-checkbox>
-    <br>
-      <mat-checkbox [(ngModel)]="hasSunroof"  formControlName="hasSunroof">Szyberdach</mat-checkbox>
-    <br>
-      <mat-checkbox [(ngModel)]="hasRadio"  formControlName="hasRadio">Radio</mat-checkbox>
-    </div>
+        <mat-form-field class="example-full-width">
+          <input matInput [min]="minDate"  [matDatepicker]="dateFromPicker" [(ngModel)]="dateFrom" name="dateFrom" placeholder="Od" >
+          <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+          <mat-datepicker #dateFromPicker></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput [min]="minDate"  [matDatepicker]="dateFromPicker" [(ngModel)]="dateFrom" name="dateFrom" placeholder="Od" >
-      <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
-      <mat-datepicker #dateFromPicker></mat-datepicker>
-    </mat-form-field>
+        <div *ngIf="!dateFrom; else elseBlock"></div>
+        <ng-template #elseBlock>
+          <mat-form-field class="example-full-width">
+            <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do" required>
+            <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateToPicker></mat-datepicker>
+          </mat-form-field>
+        </ng-template>
 
-    <div *ngIf="!dateFrom; else elseBlock"></div>
-    <ng-template #elseBlock>
-      <mat-form-field class="example-full-width">
-        <input matInput [min]="minDate" [matDatepicker]="dateToPicker" [(ngModel)]="dateTo" name="dateTo" placeholder="Do" required>
-        <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
-        <mat-datepicker #dateToPicker></mat-datepicker>
-      </mat-form-field>
-    </ng-template>
+        <mat-accordion class="expansionOption">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Opcje dodatkowe
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+              <div [formGroup]="formGroup">
+
+                <mat-checkbox [(ngModel)]="hasElectricWindow"  formControlName="hasElectricWindow">Elektryczne szyby</mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="hasNavi"  formControlName="hasNavi">Navi</mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="hasAirConditioning"  formControlName="hasAirConditioning">Klima</mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="hasManualGearbox"  formControlName="hasManualGearbox">Manualna skrzynia</mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="hasSunroof"  formControlName="hasSunroof">Szyberdach</mat-checkbox>
+                <br>
+                 <mat-checkbox [(ngModel)]="hasRadio"  formControlName="hasRadio">Radio</mat-checkbox>
+              </div>
+          </mat-expansion-panel>
+        </mat-accordion>
 
 
-    <button mat-raised-button color="primary" class="buttonFilter"  (click)="getFilterCars()">Filtruj</button>
+        <br>
+        <button mat-raised-button color="primary" class="buttonFilter"  (click)="getFilterCars()">Filtruj</button>
+
+        <button mat-raised-button color="warn" class="buttonFilter" (click)="openSnackBar()" (click)="resetFilterCars()"
+                (click)="getFilterCars()">Reset</button>
+
+      </mat-expansion-panel>
+    </mat-accordion>
   </form>
 
-</div>
 

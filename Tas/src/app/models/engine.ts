@@ -1,5 +1,6 @@
 export class Engine {
   fuelType = [
+    '',
     'PB',
     'DIESEL',
     'LPG',
@@ -7,6 +8,7 @@ export class Engine {
   ];
 
   driveType = [
+    '',
     'FWD',
     'RWD',
     'AWD'
