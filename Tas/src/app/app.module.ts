@@ -29,17 +29,17 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDatepickerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatToolbarModule,
-  MatListModule,
-  MatCheckboxModule,
   MatSelectModule,
+  MatToolbarModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
@@ -124,8 +124,7 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
     MatNativeDateModule,
     MatListModule,
     MatCheckboxModule,
