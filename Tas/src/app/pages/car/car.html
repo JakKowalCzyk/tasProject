@@ -23,12 +23,28 @@
           <mat-chip color="primary" selected="true" matTooltip="Fuel">{{ car.engine.fuel }}</mat-chip>
           <mat-chip color="primary" selected="true" matTooltip="Power KM">{{ car.engine.power }}</mat-chip>
           <mat-chip color="primary" selected="true" matTooltip="Price per day">{{ car.price }}zł</mat-chip>
+          <mat-chip color="primary" selected="true" *ngIf="car.hasAirConditioning">Air conditioning
+            <mat-icon>done</mat-icon>
+          </mat-chip>
+          <mat-chip color="primary" selected="true" *ngIf="car.hasElectricWindow">Electric windows
+            <mat-icon>done</mat-icon>
+          </mat-chip>
+          <mat-chip color="primary" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
+            <mat-icon>done</mat-icon>
+          </mat-chip>
+          <mat-chip color="primary" selected="true" *ngIf="car.hasNavi">Navi
+            <mat-icon>done</mat-icon>
+          </mat-chip>
+          <mat-chip color="primary" selected="true" *ngIf="car.hasSunroof">Sunroof
+            <mat-icon>done</mat-icon>
+          </mat-chip>
         </mat-chip-list>
       </div>
     </mat-card-content>
 
     <mat-card-actions>
       <button mat-button>Rent!</button>
+      <button mat-button *ngIf="isUserLoggedAndAdmin()">Usuń auto!</button>
     </mat-card-actions>
     <div class="user_profile" *ngIf="userService.isUserLogged()">
       <mat-card-actions>

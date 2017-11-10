@@ -26,6 +26,11 @@ export class CarPage implements OnInit {
               private router: Router) {
   }
 
+  isUserLoggedAndAdmin() {
+    return this.userService.isUserLogged() && this.userService.isAdmin();
+  }
+
+
   getBrand() {
     if (this.car == null) {
       setTimeout(() => {
