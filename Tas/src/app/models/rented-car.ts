@@ -7,6 +7,9 @@ export class RentedCar {
   from: any;
   to: any;
   totalPrice: number;
+  carModel: string;
+  carBrand: string;
+  carPhoto: string;
 
 
   constructor(id: number, carId: number, userId: number, isActive: boolean, willBeActive: boolean, from: any, to: any, totalPrice: number) {

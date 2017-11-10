@@ -1,0 +1,71 @@
+<div class="user_rents" *ngIf="isUserLogged() ">
+
+  <mat-card class="rents-card">
+
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>directions_car</mat-icon>
+      </div>
+      <mat-card-title>My rents</mat-card-title>
+      <mat-card-subtitle>Here You can checkout Your car rents! To see car details click on the image!
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-tab-group class="tab-group">
+
+      <mat-tab label="Future active" [disabled]="myWillBeActiveRentedCars.length <= 0">
+        <div class="tab-content">
+          <mat-list>
+
+            <mat-list-item *ngFor="let rent of myWillBeActiveRentedCars"
+                           matTooltip="Click on the image to see car details!!">
+              <button mat-raised-button color="primary" (click)="cancelRent(rent.id)">Cancel</button>
+              <div> |</div>
+              <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
+                   [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
+              <h4 mat-line>{{rent.carBrand}} {{rent.carModel}}</h4>
+              <h3 mat-line>Price: {{rent.totalPrice}}zł</h3>
+              <p mat-line>Starts: {{rent.from}}</p>
+              <p mat-line>Ends: {{rent.to}}</p>
+            </mat-list-item>
+
+          </mat-list>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Active rents" [disabled]="myActiveRentedCars.length <= 0">
+        <div class="tab-content">
+          <mat-list>
+            <mat-list-item *ngFor="let rent of myActiveRentedCars" matTooltip="Click on the image to see car details!!">
+              <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
+                   [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
+              <h4 mat-line>{{rent.carBrand}} {{rent.carModel}}</h4>
+              <h3 mat-line>Price: {{rent.totalPrice}}zł</h3>
+              <p mat-line>Started: {{rent.from}}</p>
+              <p mat-line>Ends: {{rent.to}}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Passed rents" [disabled]="myPassedRentedCars.length <= 0">
+        <div class="tab-content">
+          <mat-list>
+            <mat-list-item *ngFor="let rent of myPassedRentedCars" matTooltip="Click on the image to see car details!!">
+              <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
+                   [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
+              <h4 mat-line>{{rent.carBrand}} {{rent.carModel}}</h4>
+              <h3 mat-line>Price: {{rent.totalPrice}}zł</h3>
+              <p mat-line>Started: {{rent.from}}</p>
+              <p mat-line>Ended: {{rent.to}}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+
+
+    </mat-tab-group>
+
+  </mat-card>
+
+</div>

@@ -3,23 +3,48 @@ import {Http} from "@angular/http";
 import {RouteService} from "./route-service";
 import {UserService} from "./user-service";
 import {RentedCarPipe} from "../pipes/rented-car.pipe";
+import {RentedCar} from "../models/rented-car";
+import {CarService} from "./car-service";
+import {BrandService} from "./brand-service";
 
 @Injectable()
 export class RentedCarService {
 
+  myRentedCars: Array<RentedCar> = [];
 
   constructor(private http: Http,
               private routeService: RouteService,
               private userService: UserService,
-              private rentPipe: RentedCarPipe) {
+              private rentPipe: RentedCarPipe,
+              private carService: CarService,
+              private brandService: BrandService) {
   }
 
-  getMyRents(): any {
-    let rents = [];
-    this.http.get(this.routeService.routes.user_rents, {headers: this.userService.headers})
-      .subscribe((userRents => {
-        return this.populateRentArray(userRents);
-      }))
+  loadMyRents(): any {
+    if (this.myRentedCars.length <= 0 && this.userService.user != null && !this.userService.isAdmin()) {
+      this.http.get(this.routeService.routes.user_rents, {headers: this.userService.headers})
+        .subscribe((userRents => {
+          this.populateRentArray(userRents);
+        }))
+    }
+  }
+
+  getMyActiveRents(): any {
+    return this.myRentedCars.filter(value => {
+      return value.isActive;
+    })
+  }
+
+  getMyWillBeActiveRents(): any {
+    return this.myRentedCars.filter(value => {
+      return value.willBeActive;
+    })
+  }
+
+  getMyPassedRents(): any {
+    return this.myRentedCars.filter(value => {
+      return !value.willBeActive && !value.isActive;
+    })
   }
 
   getAllRents(): any {
@@ -41,6 +66,7 @@ export class RentedCarService {
   async cancelRent(rentId): Promise<any> {
     this.http.delete(this.routeService.routes.cancel_rent + rentId, {headers: this.userService.headers})
       .subscribe(res => {
+        this.myRentedCars = this.myRentedCars.filter(value => value.id != rentId);
         return true;
       }, err => {
         console.log(err);
@@ -48,11 +74,16 @@ export class RentedCarService {
       })
   }
 
-  private populateRentArray(userRents): any {
-    let rents = [];
+  private populateRentArray(userRents) {
     for (let rent of userRents.json()) {
-      rents.push(this.rentPipe.transform(rent))
+      let rentedCar = this.rentPipe.transform(rent);
+      let carById = this.carService.getCarById(rentedCar.carId);
+      let brandByCarId = this.brandService.getBrandById(carById.brand);
+      rentedCar.carModel = carById.model;
+      rentedCar.carPhoto = carById.defaultCarPhoto.resizedPhotoUrl;
+      rentedCar.carBrand = brandByCarId.name;
+      console.log(rentedCar);
+      this.myRentedCars.push(rentedCar);
     }
-    return rents;
   }
 }

@@ -11,7 +11,7 @@ export class RentedCarPipe implements PipeTransform {
     return new RentedCar(rented.id,
       rented.carId,
       rented.userId,
-      rented.isActive,
+      rented.active,
       rented.willBeActive,
       rented.from,
       rented.to,
