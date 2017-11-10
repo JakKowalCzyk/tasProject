@@ -3,12 +3,14 @@ import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
 import {Http} from "@angular/http";
 import {RouteService} from "./route-service";
+import {UserService} from "./user-service";
 
 @Injectable()
 export class CarService {
   constructor(private http: Http,
               private routeService: RouteService,
-              private carPipe: CarPipe) {
+              private carPipe: CarPipe,
+              private userService: UserService) {
     if (this.cars.length <= 0) {
       this.getCars();
     }
@@ -78,11 +80,12 @@ export class CarService {
 
   }
 
-  // deleteCar(): any {
-  //
-  //
-  //
-  // }
+  deleteCar(car : number) {
+    this.http.delete(this.routeService.routes.cars + car, { headers : this.userService.headers } )
+    .subscribe((res) => {
+      this.getCars();
+    })
+  }
 
   private populateCarList(cars) {
     for (let carl of cars.json()) {
