@@ -78,6 +78,12 @@ export class CarService {
 
   }
 
+  // deleteCar(): any {
+  //
+  //
+  //
+  // }
+
   private populateCarList(cars) {
     for (let carl of cars.json()) {
       this.cars.push(
