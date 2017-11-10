@@ -24,6 +24,11 @@ export class CarPage implements OnInit {
               private userService: UserService) {
   }
 
+  isUserLoggedAndAdmin() {
+    return this.userService.isUserLogged() && this.userService.isAdmin();
+  }
+
+
   getBrand() {
     if (this.car == null) {
       setTimeout(() => {
