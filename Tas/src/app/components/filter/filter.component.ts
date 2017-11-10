@@ -6,6 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
 
 
+
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -44,6 +45,7 @@ export class FilterComponent implements OnInit {
               public brandService: BrandService,
               public snackBar: MatSnackBar) {
     this.carService.activeFilters = '';
+
   }
 
   resetFilterCars(){
@@ -106,7 +108,6 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit() {
-
 
     this.minDate = new Date();
     this.myFilter = (d: Date): any => {
