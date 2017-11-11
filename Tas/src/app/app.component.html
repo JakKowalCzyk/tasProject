@@ -1,7 +1,62 @@
 <app-header></app-header>
 
-<div id="main" class="container-fluid" style="margin-top: 50px">
-  <router-outlet></router-outlet>
+
+<div id="main" class="container-fluid">
+  <mat-sidenav-container class="example-container">
+
+
+    <mat-sidenav mode="push" #sidenav class="example-sidenav">
+      <div *ngIf="!isUserLogged()">
+        <button mat-raised-button color="primary" routerLink="/login" (click)="sidenav.close()"
+                routerLinkActive="active" title="Logowanie">Logowanie
+        </button>
+      </div>
+
+      <div *ngIf="!isUserLogged()">
+        <button mat-raised-button color="primary" routerLink="/register" (click)="sidenav.close()"
+                routerLinkActive="active" title="Logowanie">Rejestracja
+        </button>
+      </div>
+
+      <div *ngIf="isUserLogged()">
+        <button mat-raised-button color="primary" routerLink="/me" (click)="sidenav.close()" routerLinkActive="active"
+                title="Logowanie">Profile
+        </button>
+      </div>
+
+      <div>
+        <button mat-raised-button color="primary" class="bt" (click)="sidenav.close()" routerLink="/about-firm"
+                routerLinkActive="active"
+                title="O firmie">O firmie
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" routerLink="/offer" (click)="sidenav.close()"
+                routerLinkActive="active" title="Przegląd samochodów">
+          Oferta
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" routerLink="/terms" (click)="sidenav.close()"
+                routerLinkActive="active"
+                title="Warunki wynajmu samochodu">Warunki wynajmu
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" routerLink="/contact" (click)="sidenav.close()"
+                routerLinkActive="active" title="Kontakt do firmy">
+          Kontakt
+        </button>
+      </div>
+    </mat-sidenav>
+
+
+    <router-outlet></router-outlet>
+    <div #openSide (click)="sidenav.open()"></div>
+
+  </mat-sidenav-container>
+
 </div>
 
 <app-footer></app-footer>
+
