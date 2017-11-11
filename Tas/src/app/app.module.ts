@@ -40,10 +40,11 @@ import {
   MatMenuModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatSnackBarModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
@@ -142,6 +143,7 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatTooltipModule,
     MatSnackBarModule,
+    MatSidenavModule
   ],
   providers: [
     CarService,

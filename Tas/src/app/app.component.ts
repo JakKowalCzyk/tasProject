@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/map';
+import {UserService} from "./services/user-service";
 
 
 @Component({
@@ -10,9 +11,25 @@ import 'rxjs/add/operator/map';
 
 export class AppComponent implements OnInit {
 
-  constructor() {
+  @ViewChild('openSide') myDiv: ElementRef;
+
+  constructor(private userService: UserService) {
 
   }
+
+  isUserLogged(): any {
+    return this.userService.isUserLogged();
+  }
+
+  openSideNav() {
+    this.triggerFalseClick()
+  }
+
+  triggerFalseClick() {
+    let el: HTMLElement = this.myDiv.nativeElement as HTMLElement;
+    el.click();
+  }
+
 
   ngOnInit(): void {
 

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user-service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,18 @@ import {UserService} from "../../services/user-service";
 export class HeaderComponent implements OnInit {
 
 
-  constructor(
-              public userService: UserService) {
+
+  constructor(public userService: UserService,
+              private appComponent: AppComponent) {
   }
 
 
   logout() {
     this.userService.logout();
+  }
+
+  openSideNav() {
+    this.appComponent.openSideNav();
   }
 
   ngOnInit(): void {
