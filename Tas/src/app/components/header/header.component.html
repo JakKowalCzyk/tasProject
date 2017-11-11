@@ -5,17 +5,20 @@
         <span><p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p></span>
       </a>
     </div>
+
+    <span class="example-fill-remaining-space"></span>
+
     <div class="header__login" *ngIf="!userService.isUserLogged()">
-      <button class="btn btn-success" routerLink="/login" routerLinkActive="active" title="Zaloguj">
+      <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active" title="Zaloguj">
         Zaloguj
       </button>
     </div>
 
 
     <div class="user_profile" *ngIf="userService.isUserLogged()">
+      <span>Profile</span>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
-        <mat-icon>more_vert</mat-icon>
-        Profile
+        <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
