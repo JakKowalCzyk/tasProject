@@ -13,14 +13,30 @@
   align-items: center;
 }
 
-.car-content {
+.car-image {
+  text-align: center;
   padding: 5px;
   width: 50%;
   margin: 0 auto;
-  text-align: center;
+}
+
+.car-details {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.car-options {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .mat-header {
   margin: auto;
   padding: 30px;
 }
+
+
