@@ -2,7 +2,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {RouterModule, Routes, CanActivate} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 //pages
 import {MainPage} from './pages/main/main';
@@ -158,6 +159,7 @@ const appRoutes: Routes = [
     RentedCarPipe,
     AuthGuard,
     AdminGuard,
+    CookieService,
   ],
   bootstrap: [AppComponent]
 })

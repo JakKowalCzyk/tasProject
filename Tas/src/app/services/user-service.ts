@@ -1,7 +1,10 @@
-import {Injectable} from "@angular/core";
-import {RouteService} from "./route-service";
-import {User} from "../models/user";
-import {Headers, Http} from "@angular/http";
+import { Injectable }       from "@angular/core";
+import { RouteService }     from "./route-service";
+import { User }             from "../models/user";
+import { Headers, Http }    from "@angular/http";
+import { CookieService }    from 'angular2-cookie/services/cookies.service';
+import {RentedCarService} from "./rented-car-service";
+
 
 @Injectable()
 export class UserService {
@@ -14,8 +17,11 @@ export class UserService {
     "Content-Type": 'application/json'
   });
 
-  constructor(private http: Http,
-              private routeService: RouteService) {
+  constructor(
+      private http              : Http,
+      private routeService      : RouteService,
+      private cookies           : CookieService,
+  ) {
   }
 
   async loginUser(email: string, pass: string) : Promise<any> {
@@ -33,8 +39,16 @@ export class UserService {
   async afterLogin(data, base64 = null) {
       let base = base64 || data.base64Auth;
       this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
-    this.user.base64Auth = base;
+      this.user.base64Auth = base;
+      this.cookies.putObject('user', this.user);
+
     return this.user;
+  }
+
+  logWithCookies() {
+      let cookie = this.cookies.getObject('user');
+      if (cookie == null) return;
+      this.afterLogin(cookie)
   }
 
   isUserLogged(): any {
@@ -99,6 +113,7 @@ export class UserService {
   afterLogout() {
     this.headers.delete('Authorization');
     this.user = null;
+    this.cookies.remove('user');
   }
 
 }

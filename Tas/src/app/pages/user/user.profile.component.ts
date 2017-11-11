@@ -86,7 +86,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.loggedUser = this.userService.user
+      this.loggedUser = this.userService.user;
   }
 
 }

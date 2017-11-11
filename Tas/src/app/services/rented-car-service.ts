@@ -18,9 +18,11 @@ export class RentedCarService {
               private rentPipe: RentedCarPipe,
               private carService: CarService,
               private brandService: BrandService) {
+      if (this.myRentedCars.length <= 0) this.loadMyRents();
   }
 
   loadMyRents(): any {
+    this.myRentedCars = [];
     if (this.myRentedCars.length <= 0 && this.userService.user != null && !this.userService.isAdmin()) {
       this.http.get(this.routeService.routes.user_rents, {headers: this.userService.headers})
         .subscribe((userRents => {
