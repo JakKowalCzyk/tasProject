@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
+import {UserService} from "./services/user-service";
 
 
 @Component({
@@ -10,12 +11,13 @@ import 'rxjs/add/operator/map';
 
 export class AppComponent implements OnInit {
 
-  constructor() {
+  constructor(
+      private userService   : UserService
+  ) {
 
   }
 
   ngOnInit(): void {
-
-
+    this.userService.logWithCookies();
   }
 }
