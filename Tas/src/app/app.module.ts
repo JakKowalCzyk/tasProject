@@ -57,6 +57,7 @@ import {RentsComponent} from "./pages/rents/rents.component";
 import {RentedCarService} from "./services/rented-car-service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";
+import {CookieOptions} from "angular2-cookie/core";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -161,6 +162,7 @@ const appRoutes: Routes = [
     RentedCarPipe,
     AuthGuard,
     AdminGuard,
+      { provide: CookieOptions, useValue: {}},
     CookieService,
   ],
   bootstrap: [AppComponent]
