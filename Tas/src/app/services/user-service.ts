@@ -2,7 +2,7 @@ import { Injectable }       from "@angular/core";
 import { RouteService }     from "./route-service";
 import { User }             from "../models/user";
 import { Headers, Http }    from "@angular/http";
-import { CookieService }    from 'angular2-cookie/services/cookies.service';
+import { CookieService }    from 'angular2-cookie/core';
 import {RentedCarService} from "./rented-car-service";
 
 
