@@ -6,6 +6,7 @@ import {BrandService} from "../../services/brand-service";
 import {Brand} from "../../models/brand";
 import {UserService} from "../../services/user-service";
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-car',
@@ -23,7 +24,8 @@ export class CarPage implements OnInit {
               private carService: CarService,
               private brandService: BrandService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
   isUserLoggedAndAdmin() {
@@ -59,6 +61,21 @@ export class CarPage implements OnInit {
   {
     this.carService.deleteCar(this.id);
     this.router.navigateByUrl('/main');
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(CarPage, {
+      width: '250px',
+      height: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  onNoClick(): void {
+    // this.dialogRef.close();
   }
 
   ngOnInit() {
