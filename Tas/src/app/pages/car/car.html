@@ -12,33 +12,56 @@
 
 
     <mat-card-content class="car-content">
-      <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
+      <div class="car-image">
+        <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
+      </div>
 
       <div class="car_desc">
-        <mat-chip-list>
-          <mat-chip color="primary" selected="true" matTooltip="Brand">{{brand.name}}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Model">{{ car.model}}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Production year">{{ car.year }}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Drive type">{{ car.engine.drive }}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Fuel">{{ car.engine.fuel }}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Power KM">{{ car.engine.power }}</mat-chip>
-          <mat-chip color="primary" selected="true" matTooltip="Price per day">{{ car.price }}zł</mat-chip>
-          <mat-chip color="primary" selected="true" *ngIf="car.hasAirConditioning">Air conditioning
-            <mat-icon>done</mat-icon>
-          </mat-chip>
-          <mat-chip color="primary" selected="true" *ngIf="car.hasElectricWindow">Electric windows
-            <mat-icon>done</mat-icon>
-          </mat-chip>
-          <mat-chip color="primary" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
-            <mat-icon>done</mat-icon>
-          </mat-chip>
-          <mat-chip color="primary" selected="true" *ngIf="car.hasNavi">Navi
-            <mat-icon>done</mat-icon>
-          </mat-chip>
-          <mat-chip color="primary" selected="true" *ngIf="car.hasSunroof">Sunroof
-            <mat-icon>done</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
+        <div class="car-details">
+          <mat-chip-list>
+            <mat-chip color="primary" selected="true" matTooltip="Brand">{{brand.name}}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Model">{{ car.model}}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Production year">{{ car.year }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Drive type">{{ car.engine.drive }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Fuel">{{ car.engine.fuel }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Power">{{ car.engine.power }} KM</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Price per day">{{ car.price }}zł</mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="car-options">
+          <mat-chip-list>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasAirConditioning">Air conditioning
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasAirConditioning">Air conditioning
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasElectricWindow">Electric windows
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasElectricWindow">Electric windows
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="car.hasManualGearbox">Automatic gearbox
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasNavi">Navi
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasNavi">Navi
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasSunroof">Sunroof
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasSunroof">Sunroof
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
       </div>
     </mat-card-content>
 
