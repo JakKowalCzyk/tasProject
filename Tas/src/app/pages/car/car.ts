@@ -63,6 +63,12 @@ export class CarPage implements OnInit {
     this.router.navigateByUrl('/main');
   }
 
+  delete() {
+     if(window.confirm('Are sure you want to delete this item ?')){
+     this.deleteCarById;
+    }
+ }
+
   openDialog(): void {
     let dialogRef = this.dialog.open(CarPage, {
       width: '250px',
