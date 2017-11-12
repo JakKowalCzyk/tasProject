@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
 
   constructor(private userService: UserService) {
-
+    this.loadUsers();
   }
 
   applyFilter(filterValue: string) {
@@ -29,7 +29,6 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUsers();
   }
 
   async loadUsers() {
@@ -38,9 +37,9 @@ export class AdminComponent implements OnInit {
     data.subscribe(res => {
       for (let user of res.json()) {
         users.push(createNewUser(user));
-        console.log(users)
       }
       this.dataSource = new MatTableDataSource(users);
+      console.log(this.dataSource)
     });
     console.log(users);
     console.log(this.dataSource)

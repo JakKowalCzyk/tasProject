@@ -1,6 +1,6 @@
 <div class="users-list" *ngIf="isAdmin">
 
-  <mat-card class="user-card">
+  <mat-card class="userData-card">
     <mat-card-header>
       <div mat-card-avatar class="avatar">
         <mat-icon>account_box</mat-icon>
@@ -20,29 +20,29 @@
         <!-- Position Column -->
         <ng-container matColumnDef="position">
           <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{user.id}}</mat-cell>
+          <mat-cell *matCellDef="let userData"> {{userData.id}}</mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{user.name}}</mat-cell>
+          <mat-cell *matCellDef="let userData"> {{userData.name}}</mat-cell>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{user.email}}</mat-cell>
+          <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+          <mat-cell *matCellDef="let userData"> {{userData.email}}</mat-cell>
         </ng-container>
 
         <!-- Color Column -->
         <ng-container matColumnDef="role">
-          <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{user.roleType}}</mat-cell>
+          <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
+          <mat-cell *matCellDef="let userData"> {{userData.roleType}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
-          <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
           <mat-cell>
             <button mat-button>click!</button>
           </mat-cell>
