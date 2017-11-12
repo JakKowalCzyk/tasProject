@@ -3,12 +3,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 //pages
 import {MainPage} from './pages/main/main';
 import {CarPage} from './pages/car/car';
-
 //components
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -27,9 +25,9 @@ import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
-
 // import {MaterialModule} from "./material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatTableModule} from '@angular/material/table';
 import {
   MatButtonModule,
   MatCardModule,
@@ -58,6 +56,7 @@ import {RentedCarService} from "./services/rented-car-service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
+import {AdminComponent} from "./pages/admin/admin.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -99,6 +98,10 @@ const appRoutes: Routes = [
     path: 'me/rents', component: RentsComponent, canActivate: [ AuthGuard ]
   },
 
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
+  },
+
 ];
 
 
@@ -119,7 +122,8 @@ const appRoutes: Routes = [
     FilterComponent,
     UserProfileComponent,
     AddCarComponent,
-    RentsComponent
+    RentsComponent,
+    AdminComponent
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
@@ -150,7 +154,9 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTableModule,
+
   ],
   providers: [
     CarService,

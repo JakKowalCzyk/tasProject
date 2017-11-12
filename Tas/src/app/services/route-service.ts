@@ -20,6 +20,7 @@ export class RouteService {
     'update': this.baseApi + 'user',
     'login'         : this.baseApi + 'user/me',
     'logout'        : this.baseApi + 'user/logout',
+    'users': this.baseApi + 'user/',
 
     //orders
     "add_rent": this.baseApi + 'car/rented',

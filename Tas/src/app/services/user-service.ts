@@ -1,9 +1,9 @@
-import { Injectable }       from "@angular/core";
-import { RouteService }     from "./route-service";
-import { User }             from "../models/user";
-import { Headers, Http }    from "@angular/http";
-import { CookieService }    from 'angular2-cookie/core';
-import {RentedCarService} from "./rented-car-service";
+import {Injectable} from "@angular/core";
+import {RouteService} from "./route-service";
+import {User} from "../models/user";
+import {Headers, Http} from "@angular/http";
+import {CookieService} from 'angular2-cookie/core';
+import {Observable} from "rxjs/Observable";
 
 
 @Injectable()
@@ -114,6 +114,10 @@ export class UserService {
     this.headers.delete('Authorization');
     this.user = null;
     this.cookies.remove('user');
+  }
+
+  findAll(): Observable<any> {
+    return this.http.get(this.routeService.routes.users, {headers: this.headers});
   }
 
 }

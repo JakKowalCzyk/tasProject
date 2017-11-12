@@ -32,6 +32,7 @@
         <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
         <button mat-menu-item routerLink="/me/rents" routerLinkActive="true" *ngIf="!userService.isAdmin()">My rents
         </button>
+        <button mat-menu-item routerLink="/admin" *ngIf="userService.isAdmin()" routerLinkActive="true">Admin</button>
         <button mat-menu-item routerLink="/" (click)="logout()" routerLinkActive="true">Logout</button>
       </mat-menu>
     </div>

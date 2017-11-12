@@ -1,0 +1,57 @@
+<div class="users-list" *ngIf="isAdmin">
+
+  <mat-card class="user-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-card-title>Users</mat-card-title>
+    </mat-card-header>
+
+    <div class="example-container mat-elevation-z8">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+
+      <mat-table #table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{user.id}}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{user.name}}</mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{user.email}}</mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{user.roleType}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+          <mat-cell>
+            <button mat-button>click!</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+  </mat-card>
+</div>
