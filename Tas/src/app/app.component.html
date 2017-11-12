@@ -6,53 +6,54 @@
 
 
     <mat-sidenav mode="push" #sidenav class="example-sidenav">
-      <div *ngIf="!isUserLogged()">
-        <button mat-raised-button color="primary" routerLink="/login" (click)="sidenav.close()"
-                routerLinkActive="active" title="Logowanie">Logowanie
-        </button>
-      </div>
+      <div class="side-content">
+        <div *ngIf="!isUserLogged()" class="mat-content">
+          <button mat-button routerLink="/login" (click)="sidenav.close()"
+                  routerLinkActive="active" title="Logowanie">Logowanie
+          </button>
+        </div>
 
-      <div *ngIf="!isUserLogged()">
-        <button mat-raised-button color="primary" routerLink="/register" (click)="sidenav.close()"
-                routerLinkActive="active" title="Logowanie">Rejestracja
-        </button>
-      </div>
+        <div *ngIf="!isUserLogged()" class="mat-content">
+          <button mat-button routerLink="/register" (click)="sidenav.close()"
+                  routerLinkActive="active" title="Logowanie">Rejestracja
+          </button>
+        </div>
 
-      <div *ngIf="isUserLogged()">
-        <button mat-raised-button color="primary" routerLink="/me" (click)="sidenav.close()" routerLinkActive="active"
-                title="Logowanie">Profile
-        </button>
-      </div>
+        <div *ngIf="isUserLogged()" class="mat-content">
+          <button mat-button routerLink="/me" (click)="sidenav.close()" routerLinkActive="active"
+                  title="Logowanie">Profile
+          </button>
+        </div>
 
-      <div>
-        <button mat-raised-button color="primary" class="bt" (click)="sidenav.close()" routerLink="/about-firm"
-                routerLinkActive="active"
-                title="O firmie">O firmie
-        </button>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" routerLink="/offer" (click)="sidenav.close()"
-                routerLinkActive="active" title="Przegląd samochodów">
-          Oferta
-        </button>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" routerLink="/terms" (click)="sidenav.close()"
-                routerLinkActive="active"
-                title="Warunki wynajmu samochodu">Warunki wynajmu
-        </button>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" routerLink="/contact" (click)="sidenav.close()"
-                routerLinkActive="active" title="Kontakt do firmy">
-          Kontakt
-        </button>
+        <div>
+          <button mat-button class="bt" (click)="sidenav.close()" routerLink="/about-firm"
+                  routerLinkActive="active" title="O firmie">O firmie
+          </button>
+        </div>
+        <div>
+          <button mat-button routerLink="/offer" (click)="sidenav.close()"
+                  routerLinkActive="active" title="Przegląd samochodów">
+            Oferta
+          </button>
+        </div>
+        <div>
+          <button mat-button routerLink="/terms" (click)="sidenav.close()"
+                  routerLinkActive="active"
+                  title="Warunki wynajmu samochodu">Warunki
+          </button>
+        </div>
+        <div>
+          <button mat-button routerLink="/contact" (click)="sidenav.close()"
+                  routerLinkActive="active" title="Kontakt do firmy">
+            Kontakt
+          </button>
+        </div>
       </div>
     </mat-sidenav>
 
 
     <router-outlet></router-outlet>
-    <div #openSide (click)="sidenav.open()"></div>
+    <div #openSide (click)="sidenav.toggle()"></div>
 
   </mat-sidenav-container>
 
