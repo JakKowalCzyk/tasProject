@@ -67,8 +67,7 @@
 
     <mat-card-actions>
       <button mat-button>Rent!</button>
-      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" (click)="openDialog()">Usuń z Dialogiem</button>
-      <button mat-button *ngIf="isUserLoggedAndAdmin()" (click)="delete()">Usuń auto!</button>
+      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" (click)="delete()">Usuń auto!</button>
     </mat-card-actions>
   </mat-card>
 </div>

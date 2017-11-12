@@ -64,7 +64,7 @@ export class CarPage implements OnInit {
   }
 
   delete() {
-     if(window.confirm('Are sure you want to delete this item ?')){
+     if(window.confirm('Czy chcesz usunąć ten samochód?')){
      this.deleteCarById;
     }
  }
