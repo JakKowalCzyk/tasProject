@@ -9,4 +9,6 @@ public interface UserService extends GenericService<User>, UserDetailsService {
     User findByEmail(String email);
 
     User setAdminToUser(Long id);
+
+    User setUserToAdmin(Long id);
 }
