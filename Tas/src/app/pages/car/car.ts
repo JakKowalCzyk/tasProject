@@ -61,6 +61,12 @@ export class CarPage implements OnInit {
     this.router.navigateByUrl('/main');
   }
 
+  delete() {
+     if(window.confirm('Czy chcesz usunąć ten samochód?')){
+     this.deleteCarById;
+    }
+ }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
