@@ -12,3 +12,11 @@ a {
     color: inherit;
 }
 
+.side-content {
+  padding: 15px;
+  align-items: center;
+  margin: auto;
+}
+
+.example-sidenav {
+}
