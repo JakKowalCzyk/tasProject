@@ -24,13 +24,17 @@
 
 
     <div class="user_profile" *ngIf="userService.isUserLogged()">
-      <span>Profile</span>
+      <button mat-button color="primary" [matMenuTriggerFor]="appMenu">
+        {{userService.user.email}}
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #appMenu="matMenu">
-        <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.name}}</button>
+        <button mat-menu-item routerLink="/me" routerLinkActive="true">{{userService.user.email}}</button>
         <button mat-menu-item routerLink="/me/rents" routerLinkActive="true" *ngIf="!userService.isAdmin()">My rents
+        </button>
+        <button mat-menu-item routerLink="/admin" *ngIf="userService.isAdmin()" routerLinkActive="true">Admin panel
         </button>
         <button mat-menu-item routerLink="/" (click)="logout()" routerLinkActive="true">Logout</button>
       </mat-menu>

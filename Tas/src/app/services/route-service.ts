@@ -18,8 +18,12 @@ export class RouteService {
     //user
     'register'      : this.baseApi + 'user',
     'update': this.baseApi + 'user',
+    'deleteUser': this.baseApi + 'user',
     'login'         : this.baseApi + 'user/me',
     'logout'        : this.baseApi + 'user/logout',
+    'users': this.baseApi + 'user/',
+    'admin': this.baseApi + 'user/',
+    'user': this.baseApi + 'user/',
 
     //orders
     "add_rent": this.baseApi + 'car/rented',

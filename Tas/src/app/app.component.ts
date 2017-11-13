@@ -21,6 +21,10 @@ export class AppComponent implements OnInit {
     return this.userService.isUserLogged();
   }
 
+  isAdmin(): any {
+    return this.isUserLogged() && this.userService.isAdmin();
+  }
+
   openSideNav() {
     this.triggerFalseClick()
   }
