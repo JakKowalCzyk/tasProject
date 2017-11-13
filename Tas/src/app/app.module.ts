@@ -34,6 +34,7 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
@@ -59,6 +60,7 @@ import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {RentDialogComponent} from "./components/rent/rent.dialog.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -125,7 +127,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     AddCarComponent,
     RentsComponent,
-    AdminComponent
+    AdminComponent,
+    RentDialogComponent
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
@@ -159,6 +162,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDialogModule,
     FlexLayoutModule
   ],
   providers: [
@@ -173,6 +177,9 @@ const appRoutes: Routes = [
     AdminGuard,
       { provide: CookieOptions, useValue: {}},
     CookieService,
+  ],
+  entryComponents: [
+    RentDialogComponent
   ],
   bootstrap: [AppComponent]
 })

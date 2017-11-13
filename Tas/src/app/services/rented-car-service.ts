@@ -6,11 +6,15 @@ import {RentedCarPipe} from "../pipes/rented-car.pipe";
 import {RentedCar} from "../models/rented-car";
 import {CarService} from "./car-service";
 import {BrandService} from "./brand-service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class RentedCarService {
 
   myRentedCars: Array<RentedCar> = [];
+  myActiveRentedCars: Array<RentedCar> = [];
+  myWillBeActiveRentedCars: Array<RentedCar> = [];
+  myPassedRentedCars: Array<RentedCar> = [];
 
   constructor(private http: Http,
               private routeService: RouteService,
@@ -18,7 +22,9 @@ export class RentedCarService {
               private rentPipe: RentedCarPipe,
               private carService: CarService,
               private brandService: BrandService) {
-      if (this.myRentedCars.length <= 0) this.loadMyRents();
+    if (this.myRentedCars.length <= 0) {
+      this.loadMyRents();
+    }
   }
 
   loadMyRents(): any {
@@ -27,6 +33,9 @@ export class RentedCarService {
       this.http.get(this.routeService.routes.user_rents, {headers: this.userService.headers})
         .subscribe((userRents => {
           this.populateRentArray(userRents);
+          this.myActiveRentedCars = this.getMyActiveRents();
+          this.myWillBeActiveRentedCars = this.getMyWillBeActiveRents();
+          this.myPassedRentedCars = this.getMyPassedRents();
         }))
     }
   }
@@ -56,19 +65,15 @@ export class RentedCarService {
       }))
   }
 
-  rentCar(newRentedCar): any {
-    this.http.post(this.routeService.routes.add_rent, {headers: this.userService.headers})
-      .subscribe(rent => {
-        return rent.json();
-      }, err => {
-        console.log(err);
-      })
+  rentCar(newRentedCar): Observable<any> {
+    return this.http.post(this.routeService.routes.add_rent, newRentedCar, {headers: this.userService.headers});
   }
 
   async cancelRent(rentId): Promise<any> {
     this.http.delete(this.routeService.routes.cancel_rent + rentId, {headers: this.userService.headers})
       .subscribe(res => {
         this.myRentedCars = this.myRentedCars.filter(value => value.id != rentId);
+        this.myWillBeActiveRentedCars = this.myWillBeActiveRentedCars.filter(value => value.id != rentId);
         return true;
       }, err => {
         console.log(err);
@@ -84,7 +89,6 @@ export class RentedCarService {
       rentedCar.carModel = carById.model;
       rentedCar.carPhoto = carById.defaultCarPhoto.resizedPhotoUrl;
       rentedCar.carBrand = brandByCarId.name;
-      console.log(rentedCar);
       this.myRentedCars.push(rentedCar);
     }
   }

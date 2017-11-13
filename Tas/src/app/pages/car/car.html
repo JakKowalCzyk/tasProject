@@ -65,9 +65,9 @@
       </div>
     </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-button>Rent!</button>
-      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" (click)="delete()">Usuń auto!</button>
+    <mat-card-actions class="car-actions">
+      <button mat-raised-button color="primary" *ngIf="isUserLogged()" (click)="rentCar()">Rent!</button>
+      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" color="warn" (click)="delete()">Usuń auto!</button>
     </mat-card-actions>
   </mat-card>
 </div>

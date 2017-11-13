@@ -1,9 +1,10 @@
 import {Car} from "../models/car";
 import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
-import {Http} from "@angular/http";
+import {Headers, Http} from "@angular/http";
 import {RouteService} from "./route-service";
 import {UserService} from "./user-service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CarService {
@@ -21,7 +22,6 @@ export class CarService {
   filteredCars  : Array<Car> = [];
 
   activeFilters : any;
-
 
   getCarById(id: number) {
     return this.cars.filter((el) => {
@@ -77,6 +77,16 @@ export class CarService {
       this.getCars();
     })
   }
+
+  isCarFreeInGivenDates(id: number, from: any, to: any): Observable<any> {
+    return this.http.get(this.routeService.routes.cars + id + "/rented/free", {
+      headers: new Headers({
+        "from": from,
+        "to": to
+      })
+    })
+  }
+
 
   private populateCarList(cars) {
     for (let carl of cars.json()) {
