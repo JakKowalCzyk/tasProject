@@ -5,7 +5,14 @@
 }
 
 .header {
+
+  display: flex;
+  flex-wrap: wrap;
   .mat_header {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    flex-wrap: wrap;
     color: #fff;
     height: 60px;
     background-color: $main;

@@ -3,14 +3,16 @@
   width: 390px;
   margin: 0 auto;
   align-self: center;
+  flex-direction: column;
 }
 
 .car {
-  width: 1000px;
+  width: 75%;
   margin: auto;
   padding: 15px;
   align-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .car-image {

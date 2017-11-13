@@ -1,11 +1,14 @@
 .users-list {
-  width: 1200px;
+  width: 75%;
   margin: auto;
   padding: 15px;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .user-card {
   align-items: center;
+  flex-direction: column;
 }
 
 .example-header {
@@ -17,4 +20,10 @@
   font-size: 14px;
   margin: auto;
   width: 80%;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

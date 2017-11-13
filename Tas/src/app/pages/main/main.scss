@@ -1,9 +1,8 @@
 @import "../../../variables";
 
 .main {
-  max-width: 1500px;
+  max-width: 80%;
   margin: auto;
-  display: flex;
   flex-direction: column;
   &__text {
     margin: auto;
