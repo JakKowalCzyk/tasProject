@@ -42,6 +42,13 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
     }
 
     @Override
+    public User setUserToAdmin(Long id) {
+        User userToUpdate = super.findOne(id);
+        userToUpdate.setRoleType(RoleType.ROLE_USER);
+        return super.updateObject(userToUpdate);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = findByEmail(s);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getHashPassword(), Arrays.asList(new SimpleGrantedAuthority(user.getRoleType().name())));
