@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserService} from "../../services/user-service";
 import {MatTableDataSource} from "./table-data-source";
-import {MatPaginator} from "@angular/material";
+import {MatPaginator, MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +16,8 @@ export class AdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              public snackBar: MatSnackBar) {
     this.loadUsers();
   }
 
@@ -42,8 +43,10 @@ export class AdminComponent implements OnInit {
     let response = await this.userService.setAdmin(id);
     response.subscribe(response => {
       this.loadUsers();
+      this.openSnackBar('User role changed', 'OK');
     }, err => {
-      console.log('error')
+      console.log('error');
+      this.openSnackBar('Cannot change user role - error', 'OK');
     })
   }
 
@@ -51,8 +54,10 @@ export class AdminComponent implements OnInit {
     let response = await this.userService.setUser(id);
     response.subscribe(response => {
       this.loadUsers();
+      this.openSnackBar('User role changed', 'OK');
     }, err => {
-      console.log('error')
+      console.log('error');
+      this.openSnackBar('Cannot change user role - error', 'OK');
     })
   }
 
@@ -61,8 +66,10 @@ export class AdminComponent implements OnInit {
       let response = await this.userService.deleteUser(id);
       response.subscribe(response => {
         this.loadUsers();
+        this.openSnackBar('User deleted successfuly', 'OK');
       }, err => {
-        console.log('error')
+        console.log('error');
+        this.openSnackBar('Cannot delete user - error', 'OK');
       })
     }
   }
@@ -77,6 +84,12 @@ export class AdminComponent implements OnInit {
       }
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 

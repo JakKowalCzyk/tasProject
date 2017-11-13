@@ -25,7 +25,7 @@
           </button>
         </div>
 
-        <div *ngIf="isUserLogged()" class="mat-content">
+        <div *ngIf="isAdmin()" class="mat-content">
           <button mat-button routerLink="/admin" (click)="sidenav.close()" routerLinkActive="active"
                   title="admin">Admin
           </button>
