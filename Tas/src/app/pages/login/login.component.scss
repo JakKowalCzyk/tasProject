@@ -1,8 +1,9 @@
 .login
 {
-  width: 1000px;
+  width: 75%;
   margin: auto;
   padding: 15px;
+  flex-direction: column;
 }
 
 .mat-header {
@@ -13,14 +14,16 @@
 .form-group {
   padding: 5px;
   width: 50%;
-  margin: 0 auto;
-  text-align: center;
+  margin: auto;
+  position: relative;
 }
 .login-inside
 {
+  flex-direction: column;
   width: 50%;
   height: 50%;
   margin: 0 auto;
+  position: relative;
 }
 
 .buttons {

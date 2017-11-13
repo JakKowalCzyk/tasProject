@@ -58,6 +58,7 @@ import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -157,7 +158,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatSidenavModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule
   ],
   providers: [
     CarService,
