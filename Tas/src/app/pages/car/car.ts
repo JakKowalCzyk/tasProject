@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
 import {BrandService} from "../../services/brand-service";
 import {Brand} from "../../models/brand";
 import {UserService} from "../../services/user-service";
-import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material";
+import {RentDialogComponent} from "../../components/rent/rent.dialog.component";
 
 @Component({
   selector: 'app-car',
@@ -23,7 +24,8 @@ export class CarPage implements OnInit {
               private carService: CarService,
               private brandService: BrandService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
   isUserLoggedAndAdmin() {
@@ -66,6 +68,17 @@ export class CarPage implements OnInit {
      this.deleteCarById;
     }
  }
+
+  rentCar() {
+    let dialogRef = this.dialog.open(RentDialogComponent, {
+      data: {model: this.car.model, id: this.car.id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result)
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
