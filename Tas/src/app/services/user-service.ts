@@ -120,4 +120,16 @@ export class UserService {
     return this.http.get(this.routeService.routes.users, {headers: this.headers});
   }
 
+  setAdmin(id: number): Observable<any> {
+    return this.http.put(this.routeService.routes.update + "/" + id + "/admin", null, {headers: this.headers});
+  }
+
+  setUser(id: number): Observable<any> {
+    return this.http.put(this.routeService.routes.update + "/" + id + "/user", null, {headers: this.headers});
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(this.routeService.routes.deleteUser + "/" + id, {headers: this.headers});
+  }
+
 }

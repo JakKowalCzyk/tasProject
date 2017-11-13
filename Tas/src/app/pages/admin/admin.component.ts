@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserService} from "../../services/user-service";
-import {User} from "../../models/user";
 import {MatTableDataSource} from "./table-data-source";
+import {MatPaginator} from "@angular/material";
 
 @Component({
   selector: 'app-admin',
@@ -9,18 +9,20 @@ import {MatTableDataSource} from "./table-data-source";
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  displayedColumns = ['position', 'name', 'email', 'role', 'action'];
 
+  displayedColumns = ['name', 'email', 'roleType', 'action', 'delete'];
   dataSource: MatTableDataSource<UserData>;
-  users: User[] = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private userService: UserService) {
     this.loadUsers();
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
@@ -28,8 +30,43 @@ export class AdminComponent implements OnInit {
     return this.userService.isAdmin();
   }
 
+
   ngOnInit(): void {
   }
+
+  isOneAdmin(role: string): any {
+    return role == 'ROLE_ADMIN';
+  }
+
+  async setAdmin(id: number) {
+    let response = await this.userService.setAdmin(id);
+    response.subscribe(response => {
+      this.loadUsers();
+    }, err => {
+      console.log('error')
+    })
+  }
+
+  async setUser(id: number) {
+    let response = await this.userService.setUser(id);
+    response.subscribe(response => {
+      this.loadUsers();
+    }, err => {
+      console.log('error')
+    })
+  }
+
+  async delete(id: number) {
+    if (window.confirm('Are You sure You want delete that user?')) {
+      let response = await this.userService.deleteUser(id);
+      response.subscribe(response => {
+        this.loadUsers();
+      }, err => {
+        console.log('error')
+      })
+    }
+  }
+
 
   async loadUsers() {
     const users: UserData[] = [];
@@ -39,10 +76,8 @@ export class AdminComponent implements OnInit {
         users.push(createNewUser(user));
       }
       this.dataSource = new MatTableDataSource(users);
-      console.log(this.dataSource)
+      this.dataSource.paginator = this.paginator;
     });
-    console.log(users);
-    console.log(this.dataSource)
   }
 
 }
@@ -52,13 +87,15 @@ function createNewUser(data): UserData {
     id: data.id,
     name: data.name,
     email: data.email,
+    city: data.city,
     roleType: data.roleType
   };
 }
 
 export interface UserData {
-  id: string;
+  id: number;
   name: string;
   email: string;
+  city: string;
   roleType: string;
 }

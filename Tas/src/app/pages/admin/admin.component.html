@@ -17,40 +17,48 @@
 
       <mat-table #table [dataSource]="dataSource">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
-          <mat-cell *matCellDef="let userData"> {{userData.id}}</mat-cell>
-        </ng-container>
-
-        <!-- Name Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
           <mat-cell *matCellDef="let userData"> {{userData.name}}</mat-cell>
         </ng-container>
 
-        <!-- Weight Column -->
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
           <mat-cell *matCellDef="let userData"> {{userData.email}}</mat-cell>
         </ng-container>
 
-        <!-- Color Column -->
-        <ng-container matColumnDef="role">
+        <ng-container matColumnDef="roleType">
           <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
           <mat-cell *matCellDef="let userData"> {{userData.roleType}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-          <mat-cell>
-            <button mat-button>click!</button>
+          <mat-cell *matCellDef="let userData">
+            <button mat-menu-item color="primary" (click)="setUser(userData.id)" *ngIf="isOneAdmin(userData.roleType)">
+              Set USER
+            </button>
+            <button mat-menu-item color="primary" (click)="setAdmin(userData.id)"
+                    *ngIf="!isOneAdmin(userData.roleType)">Set ADMIN
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let userData">
+            <button mat-button color="warn" (click)="delete(userData.id)">Delete</button>
           </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
+
+      <mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[1, 10, 50]">
+      </mat-paginator>
     </div>
 
   </mat-card>

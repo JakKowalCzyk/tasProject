@@ -25,6 +25,12 @@
           </button>
         </div>
 
+        <div *ngIf="isUserLogged()" class="mat-content">
+          <button mat-button routerLink="/admin" (click)="sidenav.close()" routerLinkActive="active"
+                  title="admin">Admin
+          </button>
+        </div>
+
         <div>
           <button mat-button class="bt" (click)="sidenav.close()" routerLink="/about-firm"
                   routerLinkActive="active" title="O firmie">O firmie

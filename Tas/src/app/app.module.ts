@@ -41,6 +41,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
@@ -156,7 +157,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatSidenavModule,
     MatTableModule,
-
+    MatPaginatorModule
   ],
   providers: [
     CarService,
