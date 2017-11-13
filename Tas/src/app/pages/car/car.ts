@@ -32,6 +32,10 @@ export class CarPage implements OnInit {
     return this.userService.isUserLogged() && this.userService.isAdmin();
   }
 
+  isUserLogged() {
+    return this.userService.isUserLogged() && !this.userService.isAdmin();
+  }
+
 
   getBrand() {
     if (this.car == null) {
@@ -71,7 +75,7 @@ export class CarPage implements OnInit {
 
   rentCar() {
     let dialogRef = this.dialog.open(RentDialogComponent, {
-      data: {model: this.car.model, id: this.car.id}
+      data: {model: this.car.model, brand: this.brand.name, id: this.car.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

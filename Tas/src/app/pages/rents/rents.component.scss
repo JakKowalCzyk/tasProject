@@ -20,5 +20,9 @@
 
 .tab-content {
   padding: 16px;
-  display: flex;
+  //display: flex;
+}
+
+.example-fill-remaining-space {
+  flex: 1 1 auto;
 }
