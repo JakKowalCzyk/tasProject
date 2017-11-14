@@ -18,7 +18,7 @@
           <mat-list>
 
             <mat-list-item *ngFor="let rent of rentedCarSerivce.myWillBeActiveRentedCars"
-                           matTooltip="Click on the image to see car details!!">
+                           matTooltip="Click on the image to see car details!!" class="car-item">
               <button mat-raised-button color="primary" (click)="cancelRent(rent.id)">Cancel</button>
               <div> |</div>
               <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
@@ -37,7 +37,7 @@
         <div class="tab-content">
           <mat-list>
             <mat-list-item *ngFor="let rent of rentedCarSerivce.myActiveRentedCars"
-                           matTooltip="Click on the image to see car details!!">
+                           matTooltip="Click on the image to see car details!!" class="car-item">
               <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
                    [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
               <span mat-line>{{rent.carBrand}} {{rent.carModel}}</span>
@@ -53,7 +53,7 @@
         <div class="tab-content">
           <mat-list>
             <mat-list-item *ngFor="let rent of rentedCarSerivce.myPassedRentedCars"
-                           matTooltip="Click on the image to see car details!!">
+                           matTooltip="Click on the image to see car details!!" class="car-item">
               <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
                    [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
               <span mat-line>{{rent.carBrand}} {{rent.carModel}}</span>
