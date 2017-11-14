@@ -3,14 +3,21 @@
 
   <mat-toolbar class="mat_header">
 
+    <div class="nav-button">
+      <button type="button" mat-button (click)="openSideNav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
 
-    <button type="button" mat-button (click)="openSideNav()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <div class="header__text">
+    <div class="header-text-full">
       <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
         <span><p class="header__logo"><span class="header__logoBold">Szukałex</span> wypożyczalnia samochodów</p></span>
+      </a>
+    </div>
+
+    <div class="header-text-mobile">
+      <a class="header__link" routerLink="/" routerLinkActive="active" title="Przejdź do strony głównej">
+        <span><p class="header__logo"><span class="header__logoBold">Szukałex</span> </span>
       </a>
     </div>
 
@@ -24,9 +31,11 @@
 
 
     <div class="user_profile" *ngIf="userService.isUserLogged()">
-      <button mat-button color="primary" [matMenuTriggerFor]="appMenu">
-        {{userService.user.email}}
-      </button>
+      <div class="user-name">
+        <button mat-button color="primary" [matMenuTriggerFor]="appMenu">
+          {{userService.user.email}}
+        </button>
+      </div>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon>account_circle</mat-icon>
       </button>
