@@ -37,6 +37,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -163,6 +164,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatGridListModule,
     FlexLayoutModule
   ],
   providers: [
