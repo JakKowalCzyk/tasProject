@@ -1,44 +1,68 @@
-.photo {
-  height: 260px;
-  width: 390px;
-  margin: 0 auto;
-  align-self: center;
-  flex-direction: column;
+@media only screen and (min-device-width: 320px) {
+  .car {
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .photo {
+    height: 85%;
+    width: 90%;
+    margin: 0 auto;
+    align-self: center;
+    flex-direction: column;
+  }
+
+  .car-details {
+    padding: 10px;
+  }
+
+  .car-options {
+    padding: 15px;
+  }
 }
 
-.car {
-  width: 75%;
-  margin: auto;
-  padding: 15px;
-  align-content: center;
-  align-items: center;
-  flex-direction: column;
+@media only screen and (min-width: 1224px) {
+  .car {
+    width: 75%;
+    margin: auto;
+    padding: 15px;
+    align-content: center;
+    align-items: center;
+  }
+
+  .photo {
+    height: 260px;
+    width: 390px;
+    margin: 0 auto;
+    align-self: center;
+    flex-direction: column;
+  }
+
+  .car-details {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .car-options {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 
 .car-image {
-  text-align: center;
-  padding: 5px;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.car-details {
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.car-options {
   padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .car-actions {
   padding: 15px;
-  display: flex;
   align-items: center;
   justify-content: space-around;
 }

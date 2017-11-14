@@ -1,39 +1,42 @@
 .login
 {
-  width: 75%;
+  width: 100%;
   margin: auto;
   padding: 15px;
   flex-direction: column;
-}
 
-.mat-header {
-  margin: auto;
-  padding: 30px;
-}
+  .user-card {
+    display: flex;
+    margin: auto;
 
-.form-group {
-  padding: 5px;
-  width: 50%;
-  margin: auto;
-  position: relative;
-}
-.login-inside
-{
-  flex-direction: column;
-  width: 50%;
-  height: 50%;
-  margin: 0 auto;
-  position: relative;
-}
+    flex-direction: column;
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+    .login-inside {
+      flex-direction: column;
+      text-align: center;
+      margin: auto;
+
+      .form-group {
+        text-align: center;
+        display: flex;
+        padding: 5px;
+      }
+
+      .buttons {
+        padding: 10px;
+        margin: 0 auto;
+
+      }
+    }
+  }
+
+  .mat-header {
+    margin: auto;
+    padding: 30px;
+  }
 }
 
 h3 {
   text-align: center;
 }
 
-/*CSS do poprawy?*/
