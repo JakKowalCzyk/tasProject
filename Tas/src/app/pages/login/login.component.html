@@ -34,13 +34,18 @@
         </div>
       </form>
       <div class="buttons">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
-          Login!
-        </button>
+        <div>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
+            Login!
+          </button>
+        </div>
+        <br>
         <div></div>
-        <button mat-button type="submit" routerLink="/register" routerLinkActive="active">Click
-          to register!
-        </button>
+        <div>
+          <button mat-button type="submit" routerLink="/register" routerLinkActive="active">Click
+            to register!
+          </button>
+        </div>
         <br>
       </div>
     </div>

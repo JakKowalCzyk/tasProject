@@ -12,8 +12,9 @@
     <br>
     <h3>Rejestracja nowego użytkownika</h3>
 
-    <form [formGroup]="registerForm" class="form">
-      <div class="register-inside">
+    <div class="register-inside">
+
+      <form [formGroup]="registerForm" class="form">
         <div class="form-group">
           <mat-form-field>
             <input id="email" matInput placeholder="email" type="text" class="form-control" formControlName="email"
@@ -49,19 +50,25 @@
             <mat-error *ngIf="!isRepeatPasswordValid()">Repeate password doesn't match!</mat-error>
           </mat-form-field>
         </div>
-
-        <div class="form-group">
+      </form>
+      <br>
+      <div class="buttons">
+        <div>
           <button mat-raised-button color="primary" type="submit" [disabled]="!this.registerForm.valid"
                   routerLink="/login"
                   routerLinkActive="active" (click)="registerUser()">Zarejestruj się
           </button>
         </div>
-
-        <div class="login"><a routerLink="/login" routerLinkActive="active" title="Zaloguj się">Powrót do
-          logowania</a></div>
+        <br>
+        <div></div>
+        <div>
+          <button mat-button routerLink="/login" routerLinkActive="active" title="Zaloguj się">Powrót do
+            logowania
+          </button>
+        </div>
       </div>
-    </form>
-    <br>
+
+    </div>
 
   </mat-card>
 </div>
