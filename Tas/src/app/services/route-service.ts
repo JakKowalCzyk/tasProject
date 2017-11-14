@@ -11,7 +11,7 @@ export class RouteService {
     'brands'        : this.baseApi + 'brand/',
     'addCar'        : this.baseApi + 'car',
     'addBrand'      : this.baseApi + 'brand',
-    'categories'    : this.baseApi + 'type/category/',
+    'categories': this.baseApi + 'type/categoryType/',
     'filter'        : this.baseApi + 'car/filter',
     'addPhoto'      : this.baseApi + 'car/',
 

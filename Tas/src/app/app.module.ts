@@ -106,6 +106,9 @@ const appRoutes: Routes = [
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
   },
+  {
+    path: 'addcar', component: AddCarComponent, canActivate: [AdminGuard]
+  }
 
 ];
 

@@ -5,11 +5,20 @@
       <div mat-card-avatar class="avatar">
         <mat-icon>directions_car</mat-icon>
       </div>
-      <mat-card-title>Meet our offer!</mat-card-title>
+      <mat-card-title>
+        <div class="title">
+          <span>Meet our offer!</span>
+        </div>
+      </mat-card-title>
       <mat-card-subtitle>Checkout our cars!</mat-card-subtitle>
     </mat-card-header>
 
     <div class="main-content">
+      <div class="add-button">
+        <button mat-raised-button color="primary" *ngIf="isAdmin()" routerLink="/addcar" routerLinkActive="active">Add
+          new car!
+        </button>
+      </div>
       <div class="main__cars__filters">
         <app-filter></app-filter>
       </div>
