@@ -15,7 +15,8 @@ export class MainPage {
 
 
   ngOnInit(): void {
-
-
+        setTimeout(() => {
+            this.carService.getCars()
+        }, 500)
   }
 }
