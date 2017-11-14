@@ -3,7 +3,6 @@ import { RouteService }     from "./route-service";
 import { User }             from "../models/user";
 import { Headers, Http }    from "@angular/http";
 import { CookieService }    from 'angular2-cookie/core';
-import {RentedCarService} from "./rented-car-service";
 
 
 @Injectable()
@@ -40,6 +39,7 @@ export class UserService {
       let base = base64 || data.base64Auth;
       this.user = new User(data.id, data.email, data.name, data.city, data.roleType, base);
       this.user.base64Auth = base;
+      if (this.headers.get('Authorization') == null) this.headers.append('Authorization', 'Basic ' + base);
       this.cookies.putObject('user', this.user);
 
     return this.user;
