@@ -42,6 +42,7 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Collection<User> findAll() {
         return super.findAll();
     }
@@ -78,6 +79,12 @@ public class UserControllerImpl extends GenericControllerImpl<User, com.dreamtea
     @PreAuthorize("hasRole('ADMIN')")
     public User setAdminToUser(@PathVariable Long id) {
         return getAbstractMapper().mapToHttpObject(getGenericService().setAdminToUser(id));
+    }
+
+    @Override
+    @PreAuthorize("hasRole('ADMIN')")
+    public User setUserToAdmin(@PathVariable Long id) {
+        return getAbstractMapper().mapToHttpObject(getGenericService().setUserToAdmin(id));
     }
 
     @Override

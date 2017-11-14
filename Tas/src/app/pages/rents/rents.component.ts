@@ -1,7 +1,7 @@
 import {UserService} from "../../services/user-service";
 import {Component, OnInit} from "@angular/core";
 import {RentedCarService} from "../../services/rented-car-service";
-import {RentedCar} from "../../models/rented-car";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-rents',
@@ -10,13 +10,10 @@ import {RentedCar} from "../../models/rented-car";
 })
 export class RentsComponent implements OnInit {
 
-  myActiveRentedCars: Array<RentedCar> = [];
-  myWillBeActiveRentedCars: Array<RentedCar> = [];
-  myPassedRentedCars: Array<RentedCar> = [];
 
-
-  constructor(private userService: UserService,
-              private rentedCarSerivce: RentedCarService) {
+  constructor(public snackBar: MatSnackBar,
+              private userService: UserService,
+              public rentedCarSerivce: RentedCarService) {
   }
 
   isUserLogged() {
@@ -24,16 +21,24 @@ export class RentsComponent implements OnInit {
   }
 
   async cancelRent(id: number) {
-    let success = this.rentedCarSerivce.cancelRent(id);
-    if (success) {
-      this.myWillBeActiveRentedCars = this.myWillBeActiveRentedCars.filter(value => value.id != id);
+    if (window.confirm('Are You sure You want cancel that rent?')) {
+      let success = this.rentedCarSerivce.cancelRent(id);
+      if (success) {
+        this.openSnackBar('Success', 'Ok!');
+      } else {
+        this.openSnackBar('Cannot cancell this rent', 'Ok!');
+      }
     }
   }
 
-  ngOnInit(): void {
-    this.myActiveRentedCars = this.rentedCarSerivce.getMyActiveRents();
-    this.myWillBeActiveRentedCars = this.rentedCarSerivce.getMyWillBeActiveRents();
-    this.myPassedRentedCars = this.rentedCarSerivce.getMyPassedRents();
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
+
+  ngOnInit(): void {
+  }
+
 
 }

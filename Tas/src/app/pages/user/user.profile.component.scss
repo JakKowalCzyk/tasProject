@@ -1,8 +1,20 @@
-.user_profile {
-  width: 1000px;
+@media only screen and (min-device-width: 320px) {
+  .user_profile {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  .user_profile {
+  width: 75%;
   margin: auto;
   padding: 30px;
 }
+}
+
 
 .avatar {
   background-size: cover;
@@ -16,4 +28,5 @@
 .example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
+  display: flex;
 }

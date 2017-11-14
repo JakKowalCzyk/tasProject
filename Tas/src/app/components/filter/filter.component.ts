@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Engine} from "../../models/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
-
 
 
 @Component({
@@ -65,7 +64,9 @@ export class FilterComponent implements OnInit {
     this.hasRadio           = undefined;
     this.dateFrom           = undefined;
     this.dateTo             = undefined;
-
+    this.setStep(1);
+    this.getFilterCars();
+    this.openSnackBar();
   }
 
   getFilterCars() {
@@ -91,8 +92,8 @@ export class FilterComponent implements OnInit {
           from              : this.begin                || undefined,
           to                : this.end                  || undefined,
       };
-
       this.carService.getFilterCars(data);
+    this.setStep(1);
   }
 
   openSnackBar() {
@@ -115,7 +116,7 @@ export class FilterComponent implements OnInit {
       const month = d.getMonth();
       const year = d.getFullYear();
       this.minDate = new Date(year, month, day);
-    }
+    };
     this.formGroup = new FormGroup({
       priceSmallerThan: new FormControl(),
       priceBiggerThan: new FormControl(),

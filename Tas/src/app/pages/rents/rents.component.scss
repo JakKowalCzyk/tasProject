@@ -1,22 +1,55 @@
-.user_rents {
-  width: 1000px;
-  margin: auto;
-  padding: 30px;
+@media only screen and (min-device-width: 320px) {
+  .user_rents {
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+    flex-direction: column;
+  }
+
+  .tab-content {
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .car-item {
+    flex-direction: column;
+    margin: auto;
+    display: flex;
+  }
+
+  .photo_miniature {
+    width: 115px;
+    height: 115px;
+  }
 }
+
+@media only screen and (min-width: 1224px) {
+  .user_rents {
+    width: 75%;
+    margin: auto;
+    padding: 30px;
+  }
+
+  .tab-content {
+    padding: 16px;
+  }
+
+  .photo_miniature {
+    width: 129px;
+    height: 129px;
+  }
+}
+
+
 
 .avatar {
   background-size: cover;
-}
-
-.photo_miniature {
-  width: 129px;
-  height: 129px;
 }
 
 .tab-group {
   border: 1px solid #e8e8e8;
 }
 
-.tab-content {
-  padding: 16px;
-}
+
+

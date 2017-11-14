@@ -1,0 +1,33 @@
+<div class="rent-dialog">
+
+  <h1 mat-dialog-title>Rent {{data.brand}} {{data.model}}!</h1>
+
+  <div mat-dialog-content>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="From" [(ngModel)]="from">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="To" [(ngModel)]="to">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="areCarDatesPopulated()">
+      <mat-error *ngIf="!isFromBeforeTo()">To date has to be at least like from or it should be after</mat-error>
+      <mat-error *ngIf="!areDatesAfterAtLeastToday()">Dates should be after or at least today</mat-error>
+    </div>
+
+    <div>
+      <mat-error *ngIf="!isFree">Car is rented in given dates!</mat-error>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" [disabled]="!areDatesValid()">Ok</button>
+    <button mat-button mat-dialog-close>No Thanks</button>
+  </div>
+</div>

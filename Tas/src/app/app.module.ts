@@ -3,12 +3,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 //pages
 import {MainPage} from './pages/main/main';
 import {CarPage} from './pages/car/car';
-
 //components
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -27,27 +25,31 @@ import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user/user.profile.component";
-
 // import {MaterialModule} from "./material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatTableModule} from '@angular/material/table';
 import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatSnackBarModule,
 } from "@angular/material";
 import {AddCarComponent} from './components/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
@@ -57,6 +59,9 @@ import {RentedCarService} from "./services/rented-car-service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
+import {AdminComponent} from "./pages/admin/admin.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {RentDialogComponent} from "./components/rent/rent.dialog.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -98,6 +103,10 @@ const appRoutes: Routes = [
     path: 'me/rents', component: RentsComponent, canActivate: [ AuthGuard ]
   },
 
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
+  },
+
 ];
 
 
@@ -118,7 +127,9 @@ const appRoutes: Routes = [
     FilterComponent,
     UserProfileComponent,
     AddCarComponent,
-    RentsComponent
+    RentsComponent,
+    AdminComponent,
+    RentDialogComponent
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
@@ -149,6 +160,12 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatTooltipModule,
     MatSnackBarModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatGridListModule,
+    FlexLayoutModule
   ],
   providers: [
     CarService,
@@ -162,6 +179,9 @@ const appRoutes: Routes = [
     AdminGuard,
       { provide: CookieOptions, useValue: {}},
     CookieService,
+  ],
+  entryComponents: [
+    RentDialogComponent
   ],
   bootstrap: [AppComponent]
 })
