@@ -30,7 +30,7 @@
       </div>
 
       <div class="car-list-full">
-        <mat-grid-list cols="3">
+        <mat-grid-list cols="3" rowHeight="290px">
           <div *ngIf="carService.activeFilters">
             <mat-grid-tile *ngFor="let car of carService.filteredCars">
               <app-carc [car]="car"></app-carc>
