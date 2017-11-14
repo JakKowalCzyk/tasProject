@@ -1,17 +1,53 @@
+<div class="cars">
+  <mat-card class="car-card">
 
-<div class="main">
-    <div class="main__text">Poznaj naszą ofertę</div>
-    <div class="main__cars">
-        <div class="main__cars__filters"><app-filter></app-filter></div>
-        <div class="main__cars__list">
-            <div *ngIf="carService.activeFilters">
-                <app-carc *ngFor="let car of carService.filteredCars" [car]="car"></app-carc>
-            </div>
-            <div *ngIf="!carService.activeFilters">
-                <app-carc *ngFor="let car of carService.cars" [car]="car"></app-carc>
-            </div>
-        </div>
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>directions_car</mat-icon>
+      </div>
+      <mat-card-title>Meet our offer!</mat-card-title>
+      <mat-card-subtitle>Checkout our cars!</mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="main-content">
+      <div class="main__cars__filters">
+        <app-filter></app-filter>
+      </div>
+
+      <div class="car-list-mobile">
+        <mat-grid-list cols="1">
+          <div *ngIf="carService.activeFilters">
+            <mat-grid-tile *ngFor="let car of carService.filteredCars">
+              <app-carc [car]="car"></app-carc>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf="!carService.activeFilters">
+            <mat-grid-tile *ngFor="let car of carService.cars">
+              <app-carc [car]="car"></app-carc>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+
+      <div class="car-list-full">
+        <mat-grid-list cols="3">
+          <div *ngIf="carService.activeFilters">
+            <mat-grid-tile *ngFor="let car of carService.filteredCars">
+              <app-carc [car]="car"></app-carc>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf="!carService.activeFilters">
+            <mat-grid-tile *ngFor="let car of carService.cars">
+              <app-carc [car]="car"></app-carc>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+
     </div>
-</div>
 
-<router-outlet></router-outlet>
+
+    <router-outlet></router-outlet>
+
+  </mat-card>
+</div>
