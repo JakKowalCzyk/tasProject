@@ -39,6 +39,7 @@ export class FilterComponent implements OnInit {
   hasRadio: boolean;
   minDate: any;
   step: any;
+  stepOpt: any;
 
   constructor(private carService: CarService,
               public brandService: BrandService,
@@ -106,6 +107,10 @@ export class FilterComponent implements OnInit {
 
   setStep(index: number) {
     this.step = index;
+  }
+
+  setStepOpt(index: number) {
+    this.stepOpt = index;
   }
 
   ngOnInit() {
