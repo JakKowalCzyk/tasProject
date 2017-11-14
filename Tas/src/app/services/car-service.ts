@@ -62,20 +62,19 @@ export class CarService {
 
   }
 
-  getCars(): any {
+  async getCars() {
     this.cars = [];
-    this.http.get(this.routeService.routes.cars)
-      .subscribe((cars) => {
-        this.populateCarList(cars);
-      });
-
+    const res = await this.http.get(this.routeService.routes.cars).toPromise();
+    return this.populateCarList(res.json())
   }
 
-  deleteCar(car : number) {
-    this.http.delete(this.routeService.routes.cars + car, { headers : this.userService.headers } )
-    .subscribe((res) => {
-      this.getCars();
-    })
+  async deleteCar(car : number) {
+      try {
+          const res = await this.http.delete(this.routeService.routes.cars + car, {headers: this.userService.headers}).toPromise();
+          return this.getCars();
+      } catch(e) {
+          console.log(e);
+      }
   }
 
   isCarFreeInGivenDates(id: number, from: any, to: any): Observable<any> {
@@ -89,9 +88,10 @@ export class CarService {
 
 
   private populateCarList(cars) {
-    for (let carl of cars.json()) {
+    for (let carl of cars) {
       this.cars.push(
         this.carPipe.transform(carl));
     }
+    return true;
   }
 }

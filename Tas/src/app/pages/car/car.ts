@@ -61,15 +61,16 @@ export class CarPage implements OnInit {
     this.getBrand();
   }
 
-  deleteCarById()
-  {
-    this.carService.deleteCar(this.id);
-    this.router.navigateByUrl('/main');
+  async deleteCarById() {
+    const res = await this.carService.deleteCar(this.id);
+    if (res) {
+        this.router.navigate(['/main']);
+    }
   }
 
   delete() {
      if(window.confirm('Czy chcesz usunąć ten samochód?')){
-     this.deleteCarById;
+        this.deleteCarById();
     }
  }
 
