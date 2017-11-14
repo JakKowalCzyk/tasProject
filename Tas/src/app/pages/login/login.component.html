@@ -8,17 +8,17 @@
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
 
-    <br>
-    <h3>Zaloguj się</h3>
-    <br>
-
-    <div class="login_failed" *ngIf="!logged">
+    <div class="login-inside">
       <br>
-      <h3>Invalid email or password! Try again!</h3>
-    </div>
+      <h3>Zaloguj się</h3>
+      <br>
 
-    <form [formGroup]="loginForm" novalidate class="form">
-      <div class="login-inside">
+      <div class="login_failed" *ngIf="!logged">
+        <br>
+        <h3>Invalid email or password! Try again!</h3>
+      </div>
+
+      <form [formGroup]="loginForm" novalidate class="form">
         <div class="form-group">
           <mat-form-field>
             <input type="text" class="form-control" matInput formControlName="email" placeholder="username"
@@ -32,21 +32,18 @@
                    required=""/>
           </mat-form-field>
         </div>
-
-
-        <div class="buttons">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
-            Login!
-          </button>
-          <div></div>
-          <button mat-raised-button color="accent" type="submit" routerLink="/register" routerLinkActive="active">Click
-            to register!
-          </button>
-        </div>
+      </form>
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">
+          Login!
+        </button>
+        <div></div>
+        <button mat-button type="submit" routerLink="/register" routerLinkActive="active">Click
+          to register!
+        </button>
+        <br>
       </div>
-    </form>
-
-    <br>
+    </div>
 
   </mat-card>
 </div>

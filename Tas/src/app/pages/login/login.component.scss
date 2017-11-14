@@ -1,36 +1,46 @@
 .login
 {
-  width: 75%;
+  width: 100%;
   margin: auto;
   padding: 15px;
   flex-direction: column;
+
+  .user-card {
+    display: flex;
+    margin: auto;
+
+    flex-direction: column;
+
+    .login-inside {
+      flex-direction: column;
+      text-align: center;
+      margin: auto;
+
+      .form-group {
+        text-align: center;
+        display: flex;
+        padding: 5px;
+      }
+
+      .buttons {
+        padding: 5px;
+        margin: 0 auto;
+
+      }
+    }
+  }
+
+  .mat-header {
+    margin: auto;
+    padding: 30px;
+  }
 }
 
-.mat-header {
-  margin: auto;
-  padding: 30px;
-}
-
-.form-group {
-  padding: 5px;
-  width: 50%;
-  margin: auto;
-  position: relative;
-}
-.login-inside
-{
-  flex-direction: column;
-  width: 50%;
-  height: 50%;
-  margin: 0 auto;
-  position: relative;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
+//.buttons {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-around;
+//}
 
 h3 {
   text-align: center;
