@@ -11,6 +11,16 @@
     flex-direction: column;
     flex-wrap: wrap;
   }
+  .mobile-tab {
+    width: 100%;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .normal-tab {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 1224px) {
@@ -21,6 +31,14 @@
   }
 
   .example-container {
+  }
+
+  .mobile-tab {
+    display: none;
+  }
+
+  .normal-tab {
+    display: inline;
   }
 }
 
