@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CarService} from "../../services/car-service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../services/user-service";
 
 @Component({
@@ -10,18 +10,29 @@ import {UserService} from "../../services/user-service";
 })
 export class MainPage {
 
-  constructor(public carService: CarService,
-              private userService: UserService,
-              private  route: ActivatedRoute) {
+    ref : string;
+
+  constructor(
+      public carService     : CarService,
+      private userService   : UserService,
+      private route         : ActivatedRoute,
+      private router        : Router,
+  ) {
   }
 
   isAdmin() {
     return this.userService.isUserLogged() && this.userService.isAdmin();
   }
 
+  async onCarDeleted() {
+      const res = await this.carService.getCars();
+      this.router.navigateByUrl('/main');
+  }
+
   ngOnInit(): void {
-        setTimeout(() => {
-            this.carService.getCars()
-        }, 500)
+      this.route.params.subscribe(params => {
+          this.ref = params['ref'];
+          if (this.ref == 'fromdelete') this.onCarDeleted()
+      })
   }
 }
