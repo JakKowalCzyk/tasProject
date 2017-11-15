@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import {Engine} from "../models/engine";
-import {DefaultCarPhoto} from "../models/default-car-photo";
-import {Car} from "../models/car";
+import {Engine} from "../models/car/engine";
+import {DefaultCarPhoto} from "../models/car/default-car-photo";
+import {Car} from "../models/car/car";
 
 @Pipe({
   name: 'car',

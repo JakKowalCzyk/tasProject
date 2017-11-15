@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {CarService} from "../../services/car-service";
-import {Car} from "../../models/car";
-import {BrandService} from "../../services/brand-service";
-import {Brand} from "../../models/brand";
-import {UserService} from "../../services/user-service";
+import {CarService} from "../../../services/car-service";
+import {Car} from "../../../models/car/car";
+import {BrandService} from "../../../services/brand-service";
+import {Brand} from "../../../models/car/brand";
+import {UserService} from "../../../services/user-service";
 import {MatDialog} from "@angular/material";
-import {RentDialogComponent} from "../../components/dialog/rent/rent.dialog.component";
+import {RentDialogComponent} from "../../../components/dialog/rent/rent.dialog.component";
 
 @Component({
   selector: 'app-car',

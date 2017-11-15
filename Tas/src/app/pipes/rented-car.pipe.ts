@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import {RentedCar} from "../models/rented-car";
+import {RentedCar} from "../models/car/rented-car";
 
 @Pipe({
   name: 'rentedCar',

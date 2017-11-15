@@ -1,4 +1,4 @@
-import {Car} from "../models/car";
+import {Car} from "../models/car/car";
 import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
 import {Headers, Http} from "@angular/http";

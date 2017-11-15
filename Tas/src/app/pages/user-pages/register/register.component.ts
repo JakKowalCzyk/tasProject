@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user-service";
 import {User} from "../../../models/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {matchOtherValidator} from "../../match-other-validator";
+import {matchOtherValidator} from "../../../models/match-other-validator";
 
 @Component({
   selector: 'app-register',

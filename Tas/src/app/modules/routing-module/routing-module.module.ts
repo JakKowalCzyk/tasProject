@@ -10,11 +10,11 @@ import {OfferComponent} from "../../pages/about-pages/offer/offer.component";
 import {RegisterComponent} from "../../pages/user-pages/register/register.component";
 import {UserProfileComponent} from "../../pages/user-pages/user/user.profile.component";
 import {AuthGuard} from "../../guards/AuthGuard";
-import {RentsComponent} from "../../pages/rents/rents.component";
-import {CarPage} from "../../pages/car/car";
+import {RentsComponent} from "../../pages/car-pages/rents/rents.component";
+import {CarPage} from "../../pages/car-pages/car/car";
 import {AdminComponent} from "../../pages/user-pages/admin/admin.component";
 import {AdminGuard} from "../../guards/AdminGuard";
-import {AddCarComponent} from "../../pages/add-car/add-car.component";
+import {AddCarComponent} from "../../pages/car-pages/add-car/add-car.component";
 
 const appRoutes: Routes = [
   {

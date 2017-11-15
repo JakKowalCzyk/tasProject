@@ -1,6 +1,6 @@
-import {UserService} from "../../services/user-service";
+import {UserService} from "../../../services/user-service";
 import {Component, OnInit} from "@angular/core";
-import {RentedCarService} from "../../services/rented-car-service";
+import {RentedCarService} from "../../../services/rented-car-service";
 import {MatSnackBar} from "@angular/material";
 
 @Component({

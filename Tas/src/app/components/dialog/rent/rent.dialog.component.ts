@@ -1,7 +1,7 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from "@angular/material";
 import {CarService} from "../../../services/car-service";
-import {RentedCar} from "../../../models/rented-car";
+import {RentedCar} from "../../../models/car/rented-car";
 import {RentedCarService} from "../../../services/rented-car-service";
 
 @Component({

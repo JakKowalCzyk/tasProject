@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 //pages
 import {MainPage} from './pages/main/main';
-import {CarPage} from './pages/car/car';
+import {CarPage} from './pages/car-pages/car/car';
 //components
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -25,10 +25,10 @@ import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user-pages/user/user.profile.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AddCarComponent} from './pages/add-car/add-car.component';
+import {AddCarComponent} from './pages/car-pages/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
 import {CarPipe} from "./pipes/car.pipe";
-import {RentsComponent} from "./pages/rents/rents.component";
+import {RentsComponent} from "./pages/car-pages/rents/rents.component";
 import {RentedCarService} from "./services/rented-car-service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";

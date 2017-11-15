@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {CarService} from "../../services/car-service";
-import {BrandService} from "../../services/brand-service";
-import {CarHttp} from "../../models/carHttp";
+import {CarService} from "../../../services/car-service";
+import {BrandService} from "../../../services/brand-service";
+import {CarHttp} from "../../../models/car/carHttp";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
-import {ProgressDialogComponent} from "../../components/dialog/progress/progress.dialog.component";
+import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
 
 @Component({
   selector: 'app-add-car',
