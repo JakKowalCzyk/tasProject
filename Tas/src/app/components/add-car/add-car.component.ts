@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
 import {CarHttp} from "../../models/carHttp";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-car',
@@ -32,27 +33,64 @@ export class AddCarComponent implements OnInit {
   hasElectricWindow: boolean = false;
   hasNavi: boolean = false;
   hasAirConditioning: boolean = false;
-  hasManualGearbox: boolean = false;
+  hasAutomaticGearbox: boolean = false;
   hasSunroof: boolean = false;
   hasRadio: boolean = false;
   year: any;
   photo: any;
 
   constructor(public carService: CarService,
-              public brandService: BrandService) {
+              public brandService: BrandService,
+              private router: Router) {
   }
 
   isFormValid(): any {
     return this.model != null && this.brand != null && this.categoryType != null && this.fuelType != null
-      && this.driveType != null && this.power != null && this.pricePerDay != null && this.photo != null;
+      && this.driveType != null && this.isPowerValid() && this.isPriceValid() && this.photo != null && this.isDateValid();
   }
 
-  addCar() {
+  isPriceValid(): any {
+    return this.isPricePopulated() && this.pricePerDay > 10;
+  }
+
+  isPricePopulated() {
+    return this.pricePerDay != null;
+  }
+
+  isPowerValid(): any {
+    return this.isPowerPopulated() && this.power > 10;
+  }
+
+  isPowerPopulated() {
+    return this.power != null;
+  }
+
+  isDateValid(): any {
+    return this.isYearPopulated() && this.year > 1950
+  }
+
+  isYearPopulated() {
+    return this.year != null;
+  }
+
+  async addCar() {
     let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
-      this.hasManualGearbox, this.fuelType, this.driveType, this.power, 0);
-    let res = this.carService.addCar(car, this.photo);
+      !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
+    let expectedCarSize = this.carService.cars.length + 1;
+    const res = await this.carService.addCar(car, this.photo);
+    this.routeToMain(expectedCarSize)
 
+  }
+
+  routeToMain(expectedSize) {
+    if (expectedSize == this.carService.cars.length) {
+      this.router.navigate(['/main']);
+    } else {
+      setTimeout(() => {
+        this.routeToMain(expectedSize)
+      }, 300)
+    }
   }
 
   fileChange(event) {

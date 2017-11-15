@@ -1,7 +1,7 @@
 import {Car} from "../models/car";
 import {Injectable} from "@angular/core";
 import {CarPipe} from "../pipes/car.pipe";
-import {Headers, Http, RequestOptions} from "@angular/http";
+import {Headers, Http} from "@angular/http";
 import {RouteService} from "./route-service";
 import {UserService} from "./user-service";
 import {Observable} from "rxjs/Observable";
@@ -98,28 +98,38 @@ export class CarService {
   async addCar(data, photo) {
     this.http.post(this.routeService.routes.addCar, data, {headers: this.userService.headers})
       .subscribe((res) => {
-        this.sendPhoto(photo, res.json().id).subscribe(photo => {
-          this.getCars();
-          return res.json().id
+        this.sendPhoto(photo, res.json().id).then(value => {
+          return this.getCarsWithNewPhoto(value);
         });
       }, (err) => {
         console.log(err)
       })
   }
 
-  sendPhoto(photo, carId): Observable<any> {
+  async getCarsWithNewPhoto(value) {
+    if (value.response) {
+      return await this.getCars();
+    } else {
+      setTimeout(() => {
+        return this.getCarsWithNewPhoto(value);
+      }, 500)
+    }
+  }
+
+  async sendPhoto(photo, carId): Promise<any> {
     let formData: FormData = new FormData();
     formData.append('file', photo, photo.name);
-    let headers = new Headers();
-    /** No need to include Content-Type in Angular 4 */
-    // headers.append('Content-Type', 'application/json');
-    headers.append('Content-Type', 'multipart/form-data');
-    // headers.append('Accept', 'application/json');
-    headers.append('Authorization', this.userService.headers.toJSON().Authorization);
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(`${this.routeService.routes.addPhoto + carId + "/photo"}`,
-      formData, options);
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+    xhr.open('POST', this.routeService.routes.addPhoto + carId + "/photo", true);
+    xhr.setRequestHeader("enctype", "multipart/form-data");
+    xhr.setRequestHeader('Authorization', this.userService.headers.toJSON().Authorization);
+    // IE bug fixes to clear cache
+    xhr.setRequestHeader("Cache-Control", "no-cache");
+    xhr.setRequestHeader("Cache-Control", "no-store");
+    xhr.setRequestHeader("Pragma", "no-cache");
 
+    xhr.send(formData);
+    return xhr;
   }
 
 
