@@ -15,8 +15,7 @@
         </mat-form-field>
       </div>
 
-      <mat-table #table [dataSource]="dataSource">
-
+      <mat-table #table [dataSource]="dataSource" class="normal-tab">
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
           <mat-cell *matCellDef="let userData"> {{userData.name}}</mat-cell>
@@ -43,17 +42,40 @@
             </button>
           </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="delete">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let userData">
             <button mat-button color="warn" (click)="delete(userData.id)">Delete</button>
           </mat-cell>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
+
+
+      <mat-table #mobiletab [dataSource]="dataSource" class="mobile-tab">
+        <ng-container matColumnDef="user">
+          <mat-header-cell *matHeaderCellDef> User</mat-header-cell>
+          <mat-cell *matCellDef="let userData"> {{userData.name}} {{userData.email}} {{userData.roleType}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+          <mat-cell *matCellDef="let userData">
+            <button mat-menu-item color="primary" (click)="setUser(userData.id)" *ngIf="isOneAdmin(userData.roleType)">
+              Set USER
+            </button>
+            <button mat-menu-item color="primary" (click)="setAdmin(userData.id)"
+                    *ngIf="!isOneAdmin(userData.roleType)">Set ADMIN
+            </button>
+            <button mat-button color="warn" (click)="delete(userData.id)">Delete</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsMobile"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsMobile;"></mat-row>
+      </mat-table>
+
 
       <mat-paginator #paginator
                      [pageSize]="10"

@@ -11,6 +11,7 @@ import {MatPaginator, MatSnackBar} from "@angular/material";
 export class AdminComponent implements OnInit {
 
   displayedColumns = ['name', 'email', 'roleType', 'action', 'delete'];
+  displayedColumnsMobile = ['user', 'action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
