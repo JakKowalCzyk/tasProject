@@ -68,13 +68,8 @@ export class CarService {
     return this.populateCarList(res.json())
   }
 
-  async deleteCar(car : number) {
-      try {
-          const res = await this.http.delete(this.routeService.routes.cars + car, {headers: this.userService.headers}).toPromise();
-          return this.getCars();
-      } catch(e) {
-          console.log(e);
-      }
+  deleteCar(car : number) {
+      return this.http.delete(this.routeService.routes.cars + car, {headers: this.userService.headers})
   }
 
   isCarFreeInGivenDates(id: number, from: any, to: any): Observable<any> {
@@ -88,6 +83,7 @@ export class CarService {
 
 
   private populateCarList(cars) {
+    this.cars = [];
     for (let carl of cars) {
       this.cars.push(
         this.carPipe.transform(carl));
