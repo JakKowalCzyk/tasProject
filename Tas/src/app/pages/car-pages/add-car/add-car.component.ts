@@ -78,7 +78,6 @@ export class AddCarComponent implements OnInit {
   }
 
   async addCar() {
-    console.log(this.hasAutomaticGearbox);
     this.openDialog();
     let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
