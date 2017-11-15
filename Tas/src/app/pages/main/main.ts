@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CarService} from "../../services/car-service";
 import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../services/user-service";
 
 @Component({
   selector: 'app-main',
@@ -10,9 +11,13 @@ import {ActivatedRoute} from "@angular/router";
 export class MainPage {
 
   constructor(public carService: CarService,
+              private userService: UserService,
               private  route: ActivatedRoute) {
   }
 
+  isAdmin() {
+    return this.userService.isUserLogged() && this.userService.isAdmin();
+  }
 
   ngOnInit(): void {
         setTimeout(() => {

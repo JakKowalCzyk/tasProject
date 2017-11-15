@@ -6,7 +6,7 @@ export class Car {
   id      : number;
   brand   : number;
   model   : string;
-  category: string;
+  categoryType: string;
   engine  : Engine;
   imgPath : string;
   price   : number;
@@ -18,13 +18,16 @@ export class Car {
   hasSunroof: boolean;
   hasManualGearbox: boolean;
   defaultCarPhoto : DefaultCarPhoto;
+  fuelType: string;
+  driveType: string;
+  power: number;
 
   constructor(id: number, brand: number, model: string, category: string, imgPath: string, price: number,
               year: string, engine: Engine, defaultCarPhoto: DefaultCarPhoto, hasAirConditioning: boolean, hasNavi: boolean, hasElectricWindow: boolean, hasRadio: boolean, hasSunroof: boolean, hasManualGearbox: boolean) {
     this.id = id;
     this.brand = brand;
     this.model = model;
-    this.category = category;
+    this.categoryType = category;
     this.imgPath = imgPath;
     this.price = price;
     this.year = year;

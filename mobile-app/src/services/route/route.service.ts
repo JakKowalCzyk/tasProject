@@ -10,7 +10,7 @@ export class RouteService {
         'brands'        : this.base + 'brand/',
         'addCar'        : this.base + 'car',
         'addBrand'      : this.base + 'brand',
-        'categories'    : this.base + 'type/category/',
+      'categories': this.base + 'type/categoryType/',
         'filter'        : this.base + 'car/filter',
         'addPhoto'      : this.base + 'car/',
 
