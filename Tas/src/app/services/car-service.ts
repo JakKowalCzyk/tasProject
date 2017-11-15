@@ -91,15 +91,8 @@ export class CarService {
     return true;
   }
 
-  async addCar(data, photo) {
-    this.http.post(this.routeService.routes.addCar, data, {headers: this.userService.headers})
-      .subscribe((res) => {
-        this.sendPhoto(photo, res.json().id).then(value => {
-          return this.getCarsWithNewPhoto(value);
-        });
-      }, (err) => {
-        console.log(err)
-      })
+  addCar(data): Observable<any> {
+    return this.http.post(this.routeService.routes.addCar, data, {headers: this.userService.headers});
   }
 
   async getCarsWithNewPhoto(value) {
