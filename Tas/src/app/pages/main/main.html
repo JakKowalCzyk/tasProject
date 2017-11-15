@@ -24,7 +24,7 @@
       </div>
 
       <div class="car-list-mobile">
-        <mat-grid-list cols="1">
+        <mat-grid-list cols="1" rowHeight="290px">
           <div *ngIf="carService.activeFilters">
             <mat-grid-tile *ngFor="let car of carService.filteredCars">
               <app-carc [car]="car"></app-carc>
