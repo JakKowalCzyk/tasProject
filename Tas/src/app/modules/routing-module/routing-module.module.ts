@@ -5,14 +5,14 @@ import {MainPage} from "../../pages/main/main";
 import {AboutFirmComponent} from "../../pages/about-pages/about-firm/about-firm.component";
 import {ContactComponent} from "../../pages/about-pages/contact/contact.component";
 import {TermsComponent} from "../../pages/about-pages/terms/terms.component";
-import {LoginComponent} from "../../pages/login/login.component";
+import {LoginComponent} from "../../pages/user-pages/login/login.component";
 import {OfferComponent} from "../../pages/about-pages/offer/offer.component";
-import {RegisterComponent} from "../../pages/register/register.component";
-import {UserProfileComponent} from "../../pages/user/user.profile.component";
+import {RegisterComponent} from "../../pages/user-pages/register/register.component";
+import {UserProfileComponent} from "../../pages/user-pages/user/user.profile.component";
 import {AuthGuard} from "../../guards/AuthGuard";
 import {RentsComponent} from "../../pages/rents/rents.component";
 import {CarPage} from "../../pages/car/car";
-import {AdminComponent} from "../../pages/admin/admin.component";
+import {AdminComponent} from "../../pages/user-pages/admin/admin.component";
 import {AdminGuard} from "../../guards/AdminGuard";
 import {AddCarComponent} from "../../pages/add-car/add-car.component";
 
