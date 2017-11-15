@@ -3,6 +3,8 @@ import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
 import {CarHttp} from "../../models/carHttp";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material";
+import {ProgressDialogComponent} from "../../components/dialog/progress/progress.dialog.component";
 
 @Component({
   selector: 'app-add-car',
@@ -38,10 +40,12 @@ export class AddCarComponent implements OnInit {
   hasRadio: boolean = false;
   year: any;
   photo: any;
+  dialogRef: any;
 
   constructor(public carService: CarService,
               public brandService: BrandService,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
   isFormValid(): any {
@@ -74,6 +78,7 @@ export class AddCarComponent implements OnInit {
   }
 
   async addCar() {
+    this.openDialog();
     let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
       !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
@@ -85,6 +90,7 @@ export class AddCarComponent implements OnInit {
 
   routeToMain(expectedSize) {
     if (expectedSize == this.carService.cars.length) {
+      this.dialogRef.close();
       this.router.navigate(['/main']);
     } else {
       setTimeout(() => {
@@ -98,6 +104,10 @@ export class AddCarComponent implements OnInit {
     if (fileList.length > 0) {
       this.photo = fileList[0];
     }
+  }
+
+  openDialog() {
+    this.dialogRef = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
   ngOnInit() {
