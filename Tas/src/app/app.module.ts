@@ -7,8 +7,8 @@ import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {MainPage} from './pages/main/main';
 import {CarPage} from './pages/car-pages/car/car';
 //components
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
+import {HeaderComponent} from './components/page-component/header/header.component';
+import {FooterComponent} from './components/page-component/footer/footer.component';
 import {AboutFirmComponent} from './pages/about-pages/about-firm/about-firm.component';
 import {TermsComponent} from './pages/about-pages/terms/terms.component';
 import {ContactComponent} from './pages/about-pages/contact/contact.component';
