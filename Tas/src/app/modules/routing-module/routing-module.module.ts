@@ -2,11 +2,11 @@ import {NgModule} from '@angular/core';
 
 import {RouterModule, Routes} from "@angular/router";
 import {MainPage} from "../../pages/main/main";
-import {AboutFirmComponent} from "../../pages/about-firm/about-firm.component";
-import {ContactComponent} from "../../pages/contact/contact.component";
-import {TermsComponent} from "../../pages/terms/terms.component";
+import {AboutFirmComponent} from "../../pages/about-pages/about-firm/about-firm.component";
+import {ContactComponent} from "../../pages/about-pages/contact/contact.component";
+import {TermsComponent} from "../../pages/about-pages/terms/terms.component";
 import {LoginComponent} from "../../pages/login/login.component";
-import {OfferComponent} from "../../pages/offer/offer.component";
+import {OfferComponent} from "../../pages/about-pages/offer/offer.component";
 import {RegisterComponent} from "../../pages/register/register.component";
 import {UserProfileComponent} from "../../pages/user/user.profile.component";
 import {AuthGuard} from "../../guards/AuthGuard";

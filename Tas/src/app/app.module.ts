@@ -9,11 +9,11 @@ import {CarPage} from './pages/car/car';
 //components
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
-import {AboutFirmComponent} from './pages/about-firm/about-firm.component';
-import {TermsComponent} from './pages/terms/terms.component';
-import {ContactComponent} from './pages/contact/contact.component';
+import {AboutFirmComponent} from './pages/about-pages/about-firm/about-firm.component';
+import {TermsComponent} from './pages/about-pages/terms/terms.component';
+import {ContactComponent} from './pages/about-pages/contact/contact.component';
 import {LoginComponent} from './pages/login/login.component';
-import {OfferComponent} from './pages/offer/offer.component';
+import {OfferComponent} from './pages/about-pages/offer/offer.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
