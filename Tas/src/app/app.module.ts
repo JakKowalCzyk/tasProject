@@ -44,6 +44,7 @@ import {
   MatMenuModule,
   MatNativeDateModule,
   MatPaginatorModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
@@ -51,7 +52,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from "@angular/material";
-import {AddCarComponent} from './components/add-car/add-car.component';
+import {AddCarComponent} from './pages/add-car/add-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
 import {CarPipe} from "./pipes/car.pipe";
 import {RentsComponent} from "./pages/rents/rents.component";
@@ -61,7 +62,8 @@ import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {RentDialogComponent} from "./components/rent/rent.dialog.component";
+import {RentDialogComponent} from "./components/dialog/rent/rent.dialog.component";
+import {ProgressDialogComponent} from "./components/dialog/progress/progress.dialog.component";
 
 //services
 // import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
@@ -132,7 +134,8 @@ const appRoutes: Routes = [
     AddCarComponent,
     RentsComponent,
     AdminComponent,
-    RentDialogComponent
+    RentDialogComponent,
+    ProgressDialogComponent
   ],
   imports: [RouterModule.forRoot(
     appRoutes,
@@ -168,6 +171,7 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatDialogModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule
   ],
   providers: [
@@ -184,7 +188,8 @@ const appRoutes: Routes = [
     CookieService,
   ],
   entryComponents: [
-    RentDialogComponent
+    RentDialogComponent,
+    ProgressDialogComponent
   ],
   bootstrap: [AppComponent]
 })
