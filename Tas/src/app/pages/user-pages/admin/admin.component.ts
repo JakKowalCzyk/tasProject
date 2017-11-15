@@ -41,25 +41,29 @@ export class AdminComponent implements OnInit {
   }
 
   async setAdmin(id: number) {
-    let response = await this.userService.setAdmin(id);
-    response.subscribe(response => {
-      this.loadUsers();
-      this.openSnackBar('User role changed', 'OK');
-    }, err => {
-      console.log('error');
-      this.openSnackBar('Cannot change user role - error', 'OK');
-    })
+    if (window.confirm('Are You sure You want set ADMIN?')) {
+      let response = await this.userService.setAdmin(id);
+      response.subscribe(response => {
+        this.loadUsers();
+        this.openSnackBar('User role changed', 'OK');
+      }, err => {
+        console.log('error');
+        this.openSnackBar('Cannot change user role - error', 'OK');
+      })
+    }
   }
 
   async setUser(id: number) {
-    let response = await this.userService.setUser(id);
-    response.subscribe(response => {
-      this.loadUsers();
-      this.openSnackBar('User role changed', 'OK');
-    }, err => {
-      console.log('error');
-      this.openSnackBar('Cannot change user role - error', 'OK');
-    })
+    if (window.confirm('Are You sure You want set USER?')) {
+      let response = await this.userService.setUser(id);
+      response.subscribe(response => {
+        this.loadUsers();
+        this.openSnackBar('User role changed', 'OK');
+      }, err => {
+        console.log('error');
+        this.openSnackBar('Cannot change user role - error', 'OK');
+      })
+    }
   }
 
   async delete(id: number) {
