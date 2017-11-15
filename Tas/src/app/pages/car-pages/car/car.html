@@ -42,10 +42,10 @@
             <mat-chip color="grey" selected="true" *ngIf="!car.hasElectricWindow">Electric windows
               <mat-icon>clear</mat-icon>
             </mat-chip>
-            <mat-chip color="primary" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
+            <mat-chip color="primary" selected="true" *ngIf="car.hasManualGearbox">Automatic gearbox
               <mat-icon>done</mat-icon>
             </mat-chip>
-            <mat-chip color="grey" selected="true" *ngIf="car.hasManualGearbox">Automatic gearbox
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
               <mat-icon>clear</mat-icon>
             </mat-chip>
             <mat-chip color="primary" selected="true" *ngIf="car.hasNavi">Navi
