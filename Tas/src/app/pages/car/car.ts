@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CarService} from "../../services/car-service";
 import {Car} from "../../models/car";
@@ -16,9 +16,11 @@ import {RentDialogComponent} from "../../components/dialog/rent/rent.dialog.comp
 })
 export class CarPage implements OnInit {
 
-  car: Car;
-  brand: Brand;
-  id: number;
+  car       : Car;
+  brand     : Brand;
+  id        : number;
+
+
 
   constructor(private route: ActivatedRoute,
               private carService: CarService,
@@ -35,7 +37,6 @@ export class CarPage implements OnInit {
   isUserLogged() {
     return this.userService.isUserLogged() && !this.userService.isAdmin();
   }
-
 
   getBrand() {
     if (this.car == null) {
@@ -61,18 +62,13 @@ export class CarPage implements OnInit {
     this.getBrand();
   }
 
-  async deleteCarById() {
-    const res = await this.carService.deleteCar(this.id);
-    if (res) {
-        this.router.navigate(['/main']);
-    }
+  async deleteCar() {
+      if (!window.confirm('Czy chcesz usunąć ten samochód?')) return;
+      let res = await this.carService.deleteCar(this.id);
+      res.subscribe((resp) => {
+          this.router.navigate(['/main', {ref: 'fromdelete'}])
+      });
   }
-
-  delete() {
-     if(window.confirm('Czy chcesz usunąć ten samochód?')){
-        this.deleteCarById();
-    }
- }
 
   rentCar() {
     let dialogRef = this.dialog.open(RentDialogComponent, {
