@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Brand} from "../models/brand";
+import {Brand} from "../models/car/brand";
 import {RouteService} from "./route-service";
 import {Http} from "@angular/http";
 
