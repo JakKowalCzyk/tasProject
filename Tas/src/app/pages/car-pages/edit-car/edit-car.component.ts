@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CarService} from "../../../services/car-service";
 import {BrandService} from "../../../services/brand-service";
 import {CarHttp} from "../../../models/car/carHttp";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
+import {Car} from "../../../models/car/car";
 
 @Component({
   selector: 'app-edit-car',
@@ -12,6 +13,7 @@ import {ProgressDialogComponent} from "../../../components/dialog/progress/progr
   styleUrls: ['./edit-car.component.scss']
 })
 export class EditCarComponent implements OnInit {
+  @Input() car : Car;
   categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
   fuelTypes = [
     'PB',

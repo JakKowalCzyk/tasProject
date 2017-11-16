@@ -8,6 +8,10 @@
       <mat-card-title>Edit car!</mat-card-title>
     </mat-card-header>
 
+    <div class="edit-car-image">
+      <!-- <img mat-card-image class="photo" src="/{{car.defaultCarPhoto.photoUrl}}"> -->
+    </div>
+
     <div class="input-field">
       <mat-form-field>
         <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria" >
@@ -61,7 +65,7 @@
       <mat-form-field>
         <input type="number" matInput [(ngModel)]="year" name="year" placeholder="Production year" >
         <div *ngIf="isYearPopulated()">
-          <mat-error *ngIf="!isDateValid">Year has to be grater than 1950 and smaller then current</mat-error>
+          <mat-error *ngIf="!isDateValid()">Year has to be grater than 1950 and smaller then current</mat-error>
         </div>
       </mat-form-field>
     </div>
