@@ -1,0 +1,83 @@
+<div class="edit-car">
+
+  <mat-card class="edit-car-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>directions_car</mat-icon>
+      </div>
+      <mat-card-title>Edit car!</mat-card-title>
+    </mat-card-header>
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria" >
+          <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="brand" name="brand" placeholder="Marka" >
+          <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
+            {{ brand.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-field">
+      <mat-form-field>
+        <input matInput [(ngModel)]="model" name="model" placeholder="Model" >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="fuelType" name="fuelType" placeholder="Paliwo" >
+          <mat-option *ngFor="let fuel of fuelTypes" value="{{fuel}}">{{ fuel }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select [(ngModel)]="driveType" name="driveType" placeholder="Napęd" >
+          <mat-option *ngFor="let drive of driveTypes" value="{{drive}}">{{ drive }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput [(ngModel)]="power" name="power" placeholder="Power (KM)" >
+        <div *ngIf="isPowerPopulated()">
+          <mat-error *ngIf="!isPowerValid()">Power has to be bigger than 10 HP</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="input-field">
+      <mat-form-field>
+        <input type="number" matInput [(ngModel)]="pricePerDay" name="pricePerDay" placeholder="Price per day (zł)"
+               >
+        <div *ngIf="isPricePopulated()">
+          <mat-error *ngIf="!isPriceValid()">Price has to be bigger than 10zł</mat-error>
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput [(ngModel)]="year" name="year" placeholder="Production year" >
+        <div *ngIf="isYearPopulated()">
+          <mat-error *ngIf="!isDateValid">Year has to be grater than 1950 and smaller then current</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <section class="select-section">
+      <mat-checkbox [(ngModel)]="hasElectricWindow">Elektryczne szyby</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasNavi">Navi</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasAirConditioning">Klima</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasAutomaticGearbox">Automatic gearbox</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasSunroof">Szyberdach</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasRadio">Radio</mat-checkbox>
+    </section>
+    <div><br></div>
+    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg,.jpeg,.png" >
+    <div><br></div>
+
+    <button mat-raised-button color="primary" [disabled]="!isFormValid()" (click)="editCar()">Save!</button>
+  </mat-card>
+</div>

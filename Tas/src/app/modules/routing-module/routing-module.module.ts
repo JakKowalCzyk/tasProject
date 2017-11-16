@@ -15,6 +15,7 @@ import {CarPage} from "../../pages/car-pages/car/car";
 import {AdminComponent} from "../../pages/user-pages/admin/admin.component";
 import {AdminGuard} from "../../guards/AdminGuard";
 import {AddCarComponent} from "../../pages/car-pages/add-car/add-car.component";
+import {EditCarComponent} from "../../pages/car-pages/edit-car/edit-car.component";
 
 const appRoutes: Routes = [
   {
@@ -57,6 +58,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'addcar', component: AddCarComponent, canActivate: [AdminGuard]
+  },
+  {
+    path: 'editCar', component: EditCarComponent, canActivate: [AdminGuard]
   }
 
 ];
@@ -70,5 +74,3 @@ const appRoutes: Routes = [
 export class RoutingModule {
 
 }
-
-

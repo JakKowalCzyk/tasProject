@@ -11,25 +11,25 @@ export class RouteService {
     'brands'        : this.baseApi + 'brand/',
     'addCar'        : this.baseApi + 'car',
     'addBrand'      : this.baseApi + 'brand',
-    'categories': this.baseApi + 'type/categoryType/',
+    'categories'    : this.baseApi + 'type/categoryType/',
     'filter'        : this.baseApi + 'car/filter',
     'addPhoto'      : this.baseApi + 'car/',
 
     //user
     'register'      : this.baseApi + 'user',
-    'update': this.baseApi + 'user',
-    'deleteUser': this.baseApi + 'user',
+    'update'        : this.baseApi + 'user',
+    'deleteUser'    : this.baseApi + 'user',
     'login'         : this.baseApi + 'user/me',
     'logout'        : this.baseApi + 'user/logout',
-    'users': this.baseApi + 'user/',
-    'admin': this.baseApi + 'user/',
-    'user': this.baseApi + 'user/',
+    'users'         : this.baseApi + 'user/',
+    'admin'         : this.baseApi + 'user/',
+    'user'          : this.baseApi + 'user/',
 
     //orders
-    "add_rent": this.baseApi + 'car/rented',
-    "user_rents": this.baseApi + 'car/rented/user/me',
-    "all_rents": this.baseApi + 'car/rented/',
-    "cancel_rent": this.baseApi + 'car/rented/cancel/',
+    "add_rent"      : this.baseApi + 'car/rented',
+    "user_rents"    : this.baseApi + 'car/rented/user/me',
+    "all_rents"     : this.baseApi + 'car/rented/',
+    "cancel_rent"   : this.baseApi + 'car/rented/cancel/',
   };
 
 }
