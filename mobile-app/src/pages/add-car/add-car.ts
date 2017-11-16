@@ -113,7 +113,7 @@ export class AddCarPage {
                 },
                 {
                     text    : 'Ok',
-                    handler : (data) => { this.brand = data; console.log(this.brand) }
+                    handler : (data) => { this.brand = data; }
                 }
             ]
         });
