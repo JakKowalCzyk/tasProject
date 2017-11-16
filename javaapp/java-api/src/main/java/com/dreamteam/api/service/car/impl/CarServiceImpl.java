@@ -119,7 +119,9 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
 
     private void deletePhotosFromAWS(Long id) {
         Car car = super.findOne(id);
-        carPhotoService.deleteObject(car.getDefaultCarPhoto());
+        if (car.getDefaultCarPhoto() != null) {
+            carPhotoService.deleteObject(car.getDefaultCarPhoto());
+        }
     }
 
     @Override
