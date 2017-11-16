@@ -13,8 +13,10 @@ import com.dreamteam.api.model.bo.car.RentedCar;
 import com.dreamteam.api.model.enums.CategoryType;
 import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
+import com.dreamteam.api.service.car.CarPhotoService;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.email.EmailService;
+import com.dreamteam.api.service.file.FileService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -33,6 +35,8 @@ public abstract class AbstractServiceTest {
     @MockBean
     protected RentedCarService rentedCarService;
     @MockBean
+    protected CarPhotoService carPhotoService;
+    @MockBean
     protected RentedCarDAO rentedCarDAO;
     @MockBean
     protected CarDAO carDAO;
@@ -46,6 +50,8 @@ public abstract class AbstractServiceTest {
     protected EmailService emailService;
     @MockBean
     private AmazonS3 amazonS3;
+    @MockBean
+    protected FileService fileService;
 
     @Before
     public void setUp() throws Exception {
