@@ -26,6 +26,7 @@ import {FilterComponent} from './components/filter/filter.component';
 import {UserProfileComponent} from "./pages/user-pages/user/user.profile.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AddCarComponent} from './pages/car-pages/add-car/add-car.component';
+import {EditCarComponent} from './pages/car-pages/edit-car/edit-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
 import {CarPipe} from "./pipes/car.pipe";
 import {RentsComponent} from "./pages/car-pages/rents/rents.component";
@@ -57,6 +58,7 @@ import {RoutingModule} from "./modules/routing-module/routing-module.module";
     FilterComponent,
     UserProfileComponent,
     AddCarComponent,
+    EditCarComponent,
     RentsComponent,
     AdminComponent,
     RentDialogComponent,
