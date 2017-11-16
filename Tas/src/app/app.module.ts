@@ -2,20 +2,19 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {RouterModule, Routes} from "@angular/router";
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 //pages
 import {MainPage} from './pages/main/main';
-import {CarPage} from './pages/car/car';
+import {CarPage} from './pages/car-pages/car/car';
 //components
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
-import {AboutFirmComponent} from './pages/about-firm/about-firm.component';
-import {TermsComponent} from './pages/terms/terms.component';
-import {ContactComponent} from './pages/contact/contact.component';
-import {LoginComponent} from './pages/login/login.component';
-import {OfferComponent} from './pages/offer/offer.component';
-import {RegisterComponent} from './pages/register/register.component';
+import {HeaderComponent} from './components/page-component/header/header.component';
+import {FooterComponent} from './components/page-component/footer/footer.component';
+import {AboutFirmComponent} from './pages/about-pages/about-firm/about-firm.component';
+import {TermsComponent} from './pages/about-pages/terms/terms.component';
+import {ContactComponent} from './pages/about-pages/contact/contact.component';
+import {LoginComponent} from './pages/user-pages/login/login.component';
+import {OfferComponent} from './pages/about-pages/offer/offer.component';
+import {RegisterComponent} from './pages/user-pages/register/register.component';
 import {CarService} from "./services/car-service";
 import {BrandService} from "./services/brand-service";
 import {CarComponent} from './components/car/car.component';
@@ -24,94 +23,23 @@ import {RouteService} from "./services/route-service";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "./pipes/pipes.module";
 import {FilterComponent} from './components/filter/filter.component';
-import {UserProfileComponent} from "./pages/user/user.profile.component";
-// import {MaterialModule} from "./material.module";
+import {UserProfileComponent} from "./pages/user-pages/user/user.profile.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatTableModule} from '@angular/material/table';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-} from "@angular/material";
-import {AddCarComponent} from './components/add-car/add-car.component';
+import {AddCarComponent} from './pages/car-pages/add-car/add-car.component';
+import {EditCarComponent} from './pages/car-pages/edit-car/edit-car.component';
 import {RentedCarPipe} from "./pipes/rented-car.pipe";
 import {CarPipe} from "./pipes/car.pipe";
-import {RentsComponent} from "./pages/rents/rents.component";
+import {RentsComponent} from "./pages/car-pages/rents/rents.component";
 import {RentedCarService} from "./services/rented-car-service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {AdminGuard} from "./guards/AdminGuard";
 import {CookieOptions} from "angular2-cookie/core";
-import {AdminComponent} from "./pages/admin/admin.component";
+import {AdminComponent} from "./pages/user-pages/admin/admin.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {RentDialogComponent} from "./components/rent/rent.dialog.component";
-
-//services
-// import {routableComponents, RoutingModuleModule} from "./routing-module/routing-module.module";
-
-
-const appRoutes: Routes = [
-  {
-    path: 'main', component: MainPage
-  },
-  {
-    path: '', redirectTo: 'main', pathMatch: 'full'
-  },
-  {
-    path: 'about-firm', component: AboutFirmComponent
-  },
-  {
-    path: 'contact', component: ContactComponent
-  },
-  {
-    path: 'terms', component: TermsComponent
-  },
-  {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'offer', component: OfferComponent
-  },
-  {
-    path: 'register', component: RegisterComponent
-  },
-  {
-    path: 'car/:id', component: CarPage
-  },
-  {
-    path: 'me', component: UserProfileComponent, canActivate: [ AuthGuard ]
-  },
-
-  {
-    path: 'me/rents', component: RentsComponent, canActivate: [ AuthGuard ]
-  },
-
-  {
-    path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
-  },
-  {
-    path: 'addcar', component: AddCarComponent, canActivate: [AdminGuard]
-  }
-
-];
-
+import {RentDialogComponent} from "./components/dialog/rent/rent.dialog.component";
+import {ProgressDialogComponent} from "./components/dialog/progress/progress.dialog.component";
+import {MaterialModule} from "./modules/material-module/material.module";
+import {RoutingModule} from "./modules/routing-module/routing-module.module";
 
 @NgModule({
   declarations: [
@@ -130,44 +58,21 @@ const appRoutes: Routes = [
     FilterComponent,
     UserProfileComponent,
     AddCarComponent,
+    EditCarComponent,
     RentsComponent,
     AdminComponent,
-    RentDialogComponent
+    RentDialogComponent,
+    ProgressDialogComponent
   ],
-  imports: [RouterModule.forRoot(
-    appRoutes,
-    { enableTracing: true } // <-- debugging purposes only
-  ),
-    // MaterialModule,
+  imports: [
+    RoutingModule,
+    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     PipesModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatExpansionModule,
-    MatNativeDateModule,
-    MatListModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatListModule,
-    MatChipsModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatGridListModule,
     FlexLayoutModule
   ],
   providers: [
@@ -184,7 +89,8 @@ const appRoutes: Routes = [
     CookieService,
   ],
   entryComponents: [
-    RentDialogComponent
+    RentDialogComponent,
+    ProgressDialogComponent
   ],
   bootstrap: [AppComponent]
 })

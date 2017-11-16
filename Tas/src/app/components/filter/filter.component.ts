@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Engine} from "../../models/engine";
+import {Engine} from "../../models/car/engine";
 import {CarService} from "../../services/car-service";
 import {BrandService} from "../../services/brand-service";
 import {FormControl, FormGroup} from "@angular/forms";

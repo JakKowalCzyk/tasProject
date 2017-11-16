@@ -7,9 +7,11 @@ import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
 import com.dreamteam.api.service.car.CarService;
 import com.dreamteam.api.service.car.RentedCarService;
+import com.dreamteam.api.service.file.FileService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,11 +23,18 @@ import java.util.stream.Collectors;
 public class CarServiceImpl extends GenericServiceImpl<Car> implements CarService {
 
     private RentedCarService rentedCarService;
+    private FileService fileService;
+
+    @Value("${s3-repo-bucket-komis-images}")
+    private String s3KomisImagesBucketName;
+    @Value("${s3-repo-bucket-komis-images-resized}")
+    private String s3KomisResizedImagesBucketName;
 
     @Autowired
-    public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService) {
+    public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService, FileService fileService) {
         super(modelDAO);
         this.rentedCarService = rentedCarService;
+        this.fileService = fileService;
     }
 
     @Override
@@ -111,7 +120,16 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     @Override
     public void deleteObject(Long id) {
         rentedCarService.findByCar(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
+        deletePhotosFromAWS(id);
         super.deleteObject(id);
+    }
+
+    private void deletePhotosFromAWS(Long id) {
+        Car car = super.findOne(id);
+        if (car.getDefaultCarPhoto() != null) {
+            fileService.deleteS3File(car.getDefaultCarPhoto().getPhotoS3Id(), s3KomisImagesBucketName);
+            fileService.deleteS3File(car.getDefaultCarPhoto().getResizedPhotoS3Id(), s3KomisResizedImagesBucketName);
+        }
     }
 
     @Override

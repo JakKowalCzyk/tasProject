@@ -3,7 +3,7 @@ import {Http} from "@angular/http";
 import {RouteService} from "./route-service";
 import {UserService} from "./user-service";
 import {RentedCarPipe} from "../pipes/rented-car.pipe";
-import {RentedCar} from "../models/rented-car";
+import {RentedCar} from "../models/car/rented-car";
 import {CarService} from "./car-service";
 import {BrandService} from "./brand-service";
 import {Observable} from "rxjs/Observable";

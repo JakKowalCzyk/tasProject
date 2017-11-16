@@ -1,0 +1,74 @@
+<div *ngIf="isCarLoaded()" class="car">
+  <mat-card class="car-card">
+    <mat-card-header>
+
+      <div mat-card-avatar class="avatar">
+        <mat-icon>directions_car</mat-icon>
+      </div>
+
+      <mat-card-title>{{brand.name}}</mat-card-title>
+      <mat-card-subtitle>{{car.model}} - {{car.year}}</mat-card-subtitle>
+    </mat-card-header>
+
+
+    <mat-card-content class="car-content">
+      <div class="car-image">
+        <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
+      </div>
+
+      <div class="car_desc">
+        <div class="car-details">
+          <mat-chip-list>
+            <mat-chip color="primary" selected="true" matTooltip="Brand">{{brand.name}}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Model">{{ car.model}}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Production year">{{ car.year }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Drive type">{{ car.engine.drive }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Fuel">{{ car.engine.fuel }}</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Power">{{ car.engine.power }} KM</mat-chip>
+            <mat-chip color="primary" selected="true" matTooltip="Price per day">{{ car.price }}zł</mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="car-options">
+          <mat-chip-list>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasAirConditioning">Air conditioning
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasAirConditioning">Air conditioning
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasElectricWindow">Electric windows
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasElectricWindow">Electric windows
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasManualGearbox">Automatic gearbox
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasManualGearbox">Automatic gearbox
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasNavi">Navi
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasNavi">Navi
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+            <mat-chip color="primary" selected="true" *ngIf="car.hasSunroof">Sunroof
+              <mat-icon>done</mat-icon>
+            </mat-chip>
+            <mat-chip color="grey" selected="true" *ngIf="!car.hasSunroof">Sunroof
+              <mat-icon>clear</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="car-actions">
+      <button mat-raised-button color="primary" *ngIf="isUserLogged()" (click)="rentCar()">Rent!</button>
+      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" color="warn" (click)="deleteCar()">Usuń auto!</button>
+      <button mat-raised-button *ngIf="isUserLoggedAndAdmin()" color="warn" routerLink="/editCar">Edytuj auto!</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
