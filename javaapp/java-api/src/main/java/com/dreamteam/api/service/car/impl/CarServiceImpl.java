@@ -5,6 +5,7 @@ import com.dreamteam.api.model.bo.car.Car;
 import com.dreamteam.api.model.enums.CategoryType;
 import com.dreamteam.api.model.enums.DriveType;
 import com.dreamteam.api.model.enums.FuelType;
+import com.dreamteam.api.service.car.CarPhotoService;
 import com.dreamteam.api.service.car.CarService;
 import com.dreamteam.api.service.car.RentedCarService;
 import com.dreamteam.api.service.impl.GenericServiceImpl;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class CarServiceImpl extends GenericServiceImpl<Car> implements CarService {
 
     private RentedCarService rentedCarService;
+    private CarPhotoService carPhotoService;
 
     @Autowired
     public CarServiceImpl(CarDAO modelDAO, RentedCarService rentedCarService) {
@@ -111,7 +113,13 @@ public class CarServiceImpl extends GenericServiceImpl<Car> implements CarServic
     @Override
     public void deleteObject(Long id) {
         rentedCarService.findByCar(id).forEach(rentedCar -> rentedCarService.deleteObject(rentedCar.getId()));
+        deletePhotosFromAWS(id);
         super.deleteObject(id);
+    }
+
+    private void deletePhotosFromAWS(Long id) {
+        Car car = super.findOne(id);
+        carPhotoService.deleteObject(car.getDefaultCarPhoto());
     }
 
     @Override
