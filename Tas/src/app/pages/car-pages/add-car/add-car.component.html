@@ -61,7 +61,7 @@
       <mat-form-field>
         <input type="number" matInput [(ngModel)]="year" name="year" placeholder="Production year" required>
         <div *ngIf="isYearPopulated()">
-          <mat-error *ngIf="!isDateValid">Year has to be grater than 1950 and smaller then current</mat-error>
+          <mat-error *ngIf="!isDateValid()">Year has to be grater than 1950 and smaller then current</mat-error>
         </div>
       </mat-form-field>
     </div>

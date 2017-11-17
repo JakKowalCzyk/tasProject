@@ -60,7 +60,7 @@ const appRoutes: Routes = [
     path: 'addcar', component: AddCarComponent, canActivate: [AdminGuard]
   },
   {
-    path: 'editCar', component: EditCarComponent, canActivate: [AdminGuard]
+    path: 'edit-car/:id', component: EditCarComponent, canActivate: [AdminGuard]
   }
 
 ];
