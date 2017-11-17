@@ -3,6 +3,8 @@ import {UserService} from "../../../services/user-service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {RentedCarService} from "../../../services/rented-car-service";
+import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +15,14 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   logged: boolean = true;
+  dialogRefProgress: any;
 
   constructor(
     public userService    : UserService,
     private formBuilder   : FormBuilder,
     private router        : Router,
-    private rentedCarService: RentedCarService
+    private rentedCarService: RentedCarService,
+    public dialog: MatDialog
   ) {
     this.createFormGroup();
   }
@@ -34,11 +38,14 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     } else {
+      this.openProgressDialog();
       let success = await this.userService.loginUser(this.loginForm.get('email').value, this.loginForm.get('password').value);
       if (success) {
         this.rentedCarService.loadMyRents();
+        this.dialogRefProgress.close();
         this.router.navigateByUrl('/me');
       } else {
+        this.dialogRefProgress.close();
         this.router.navigateByUrl('/login');
         this.logged = false;
       }
@@ -47,6 +54,10 @@ export class LoginComponent implements OnInit {
 
   isUserPresent(): any {
     return this.userService.user != null;
+  }
+
+  openProgressDialog() {
+    this.dialogRefProgress = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
   ngOnInit() {
