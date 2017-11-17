@@ -13,11 +13,11 @@
 
     <mat-tab-group class="tab-group">
 
-      <mat-tab label="Future active" [disabled]="rentedCarSerivce.myWillBeActiveRentedCars.length <= 0">
+      <mat-tab label="Future active" [disabled]="rentedCarService.myWillBeActiveRentedCars.length <= 0">
         <div class="tab-content">
           <mat-list>
 
-            <mat-list-item *ngFor="let rent of rentedCarSerivce.myWillBeActiveRentedCars"
+            <mat-list-item *ngFor="let rent of rentedCarService.myWillBeActiveRentedCars"
                            matTooltip="Click on the image to see car details!!" class="car-item">
               <button mat-raised-button color="primary" (click)="cancelRent(rent.id)">Cancel</button>
               <div> |</div>
@@ -33,10 +33,10 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Active rents" [disabled]="rentedCarSerivce.myActiveRentedCars.length <= 0">
+      <mat-tab label="Active rents" [disabled]="rentedCarService.myActiveRentedCars.length <= 0">
         <div class="tab-content">
           <mat-list>
-            <mat-list-item *ngFor="let rent of rentedCarSerivce.myActiveRentedCars"
+            <mat-list-item *ngFor="let rent of rentedCarService.myActiveRentedCars"
                            matTooltip="Click on the image to see car details!!" class="car-item">
               <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
                    [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>
@@ -49,10 +49,10 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Passed rents" [disabled]="rentedCarSerivce.myPassedRentedCars.length <= 0">
+      <mat-tab label="Passed rents" [disabled]="rentedCarService.myPassedRentedCars.length <= 0">
         <div class="tab-content">
           <mat-list>
-            <mat-list-item *ngFor="let rent of rentedCarSerivce.myPassedRentedCars"
+            <mat-list-item *ngFor="let rent of rentedCarService.myPassedRentedCars"
                            matTooltip="Click on the image to see car details!!" class="car-item">
               <img class="photo_miniature" src="{{rent.carPhoto}}" matTooltip="Go to the car!"
                    [routerLink]="['/car', rent.carId]" routerLinkActive="active"/>

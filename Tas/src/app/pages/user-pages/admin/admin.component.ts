@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserService} from "../../../services/user-service";
 import {MatTableDataSource} from "./table-data-source";
-import {MatPaginator, MatSnackBar} from "@angular/material";
+import {MatDialog, MatPaginator, MatSnackBar} from "@angular/material";
+import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
 
 @Component({
   selector: 'app-admin',
@@ -13,12 +14,14 @@ export class AdminComponent implements OnInit {
   displayedColumns = ['name', 'email', 'roleType', 'action', 'delete'];
   displayedColumnsMobile = ['user', 'action'];
   dataSource: MatTableDataSource<UserData>;
+  dialogRefProgress: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   constructor(private userService: UserService,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              public dialog: MatDialog) {
     this.loadUsers();
   }
 
@@ -42,11 +45,14 @@ export class AdminComponent implements OnInit {
 
   async setAdmin(id: number) {
     if (window.confirm('Are You sure You want set ADMIN?')) {
+      this.openProgressDialog();
       let response = await this.userService.setAdmin(id);
       response.subscribe(response => {
         this.loadUsers();
+        this.dialogRefProgress.close();
         this.openSnackBar('User role changed', 'OK');
       }, err => {
+        this.dialogRefProgress.close();
         console.log('error');
         this.openSnackBar('Cannot change user role - error', 'OK');
       })
@@ -55,12 +61,15 @@ export class AdminComponent implements OnInit {
 
   async setUser(id: number) {
     if (window.confirm('Are You sure You want set USER?')) {
+      this.openProgressDialog();
       let response = await this.userService.setUser(id);
       response.subscribe(response => {
         this.loadUsers();
+        this.dialogRefProgress.close();
         this.openSnackBar('User role changed', 'OK');
       }, err => {
         console.log('error');
+        this.dialogRefProgress.close();
         this.openSnackBar('Cannot change user role - error', 'OK');
       })
     }
@@ -68,12 +77,15 @@ export class AdminComponent implements OnInit {
 
   async delete(id: number) {
     if (window.confirm('Are You sure You want delete that user?')) {
+      this.openProgressDialog();
       let response = await this.userService.deleteUser(id);
       response.subscribe(response => {
         this.loadUsers();
+        this.dialogRefProgress.close();
         this.openSnackBar('User deleted successfuly', 'OK');
       }, err => {
         console.log('error');
+        this.dialogRefProgress.close();
         this.openSnackBar('Cannot delete user - error', 'OK');
       })
     }
@@ -96,6 +108,10 @@ export class AdminComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  openProgressDialog() {
+    this.dialogRefProgress = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
 }
