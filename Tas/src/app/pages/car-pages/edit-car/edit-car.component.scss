@@ -1,3 +1,28 @@
+@media only screen and (min-device-width: 320px) {
+  .photo {
+    height: 85%;
+    width: 90%;
+    margin: 0 auto;
+    align-self: center;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 1224px){
+  .photo {
+    height: 260px;
+    width: 390px;
+    margin: 0 auto;
+    align-self: center;
+    flex-direction: column;
+  }
+}
+
+.car-image
+{
+  padding: 15px;
+}
+
 .edit-car {
   width: 100%;
   margin: auto;
@@ -6,19 +31,6 @@
 
   .edit-car-card {
     text-align: center;
-
-  }
-  .edit-car-image
-  {
-    padding: 15px;
-    
-    .edit-car-image-photo {
-      height: 85%;
-      width: 90%;
-      margin: 0 auto;
-      align-self: center;
-      flex-direction: column;
-    }
   }
 
 }

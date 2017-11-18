@@ -2,18 +2,18 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CarService} from "../../../services/car-service";
 import {BrandService} from "../../../services/brand-service";
 import {CarHttp} from "../../../models/car/carHttp";
-import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Car} from "../../../models/car/car";
 
 @Component({
   selector: 'app-edit-car',
   templateUrl: './edit-car.component.html',
-  styleUrls: ['./edit-car.component.scss']
+  styleUrls: ['./edit-car.component.scss'],
+  providers: [CarService]
 })
 export class EditCarComponent implements OnInit {
-  @Input() car : Car;
   categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
   fuelTypes = [
     'PB',
@@ -27,6 +27,9 @@ export class EditCarComponent implements OnInit {
     'RWD',
     'AWD'
   ];
+
+  id  : number;
+  car       : Car;
   model: string;
   brand: number;
   fuelType: string;
@@ -34,7 +37,7 @@ export class EditCarComponent implements OnInit {
   driveType: string;
   power: number;
   pricePerDay: number;
-  hasElectricWindow: boolean = false;
+  hasElectricWindow: boolean = true;
   hasNavi: boolean = false;
   hasAirConditioning: boolean = false;
   hasAutomaticGearbox: boolean = false;
@@ -44,7 +47,8 @@ export class EditCarComponent implements OnInit {
   photo: any;
   dialogRef: any;
 
-  constructor(public carService: CarService,
+  constructor(private route: ActivatedRoute,
+              public carService: CarService,
               public brandService: BrandService,
               private router: Router,
               public dialog: MatDialog) {
@@ -115,7 +119,35 @@ export class EditCarComponent implements OnInit {
     this.dialogRef = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
+  getCarById() {
+    if (this.carService.cars.length <= 0) {
+      setTimeout(() => {
+        this.getCarById();
+      }, 500);
+    }
+    this.car = this.carService.getCarById(this.id);
+    this.getBrand();
+  }
+
+  getBrand() {
+    if (this.car == null) {
+      setTimeout(() => {
+        this.getBrand();
+      }, 500)
+    } else {
+      this.brand = this.brandService.getBrandById(this.car.brand);
+    }
+  }
+
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.getCarById();
+    });
+  }
+
+  isCarLoaded(): any {
+    return this.car != null && this.brand != null;
   }
 
 }

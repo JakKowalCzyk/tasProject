@@ -1,4 +1,4 @@
-<div class="edit-car">
+<div *ngIf="isCarLoaded()"class="edit-car">
 
   <mat-card class="edit-car-card">
     <mat-card-header>
@@ -8,19 +8,21 @@
       <mat-card-title>Edit car!</mat-card-title>
     </mat-card-header>
 
-    <div class="edit-car-image">
-      <!-- <img mat-card-image class="photo" src="/{{car.defaultCarPhoto.photoUrl}}"> -->
+    <div class="car-image">
+      <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
     </div>
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="Kategoria" >
-          <mat-option *ngFor="let category of categories" value="{{category}}">{{ category }}
+        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="{{car.category}}" >
+          <mat-option *ngFor="let category of categories" value="{{category}}">
+            {{ category }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field>
-        <mat-select [(ngModel)]="brand" name="brand" placeholder="Marka" >
+        <mat-select [(ngModel)]="brand" name="brand" placeholder="{{brand.name}}" >
           <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
             {{ brand.name }}
           </mat-option>
@@ -30,11 +32,13 @@
 
     <div class="input-field">
       <mat-form-field>
-        <input matInput [(ngModel)]="model" name="model" placeholder="Model" >
+        <input matInput [(ngModel)]="model" name="model" placeholder="{{car.model}}" >
       </mat-form-field>
+
       <mat-form-field>
-        <mat-select [(ngModel)]="fuelType" name="fuelType" placeholder="Paliwo" >
-          <mat-option *ngFor="let fuel of fuelTypes" value="{{fuel}}">{{ fuel }}
+        <mat-select [(ngModel)]="fuelType" name="fuelType" placeholder="{{car.engine.fuel}}" >
+          <mat-option *ngFor="let fuel of fuelTypes" value="{{fuel}}">
+            {{ fuel }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -42,28 +46,31 @@
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="driveType" name="driveType" placeholder="Napęd" >
-          <mat-option *ngFor="let drive of driveTypes" value="{{drive}}">{{ drive }}
+        <mat-select [(ngModel)]="driveType" name="driveType" placeholder="{{car.engine.drive}}" >
+          <mat-option *ngFor="let drive of driveTypes" value="{{drive}}">
+            {{ drive }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="power" name="power" placeholder="Power (KM)" >
+        <input type="number" matInput [(ngModel)]="power" name="power" placeholder="{{car.engine.power}} KM" value="{{car.engine.power}}">
         <div *ngIf="isPowerPopulated()">
           <mat-error *ngIf="!isPowerValid()">Power has to be bigger than 10 HP</mat-error>
         </div>
       </mat-form-field>
     </div>
+
     <div class="input-field">
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="pricePerDay" name="pricePerDay" placeholder="Price per day (zł)"
-               >
+        <input type="number" matInput [(ngModel)]="pricePerDay" name="pricePerDay" placeholder="{{car.price}}">
         <div *ngIf="isPricePopulated()">
           <mat-error *ngIf="!isPriceValid()">Price has to be bigger than 10zł</mat-error>
         </div>
       </mat-form-field>
+
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="year" name="year" placeholder="Production year" >
+        <input type="number" matInput [(ngModel)]="year" name="year" placeholder="{{car.year}}" >
         <div *ngIf="isYearPopulated()">
           <mat-error *ngIf="!isDateValid()">Year has to be grater than 1950 and smaller then current</mat-error>
         </div>
@@ -71,7 +78,8 @@
     </div>
 
     <section class="select-section">
-      <mat-checkbox [(ngModel)]="hasElectricWindow">Elektryczne szyby</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="car.hasElectricWindow" >Elektryczne szyby</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="!car.hasElectricWindow">Elektryczne szyby</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasNavi">Navi</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasAirConditioning">Klima</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasAutomaticGearbox">Automatic gearbox</mat-checkbox>
