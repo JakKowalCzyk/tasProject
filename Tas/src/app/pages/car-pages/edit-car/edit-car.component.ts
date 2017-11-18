@@ -37,7 +37,7 @@ export class EditCarComponent implements OnInit {
   driveType: string;
   power: number;
   pricePerDay: number;
-  hasElectricWindow: boolean = true;
+  hasElectricWindow: boolean = false;
   hasNavi: boolean = false;
   hasAirConditioning: boolean = false;
   hasAutomaticGearbox: boolean = false;

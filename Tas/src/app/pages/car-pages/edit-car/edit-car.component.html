@@ -14,7 +14,7 @@
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="{{car.category}}" >
+        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="NIE DZIAŁA">
           <mat-option *ngFor="let category of categories" value="{{category}}">
             {{ category }}
           </mat-option>
@@ -54,7 +54,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="power" name="power" placeholder="{{car.engine.power}} KM" value="{{car.engine.power}}">
+        <input type="number" matInput [(ngModel)]="power" name="power" placeholder="{{car.engine.power}} KM" value="{{power}}">
         <div *ngIf="isPowerPopulated()">
           <mat-error *ngIf="!isPowerValid()">Power has to be bigger than 10 HP</mat-error>
         </div>
@@ -78,12 +78,13 @@
     </div>
 
     <section class="select-section">
-      <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="car.hasElectricWindow" >Elektryczne szyby</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="!car.hasElectricWindow">Elektryczne szyby</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasElectricWindow">Electric windows</mat-checkbox>
+      <!-- <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="car.hasElectricWindow" >Elektryczne szyby</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="!car.hasElectricWindow">Elektryczne szyby</mat-checkbox> -->
       <mat-checkbox [(ngModel)]="hasNavi">Navi</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasAirConditioning">Klima</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasAirConditioning">Air conditioning</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasAutomaticGearbox">Automatic gearbox</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasSunroof">Szyberdach</mat-checkbox>
+      <mat-checkbox [(ngModel)]="hasSunroof">Sunroof</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasRadio">Radio</mat-checkbox>
     </section>
     <div><br></div>
