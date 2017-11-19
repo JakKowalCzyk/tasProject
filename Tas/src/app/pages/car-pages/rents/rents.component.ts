@@ -1,7 +1,8 @@
 import {UserService} from "../../../services/user-service";
 import {Component, OnInit} from "@angular/core";
 import {RentedCarService} from "../../../services/rented-car-service";
-import {MatSnackBar} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
+import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
 
 @Component({
   selector: 'app-rents',
@@ -10,10 +11,12 @@ import {MatSnackBar} from "@angular/material";
 })
 export class RentsComponent implements OnInit {
 
+  dialogRefProgress: any;
 
   constructor(public snackBar: MatSnackBar,
               private userService: UserService,
-              public rentedCarSerivce: RentedCarService) {
+              public rentedCarService: RentedCarService,
+              public dialog: MatDialog) {
   }
 
   isUserLogged() {
@@ -22,10 +25,13 @@ export class RentsComponent implements OnInit {
 
   async cancelRent(id: number) {
     if (window.confirm('Are You sure You want cancel that rent?')) {
-      let success = this.rentedCarSerivce.cancelRent(id);
+      this.openProgressDialog();
+      let success = this.rentedCarService.cancelRent(id);
       if (success) {
+        this.dialogRefProgress.close();
         this.openSnackBar('Success', 'Ok!');
       } else {
+        this.dialogRefProgress.close();
         this.openSnackBar('Cannot cancell this rent', 'Ok!');
       }
     }
@@ -35,6 +41,10 @@ export class RentsComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  openProgressDialog() {
+    this.dialogRefProgress = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
   ngOnInit(): void {

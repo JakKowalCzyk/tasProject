@@ -70,7 +70,6 @@ export class AdService extends HasResponse {
         this.getCategories();
         this.http.get(this.routeService.routes.cars)
             .subscribe((res) => {
-                console.log(res.json().defaultCarPhoto);
                 for (let car of res.json()) {
                     this.allCars.push(this.carPipe.transform(car))
                 }
@@ -146,7 +145,6 @@ export class AdService extends HasResponse {
             };
             return fileTransfer.upload(photo[0], this.routeService.routes.addPhoto + carId + "/photo", options)
                 .then((res) => {
-                    console.log(res);
                     this.success('Dodano samochód!', 'car:added');
                     this.refresh();
                 },(err) => {

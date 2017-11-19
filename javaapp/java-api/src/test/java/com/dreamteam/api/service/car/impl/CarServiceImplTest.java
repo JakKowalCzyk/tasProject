@@ -23,7 +23,7 @@ public class CarServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void findPossibleCarToRentInGivenDates() throws Exception {
-        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService);
+        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService, fileService);
 
         Brand brand1 = getBrandTest("br1", 1L);
         Brand brand2 = getBrandTest("br2", 2L);
@@ -49,7 +49,7 @@ public class CarServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void findByFilteredParameters() throws Exception {
-        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService);
+        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService, fileService);
 
         Brand brand1 = getBrandTest("br1", 1L);
         Brand brand2 = getBrandTest("br2", 2L);
@@ -116,7 +116,7 @@ public class CarServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void filterValues() throws Exception {
-        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService);
+        CarServiceImpl carService = new CarServiceImpl(carDAO, rentedCarService, fileService);
         assertTrue(carService.filterValues(null, null, 4));
 
         assertTrue(carService.filterValues(4, null, 4));

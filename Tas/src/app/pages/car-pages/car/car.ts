@@ -7,6 +7,7 @@ import {Brand} from "../../../models/car/brand";
 import {UserService} from "../../../services/user-service";
 import {MatDialog} from "@angular/material";
 import {RentDialogComponent} from "../../../components/dialog/rent/rent.dialog.component";
+import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
 
 @Component({
   selector: 'app-car',
@@ -19,6 +20,7 @@ export class CarPage implements OnInit {
   car       : Car;
   brand     : Brand;
   id        : number;
+  dialogRef: any;
 
 
 
@@ -66,8 +68,13 @@ export class CarPage implements OnInit {
       if (!window.confirm('Do you want to delete this car?')) return;
       let res = await this.carService.deleteCar(this.id);
       res.subscribe((resp) => {
-          this.router.navigate(['/main', {ref: 'fromdelete'}])
+        this.dialogRef.close();
+        this.router.navigate(['/main', {ref: 'fromdelete'}])
       });
+  }
+
+  openProgressDialog() {
+    this.dialogRef = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
   rentCar() {

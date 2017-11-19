@@ -37,7 +37,7 @@ public class Car extends AbstractModel {
     private boolean hasRadio;
     private boolean hasSunroof;
     private boolean hasManualGearbox;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private CarPhoto defaultCarPhoto;
 
     public Car() {
