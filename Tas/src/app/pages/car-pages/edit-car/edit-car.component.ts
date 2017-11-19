@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CarService} from "../../../services/car-service";
 import {BrandService} from "../../../services/brand-service";
 import {CarHttp} from "../../../models/car/carHttp";
@@ -85,27 +85,24 @@ export class EditCarComponent implements OnInit {
 
   async editCar() {
     this.openDialog();
-    let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
+    let car = new CarHttp(this.car.id, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
       !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
-    let expectedCarSize = this.carService.cars.length + 1;
-    this.carService.addCar(car).subscribe(res => {
-      this.carService.sendPhoto(this.photo, res.json().id).then(value => {
-        this.carService.getCarsWithNewPhoto(value);
-        this.routeToMain(expectedCarSize, res.json().id)
-      });
+    this.carService.editCar(car).subscribe(res => {
+      if (this.photo != null) {
+        this.carService.sendPhoto(this.photo, this.car.id).then(value => {
+          this.carService.getCarsWithNewPhoto(value);
+          this.routeToMain(res.json().id);
+        });
+      } else {
+        this.routeToMain(res.json().id);
+      }
     })
   }
 
-  routeToMain(expectedSize, id) {
-    if (expectedSize == this.carService.cars.length) {
-      this.dialogRef.close();
-      this.router.navigate(['/car/' + id]);
-    } else {
-      setTimeout(() => {
-        this.routeToMain(expectedSize, id)
-      }, 300)
-    }
+  routeToMain(id) {
+    this.dialogRef.close();
+    this.router.navigate(['/car/' + id]);
   }
 
   fileChange(event) {

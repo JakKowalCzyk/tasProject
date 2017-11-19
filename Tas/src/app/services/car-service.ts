@@ -95,6 +95,10 @@ export class CarService {
     return this.http.post(this.routeService.routes.addCar, data, {headers: this.userService.headers});
   }
 
+  editCar(data): Observable<any> {
+    return this.http.put(this.routeService.routes.addCar, data, {headers: this.userService.headers});
+  }
+
   async getCarsWithNewPhoto(value) {
     if (value.response) {
       return await this.getCars();

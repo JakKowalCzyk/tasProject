@@ -86,7 +86,7 @@
       <mat-checkbox [(ngModel)]="car.hasRadio">Radio</mat-checkbox>
     </section>
     <div><br></div>
-    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg,.jpeg,.png" >
+    <input type="file" (change)="fileChange($event)" placeholder="Upload new photo for a car!" accept=".jpg,.jpeg,.png">
     <div><br></div>
 
     <button mat-raised-button color="primary" [disabled]="!isFormValid()" (click)="editCar()">Save!</button>
