@@ -1,19 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CarService} from "../../../services/car-service";
 import {BrandService} from "../../../services/brand-service";
 import {CarHttp} from "../../../models/car/carHttp";
-import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Car} from "../../../models/car/car";
 
 @Component({
   selector: 'app-edit-car',
   templateUrl: './edit-car.component.html',
-  styleUrls: ['./edit-car.component.scss']
+  styleUrls: ['./edit-car.component.scss'],
+  providers: [CarService]
 })
 export class EditCarComponent implements OnInit {
-  @Input() car : Car;
   categories = ['SEDAN', 'SUV', 'CITY', 'SPORT'];
   fuelTypes = [
     'PB',
@@ -27,6 +27,9 @@ export class EditCarComponent implements OnInit {
     'RWD',
     'AWD'
   ];
+
+  id  : number;
+  car       : Car;
   model: string;
   brand: number;
   fuelType: string;
@@ -44,7 +47,8 @@ export class EditCarComponent implements OnInit {
   photo: any;
   dialogRef: any;
 
-  constructor(public carService: CarService,
+  constructor(private route: ActivatedRoute,
+              public carService: CarService,
               public brandService: BrandService,
               private router: Router,
               public dialog: MatDialog) {
@@ -81,27 +85,24 @@ export class EditCarComponent implements OnInit {
 
   async editCar() {
     this.openDialog();
-    let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
+    let car = new CarHttp(this.car.id, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
       !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
-    let expectedCarSize = this.carService.cars.length + 1;
-    this.carService.addCar(car).subscribe(res => {
-      this.carService.sendPhoto(this.photo, res.json().id).then(value => {
-        this.carService.getCarsWithNewPhoto(value);
-        this.routeToMain(expectedCarSize, res.json().id)
-      });
+    this.carService.editCar(car).subscribe(res => {
+      if (this.photo != null) {
+        this.carService.sendPhoto(this.photo, this.car.id).then(value => {
+          this.carService.getCarsWithNewPhoto(value);
+          this.routeToMain(res.json().id);
+        });
+      } else {
+        this.routeToMain(res.json().id);
+      }
     })
   }
 
-  routeToMain(expectedSize, id) {
-    if (expectedSize == this.carService.cars.length) {
-      this.dialogRef.close();
-      this.router.navigate(['/car/' + id]);
-    } else {
-      setTimeout(() => {
-        this.routeToMain(expectedSize, id)
-      }, 300)
-    }
+  routeToMain(id) {
+    this.dialogRef.close();
+    this.router.navigate(['/car/' + id]);
   }
 
   fileChange(event) {
@@ -115,7 +116,35 @@ export class EditCarComponent implements OnInit {
     this.dialogRef = this.dialog.open(ProgressDialogComponent, {disableClose: true});
   }
 
+  getCarById() {
+    if (this.carService.cars.length <= 0) {
+      setTimeout(() => {
+        this.getCarById();
+      }, 500);
+    }
+    this.car = this.carService.getCarById(this.id);
+    this.getBrand();
+  }
+
+  getBrand() {
+    if (this.car == null) {
+      setTimeout(() => {
+        this.getBrand();
+      }, 500)
+    } else {
+      this.brand = this.brandService.getBrandById(this.car.brand);
+    }
+  }
+
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.getCarById();
+    });
+  }
+
+  isCarLoaded(): any {
+    return this.car != null && this.brand != null;
   }
 
 }
