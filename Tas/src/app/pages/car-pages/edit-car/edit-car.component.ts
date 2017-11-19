@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material";
 import {ProgressDialogComponent} from "../../../components/dialog/progress/progress.dialog.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Car} from "../../../models/car/car";
+import {Brand} from "../../../models/car/brand";
 
 @Component({
   selector: 'app-edit-car',
@@ -31,7 +32,7 @@ export class EditCarComponent implements OnInit {
   id  : number;
   car       : Car;
   model: string;
-  brand: number;
+  brand: Brand;
   fuelType: string;
   categoryType: string;
   driveType: string;
@@ -55,49 +56,61 @@ export class EditCarComponent implements OnInit {
   }
 
   isFormValid(): any {
-    return this.model != null && this.brand != null && this.categoryType != null && this.fuelType != null
-      && this.driveType != null && this.isPowerValid() && this.isPriceValid() && this.photo != null && this.isDateValid();
+    return this.car.model != null && this.car.brand != null && this.car.categoryType != null && this.car.engine.fuel != null
+      && this.car.engine.drive != null && this.isPowerValid() && this.isPriceValid() && this.isDateValid();
   }
 
   isPriceValid(): any {
-    return this.isPricePopulated() && this.pricePerDay > 10;
+    return this.isPricePopulated() && this.car.price > 10;
   }
 
   isPricePopulated() {
-    return this.pricePerDay != null;
+    return this.car.price != null;
   }
 
   isPowerValid(): any {
-    return this.isPowerPopulated() && this.power > 10;
+    return this.isPowerPopulated() && this.car.engine.power > 10;
   }
 
   isPowerPopulated() {
-    return this.power != null;
+    return this.car.engine.power != null;
   }
 
   isDateValid(): any {
-    return this.isYearPopulated() && this.year > 1950
+    return this.isYearPopulated() && +this.car.year > 1950
   }
 
   isYearPopulated() {
-    return this.year != null;
+    return this.car.year != null;
   }
 
   async editCar() {
+    console.log(this.car);
+    console.log(this.car.brand);
     this.openDialog();
-    let car = new CarHttp(this.car.id, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
-      this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
-      !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
+    let brandId = this.getBrandId();
+    let car = new CarHttp(this.car.id, brandId, this.car.model, this.car.categoryType, this.car.price, this.car.year,
+      this.car.hasAirConditioning, this.car.hasNavi, this.car.hasElectricWindow, this.car.hasRadio, this.car.hasSunroof,
+      this.car.hasManualGearbox, this.car.engine.fuel, this.car.engine.drive, this.car.engine.power, 0);
     this.carService.editCar(car).subscribe(res => {
       if (this.photo != null) {
         this.carService.sendPhoto(this.photo, this.car.id).then(value => {
           this.carService.getCarsWithNewPhoto(value);
-          this.routeToMain(res.json().id);
+          setTimeout(() => this.routeToMain(res.json().id), 300)
+          ;
         });
       } else {
         this.routeToMain(res.json().id);
       }
     })
+  }
+
+  getBrandId(): any {
+    if (this.brand.id) {
+      return this.brand.id;
+    } else {
+      return this.brand;
+    }
   }
 
   routeToMain(id) {

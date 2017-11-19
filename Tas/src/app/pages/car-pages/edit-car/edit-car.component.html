@@ -22,7 +22,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select [(ngModel)]="brand" name="brand" placeholder="Brand">
+        <mat-select ngModel="{{car.brand}}" [(ngModel)]="brand" name="brand" placeholder="Brand">
           <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
             {{ brand.name }}
           </mat-option>
@@ -46,7 +46,7 @@
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="car.engine.driveType" name="driveType" placeholder="Drive" >
+        <mat-select [(ngModel)]="car.engine.drive" name="driveType" placeholder="Drive">
           <mat-option *ngFor="let drive of driveTypes" value="{{drive}}">
             {{ drive }}
           </mat-option>
