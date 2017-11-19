@@ -14,7 +14,7 @@
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="categoryType" name="categoryType" placeholder="NIE DZIAŁA">
+        <mat-select [(ngModel)]="car.categoryType" name="categoryType" placeholder=" ">
           <mat-option *ngFor="let category of categories" value="{{category}}">
             {{ category }}
           </mat-option>
@@ -78,14 +78,14 @@
     </div>
 
     <section class="select-section">
-      <mat-checkbox [(ngModel)]="hasElectricWindow">Electric windows</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasElectricWindow">Electric windows</mat-checkbox>
       <!-- <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="car.hasElectricWindow" >Elektryczne szyby</mat-checkbox>
       <mat-checkbox [(ngModel)]="hasElectricWindow" *ngIf="!car.hasElectricWindow">Elektryczne szyby</mat-checkbox> -->
-      <mat-checkbox [(ngModel)]="hasNavi">Navi</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasAirConditioning">Air conditioning</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasAutomaticGearbox">Automatic gearbox</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasSunroof">Sunroof</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hasRadio">Radio</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasNavi">Navi</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasAirConditioning">Air conditioning</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasManualGearbox">Automatic gearbox</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasSunroof">Sunroof</mat-checkbox>
+      <mat-checkbox [(ngModel)]="car.hasRadio">Radio</mat-checkbox>
     </section>
     <div><br></div>
     <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg,.jpeg,.png" >
