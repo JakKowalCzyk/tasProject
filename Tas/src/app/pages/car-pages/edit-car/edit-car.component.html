@@ -12,9 +12,11 @@
       <img mat-card-image class="photo" src="{{car.defaultCarPhoto.photoUrl}}">
     </div>
 
+<mat-chip color="primary" selected="true" matTooltip="Brand">{{car.engine.drive}}</mat-chip>
+
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="car.categoryType" name="categoryType" placeholder="Category">
+        <mat-select ngModel="{{car.categoryType}}" name="categoryType" placeholder="Category">
           <mat-option *ngFor="let category of categories" value="{{category}}">
             {{ category }}
           </mat-option>
@@ -22,7 +24,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select [(ngModel)]="brand" name="brand" placeholder="Brand">
+        <mat-select ngModel="{{car.brand}}" name="brand" placeholder="Brand">
           <mat-option *ngFor="let brand of brandService.brands" value="{{brand.id}}">
             {{ brand.name }}
           </mat-option>
@@ -32,11 +34,11 @@
 
     <div class="input-field">
       <mat-form-field>
-        <input matInput [(ngModel)]="car.model" name="model" placeholder="Model" >
+        <input matInput ngModel="{{car.model}}" name="model" placeholder="Model" >
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select [(ngModel)]="car.engine.fuel" name="fuelType" placeholder="Fuel" >
+        <mat-select ngModel="{{car.engine.fuel}}" name="fuelType" placeholder="Fuel" >
           <mat-option *ngFor="let fuel of fuelTypes" value="{{fuel}}">
             {{ fuel }}
           </mat-option>
@@ -46,7 +48,7 @@
 
     <div class="input-field">
       <mat-form-field>
-        <mat-select [(ngModel)]="car.engine.driveType" name="driveType" placeholder="Drive" >
+        <mat-select ngModel="{{car.engine.drive}}" name="driveType" placeholder="Drive" >
           <mat-option *ngFor="let drive of driveTypes" value="{{drive}}">
             {{ drive }}
           </mat-option>
@@ -54,7 +56,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="car.engine.power" name="power" placeholder="Power [KM]">
+        <input type="number" matInput ngModel="{{car.engine.power}}" name="power" placeholder="Power [KM]">
         <div *ngIf="isPowerPopulated()">
           <mat-error *ngIf="!isPowerValid()">Power has to be bigger than 10 HP</mat-error>
         </div>
@@ -63,7 +65,7 @@
 
     <div class="input-field">
       <mat-form-field>
-        <input type="number" matInput [(ngModel)]="car.price" name="pricePerDay" placeholder="Price">
+        <input type="number" matInput ngModel="{{car.price}}" name="pricePerDay" placeholder="Price">
         <div *ngIf="isPricePopulated()">
           <mat-error *ngIf="!isPriceValid()">Price has to be bigger than 10zł</mat-error>
         </div>
