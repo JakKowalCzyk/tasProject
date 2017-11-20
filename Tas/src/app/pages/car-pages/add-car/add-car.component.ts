@@ -82,24 +82,17 @@ export class AddCarComponent implements OnInit {
     let car = new CarHttp(null, this.brand, this.model, this.categoryType, this.pricePerDay, this.year,
       this.hasAirConditioning, this.hasNavi, this.hasElectricWindow, this.hasRadio, this.hasSunroof,
       !this.hasAutomaticGearbox, this.fuelType, this.driveType, this.power, 0);
-    let expectedCarSize = this.carService.cars.length + 1;
     this.carService.addCar(car).subscribe(res => {
-      this.carService.sendPhoto(this.photo, res.json().id).then(value => {
-        this.carService.getCarsWithNewPhoto(value);
-        this.routeToMain(expectedCarSize, res.json().id)
+      this.carService.sendPhoto(this.photo, res.json().id).subscribe(resImage => {
+        this.carService.getCars();
+        this.routeToMain(res.json().id)
       });
     })
   }
 
-  routeToMain(expectedSize, id) {
-    if (expectedSize == this.carService.cars.length) {
+  routeToMain(id) {
       this.dialogRef.close();
       this.router.navigate(['/car/' + id]);
-    } else {
-      setTimeout(() => {
-        this.routeToMain(expectedSize, id)
-      }, 300)
-    }
   }
 
   fileChange(event) {
