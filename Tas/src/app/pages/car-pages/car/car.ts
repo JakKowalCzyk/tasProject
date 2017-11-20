@@ -65,8 +65,7 @@ export class CarPage implements OnInit {
   }
 
   async deleteCar() {
-      if (!window.confirm('Czy chcesz usunąć ten samochód?')) return;
-    this.openProgressDialog();
+      if (!window.confirm('Do you want to delete this car?')) return;
       let res = await this.carService.deleteCar(this.id);
       res.subscribe((resp) => {
         this.dialogRef.close();
@@ -95,4 +94,5 @@ export class CarPage implements OnInit {
       this.getCarById();
     });
   }
+
 }
