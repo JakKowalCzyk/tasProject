@@ -17,11 +17,11 @@ export class CarService {
     }
   }
 
-  cars          : Array<Car> = [];
-  carsCategory  : Array<Car> = [];
-  filteredCars  : Array<Car> = [];
+  cars: Array<Car> = [];
+  carsCategory: Array<Car> = [];
+  filteredCars: Array<Car> = [];
 
-  activeFilters : any;
+  activeFilters: any;
 
   getCarById(id: number) {
     return this.cars.filter((el) => {
@@ -35,20 +35,20 @@ export class CarService {
 
   getFilterCars(params): any {
 
-      this.activeFilters = params;
+    this.activeFilters = params;
 
-      let route = params.from ? this.routeService.routes.filter + '/dates' : this.routeService.routes.filter;
+    let route = params.from ? this.routeService.routes.filter + '/dates' : this.routeService.routes.filter;
 
-      this.http.get(route, { search: params })
-          .subscribe((res) => {
-              this.filteredCars = [];
-              for (let car of res.json()) {
-                  this.filteredCars.push(this.carPipe.transform(car))
-              }
-              //tu jeszcze posortować
-          },(err) => {
-            console.log(err)
-          })
+    this.http.get(route, {search: params})
+      .subscribe((res) => {
+        this.filteredCars = [];
+        for (let car of res.json()) {
+          this.filteredCars.push(this.carPipe.transform(car))
+        }
+        //tu jeszcze posortować
+      }, (err) => {
+        console.log(err)
+      })
 
   }
 
@@ -68,8 +68,8 @@ export class CarService {
     return this.populateCarList(res.json())
   }
 
-  deleteCar(car : number) {
-      return this.http.delete(this.routeService.routes.cars + car, {headers: this.userService.headers})
+  deleteCar(car: number) {
+    return this.http.delete(this.routeService.routes.cars + car, {headers: this.userService.headers})
   }
 
   isCarFreeInGivenDates(id: number, from: any, to: any): Observable<any> {
@@ -109,22 +109,29 @@ export class CarService {
     }
   }
 
-  async sendPhoto(photo, carId): Promise<any> {
-    let formData: FormData = new FormData();
-    formData.append('file', photo, photo.name);
-    let xhr: XMLHttpRequest = new XMLHttpRequest();
-    xhr.open('POST', this.routeService.routes.addPhoto + carId + "/photo", true);
-    xhr.setRequestHeader("enctype", "multipart/form-data");
-    xhr.setRequestHeader('Authorization', this.userService.headers.toJSON().Authorization);
-    // IE bug fixes to clear cache
-    xhr.setRequestHeader("Cache-Control", "no-cache");
-    xhr.setRequestHeader("Cache-Control", "no-store");
-    xhr.setRequestHeader("Pragma", "no-cache");
-
-    xhr.send(formData);
-    return xhr;
+  sendPhoto(photo, carId): Observable<any> {
+    return Observable.create(observer => {
+      let formData: FormData = new FormData();
+      formData.append('file', photo, photo.name);
+      let xhr: XMLHttpRequest = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            observer.next(JSON.parse(xhr.response));
+            observer.complete();
+          } else {
+            observer.error(xhr.response);
+          }
+        }
+      };
+      xhr.open('POST', this.routeService.routes.addPhoto + carId + "/photo", true);
+      xhr.setRequestHeader("enctype", "multipart/form-data");
+      xhr.setRequestHeader('Authorization', this.userService.headers.toJSON().Authorization);
+      // IE bug fixes to clear cache
+      xhr.setRequestHeader("Cache-Control", "no-cache");
+      xhr.setRequestHeader("Cache-Control", "no-store");
+      xhr.setRequestHeader("Pragma", "no-cache");
+      xhr.send(formData);
+    });
   }
-
-
-
 }

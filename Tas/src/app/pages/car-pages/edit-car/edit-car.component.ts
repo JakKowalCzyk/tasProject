@@ -86,24 +86,32 @@ export class EditCarComponent implements OnInit {
   }
 
   async editCar() {
-    console.log(this.car);
-    console.log(this.car.brand);
     this.openDialog();
+    let car = this.getEditedCar();
+    if (this.photo != null) {
+      this.carService.sendPhoto(this.photo, this.car.id).subscribe(res => {
+        this.carService.getCars();
+        this.edit(car);
+      });
+    } else {
+      this.edit(car);
+    }
+
+  }
+
+  edit(car) {
+    this.carService.editCar(car).subscribe(res => {
+      console.log('routing');
+      this.routeToMain(res.json().id);
+    });
+  }
+
+  private getEditedCar() {
     let brandId = this.getBrandId();
     let car = new CarHttp(this.car.id, brandId, this.car.model, this.car.categoryType, this.car.price, this.car.year,
       this.car.hasAirConditioning, this.car.hasNavi, this.car.hasElectricWindow, this.car.hasRadio, this.car.hasSunroof,
       this.car.hasManualGearbox, this.car.engine.fuel, this.car.engine.drive, this.car.engine.power, 0);
-    this.carService.editCar(car).subscribe(res => {
-      if (this.photo != null) {
-        this.carService.sendPhoto(this.photo, this.car.id).then(value => {
-          this.carService.getCarsWithNewPhoto(value);
-          setTimeout(() => this.routeToMain(res.json().id), 300)
-          ;
-        });
-      } else {
-        this.routeToMain(res.json().id);
-      }
-    })
+    return car;
   }
 
   getBrandId(): any {
