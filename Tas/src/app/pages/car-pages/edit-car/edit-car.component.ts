@@ -47,6 +47,7 @@ export class EditCarComponent implements OnInit {
   year: any;
   photo: any;
   dialogRef: any;
+  ref: string;
 
   constructor(private route: ActivatedRoute,
               public carService: CarService,
